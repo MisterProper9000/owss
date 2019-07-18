@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             Title="Account"
+             x:Class="ScooterSharing.Account">
+    <ContentPage.Content>
+        <ScrollView Orientation="Vertical">
+            <StackLayout>
+                <Grid>
+                    <Image x:Name="backPhoto" 
+                           Aspect="AspectFill" 
+                           Scale="1"
+                           Grid.Row="0"
+                           HorizontalOptions="FillAndExpand"/>
+                    <Grid Grid.Row="0">
+                        <Image x:Name="offers"
+                               Scale="0.65"
+                               Grid.Column="0"
+                               Opacity="1"
+                               Grid.RowSpan="2"/>
+                        <Image x:Name="userIcon"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               Scale="1"
+                               TranslationY="10"/>
+                        <Frame HeightRequest="20" 
+                               WidthRequest="20" 
+                               CornerRadius="10" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center"
+                               TranslationX="30"
+                               TranslationY="-20"
+                               Grid.Column="0"
+                               Grid.RowSpan="2"
+                               Margin="0" 
+                               IsEnabled="False"
+                               IsVisible="False"
+                               Padding="0" 
+                               BackgroundColor="Maroon">
+                            <Label Text="7" 
+                                   FontSize="10"
+                                   TextColor="White"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center" 
+                                   HorizontalTextAlignment="Center" 
+                                   VerticalTextAlignment="Center" />
+                        </Frame>
+                        <Label x:Name="cash"
+                               Grid.Row="1"
+                               Text="100$"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               TextColor="DarkGoldenrod"
+                               FontSize="30"
+                               FontAttributes="Bold"
+                               Grid.Column="1"/>
+                       
+                        <Image x:Name="wallet"
+                               Grid.Column="2"
+                               Opacity="1"
+                               Scale="0.7"
+                               Grid.RowSpan="2"/>
+                    </Grid>
+                    <d:ListView x:Name="paymentHistory"
+                              SeparatorVisibility="Default"
+                              Grid.Row="1"
+                              BackgroundColor="Firebrick"
+                              HasUnevenRows="True"
+                              SelectionMode="Single"
+                              d:ItemSelected="OnScooterSelected"
+                              SeparatorColor="DarkGreen"
+                              RefreshControlColor="LightSeaGreen"
+                              d:ItemTapped="OnScooterTapped"
+                              ItemsSource="{Binding Scooters}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <Grid Padding="10" BackgroundColor="YellowGreen">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions >
+                                        <Image Grid.RowSpan="2"
+                                           Source="{Binding ImageSource}"
+                                           Aspect="AspectFill"
+                                           HeightRequest="60"
+                                           WidthRequest="60" />
+                                        <Label Grid.Column="1"
+                                           LineBreakMode="CharacterWrap"
+                                           Grid.ColumnSpan="2"
+                                           Text="{Binding Name}"
+                                           FontAttributes="Bold" />
+                                        <Label Grid.Column="3"
+                                           Grid.RowSpan="2"
+                                           FontSize="Medium"
+                                           Text="{Binding Price}"
+                                           FontAttributes="Bold" />
+                                        <Label Grid.Row="1"
+                                           Grid.Column="1"
+                                           Text="{Binding Lat}"
+                                           VerticalOptions="End"
+                                           HorizontalOptions="Fill"/>
+                                        <Label Grid.Row="1"
+                                           Grid.Column="2"
+                                           Text="{Binding Lng}"
+                                           VerticalOptions="End" />
+
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </d:ListView>
+                </Grid>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

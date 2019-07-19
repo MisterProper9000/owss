@@ -43,8 +43,8 @@ namespace ScooterSharing
                 Lat = 59.9648886,
                 Lng = 30.3454112,
                 Name = "CoolRentCompany9000",
-                ImageSource = "http://upload.wikimedia.org/wikipedia/commons/thumb/8/83/BlueMonkey.jpg/220px-BlueMonkey.jpg",
-                Price="2$/h"
+                ImageSource = "http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42560-motor-scooter-icon.png",
+                Price ="2$/h"
             });
             Scooters.Add(new Scooter
             {
@@ -61,7 +61,7 @@ namespace ScooterSharing
                 Lat = 59.954833,
                 Lng = 30.337149,
                 Name = "AnotherRentCompany9000",
-                ImageSource = "ScooterSharing.scooter.png",
+                ImageSource = "http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42560-motor-scooter-icon.png",
                 Price = "2.5$/h"
             });
             Scooters.Add(new Scooter
@@ -70,7 +70,7 @@ namespace ScooterSharing
                 Lat = 59.954833,
                 Lng = 30.337149,
                 Name = "AnotherRentCompyyuujjkkllooany9000",
-                ImageSource = "ScooterSharing.back.jpg",
+                ImageSource = "http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42560-motor-scooter-icon.png",
                 Price = "2.5$/h"
             });
             Scooters.Add(new Scooter
@@ -79,7 +79,7 @@ namespace ScooterSharing
                 Lat = 59.954833,
                 Lng = 30.337149,
                 Name = "AnotherRentCompany9000",
-                ImageSource = "ScooterSharing/back.jpg",
+                ImageSource = "http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42560-motor-scooter-icon.png",
                 Price = "2.5$/h"
             });
             BindingContext = this;

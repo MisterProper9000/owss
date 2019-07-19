@@ -21,5 +21,12 @@ namespace ScooterSharing
             wallet.Source = ImageSource.FromResource("ScooterSharing.wallet.png");
 
         }
+
+        private void PayTapped(object sender, ItemTappedEventArgs e)
+        {
+            var vm = BindingContext as PaymentsViewModel;
+            var payment = e.Item as Payment;
+            vm.HideOrShowPayment(payment);
+        }
     }
 }

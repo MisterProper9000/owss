@@ -9,10 +9,22 @@
              x:Class="ScooterSharing.LogIn">
     <ContentPage.Content>
         <StackLayout>
+            <Label Text="http://IP:port; data sended: var friend = new Friend { Id = 1, Name = Иван Иванов };"/>
+            <Entry x:Name="IP"
+                       ClassId="IP"
+                       Text=""
+                       Placeholder="place ip here"
+                       ReturnType="Next"
+                       PlaceholderColor="DarkGreen"/>
+            <Entry x:Name="port"
+                       ClassId="port"
+                       Text=""
+                       Placeholder="port number here"
+                       ReturnType="Next"
+                       PlaceholderColor="DarkGreen"/>
             <Grid Padding="50">
-                <Label x:Name="debug"
-                       Grid.Row="10"
-                       Text=""/>
+                
+                
                 <Entry x:Name="fName"
                        ClassId="fName"
                        Text=""
@@ -42,7 +54,7 @@
                 <Entry x:Name="sName"
                        ClassId="sName"
                        Text=""
-                       Placeholder="Second Name"
+                       Placeholder="Last Name"
                        Grid.Row="1"
                        Opacity="0"
                        TextChanged="DetectTrash"
@@ -59,8 +71,25 @@
                        IsVisible="False"
                        Keyboard="Numeric"
                        ReturnType="Next"
+                       Unfocused="CheckPhone"
                        PlaceholderColor="DarkGreen"
                        TextChanged="DetectTrash"/>
+                <Entry x:Name="code"
+                       ClassId="code"
+                       Text=""
+                       TextChanged="DetectTrash"
+                       Placeholder="verification code"
+                       Grid.Row="3"
+                       IsEnabled="False"
+                       IsVisible="False"
+                       ReturnType="Next"
+                       PlaceholderColor="DarkGreen"/>
+                <Button x:Name="sendCode"
+                        Text="Confirm code"
+                        Grid.Row="4"
+                        IsEnabled="False"
+                        IsVisible="False"
+                        Clicked="ConfirmCode"/>
                 <Entry x:Name="mail"
                        ClassId="mail"
                        Text=""
@@ -96,10 +125,6 @@
                        ReturnType="Next"
                        PlaceholderColor="DarkGreen"
                        Unfocused="DetectTrash"/>
-                <Label x:Name="errorLabel"
-                       Grid.Row="6"
-                       Text=""
-                       TextColor="#920031"/>
 
                 <Grid Grid.Row="8">
                     <forms:AnimationView x:Name="check"

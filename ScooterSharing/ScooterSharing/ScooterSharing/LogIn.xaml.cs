@@ -7,6 +7,10 @@ using System.ComponentModel;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Net.Http;
+using System.Net;
+using Newtonsoft.Json;
+using System.Text.RegularExpressions;
 
 namespace ScooterSharing
 {
@@ -46,7 +50,7 @@ namespace ScooterSharing
 
             btnSignUp.IsEnabled = false;
             btnLogIn.IsEnabled = false;
-            errorLabel.IsEnabled = false;
+            
 
             fName.IsEnabled = true;
             fName.IsVisible = true;
@@ -92,7 +96,6 @@ namespace ScooterSharing
 
             btnSignUp.IsEnabled = false;
             btnLogIn.IsEnabled = false;
-            errorLabel.IsEnabled = false;
 
             mail.IsEnabled = true;
             mail.IsVisible = true;
@@ -112,30 +115,48 @@ namespace ScooterSharing
 
         public void DataCheck(object sender, EventArgs e)
         {
-            ToAccount();//temporary!!
-
             check.Play();
             
             if(uiMode == UIMode.SignUp && (fName.Text == "" || sName.Text == "" || phone.Text == "" || mail.Text == "" ||
                 password.Text == "" || confirmPassword.Text == ""))
             {
-                errorLabel.Text = "Fill all fields first!";
+                DisplayAlert("Attention", "All fields nust be filled", "OK");
                 return;
             }
 
             if (uiMode == UIMode.LogIn && (mail.Text == "" || password.Text == ""))
             {
-                errorLabel.Text = "Fill all fields first!";
+                DisplayAlert("Attention", "All fields nust be filled", "OK");
                 return;
             }
 
             if (uiMode == UIMode.SignUp && confirmPassword.Text != password.Text)
             {
-                errorLabel.Text = "Mismatched passwords!";
+                DisplayAlert("Attention", "Mismatched passwords", "OK");
                 return;
             }
+            if (uiMode == UIMode.SignUp)
+            {
+                DisplayAlert("Attention", "A confirmation code will be sent to your email", "OK");
 
-            //ToAccount();
+                fName.IsEnabled = false;
+                fName.IsVisible = false;
+                sName.IsEnabled = false;
+                sName.IsVisible = false;
+                phone.IsEnabled = false;
+                phone.IsVisible = false;
+                mail.IsEnabled = false;
+                mail.IsVisible = false;
+                password.IsEnabled = false;
+                password.IsVisible = false;
+                confirmPassword.IsEnabled = false;
+                confirmPassword.IsVisible = false;
+
+                code.IsEnabled = true;
+                code.IsVisible = true;
+                sendCode.IsVisible = true;
+                sendCode.IsEnabled = true;
+            }
         }
 
         public void ToStart(object sender, EventArgs e)
@@ -168,7 +189,6 @@ namespace ScooterSharing
 
             btnSignUp.IsEnabled = true;
             btnLogIn.IsEnabled = true;
-            errorLabel.IsEnabled = true;
 
             btnLogIn.FadeTo(1, 100, Easing.Linear);
             fName.FadeTo(0, 100, Easing.Linear);
@@ -202,7 +222,6 @@ namespace ScooterSharing
 
             btnSignUp.IsEnabled = true;
             btnLogIn.IsEnabled = true;
-            errorLabel.IsEnabled = true;
 
             mail.IsEnabled = false;
             mail.IsVisible = false;
@@ -221,9 +240,33 @@ namespace ScooterSharing
         {
             close.Play();
         }
-
-        public void ToAccount()
+        class Friend
         {
+            public int Id { get; set; }
+            public string Name { get; set; }
+        }
+
+        async public void ToAccount()
+        {
+            //TEST SERVER INTERACTION
+            var friend = new Friend { Id = 1, Name = "Иван Иванов" };
+            HttpClient client = new HttpClient();
+            HttpRequestMessage request = new HttpRequestMessage();
+            string uri = "http://" + IP.Text + ":" + port.Text;
+            request.RequestUri = new Uri(uri);//http://10.101.177.21:3000
+            request.Method = HttpMethod.Get;
+            string json = JsonConvert.SerializeObject(friend);
+            HttpContent content = new StringContent(json);
+            request.Content = content;
+            request.Headers.Add("Accept", "hello/json");
+            await client.SendAsync(request);
+            /*HttpResponseMessage response = await client.SendAsync(request);
+            if (response.StatusCode == HttpStatusCode.OK)
+            {
+                HttpContent responseContent = response.Content;
+                json = await responseContent.ReadAsStringAsync();
+            }*/
+
             TabbedPage tabbedPage = new TabbedPage();
             tabbedPage.Children.Add(new Account());
             tabbedPage.Children.Add(new XMap());
@@ -277,15 +320,67 @@ namespace ScooterSharing
                     }
                     break;
                 case "mail":
+                    if(!ValidateEmail(mail.Text))
+                    {
+                        DisplayAlert("Attention", "Invalid email", "OK");
+                    }
                     break;
                 case "password":
+                    if(password.Text.Length < 8)
+                    {
+                        DisplayAlert("Attention", "Password must contain at least 8 characters", "OK");
+                    }
+                    if(confirmPassword.Text != "" && confirmPassword.Text != password.Text)
+                    {
+                        DisplayAlert("Attention", "Mismatched passwords", "OK");
+                    }
                     break;
                 case "confirmpassword":
+                    if (confirmPassword.Text.Length < 8)
+                    {
+                        DisplayAlert("Attention", "Password must contain at least 8 characters", "OK");
+                    }
+                    if (password.Text != "" && confirmPassword.Text != password.Text)
+                    {
+                        DisplayAlert("Attention", "Mismatched passwords", "OK");
+                    }
                     break;
                 default:
                     break;
             }
-            
         }
+
+        Regex EmailRegex = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
+        public bool ValidateEmail(string email)
+        {
+            if (string.IsNullOrWhiteSpace(email))
+                return false;
+
+            return EmailRegex.IsMatch(email);
+        }
+
+        public void ConfirmCode(object sender, EventArgs e)
+        {
+            if (code.Text == "")
+                DisplayAlert("Attention", "You must enter verification code", "OK");
+            //code sent
+            if(false)//some server responce
+            {
+                DisplayAlert("Error", "Wrong verification code", "OK");
+                code.IsEnabled = false;
+                code.IsVisible = false;
+                sendCode.IsVisible = false;
+                sendCode.IsEnabled = false;
+                ToStart(sender, e);
+                return;
+            }
+            ToAccount();
+        }
+
+        public void CheckPhone(object sender, EventArgs e)
+        {
+            if (phone.Text.Length < phoneCharLimit)
+                DisplayAlert("Attention", "Too short phone number", "OK");                                
     }
+}
 }

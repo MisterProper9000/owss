@@ -24,3 +24,5 @@ yarn-error.log*
 
 # mvn out
 *target*
+
+*.idea*

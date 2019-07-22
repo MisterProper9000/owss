@@ -9,10 +9,10 @@ import java.util.List;
 
 @Service
 public class ClientServiceImpl implements ClientService {
-   final private ClientRepository clientRepository;
+    final private ClientRepository clientRepository;
 
     @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository){
+    public ClientServiceImpl(ClientRepository clientRepository) {
         this.clientRepository = clientRepository;
     }
 

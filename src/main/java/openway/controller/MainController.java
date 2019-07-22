@@ -36,4 +36,9 @@ public class MainController {
         logger.info("add lesser to db");
         lesserService.addNewLesser(newItem);
     }
+
+    @PostMapping("/moto")
+    void newMoto(@RequestBody String newItem) {
+        logger.info("motoooooooooo"+ newItem);
+    }
 }

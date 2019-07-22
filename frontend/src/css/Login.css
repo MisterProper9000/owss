@@ -1,0 +1,35 @@
+body {
+    margin-top: 1%;
+}
+
+.startLogo {
+    margin-left: 20%;
+    margin-top: 2%;
+}
+
+.formLogin {
+    margin-top: 3%;
+    margin-left: 40%;
+}
+
+.input {
+    margin-top: 1%;
+    width: 300px;
+}
+
+.buttonNewApplier {
+    margin-top: 2%;
+    margin-left: 40%;
+    width: 300px
+}
+
+.errorMsg {
+    fontSize: 30;
+    background: salmon;
+    width: 300px;
+    font-weight: bold;
+}
+
+.option {
+    width: 300px;
+}

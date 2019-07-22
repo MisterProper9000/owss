@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import NavbarComp from "./NavbarComp";
 
 class Client extends Component {
     constructor(props) {
@@ -42,10 +43,10 @@ class Client extends Component {
     render() {
         return (
             <div>
+                <NavbarComp/>
                 <button onClick={this.getForms} className="btn btn-secondary btn-lg">Получить информацию</button>
                 <button onClick={this.getClients} className="btn btn-secondary btn-lg">Клиенты</button>
             </div>
-
         );
     }
 }

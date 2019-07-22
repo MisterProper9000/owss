@@ -4,10 +4,8 @@
     <bookmark url="file://$PROJECT_DIR$/frontend/src/components/Registration.js" line="29" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a5380fa1-d86d-4d3e-b8b6-8223656ba791" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="a5380fa1-d86d-4d3e-b8b6-8223656ba791" name="Default Changelist" comment="add connection to client">
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Client.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Client.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/controller/MainController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -89,8 +87,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
+            <state relative-caret-position="187">
+              <caret line="11" selection-start-line="11" selection-end-line="11" selection-end-column="15" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1203#1204#0" expanded="true" />
@@ -117,7 +115,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frontend/src/components/Login.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-607">
+            <state relative-caret-position="-539">
               <caret line="15" column="10" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
@@ -190,15 +188,6 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/openway/model/Motoroller.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -256,6 +245,7 @@
         <option value="$PROJECT_DIR$/src/main/java/openway/model/Motoroller.java" />
         <option value="$PROJECT_DIR$/frontend/src/components/Registration.js" />
         <option value="$PROJECT_DIR$/src/main/java/openway/controller/MainController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/openway/controller/MobileController.java" />
       </list>
     </option>
   </component>
@@ -283,7 +273,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-11" />
     <option name="y" value="-11" />
     <option name="width" value="1943" />
@@ -533,7 +523,7 @@
       <updated>1563539745458</updated>
       <workItem from="1563539747664" duration="3923000" />
       <workItem from="1563779741735" duration="17627000" />
-      <workItem from="1563799413871" duration="4834000" />
+      <workItem from="1563799413871" duration="5127000" />
     </task>
     <task id="LOCAL-00001" summary="connect postgresql">
       <created>1563783029257</created>
@@ -549,11 +539,18 @@
       <option name="project" value="LOCAL" />
       <updated>1563798855911</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="add connection to client">
+      <created>1563806318961</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1563806318961</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="26384000" />
+    <option name="totallyTimeSpent" value="26677000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -566,9 +563,8 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22024292" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15060729" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -578,13 +574,13 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.053285968" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.14209591" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.94671404" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.7637655" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.23445825" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.634103" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.14031972" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.06571936" />
@@ -611,10 +607,10 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="connect postgresql" />
     <MESSAGE value="add registration" />
-    <option name="LAST_COMMIT_MESSAGE" value="add registration" />
+    <MESSAGE value="add connection to client" />
+    <option name="LAST_COMMIT_MESSAGE" value="add connection to client" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/FormServiceImpl.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/openway/utils/HashUtil.java">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -895,18 +891,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="39" column="4" selection-start-line="39" selection-start-column="4" selection-end-line="39" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1203#1204#0" expanded="true" />
-            <element signature="e#1247#1248#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/components/NavbarComp.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -917,9 +901,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" selection-start-line="11" selection-end-line="11" selection-end-column="15" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1203#1204#0" expanded="true" />
+            <element signature="e#1247#1248#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MobileController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/components/Login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-607">
+        <state relative-caret-position="-539">
           <caret line="15" column="10" lean-forward="true" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />

@@ -12,8 +12,8 @@ public class ClientServiceImpl implements ClientService {
    final private ClientRepository clientRepository;
 
     @Autowired
-    public ClientServiceImpl(ClientRepository motoRepository) {
-        this.clientRepository = motoRepository;
+    public ClientServiceImpl(ClientRepository clientRepository){
+        this.clientRepository = clientRepository;
     }
 
     @Override

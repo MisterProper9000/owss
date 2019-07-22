@@ -1,30 +1,30 @@
 package openway.controller;
 
+import openway.model.Client;
 import openway.service.ClientService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 
 
 @RestController
 public class MainController {
 
-    //private final ClientService clientService;
+    private final static Logger logger = Logger.getLogger(MainController.class.getName());
+
+    private final ClientService clientService;
 
     public MainController(ClientService clientService) {
 
-        //this.clientService = clientService;
+        this.clientService = clientService;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/clients")
-    List<String> getCLient() {
-        List<String> list = new ArrayList();
-        list.add("qwqw");
-        list.add("dsda");
-        return list;
+    @GetMapping("/data")
+    List<Client> getClients() {
+        logger.info("get clients data");
+        return clientService.findAll();
     }
 }

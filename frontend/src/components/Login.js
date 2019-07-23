@@ -35,7 +35,7 @@ class Login extends Component {
         }).then(response => response.json()).then(response => {
             if (response == true) {
                 this.setState({errorMsg: ''});
-                window.location = "/admin"
+                window.location = "/info_lesser"
             } else {
                 this.setState({errorMsg: 'Wrong login or password!'});
             }
@@ -46,15 +46,15 @@ class Login extends Component {
     }
 
     render() {
-        const {login, password} = this.state;
+        const {email, password} = this.state;
 
         return (
             <div>
                 <NavbarComp/>
                 <form className="formLogin" onSubmit={this.handleSubmit}>
                     <h1>Sign in</h1>
-                    <input className="input" type="text" placeholder="email" name="login"
-                           value={login}
+                    <input className="input" type="text" placeholder="email" name="email"
+                           value={email}
                            onChange={this.handleChange}/><br/>
                     <input className="input" type="password" placeholder="password" name="password"
                            value={password}

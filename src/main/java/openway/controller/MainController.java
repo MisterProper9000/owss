@@ -46,9 +46,17 @@ public class MainController {
 
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/login")
+    boolean getLoginPassword(@RequestBody String auth) {
+        logger.info("check auth");
+        return lesserService.authentication(auth);
+    }
+
     @PostMapping("/moto")
     String newMoto(@RequestBody String newItem) {
         logger.info("motoooooooooo" + newItem);
+        clientService.addNewClient(newItem);
         return "Hello  Daniil";
     }
 }

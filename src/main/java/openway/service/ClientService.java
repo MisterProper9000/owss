@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface ClientService {
     List<Client> findAll();
+    void addNewClient(String newClient);
 }

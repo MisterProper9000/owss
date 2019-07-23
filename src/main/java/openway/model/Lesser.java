@@ -25,6 +25,11 @@ public class Lesser {
     public Lesser() {
     }
 
+    public Lesser(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public Lesser(String type, String first_name, String last_name,
                   String company_name, String email, String password,
                   String phone, String address, String bank_account, int sum_moto) {
@@ -38,5 +43,13 @@ public class Lesser {
         this.address = address;
         this.bank_account = bank_account;
         this.sum_moto = sum_moto;
+    }
+
+    public String getEmail(){
+        return email;
+    }
+
+    public String getPassword(){
+        return password;
     }
 }

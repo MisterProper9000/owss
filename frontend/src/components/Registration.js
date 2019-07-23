@@ -16,8 +16,9 @@ class Registration extends Component {
             address: '',
             phone: '',
             sum_moto: '',
-            bank_account:'',
+            bank_account: '',
             password: '',
+            errorMsg: '',
             data: [],
         };
         this.handleChange = this.handleChange.bind(this);
@@ -30,7 +31,7 @@ class Registration extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {first_name, last_name,company_name, type, email, phone, address, sum_moto,bank_account, password} = this.state;
+        const {first_name, last_name, company_name, type, email, phone, address, sum_moto, bank_account, password} = this.state;
 
         fetch('http://10.101.177.21:9091/reg', {
             method: 'POST',
@@ -46,6 +47,13 @@ class Registration extends Component {
                 bank_account,
                 sum_moto
             })
+        }).then(response => response.json()).then(response => {
+            if (response == true) {
+                this.setState({errorMsg: ''});
+                window.location = "/login"
+            } else {
+                this.setState({errorMsg: 'Enter correct data!'});
+            }
         })
     }
 
@@ -53,13 +61,14 @@ class Registration extends Component {
     }
 
     render() {
-        const {first_name, last_name,company_name, type, email, phone, address, sum_moto,bank_account, password} = this.state;
+        const {first_name, last_name, company_name, type, email, phone, address, sum_moto, bank_account, password} = this.state;
 
         return (
             <div>
                 <NavbarComp/>
                 <form className="formLogin" onSubmit={this.handleSubmit}>
                     <h1>Sign up</h1>
+                    <div className="errorMsg">{this.state.errorMsg}</div>
                     <div>
                         <select className="option" name="type" value={type} onChange={this.handleChange}>
                             <option value="Individuals">Individuals</option>
@@ -93,7 +102,6 @@ class Registration extends Component {
                     <input className="input" type="password" placeholder="password" name="password"
                            value={password}
                            onChange={this.handleChange}/><br/>
-                    <div className="errorMsg">{this.state.errorMsg}</div>
                     <input type="submit" name="buttonLogin" className="input btn btn-secondary"
                            value="Ok"/>
                 </form>

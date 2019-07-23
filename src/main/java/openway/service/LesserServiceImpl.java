@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import openway.model.Lesser;
 import openway.repository.LesserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.logging.Logger;
 
@@ -17,6 +18,7 @@ public class LesserServiceImpl implements LesserService {
         this.lesserRepository = lesserRepository;
     }
 
+    @Transactional
     @Override
     public void addNewLesser(String newLesser) {
         logger.info("called addNewLesser()");

@@ -32,14 +32,23 @@ public class MainController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/reg")
-    void newLesser(@RequestBody String newItem) {
-        logger.info("add lesser to db");
-        lesserService.addNewLesser(newItem);
+    boolean addNewLesser(@RequestBody String newItem) {
+        logger.info("called addNewLesser()");
+        try{
+            lesserService.addNewLesser(newItem);
+            logger.info("add new lessor");
+            return true;
+        }
+        catch (Exception e){
+            logger.info("error with saving data: not added new lessor");
+            return false;
+        }
+
     }
 
     @PostMapping("/moto")
     String newMoto(@RequestBody String newItem) {
-        logger.info("motoooooooooo"+ newItem);
+        logger.info("motoooooooooo" + newItem);
         return "Hello  Daniil";
     }
 }

@@ -48,10 +48,16 @@ public class MainController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
-    boolean getLoginPassword(@RequestBody String auth) {
-        logger.info("check auth");
-        return lesserService.authentication(auth);
+    void getLoginPassword(@RequestBody String auth) {
+        lesserService.setPasswordHash();
     }
+
+//    @CrossOrigin(origins = "http://localhost:3000")
+//    @PostMapping("/login")
+//    boolean getLoginPassword(@RequestBody String auth) {
+//        logger.info("check auth");
+//        return lesserService.authentication(auth);
+//    }
 
     @PostMapping("/moto")
     String newMoto(@RequestBody String newItem) {

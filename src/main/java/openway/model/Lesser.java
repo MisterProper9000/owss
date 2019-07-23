@@ -52,4 +52,8 @@ public class Lesser {
     public String getPassword(){
         return password;
     }
+
+    public String setPassword(String password){
+        return password;
+    }
 }

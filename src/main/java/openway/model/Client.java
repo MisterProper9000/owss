@@ -15,7 +15,6 @@ public class Client {
     private String email;
     private String phone;
     private String password;
-
     public Client(String name, String email, String phone, String password) {
         this.name = name;
         this.email = email;

@@ -20,7 +20,7 @@ class Client extends Component {
 
     getForms() {
         var xhr = new XMLHttpRequest();
-        xhr.open("GET", 'http://localhost:9091/clients', true);
+        xhr.open("GET", 'http://10.101.177.21:9091/clients', true);
         xhr.onreadystatechange = function () {
             if (this.readyState !== 4) return;
             let answer =this.responseText;

@@ -38,7 +38,8 @@ public class MainController {
     }
 
     @PostMapping("/moto")
-    void newMoto(@RequestBody String newItem) {
+    String newMoto(@RequestBody String newItem) {
         logger.info("motoooooooooo"+ newItem);
+        return "Hello  Daniil";
     }
 }

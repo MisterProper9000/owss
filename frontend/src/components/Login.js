@@ -7,10 +7,9 @@ class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            id_admin: '',
-            login: '',
+            id: '',
+            email: '',
             password: '',
-            role: '',
             data: [],
             errorMsg: ''
         };
@@ -24,12 +23,12 @@ class Login extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {login, password} = this.state;
+        const {email, password} = this.state;
 
-        fetch('http://localhost:9091/login', {
+        fetch('http://10.101.177.21:9091/login', {
             method: 'POST',
             body: JSON.stringify({
-                    login,
+                    email,
                     password
                 }
             )
@@ -54,7 +53,7 @@ class Login extends Component {
                 <NavbarComp/>
                 <form className="formLogin" onSubmit={this.handleSubmit}>
                     <h1>Sign in</h1>
-                    <input className="input" type="text" placeholder="login" name="login"
+                    <input className="input" type="text" placeholder="email" name="login"
                            value={login}
                            onChange={this.handleChange}/><br/>
                     <input className="input" type="password" placeholder="password" name="password"

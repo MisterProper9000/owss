@@ -8,12 +8,15 @@ class Registration extends Component {
         super(props);
         this.state = {
             id: '',
-            name: '',
+            first_name: '',
+            last_name: '',
+            company_name: '',
             type: "Individuals",
             email: '',
             address: '',
             phone: '',
             sum_moto: '',
+            bank_account:'',
             password: '',
             data: [],
         };
@@ -27,17 +30,20 @@ class Registration extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {name, type, email, phone, address, sum_moto, password} = this.state;
+        const {first_name, last_name,company_name, type, email, phone, address, sum_moto,bank_account, password} = this.state;
 
         fetch('http://10.101.177.21:9091/reg', {
             method: 'POST',
             body: JSON.stringify({
-                name,
+                first_name,
+                last_name,
+                company_name,
                 type,
                 email,
                 password,
                 phone,
                 address,
+                bank_account,
                 sum_moto
             })
         })
@@ -47,7 +53,7 @@ class Registration extends Component {
     }
 
     render() {
-        const {name, type, email, phone, address, sum_moto, password} = this.state;
+        const {first_name, last_name,company_name, type, email, phone, address, sum_moto,bank_account, password} = this.state;
 
         return (
             <div>
@@ -60,8 +66,17 @@ class Registration extends Component {
                             <option value="Entities">Entities</option>
                         </select>
                     </div>
-                    <input className="input" type="text" placeholder="name" name="name"
-                           value={name}
+                    <input className="input" type="text" placeholder="first name" name="first_name"
+                           value={first_name}
+                           onChange={this.handleChange}/><br/>
+                    <input className="input" type="text" placeholder="last name" name="last_name"
+                           value={last_name}
+                           onChange={this.handleChange}/><br/>
+                    <input className="input" type="text" placeholder="company name" name="company_name"
+                           value={company_name}
+                           onChange={this.handleChange}/><br/>
+                    <input className="input" type="text" placeholder="bank account" name="bank_account"
+                           value={bank_account}
                            onChange={this.handleChange}/><br/>
                     <input className="input" type="text" placeholder="email" name="email"
                            value={email}

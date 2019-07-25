@@ -28,8 +28,9 @@ public class LesserServiceImpl implements LesserService {
         Lesser lesser = g.fromJson(newLesser, Lesser.class);
 
         //setPasswordHash(lesser);
-        lesserRepository.save(lesser);
+        Lesser saved = lesserRepository.save(lesser);
         logger.info("save to database:" + lesser);
+        logger.info("save to database:" + saved);
     }
 
     @Override
@@ -55,9 +56,9 @@ public class LesserServiceImpl implements LesserService {
         Lesser lesser = lesserRepository.findLesserByEmail("kate@gmail.com");
         logger.info("info about lesser"+lesser);
         try{
-            logger.info("old password:   "+lesser.getPassword());
+            logger.info("old password:   " + lesser.getPassword());
             lesser.setPassword(HashUtil.getSaltedHash(lesser.getPassword()));
-            logger.info("hash pasword:  "+lesser.getPassword());
+            logger.info("hash pasword:  " + lesser.getPassword());
         } catch (Exception e){
             e.printStackTrace();
         }

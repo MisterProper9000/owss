@@ -29,7 +29,6 @@ public class ClientServiceImpl implements ClientService {
         logger.info("called addNewLesser()");
         Gson g = new Gson();
         Client client = g.fromJson(newClient,Client.class);
-
         clientRepository.save(client);
         logger.info("save to database:" + client);
     }

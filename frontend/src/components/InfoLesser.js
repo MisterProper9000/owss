@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import NavbarComp from "./NavbarComp"
-import '../css/Login.css';
+import '../css/InfoLesser.css';
 
 
 class InfoLesser extends Component {
@@ -8,26 +8,30 @@ class InfoLesser extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            first_name: '',
+            last_name: '',
+            email: '',
+            sum_moto: '',
 
         };
         this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     handleChange(event) {
         this.setState({[event.target.name]: event.target.value});
+    }
 
-        fetch('http://10.101.177.12:9091/reg', {
+    handleSubmit(event) {
+        event.preventDefault();
+        const {first_name, last_name, company_name, type, email, phone, address, sum_moto, bank_account, password} = this.state;
+
+        fetch('http://10.101.177.21:9091/reg', {
             method: 'POST',
             body: JSON.stringify({
                 first_name,
                 last_name,
-                company_name,
-                type,
                 email,
-                password,
-                phone,
-                address,
-                bank_account,
                 sum_moto
             })
         }).then(response => response.json()).then(response => {
@@ -38,11 +42,10 @@ class InfoLesser extends Component {
                 this.setState({errorMsg: 'Enter correct data!'});
             }
         })
-
-
     }
 
-    render() {
+
+render() {
         return(
             <div>
                 <NavbarComp/>

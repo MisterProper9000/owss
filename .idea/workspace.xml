@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5380fa1-d86d-4d3e-b8b6-8223656ba791" name="Default Changelist" comment="added function hash">
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Registration.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/controller/ArduinoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/controller/ArduinoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/model/Lesser.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/model/Lesser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/service/LesserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/service/LesserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/service/LesserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/service/LesserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/openway/controller/MobileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/controller/MobileController.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -171,8 +165,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MobileController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="415">
-              <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+            <state relative-caret-position="221">
+              <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#451#452#0" expanded="true" />
@@ -265,7 +259,6 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/openway/mapper/Mapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/openway/service/ClientServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/openway/controller/MobileController.java" />
         <option value="$PROJECT_DIR$/src/main/java/openway/controller/ArduinoController.java" />
         <option value="$PROJECT_DIR$/src/main/java/openway/model/Lesser.java" />
         <option value="$PROJECT_DIR$/src/main/java/openway/repository/LesserRepository.java" />
@@ -274,6 +267,7 @@
         <option value="$PROJECT_DIR$/src/main/java/openway/service/LesserServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/openway/service/LesserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/openway/controller/MainController.java" />
+        <option value="$PROJECT_DIR$/src/main/java/openway/controller/MobileController.java" />
       </list>
     </option>
   </component>
@@ -552,7 +546,7 @@
       <updated>1563539745458</updated>
       <workItem from="1563539747664" duration="3923000" />
       <workItem from="1563779741735" duration="17627000" />
-      <workItem from="1563799413871" duration="45661000" />
+      <workItem from="1563799413871" duration="45944000" />
     </task>
     <task id="LOCAL-00001" summary="connect postgresql">
       <created>1563783029257</created>
@@ -614,7 +608,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="67211000" />
+    <option name="totallyTimeSpent" value="67494000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -629,7 +623,7 @@
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23673469" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -639,13 +633,13 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.053285968" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.15526803" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.9445471" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.7637655" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.4676525" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.43992606" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="8" visible="true" weight="0.055452865" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.06469501" />
@@ -1059,8 +1053,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MobileController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="415">
-          <caret line="26" column="5" lean-forward="true" selection-start-line="26" selection-start-column="5" selection-end-line="26" selection-end-column="5" />
+        <state relative-caret-position="221">
+          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#451#452#0" expanded="true" />

@@ -53,6 +53,10 @@ public class Lesser {
         return password;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public String setPassword(String password){
         return password;
     }

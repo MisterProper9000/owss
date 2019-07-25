@@ -8,10 +8,11 @@ import java.util.logging.Logger;
 @RestController
 public class ArduinoController {
 
-    private final static Logger logger = Logger.getLogger(MainController.class.getName());
+    private final static Logger logger = Logger.getLogger(ArduinoController.class.getName());
 
-    @PostMapping("/ard")
-    void getForms(@RequestBody String newItem) {
-        logger.info("arduinoooo"+newItem);
+    @GetMapping("/ard")
+    String getForms() {
+        logger.info("arduinoooo");
+        return "Hello";
     }
 }

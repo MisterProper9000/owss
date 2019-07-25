@@ -11,6 +11,9 @@ import java.util.logging.Logger;
 @RestController
 public class MobileController {
 
+
+    }
+
     private final static Logger logger = Logger.getLogger(MainController.class.getName());
 
     private final ClientService clientService;

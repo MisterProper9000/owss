@@ -1,5 +1,6 @@
 package openway.controller;
 
+import openway.model.Lesser;
 import openway.service.LesserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,16 +35,16 @@ public class MainController {
 
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/login")
-    void getLoginPassword(@RequestBody String auth) {
-        lesserService.setPasswordHash();
-    }
-
 //    @CrossOrigin(origins = "http://localhost:3000")
 //    @PostMapping("/login")
-//    boolean getLoginPassword(@RequestBody String auth) {
-//        logger.info("check auth");
-//        return lesserService.authentication(auth);
+//    void getLoginPassword(@RequestBody String auth) {
+//        lesserService.setPasswordHash();
 //    }
+
+    @CrossOrigin(origins = "http://10.101.177.21:9091:3000")
+    @PostMapping("/login")
+    Lesser getLoginPassword(@RequestBody String auth) {
+        logger.info("check auth");
+        return lesserService.authentication(auth);
+    }
 }

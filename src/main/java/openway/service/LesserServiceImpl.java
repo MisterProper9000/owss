@@ -28,38 +28,38 @@ public class LesserServiceImpl implements LesserService {
         Lesser lesser = g.fromJson(newLesser, Lesser.class);
 
         //setPasswordHash(lesser);
-        lesserRepository.save(lesser);
-        logger.info("save to database:" + lesser);
+        Lesser save = lesserRepository.save(lesser);
+        logger.info("save to database:" + save);
     }
 
     @Override
-    public boolean authentication(String auth) {
+    public Lesser authentication(String auth) {
         logger.info("called authentication()" + auth);
         Gson g = new Gson();
         Login lesser = g.fromJson(auth, Login.class);
 
         Lesser lesserInDB = lesserRepository.findLesserByEmail(lesser.getEmail());
         try {
-            if (HashUtil.check(lesserInDB.getPassword(),(lesser.getPassword())))
-                return true;
+            if (lesserInDB.getPassword().equals(lesser.getPassword()))
+                return lesserInDB;
         } catch (Exception e) {
             e.printStackTrace();
         }
         logger.info("checked entered data from start page");
-        return false;
+        return null;
     }
 
     //Setting password hash
-    @Override
-    public void setPasswordHash() {
-        Lesser lesser = lesserRepository.findLesserByEmail("kate@gmail.com");
-        logger.info("info about lesser"+lesser);
-        try{
-            logger.info("old password:   "+lesser.getPassword());
-            lesser.setPassword(HashUtil.getSaltedHash(lesser.getPassword()));
-            logger.info("hash pasword:  "+lesser.getPassword());
-        } catch (Exception e){
-            e.printStackTrace();
-        }
-    }
+//    @Override
+//    public void setPasswordHash() {
+//        Lesser lesser = lesserRepository.findLesserByEmail("kate@gmail.com");
+//        logger.info("info about lesser"+lesser);
+//        try{
+//            logger.info("old password:   "+lesser.getPassword());
+//            lesser.setPassword(HashUtil.getSaltedHash(lesser.getPassword()));
+//            logger.info("hash pasword:  "+lesser.getPassword());
+//        } catch (Exception e){
+//            e.printStackTrace();
+//        }
+//    }
 }

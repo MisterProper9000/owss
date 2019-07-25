@@ -48,7 +48,7 @@ class Registration extends Component {
                 sum_moto
             })
         }).then(response => response.json()).then(response => {
-            if (response == true) {
+            if (response != null) {
                 this.setState({errorMsg: ''});
                 window.location = "/login"
             } else {

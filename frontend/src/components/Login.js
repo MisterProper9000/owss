@@ -33,11 +33,11 @@ class Login extends Component {
                 }
             )
         }).then(response => response.json()).then(response => {
-            if (response == true) {
+            if (response == "") {
+                this.setState({errorMsg: 'Wrong login or password!'});
+            } else {
                 this.setState({errorMsg: ''});
                 window.location = "/info_lesser"
-            } else {
-                this.setState({errorMsg: 'Wrong login or password!'});
             }
         })
     }

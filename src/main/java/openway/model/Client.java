@@ -16,6 +16,11 @@ public class Client {
     private String phone;
     private String password;
 
+    public Client(String email, String password) {
+        this.email = email;
+        this.password = password;
+    }
+
     public Client(String first_name, String last_name,
                   String email, String phone, String password) {
         this.first_name = first_name;
@@ -26,5 +31,27 @@ public class Client {
     }
 
     public Client() {
+    }
+
+
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
     }
 }

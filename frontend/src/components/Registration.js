@@ -33,7 +33,7 @@ class Registration extends Component {
         event.preventDefault();
         const {first_name, last_name, company_name, type, email, phone, address, sum_moto, bank_account, password} = this.state;
 
-        fetch('http://10.101.177.21:9091/reg', {
+        fetch('http://10.101.177.12:9091/reg', {
             method: 'POST',
             body: JSON.stringify({
                 first_name,

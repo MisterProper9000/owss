@@ -28,8 +28,10 @@ public class LesserServiceImpl implements LesserService {
         Lesser lesser = g.fromJson(newLesser, Lesser.class);
 
         //setPasswordHash(lesser);
-        Lesser save = lesserRepository.save(lesser);
-        logger.info("save to database:" + save);
+
+        Lesser saved = lesserRepository.save(lesser);
+        logger.info("save to database:" + lesser);
+        logger.info("save to database:" + saved);
     }
 
     @Override

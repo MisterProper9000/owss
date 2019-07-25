@@ -25,4 +25,6 @@ yarn-error.log*
 # mvn out
 *target*
 
+# idea files
 *.idea*
+*.iml

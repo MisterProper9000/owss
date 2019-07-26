@@ -4,27 +4,26 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:behavior1="clr-namespace:ScooterSharing"
              mc:Ignorable="d"
-             BackgroundColor="LightGreen"
+             BackgroundColor="WhiteSmoke"
              x:Class="ScooterSharing.LogIn">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="http://IP:port; data sended: var friend = new Friend { Id = 1, Name = Иван Иванов };"/>
-            <Entry x:Name="IP"
+            <d:Label Text="http://IP:port; data sended: var friend = new Friend { Id = 1, Name = Иван Иванов };"/>
+            <d:Entry x:Name="IP"
                        ClassId="IP"
                        Text=""
                        Placeholder="place ip here"
                        ReturnType="Next"
                        PlaceholderColor="DarkGreen"/>
-            <Entry x:Name="port"
+            <d:Entry x:Name="port"
                        ClassId="port"
                        Text=""
                        Placeholder="port number here"
                        ReturnType="Next"
                        PlaceholderColor="DarkGreen"/>
             <Grid Padding="50">
-                
-                
                 <Entry x:Name="fName"
                        ClassId="fName"
                        Text=""
@@ -64,6 +63,7 @@
                 <Entry x:Name="phone"
                        ClassId="phone"
                        Text=""
+                       CursorPosition="2"
                        Placeholder="Phone number"
                        Grid.Row="2"
                        Opacity="0"
@@ -71,9 +71,12 @@
                        IsVisible="False"
                        Keyboard="Numeric"
                        ReturnType="Next"
-                       Unfocused="CheckPhone"
                        PlaceholderColor="DarkGreen"
-                       TextChanged="DetectTrash"/>
+                       TextChanged="DetectTrash">
+                    <Entry.Behaviors>
+                        <behavior1:MaskedBehavior Mask="+7 (XXX) XXX-XXXX" />
+                    </Entry.Behaviors>
+                </Entry>
                 <Entry x:Name="code"
                        ClassId="code"
                        Text=""
@@ -92,6 +95,7 @@
                         Clicked="ConfirmCode"/>
                 <Entry x:Name="mail"
                        ClassId="mail"
+                       MaxLength="50"
                        Text=""
                        Placeholder="you@email.com"
                        Grid.Row="3"
@@ -104,6 +108,7 @@
                 <Entry x:Name="password"
                        ClassId="password"
                        Text=""
+                       MaxLength="50"
                        Placeholder="Password"
                        Grid.Row="4"
                        Opacity="0"
@@ -114,6 +119,7 @@
                        PlaceholderColor="DarkGreen"
                        Unfocused="DetectTrash"/>
                 <Entry x:Name="confirmPassword"
+                       MaxLength="50"
                        ClassId="confirmpassword"
                        Text=""
                        Placeholder="Confirm password"

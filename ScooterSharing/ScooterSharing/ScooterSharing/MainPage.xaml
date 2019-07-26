@@ -5,7 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              mc:Ignorable="d"
-             BackgroundColor="LightGreen"
+             BackgroundColor="WhiteSmoke"
              x:Class="ScooterSharing.MainPage">
 
     <StackLayout>

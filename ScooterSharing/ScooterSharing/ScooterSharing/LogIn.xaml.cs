@@ -15,10 +15,11 @@ using System.Text.RegularExpressions;
 namespace ScooterSharing
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
+    
     public partial class LogIn : ContentPage
     {
-        private int phoneCharLimit = 11;
         private int fsNameCharLimit = 40;
+        private int phoneCharLimit = 17;
         private enum UIMode{Default,LogIn,SignUp };
         int onFinishCheck; // since both click and close button's animation have to be played (for draw on last frame)
         int onFinishClose; // during moving to input mode both onFinish methods call before they actually will
@@ -120,13 +121,19 @@ namespace ScooterSharing
             if(uiMode == UIMode.SignUp && (fName.Text == "" || sName.Text == "" || phone.Text == "" || mail.Text == "" ||
                 password.Text == "" || confirmPassword.Text == ""))
             {
-                DisplayAlert("Attention", "All fields nust be filled", "OK");
+                DisplayAlert("Attention", "All fields must be filled", "OK");
+                return;
+            }
+
+            if (uiMode == UIMode.SignUp && phone.Text.Length < phoneCharLimit)
+            {
+                DisplayAlert("Attention", "Too short phone number", "OK");
                 return;
             }
 
             if (uiMode == UIMode.LogIn && (mail.Text == "" || password.Text == ""))
             {
-                DisplayAlert("Attention", "All fields nust be filled", "OK");
+                DisplayAlert("Attention", "All fields must be filled", "OK");
                 return;
             }
 
@@ -152,10 +159,20 @@ namespace ScooterSharing
                 confirmPassword.IsEnabled = false;
                 confirmPassword.IsVisible = false;
 
+                close.IsEnabled = false;
+                close.IsVisible = false;
+                check.IsVisible = false;
+                check.IsEnabled = false;
+
                 code.IsEnabled = true;
                 code.IsVisible = true;
                 sendCode.IsVisible = true;
                 sendCode.IsEnabled = true;
+            }
+
+            if(uiMode == UIMode.LogIn)
+            {
+                ToAccountFromLogIn();
             }
         }
 
@@ -201,6 +218,8 @@ namespace ScooterSharing
             check.FadeTo(0, 600, Easing.Linear);
             close.FadeTo(0, 600, Easing.Linear);
 
+            sendCode.IsEnabled = false;
+            sendCode.IsVisible = false;
             fName.IsEnabled = false;
             fName.IsVisible = false;
             sName.IsEnabled = false;
@@ -222,7 +241,9 @@ namespace ScooterSharing
 
             btnSignUp.IsEnabled = true;
             btnLogIn.IsEnabled = true;
-
+            
+            sendCode.IsEnabled = false;
+            sendCode.IsVisible = false;
             mail.IsEnabled = false;
             mail.IsVisible = false;
             password.IsEnabled = false;
@@ -240,38 +261,126 @@ namespace ScooterSharing
         {
             close.Play();
         }
-        class Friend
+
+        async private void ToAccountFromLogIn()
         {
-            public int Id { get; set; }
-            public string Name { get; set; }
+            //tmp
+            /*TabbedPage tabbedPage = new TabbedPage();
+            tabbedPage.Children.Add(new Account());
+            tabbedPage.Children.Add(new XMap());
+
+            tabbedPage.BarBackgroundColor = Color.Green;
+            NavigationPage.SetHasNavigationBar(tabbedPage, false);
+            Application.Current.MainPage = new NavigationPage(tabbedPage);
+            //tmp
+            return;*/
+            var user = new UserLogIn
+            {
+                password = password.Text,
+                email = mail.Text
+            };
+            string result = await RequestStuff.doRequest("loginclient", JsonConvert.SerializeObject(user));
+            string[] parseRes = result.Split('|');
+            if (parseRes[0] == RequestResult.OK.ToString())
+            {
+                App.Current.Properties["isLoggedIn"] = "yes";
+                App.Current.Properties["fName"] = parseRes[1];
+                App.Current.Properties["lName"] = parseRes[2];
+                //App.Current.Properties["balance"] = parseResult.balance;
+                await App.Current.SavePropertiesAsync();
+
+                TabbedPage tabbedPage = new TabbedPage();
+                tabbedPage.Children.Add(new Account());
+                tabbedPage.Children.Add(new XMap());
+
+                tabbedPage.BarBackgroundColor = Color.Green;
+                NavigationPage.SetHasNavigationBar(tabbedPage, false);
+                Application.Current.MainPage = new NavigationPage(tabbedPage);
+            }
+            else if(parseRes[0] == RequestResult.DOESNTEXIST.ToString())
+            {
+                await DisplayAlert("Error", "User doesn't exist", "OK");
+                if (uiMode == UIMode.LogIn)
+                {
+                    ToStartFromLogin();
+                    onFinishClose = 0;
+                }
+                if (uiMode == UIMode.SignUp)
+                {
+                    ToStartFromSignUp();
+                    onFinishClose = 0;
+                }
+            }
+            else
+            {
+                await DisplayAlert("Error", "Something goes wrong", "OK");
+                if (uiMode == UIMode.LogIn)
+                {
+                    ToStartFromLogin();
+                    onFinishClose = 0;
+                }
+                if (uiMode == UIMode.SignUp)
+                {
+                    ToStartFromSignUp();
+                    onFinishClose = 0;
+                }
+            }
+            
         }
 
         async public void ToAccount()
         {
-            //TEST SERVER INTERACTION
-            var friend = new Friend { Id = 1, Name = "Иван Иванов" };
-            HttpClient client = new HttpClient();
-            HttpRequestMessage request = new HttpRequestMessage();
-            string uri = "http://" + IP.Text + ":" + port.Text;
-            request.RequestUri = new Uri(uri);//http://10.101.177.21:3000
-            request.Method = HttpMethod.Get;
-            string json = JsonConvert.SerializeObject(friend);
-            HttpContent content = new StringContent(json);
-            request.Content = content;
-            request.Headers.Add("Accept", "hello/json");
-            await client.SendAsync(request);
-            /*HttpResponseMessage response = await client.SendAsync(request);
-            if (response.StatusCode == HttpStatusCode.OK)
+            var user = new UserSignUp {
+                first_name = fName.Text,
+                last_name = sName.Text,
+                phone = phone.Text,
+                email = mail.Text,
+                password = password.Text
+            };
+            string result = await RequestStuff.doRequest("regclient", JsonConvert.SerializeObject(user));
+            string[] parseRes = result.Split('|');
+            if (parseRes[0] == RequestResult.ALREADYEXIST.ToString())
             {
-                HttpContent responseContent = response.Content;
-                json = await responseContent.ReadAsStringAsync();
-            }*/
-
+                await DisplayAlert("Error", "User already exist", "OK");
+                if (uiMode == UIMode.LogIn)
+                {
+                    ToStartFromLogin();
+                    onFinishClose = 0;
+                }
+                if (uiMode == UIMode.SignUp)
+                {
+                    ToStartFromSignUp();
+                    onFinishClose = 0;
+                }
+                return;
+            }
+            if (parseRes[0] != RequestResult.OK.ToString())
+            {
+                await DisplayAlert("Error", "Something wrong with server", "OK");
+                if (uiMode == UIMode.LogIn)
+                {
+                    ToStartFromLogin();
+                    onFinishClose = 0;
+                }
+                if (uiMode == UIMode.SignUp)
+                {
+                    ToStartFromSignUp();
+                    onFinishClose = 0;
+                }
+                return;
+            }
+            App.Current.Properties["isLoggedIn"] = "yes";
+            App.Current.Properties["fName"] = fName.Text;
+            App.Current.Properties["lName"] = sName.Text;
+            App.Current.Properties["balance"] = "0$";
+            await App.Current.SavePropertiesAsync();
             TabbedPage tabbedPage = new TabbedPage();
             tabbedPage.Children.Add(new Account());
             tabbedPage.Children.Add(new XMap());
+
             tabbedPage.BarBackgroundColor = Color.Green;
-            Application.Current.MainPage = tabbedPage;
+            NavigationPage.SetHasNavigationBar(tabbedPage, false);
+            Application.Current.MainPage = new NavigationPage(tabbedPage);
         }
 
         protected override bool OnBackButtonPressed()
@@ -314,34 +423,35 @@ namespace ScooterSharing
                         {
                             phone.Text = phone.Text.Substring(0, phone.Text.Length - 1);
                         }
-                    if (phone.Text.Length > phoneCharLimit)
-                    {
-                        phone.Text = phone.Text.Substring(0, phoneCharLimit);
-                    }
                     break;
                 case "mail":
                     if(!ValidateEmail(mail.Text))
                     {
+                        mail.Text = "";
                         DisplayAlert("Attention", "Invalid email", "OK");
                     }
                     break;
                 case "password":
                     if(password.Text.Length < 8)
                     {
+                        password.Text = "";
                         DisplayAlert("Attention", "Password must contain at least 8 characters", "OK");
                     }
                     if(confirmPassword.Text != "" && confirmPassword.Text != password.Text)
                     {
+                        password.Text = "";
                         DisplayAlert("Attention", "Mismatched passwords", "OK");
                     }
                     break;
                 case "confirmpassword":
                     if (confirmPassword.Text.Length < 8)
                     {
+                        confirmPassword.Text = "";
                         DisplayAlert("Attention", "Password must contain at least 8 characters", "OK");
                     }
                     if (password.Text != "" && confirmPassword.Text != password.Text)
                     {
+                        confirmPassword.Text = "";
                         DisplayAlert("Attention", "Mismatched passwords", "OK");
                     }
                     break;
@@ -359,28 +469,105 @@ namespace ScooterSharing
             return EmailRegex.IsMatch(email);
         }
 
-        public void ConfirmCode(object sender, EventArgs e)
+        async public void ConfirmCode(object sender, EventArgs e)
         {
             if (code.Text == "")
-                DisplayAlert("Attention", "You must enter verification code", "OK");
+                await DisplayAlert("Attention", "You must enter verification code", "OK");
             //code sent
-            if(false)//some server responce
+            var verCode = new VerificationCode {
+                mail = mail.Text,
+                code = code.Text
+            };
+
+            //if there is time left
+            //string result = await RequestStuff.doRequest("moto", JsonConvert.SerializeObject(verCode));
+
+            if (false)//some server responce
             {
-                DisplayAlert("Error", "Wrong verification code", "OK");
+                await DisplayAlert("Error", "Wrong verification code", "OK");
+                code.Text = "";
                 code.IsEnabled = false;
                 code.IsVisible = false;
                 sendCode.IsVisible = false;
                 sendCode.IsEnabled = false;
+
+
                 ToStart(sender, e);
                 return;
             }
             ToAccount();
         }
-
-        public void CheckPhone(object sender, EventArgs e)
-        {
-            if (phone.Text.Length < phoneCharLimit)
-                DisplayAlert("Attention", "Too short phone number", "OK");                                
     }
-}
+
+    public class MaskedBehavior : Behavior<Entry>
+    {
+        private string _mask = "";
+        public string Mask
+        {
+            get => _mask;
+            set
+            {
+                _mask = value;
+                SetPositions();
+            }
+        }
+
+        protected override void OnAttachedTo(Entry entry)
+        {
+            entry.TextChanged += OnEntryTextChanged;
+            base.OnAttachedTo(entry);
+        }
+
+        protected override void OnDetachingFrom(Entry entry)
+        {
+            entry.TextChanged -= OnEntryTextChanged;
+            base.OnDetachingFrom(entry);
+        }
+
+        IDictionary<int, char> _positions;
+
+        void SetPositions()
+        {
+            if (string.IsNullOrEmpty(Mask))
+            {
+                _positions = null;
+                return;
+            }
+
+            var list = new Dictionary<int, char>();
+            for (var i = 0; i < Mask.Length; i++)
+                if (Mask[i] != 'X')
+                    list.Add(i, Mask[i]);
+
+            _positions = list;
+        }
+
+        private void OnEntryTextChanged(object sender, TextChangedEventArgs args)
+        {
+            var entry = sender as Entry;
+
+            var text = entry.Text;
+
+            if (string.IsNullOrWhiteSpace(text) || _positions == null)
+                return;
+
+            if (text.Length > _mask.Length)
+            {
+                entry.Text = text.Remove(text.Length - 1);
+                return;
+            }
+
+            foreach (var position in _positions)
+                if (text.Length >= position.Key + 1)
+                {
+                    var value = position.Value.ToString();
+                    if (text.Substring(position.Key, 1) != value)
+                        text = text.Insert(position.Key, value);
+                }
+
+            if (entry.Text != text)
+                entry.Text = text;
+        }
+
+    }
 }

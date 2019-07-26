@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:behavior1="clr-namespace:ScooterSharing"
+             mc:Ignorable="d"
+             Title="Payments"
+             BackgroundColor="WhiteSmoke"
+             x:Class="ScooterSharing.Pay">
+    <ContentPage.Content>
+        <StackLayout>
+            <Image x:Name="epay"/>
+            <Grid Padding="50, 0, 50, 0">
+                <Entry x:Name="fName"
+                       ClassId="fName"
+                       Text=""
+                       Placeholder="First Name"
+                       Grid.Row="1"
+                       TextChanged="DetectTrash"
+                       ReturnType="Next"
+                       PlaceholderColor="DarkGreen"/>
+                <Entry x:Name="lName"
+                       ClassId="lName"
+                       Text=""
+                       Placeholder="Last Name"
+                       Grid.Row="2"
+                       TextChanged="DetectTrash"
+                       ReturnType="Next"
+                       PlaceholderColor="DarkGreen"/>
+                <Entry x:Name="cardNum"
+                       ClassId="cardNum"
+                       Text=""
+                       Placeholder="Card num"
+                       Grid.Row="3"
+                       TextChanged="DetectTrash"
+                       Unfocused="CheckNumbers"
+                       ReturnType="Next"
+                       IsPassword="False"
+                       PlaceholderColor="DarkGreen">
+                    <Entry.Behaviors>
+                        <behavior1:MaskedBehaviorCardNum Mask="XXXX-XXXX-XXXX-XXXX" />
+                    </Entry.Behaviors>
+                </Entry>
+                <Entry x:Name="cvc2"
+                       ClassId="cvc2"
+                       Text=""
+                       Placeholder="CVC2"
+                       Grid.Row="4"
+                       IsPassword="True"
+                       TextChanged="DetectTrash"
+                       Unfocused="CheckNumbers"
+                       ReturnType="Next"
+                       PlaceholderColor="DarkGreen"/>
+            </Grid>
+            <Image x:Name="doPay">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="DoPay"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <forms:AnimationView x:Name="payAnim"
+	                             Animation="pay.json" 
+	                             Loop="True"
+                                 IsEnabled="False"
+	                             AutoPlay="False"
+                                 IsVisible="False"
+                                 Scale="1"
+                                 HeightRequest="80"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

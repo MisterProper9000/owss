@@ -4,12 +4,13 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:PinchGesture"
+             xmlns:local1="clr-namespace:ScooterSharing"
              mc:Ignorable="d"
+             BackgroundColor="WhiteSmoke"
              Title="Map"
              x:Class="ScooterSharing.XMap">
     <ContentPage.Content>
         <StackLayout x:Name="mainStack">
-            
             <Grid x:Name="mainGrid">
                 <WebView x:Name="Browser" 
                          HeightRequest="3000" 
@@ -23,8 +24,9 @@
                             Grid.Row="0"
                             IsEnabled="True"
                             IsVisible="True">
-                    <StackLayout>
+                    <Grid>
                         <Image x:Name="map" 
+                               Grid.Row="0"
                            Aspect="AspectFill" 
                            Scale="1"
                            WidthRequest="1920"
@@ -33,10 +35,51 @@
                            VerticalOptions="Center">
                         </Image>
                         <Image x:Name="customPin1"
-                                 Scale="1"
-                                 >                            
+                                 Scale="0.03"
+                               ClassId="0"
+                               Grid.Row="0"
+                                 >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="PinTap"/>
+                            </Image.GestureRecognizers>
                         </Image>
-                    </StackLayout>
+                        <Image x:Name="customPin2"
+                               ClassId="1"
+                                 Scale="0.03"
+                               Grid.Row="0"
+                                 >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="PinTap"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Image x:Name="customPin3"
+                               Scale="0.03"
+                               ClassId="2"
+                               Grid.Row="0"
+                                 >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="PinTap"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Image x:Name="customPin4"
+                               Scale="0.03"
+                               ClassId="3"
+                               Grid.Row="0"
+                                 >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="PinTap"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                        <Image x:Name="customPin5"
+                               Scale="0.03"
+                               ClassId="4"
+                               Grid.Row="0"
+                                 >
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="PinTap"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Grid>
                 </ScrollView>
                 <ListView x:Name="scooterList"
                           SeparatorVisibility="Default"
@@ -44,15 +87,18 @@
                           BackgroundColor="Firebrick"
                           HasUnevenRows="True"
                           SelectionMode="Single"
+                          IsPullToRefreshEnabled="true"
                           ItemSelected="OnScooterSelected"
                           SeparatorColor="DarkGreen"
                           RefreshControlColor="LightSeaGreen"
                           ItemTapped="OnScooterTapped"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          IsRefreshing="{Binding IsRefreshing}" 
                           ItemsSource="{Binding Scooters}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <ViewCell>
-                                <Grid Padding="10" BackgroundColor="YellowGreen">
+                                <Grid Padding="10" BackgroundColor="{Binding color}">
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="Auto" />
                                         <RowDefinition Height="*" />
@@ -69,7 +115,7 @@
                                     <Label Grid.Column="1"
                                            LineBreakMode="CharacterWrap"
                                            Grid.ColumnSpan="2"
-                                           Text="{Binding Name}"
+                                           Text="{Binding CompanyName}"
                                            FontAttributes="Bold" />
                                     <Label Grid.Column="3"
                                            Grid.RowSpan="2"

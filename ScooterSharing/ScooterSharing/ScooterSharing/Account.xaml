@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:ScooterSharing"
              mc:Ignorable="d"
+             BackgroundColor="WhiteSmoke"
              Title="Account"
              x:Class="ScooterSharing.Account">
     <ContentPage.BindingContext>
@@ -14,6 +15,7 @@
 
     <StackLayout>
         <StackLayout HeightRequest="400">
+
             <Grid Grid.Row="0">
                 <Image x:Name="backPhoto" 
                        Aspect="AspectFill" 
@@ -27,12 +29,20 @@
                                Scale="0.65"
                                Grid.Column="0"
                                Opacity="1"
-                               Grid.RowSpan="2"/>
+                               Grid.RowSpan="2">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ToOffers"/>
+                    </Image.GestureRecognizers>
+                </Image>
                 <Image x:Name="userIcon"
                                Grid.Column="1"
                                Grid.Row="0"
                                Scale="1"
-                               TranslationY="10"/>
+                               TranslationY="10">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="toDetails"/>
+                    </Image.GestureRecognizers>
+                </Image>
                 <Frame HeightRequest="20" 
                                WidthRequest="20" 
                                CornerRadius="10" 
@@ -69,8 +79,17 @@
                                Grid.Column="2"
                                Opacity="1"
                                Scale="0.7"
-                               Grid.RowSpan="2"/>
+                               Grid.RowSpan="2">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ToPay"/>
+                    </Image.GestureRecognizers>
+                </Image>
             </Grid>
+            <Button x:Name="QR"
+                    Text="Scan QR to rent scooter"
+                    BackgroundColor="Green"
+                    TextColor="WhiteSmoke"
+                    Clicked="scanQr"/>
         </StackLayout>
         <ListView x:Name="payList"
                       ItemsSource="{Binding Payments}"

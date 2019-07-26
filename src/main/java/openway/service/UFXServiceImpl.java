@@ -6,10 +6,6 @@ import java.io.IOException;
 
 public class UFXServiceImpl implements UFXService{
 
-    public String requestSend(String request) {
-        return null;
-    }
-
     public String requestCreateClient(String sName, String name,
                                       int clientNumber, String email,
                                       String regNumber){

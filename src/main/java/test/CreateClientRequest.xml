@@ -3,8 +3,8 @@
     <Source app="MobileApp"/>
     <MsgData>
         <Application>
-            <RegNumber>1</RegNumber>
-			<Institution>0001</Institution>
+            <RegNumber>XML_BB_0001</RegNumber>
+            <Institution>0001</Institution>
             <OrderDprt>0101</OrderDprt>
             <ObjectType>Client</ObjectType>
             <ActionType>Add</ActionType>
@@ -12,24 +12,14 @@
                 <Client>
                     <ClientType>PR</ClientType>
                     <ClientInfo>
-                        <ClientNumber>1</ClientNumber>
-                        <RegNumberType>RegNumberType</RegNumberType>
-                        <RegNumber>1</RegNumber>
+                        <ClientNumber>XML_BB_01</ClientNumber>
+                        <RegNumber>XML_BB_01</RegNumber>
                         <RegNumberDetails>RegDetails</RegNumberDetails>
                         <FirstName>Ivan</FirstName>
                         <LastName>Ivanov</LastName>
                     </ClientInfo>
-
-                    <AddInfo>
-                        <AddInfo01>add_info_1_3456789_12345678</AddInfo01>
-                        <AddInfo02>add_info_2_3456789_12345678</AddInfo02>
-                        <AddDate01>1981-08-13</AddDate01>
-                        <AddDate02>1985-06-12</AddDate02>
-                        <AnyTagClient>AnyTagClientValue</AnyTagClient>
-                        <SecondAnyTagClient>SecondAnyTagClientValue</SecondAnyTagClient>
-                    </AddInfo>
                 </Client>
             </Data>
         </Application>
-	</MsgData>
+    </MsgData>
 </UFXMsg>

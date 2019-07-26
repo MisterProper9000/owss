@@ -2,11 +2,8 @@ package openway.service;
 
 public interface UFXService {
 
-    String requestSend(String request);
-
-
     /**
-     *
+     * NEED UPDATE !
      * @param sName surname
      * @param name name
      * @param clientNUmber client id from db
@@ -16,4 +13,10 @@ public interface UFXService {
     String requestCreateClient(String sName, String name,
                                int clientNUmber,
                                String email, String regNumber);
+
+    public String requestCreateIssContract(String sName, String name,
+                                      int clientNumber, String email,
+                                      String regNumber);
+
+
 }

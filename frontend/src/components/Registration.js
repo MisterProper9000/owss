@@ -33,7 +33,7 @@ class Registration extends Component {
         event.preventDefault();
         const {first_name, last_name, company_name, type, email, phone, address, sum_moto, bank_account, password} = this.state;
 
-        fetch('http://10.101.177.12:9091/reg', {
+        fetch('http://10.101.177.21:9091/reg', {
             method: 'POST',
             body: JSON.stringify({
                 first_name,
@@ -67,7 +67,7 @@ class Registration extends Component {
             <div>
                 <NavbarComp/>
                 <form className="formLogin" onSubmit={this.handleSubmit}>
-                    <h1>Sign up</h1>
+                    <h1 className="title">Sign up</h1>
                     <div className="errorMsg">{this.state.errorMsg}</div>
                     <div>
                         <select className="option" name="type" value={type} onChange={this.handleChange}>

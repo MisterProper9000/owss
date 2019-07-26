@@ -5,7 +5,7 @@ import NotFound from './components/NotFound';
 import StartPage from './components/StartPage';
 import Login from './components/Login';
 import Reg from './components/Registration';
-import InfoLesser from './components/InfoLesser';
+import InfoLesser from './components/Info';
 
 ReactDOM.render(
     <div>

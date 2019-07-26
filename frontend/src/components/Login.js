@@ -11,7 +11,8 @@ class Login extends Component {
             email: '',
             password: '',
             data: [],
-            errorMsg: ''
+            errorMsg: '',
+            way4: '',
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,40 +33,43 @@ class Login extends Component {
                     password
                 }
             )
-        }).then(response => response.json()).then(response => {
-            if (response == "") {
-                this.setState({errorMsg: 'Wrong login or password!'});
-            } else {
+        }).then(response => {
+            if (response === "ok") {
                 this.setState({errorMsg: ''});
-                window.location = "/info_lesser"
+                console.log(response + "test");
+                window.location = "/info_lesser";
+            } else {
+                this.setState({errorMsg: 'Error with login or password'});
             }
-        })
+        });
     }
 
-    componentDidMount() {
-    }
+componentDidMount()
+{
+}
 
-    render() {
-        const {email, password} = this.state;
+render()
+{
+    const {email, password} = this.state;
 
-        return (
-            <div>
-                <NavbarComp/>
-                <form className="formLogin" onSubmit={this.handleSubmit}>
-                    <h1>Sign in</h1>
-                    <input className="input" type="text" placeholder="email" name="email"
-                           value={email}
-                           onChange={this.handleChange}/><br/>
-                    <input className="input" type="password" placeholder="password" name="password"
-                           value={password}
-                           onChange={this.handleChange}/><br/>
-                    <div className="errorMsg">{this.state.errorMsg}</div>
-                    <input type="submit" name="buttonLogin" className="input btn btn-secondary"
-                           value="Ok"/>
-                </form>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <NavbarComp/>
+            <form className="formLogin" onSubmit={this.handleSubmit}>
+                <h1 className="title">Sign in</h1>
+                <div className="errorMsg">{this.state.errorMsg}</div>
+                <input className="input" type="text" placeholder="email" name="email"
+                       value={email}
+                       onChange={this.handleChange}/><br/>
+                <input className="input" type="password" placeholder="password" name="password"
+                       value={password}
+                       onChange={this.handleChange}/><br/>
+                <input type="submit" name="buttonLogin" className="input btn btn-secondary"
+                       value="Ok"/>
+            </form>
+        </div>
+    );
+}
 }
 
 export default Login;

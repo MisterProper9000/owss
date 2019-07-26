@@ -8,8 +8,8 @@ body {
 }
 
 .formLogin {
-    margin-top: 3%;
-    margin-left: 40%;
+    margin-top: 1%;
+    margin-left: 45%;
 }
 
 .input {
@@ -19,7 +19,7 @@ body {
 
 .buttonNewApplier {
     margin-top: 2%;
-    margin-left: 40%;
+    margin-left: 37%;
     width: 300px
 }
 
@@ -32,4 +32,10 @@ body {
 
 .option {
     width: 300px;
+}
+
+.title{
+    margin-left: 0%;
+    color: #ffffff;
+    font-weight: bold;
 }

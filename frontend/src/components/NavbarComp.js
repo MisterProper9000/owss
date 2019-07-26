@@ -4,7 +4,7 @@ import {Nav, Navbar} from "react-bootstrap";
 class NavbarComp extends Component {
     render() {
         return (
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
                 <Navbar.Brand href="/">ScooShar</Navbar.Brand>
                 <Navbar.Brand href="/login">Sign in</Navbar.Brand>
                 <Navbar.Brand href="/reg">Sign up</Navbar.Brand>

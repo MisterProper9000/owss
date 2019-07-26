@@ -3,7 +3,7 @@
     <Source app="MobileApp"/>
     <MsgData>
         <Application>
-            <RegNumber>2</RegNumber>
+            <RegNumber>tfrwygsvah</RegNumber>
 			<Institution>0001</Institution>
             <OrderDprt>0101</OrderDprt>
             <ObjectType>Client</ObjectType>
@@ -12,12 +12,12 @@
                 <Client>
                     <ClientType>PR</ClientType>
                     <ClientInfo>
-                        <ClientNumber>1</ClientNumber>
+                        <ClientNumber>123</ClientNumber>
                         <RegNumberType>RegNumberType</RegNumberType>
-                        <RegNumber>1</RegNumber>
+                        <RegNumber>123</RegNumber>
                         <RegNumberDetails>RegDetails</RegNumberDetails>
-                        <FirstName>Ivan</FirstName>
-                        <LastName>Ivanov</LastName>
+                        <FirstName>Vasa</FirstName>
+                        <LastName>Vasil</LastName>
                     </ClientInfo>
 
                     <AddInfo>

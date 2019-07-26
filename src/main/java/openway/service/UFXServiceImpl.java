@@ -1,19 +1,18 @@
 package openway.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
-public class UFXServiceImpl implements UFXService{
-
-    public String requestSend(String request) {
-        return null;
-    }
-
+@Service
+public class UFXServiceImpl implements UFXService {
+    @Override
     public String requestCreateClient(String sName, String name,
-                                      int clientNumber, String email,
-                                      String regNumber){
-
+                                      int clientNumber,
+                                      String email, String regNumber) {
         String fileName = "CreateClientRequest.xml";
         String clientNumberStr = Integer.toString(clientNumber);
 
@@ -42,19 +41,19 @@ public class UFXServiceImpl implements UFXService{
                     "                    <ClientType>PR</ClientType>\n" +
                     "                    <ClientInfo>\n" +
                     "                        <ClientNumber>" +
-                                             clientNumberStr +
-                                             "</ClientNumber>\n" +
+                    clientNumberStr +
+                    "</ClientNumber>\n" +
                     "                        <RegNumberType>RegNumberType</RegNumberType>\n" +
                     "                        <RegNumber>" +
-                                             clientNumberStr +
-                                             "</RegNumber>\n" +
+                    clientNumberStr +
+                    "</RegNumber>\n" +
                     "                        <RegNumberDetails>RegDetails</RegNumberDetails>\n" +
                     "                        <FirstName>" +
-                                             name +
-                                             "</FirstName>\n" +
+                    name +
+                    "</FirstName>\n" +
                     "                        <LastName>" +
-                                             sName +
-                                             "</LastName>\n" +
+                    sName +
+                    "</LastName>\n" +
                     "                    </ClientInfo>\n\n" +
                     "                    <AddInfo>\n" +
                     "                        <AddInfo01>add_info_1_3456789_12345678</AddInfo01>\n" +
@@ -72,11 +71,10 @@ public class UFXServiceImpl implements UFXService{
 
             writer.flush();
             writer.close();
-        }catch (IOException e){
+        } catch (IOException e) {
             return e.toString();
         }
 
         return "";
     }
-
 }

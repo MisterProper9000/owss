@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import NavbarComp from "./NavbarComp"
 import '../css/InfoLesser.css';
+import { Button, Form } from 'react-bootstrap';
 
 
 class InfoLesser extends Component {
@@ -26,7 +27,7 @@ class InfoLesser extends Component {
         event.preventDefault();
         const {first_name, last_name, company_name, type, email, phone, address, sum_moto, bank_account, password} = this.state;
 
-        fetch('http://10.101.177.21:9091/reg', {
+        fetch('http://10.101.177.21:9091/', {
             method: 'POST',
             body: JSON.stringify({
                 first_name,

@@ -1,0 +1,44 @@
+.infoForm {
+    align-items: center;
+    overflow-x: auto;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+}
+
+
+.getInfo {
+    margin-bottom: 5%;
+    margin-left: 25%;
+}
+
+.selectId {
+    height: 38px;
+    margin-left: 20%;
+    margin-top: 2%;
+    color: white;
+}
+
+
+.long {
+    background: #bac0cc;
+    letter-spacing: 1em;
+}
+
+.form-control {
+    width: 120px;
+    margin-left: 3%;
+}
+
+.form-control, .selectId, .btn {
+    display: inline-block;
+}
+
+button {
+    width: 600px;
+    margin-top: 2%;
+}
+.tablee{
+    color: rgba(2, 2, 2, 0.99);
+    margin-left: 0%;
+}

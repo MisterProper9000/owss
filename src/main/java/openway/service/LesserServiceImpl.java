@@ -8,6 +8,8 @@ import openway.utils.HashUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -35,21 +37,47 @@ public class LesserServiceImpl implements LesserService {
     }
 
     @Override
-    public Lesser authentication(String auth) {
+    public String authentication(String auth) {
         logger.info("called authentication()" + auth);
         Gson g = new Gson();
         Login lesser = g.fromJson(auth, Login.class);
-
+        logger.info("lesser.getmail"+lesser.getEmail());
         Lesser lesserInDB = lesserRepository.findLesserByEmail(lesser.getEmail());
+        logger.info("lesserInDB"+lesserInDB);
         try {
-            if (lesserInDB.getPassword().equals(lesser.getPassword()))
-                return lesserInDB;
+            if (lesserInDB.getPassword().equals(lesser.getPassword())){
+                logger.info("checked entered data from start page");
+                return "ok";
+            }
+            else {
+                logger.info("error with login");
+                return "error";
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            return "error";
         }
-        logger.info("checked entered data from start page");
-        return null;
     }
+
+    @Override
+    public List<Lesser> findAll() {
+        logger.info("find all lessers (called findAll())");
+        return lesserRepository.findAll();
+    }
+
+    @Override
+    public List<Integer> listofidlessers() {
+        logger.info("called listidlessers");
+        List<Integer> listOfId = new ArrayList<>();
+        List<Lesser> forms = findAll();
+        for (Lesser form : forms) {
+            listOfId.add(form.getId());
+        }
+        int i = listOfId.size();
+        logger.info("listOfId.size()=  " + i);
+        return listOfId;
+    }
+
 
     //Setting password hash
 //    @Override

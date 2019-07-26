@@ -14,25 +14,16 @@ public class UFXServiceImpl implements UFXService{
                                       int clientNumber, String email,
                                       String regNumber){
 
-        String fileName = "CreateClientRequest.xml";
         String clientNumberStr = Integer.toString(clientNumber);
 
-        try {
-            File file = new File(fileName);
-            boolean status = file.createNewFile();
-            FileWriter writer = new FileWriter(file, false);
-
-
-            writer.write("<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" " +
+        String res = "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" " +
                     "version=\"2.0\" direction=\"Rq\">\n" +
                     "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
-                    "    <Source app=\"MobileApp\"/>");
-
-            writer.write("\n    <MsgData>\n" +
+                    "    <Source app=\"MobileApp\"/> \n    <MsgData>\n" +
                     "        <Application>\n" +
                     "            <RegNumber>" +
-                    regNumber +
-                    "</RegNumber>\n" +
+                                    regNumber +
+                                "</RegNumber>\n" +
                     "\t\t\t<Institution>0001</Institution>\n" +
                     "            <OrderDprt>0101</OrderDprt>\n" +
                     "            <ObjectType>Client</ObjectType>\n" +
@@ -68,15 +59,8 @@ public class UFXServiceImpl implements UFXService{
                     "            </Data>\n" +
                     "        </Application>\n" +
                     "\t</MsgData>\n" +
-                    "</UFXMsg>");
-
-            writer.flush();
-            writer.close();
-        }catch (IOException e){
-            return e.toString();
-        }
-
-        return "";
+                    "</UFXMsg>";
+        return res;
     }
 
 }

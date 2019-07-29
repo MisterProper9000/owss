@@ -3,8 +3,17 @@ package openway.controller;
 import openway.model.Lesser;
 import openway.service.LesserService;
 import openway.service.UFXService;
-import org.springframework.web.bind.annotation.*;
+import openway.service.UFXServiceImpl;
 
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.springframework.web.bind.annotation.*;
+import org.apache.http.impl.client.HttpClients;
+import sun.net.www.http.HttpClient;
+
+import javax.xml.soap.Name;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -27,9 +36,35 @@ public class MainController {
     @PostMapping("/reg")
     boolean addNewLesser(@RequestBody String newItem) {
         logger.info("called addNewLesser()");
+
         try {
             lesserService.addNewLesser(newItem);
             logger.info("add new lessor");
+
+            UFXService ufxSer = new UFXServiceImpl();
+            String tst_sName = "tstFromServer_sName";
+            String tst_Name = "tstFromServer_Name";
+            String tst_clientNumber = "XML_BB_10";
+            String tst_regNumberClient = "XML_BB_0010";
+            String tst_regNumberApp = "XML_BB_0010" + "_A";
+            String tst_conractNumber = "XML_BB_10";
+
+            String urlUfxAdapter = "10.101.124.36:17777";
+
+
+            String requestCreateClient = ufxSer.RequestCreateClient(tst_sName, tst_Name,
+                    tst_clientNumber, tst_regNumberClient);
+            String requestCreateIssContract = ufxSer.RequestCreateIssContract(tst_clientNumber,
+                    tst_regNumberClient,  tst_regNumberApp, tst_conractNumber);
+
+            //logger.info("create client request: " + requestCreateClient);
+            //logger.info("create client request: " + requestCreateIssContract);
+
+//            String res = ufxSer.SendRequest(urlUfxAdapter, requestCreateClient);
+//            logger.info(res);
+//            res = ufxSer.SendRequest(urlUfxAdapter, requestCreateIssContract);
+//            logger.info(res);
+
             return true;
         } catch (Exception e) {
             logger.info("error with saving data: not added new lessor");
@@ -38,47 +73,20 @@ public class MainController {
 
     }
 
-    String s = new String("<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
-            "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
-            "    <Source app=\"MobileApp\"/>\n" +
-            "    <MsgData>\n" +
-            "        <Application>\n" +
-            "            <RegNumber>tfrwygsvah</RegNumber>\n" +
-            "\t\t\t<Institution>0001</Institution>\n" +
-            "            <OrderDprt>0101</OrderDprt>\n" +
-            "            <ObjectType>Client</ObjectType>\n" +
-            "            <ActionType>Add</ActionType>\n" +
-            "            <Data>\n" +
-            "                <Client>\n" +
-            "                    <ClientType>PR</ClientType>\n" +
-            "                    <ClientInfo>\n" +
-            "                        <ClientNumber>123</ClientNumber>\n" +
-            "                        <RegNumberType>RegNumberType</RegNumberType>\n" +
-            "                        <RegNumber>123</RegNumber>\n" +
-            "                        <RegNumberDetails>RegDetails</RegNumberDetails>\n" +
-            "                        <FirstName>Vasa</FirstName>\n" +
-            "                        <LastName>Vasil</LastName>\n" +
-            "                    </ClientInfo>\n" +
-            "\n" +
-            "                    <AddInfo>\n" +
-            "                        <AddInfo01>add_info_1_3456789_12345678</AddInfo01>\n" +
-            "                        <AddInfo02>add_info_2_3456789_12345678</AddInfo02>\n" +
-            "                        <AddDate01>1981-08-13</AddDate01>\n" +
-            "                        <AddDate02>1985-06-12</AddDate02>\n" +
-            "                        <AnyTagClient>AnyTagClientValue</AnyTagClient>\n" +
-            "                        <SecondAnyTagClient>SecondAnyTagClientValue</SecondAnyTagClient>\n" +
-            "                    </AddInfo>\n" +
-            "                </Client>\n" +
-            "            </Data>\n" +
-            "        </Application>\n" +
-            "\t</MsgData>\n" +
-            "</UFXMsg>");
+    private String SentToWay4(String request) {
+
+
+
+        return "";
+    }
+
+
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
     String getLoginPassword(@RequestBody String auth) {
         logger.info("check auth");
-        logger.info("prooooooooooooooooob   "+lesserService.authentication(auth));
+        logger.info("prooooooooooooooooob   " + lesserService.authentication(auth));
         //goToWay4(s);
         return lesserService.authentication(auth);
     }
@@ -100,6 +108,8 @@ public class MainController {
 //        HttpResponse<?> response = client.send(request, BodyHandlers.discarding());
 //        System.out.println(response.statusCode());
 //    }
+
+
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/info")

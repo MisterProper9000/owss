@@ -13,6 +13,7 @@ class Login extends Component {
             data: [],
             errorMsg: '',
             way4: '',
+            is_login:''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,7 +25,7 @@ class Login extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {email, password} = this.state;
+        const {email, password,is_login} = this.state;
 
         fetch('http://10.101.177.21:9091/login', {
             method: 'POST',
@@ -40,6 +41,7 @@ class Login extends Component {
                 window.location = "/info_lesser";
             } else {
                 this.setState({errorMsg: 'Error with login or password'});
+                //window.location = "/info_lesser";
             }
         });
     }

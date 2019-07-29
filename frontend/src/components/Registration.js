@@ -1,6 +1,23 @@
-import React, {Component} from 'react';
+import React, {Component, useState} from 'react';
 import '../css/Login.css';
 import NavbarComp from "./NavbarComp";
+
+import {Modal,Button} from "react-bootstrap";
+import DialogWindow from "./Dialog window";
+
+
+
+function goToInfo(props){
+    const isLoggedIn = props;
+    if(isLoggedIn){
+        console.log("test : ok");
+        return <DialogWindow/>;
+    }
+    else{
+        console.log("test : error");
+        return <DialogWindow/>;
+    }
+}
 
 class Registration extends Component {
 
@@ -20,9 +37,11 @@ class Registration extends Component {
             password: '',
             errorMsg: '',
             data: [],
+            isRegOk: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleClose = this.handleClose.bind(this);
     }
 
     handleChange(event) {
@@ -31,7 +50,8 @@ class Registration extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {first_name, last_name, company_name, type, email, phone, address, sum_moto, bank_account, password} = this.state;
+        const {first_name, last_name, company_name, type, email, phone, address,
+            sum_moto, bank_account, password} = this.state;
 
         fetch('http://10.101.177.21:9091/reg', {
             method: 'POST',
@@ -47,17 +67,28 @@ class Registration extends Component {
                 bank_account,
                 sum_moto
             })
-        }).then(response => response.json()).then(response => {
-            if (response != null) {
+        }).then(response => {
+            if (response === true) {
                 this.setState({errorMsg: ''});
-                window.location = "/login"
+                this.setState({isRegOk:true});
+                console.log("isRegOk: "+this.state.isRegOk);
+                setShow(true);
+
             } else {
                 this.setState({errorMsg: 'Enter correct data!'});
+                console.log("isRegOk: "+this.state.isRegOk);
+                setShow(true);
             }
+
         })
     }
 
     componentDidMount() {
+    }
+
+    handleClose() {
+        setShow(false);
+        window.location = "/info_lesser";
     }
 
     render() {
@@ -65,6 +96,17 @@ class Registration extends Component {
 
         return (
             <div>
+                <Modal show={show} onHide={this.handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Rigistration</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>You have been successfully registered!<br/> Go to your account.</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="secondary" onClick={this.handleClose}>
+                            Ok
+                        </Button>
+                    </Modal.Footer>
+                </Modal>
                 <NavbarComp/>
                 <form className="formLogin" onSubmit={this.handleSubmit}>
                     <h1 className="title">Sign up</h1>
@@ -102,8 +144,9 @@ class Registration extends Component {
                     <input className="input" type="password" placeholder="password" name="password"
                            value={password}
                            onChange={this.handleChange}/><br/>
-                    <input type="submit" name="buttonLogin" className="input btn btn-secondary"
-                           value="Ok"/>
+                    <Button variant="primary" onClick={this.handleSubmit}>
+                        Ok
+                    </Button>
                 </form>
             </div>
         );

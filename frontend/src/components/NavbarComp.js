@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
 import {Nav, Navbar} from "react-bootstrap";
 
+const navbarColor = {backgroundColor: '#660033'};
+
 class NavbarComp extends Component {
     render() {
         return (
-            <Navbar collapseOnSelect expand="lg" bg="black" variant="dark">
+            <Navbar style={navbarColor} collapseOnSelect expand="lg"  variant="dark">
                 <Navbar.Brand href="/">ScooShar</Navbar.Brand>
                 <Navbar.Brand href="/login">Sign in</Navbar.Brand>
                 <Navbar.Brand href="/reg">Sign up</Navbar.Brand>
@@ -20,4 +22,3 @@ class NavbarComp extends Component {
 }
 
 export default NavbarComp;
-

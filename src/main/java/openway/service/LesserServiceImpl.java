@@ -26,14 +26,9 @@ public class LesserServiceImpl implements LesserService {
     public void addNewLesser(String newLesser) {
         logger.info("called addNewLesser()");
         Gson g = new Gson();
-
         Lesser lesser = g.fromJson(newLesser, Lesser.class);
-
-        //setPasswordHash(lesser);
-
-        Lesser saved = lesserRepository.save(lesser);
+        lesserRepository.save(lesser);
         logger.info("save to database:" + lesser);
-        logger.info("save to database:" + saved);
     }
 
     @Override

@@ -1,19 +1,21 @@
-body {
-    background: url('../components/start_logo2.jpg') no-repeat;
-    background-size: 100%;
-
-}
-
 .title1{
-    margin-top: 3%;
+    margin-top: 2%;
     margin-left: 57%;
-    color: #ffffff;
+    color: #660033;
     opacity: 0.5;
 }
 
 .title2{
     margin-top: 1%;
     margin-left: 57%;
-    color: #ffffff;
+    color: #660033;
     font-weight: bold;
+}
+
+.bg {
+    background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }

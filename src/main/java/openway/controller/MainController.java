@@ -39,33 +39,9 @@ public class MainController {
 
         try {
             lesserService.addNewLesser(newItem);
-            logger.info("add new lessor");
-
-            UFXService ufxSer = new UFXServiceImpl();
-            String tst_sName = "tstFromServer_sName";
-            String tst_Name = "tstFromServer_Name";
-
-            String rnd = ufxSer.GenerateId("kek");
-
-            String tst_clientNumber = rnd;
-            String tst_regNumberClient = rnd;
-            String tst_regNumberApp = rnd + "_A";
-            String tst_conractNumber = rnd;
-
-            String urlUfxAdapter = "http://10.101.124.36:17777";
-
-            String requestCreateClient = ufxSer.RequestCreateClient(tst_sName, tst_Name,
-                    tst_clientNumber, tst_regNumberClient);
-            String requestCreateIssContract = ufxSer.RequestCreateIssContract(tst_clientNumber,
-                    tst_regNumberClient,  tst_regNumberApp, tst_conractNumber);
-
-            logger.info("create client request: " + requestCreateClient);
-            logger.info("create client request: " + requestCreateIssContract);
-
-            String res = ufxSer.SendRequest(urlUfxAdapter, requestCreateClient);
-            logger.info(res);
-            res = ufxSer.SendRequest(urlUfxAdapter, requestCreateIssContract);
-            logger.info(res);
+            logger.info("add new lessor in database");
+            //String resWay4 = ufxService.AddNewLessorInWay4(newItem);
+            //logger.info(resWay4);
 
             return true;
         } catch (Exception e) {
@@ -75,14 +51,6 @@ public class MainController {
         }
 
     }
-
-    private String SentToWay4(String request) {
-
-
-
-        return "";
-    }
-
 
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -94,12 +62,6 @@ public class MainController {
         return lesserService.authentication(auth);
     }
 
-    @CrossOrigin(origins = "http://10.101.124.36:17777")
-    @PostMapping()
-    String goToWay4(@RequestBody String s) {
-        logger.info("way4test" + s);
-        return s;
-    }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/info")

@@ -1,6 +1,7 @@
 package openway.controller;
 
 import openway.service.ClientService;
+import openway.service.UFXService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
@@ -12,9 +13,11 @@ public class MobileController {
     private final static Logger logger = Logger.getLogger(MobileController.class.getName());
 
     private final ClientService clientService;
+    private final UFXService ufxService;
 
-    public MobileController(ClientService clientService) {
+    public MobileController(ClientService clientService, UFXService ufxService) {
         this.clientService = clientService;
+        this.ufxService = ufxService;
     }
 
     @PostMapping("/regclient")

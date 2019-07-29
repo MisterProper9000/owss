@@ -15,6 +15,7 @@ public class Motoroller {
     private String auto_number;
     private String model;
     private int id_owner;
+    private boolean status;
 
     public Motoroller() {
     }
@@ -23,5 +24,9 @@ public class Motoroller {
         this.auto_number = auto_number;
         this.model = model;
         this.id_owner = id_owner;
+    }
+
+    public boolean isStatus() {
+        return status;
     }
 }

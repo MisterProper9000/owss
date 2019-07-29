@@ -30,13 +30,13 @@ public interface UFXService {
     String RequestCreateIssContract(String clientNumber,
                                     String regNumberClient,
                                     String regNumberApp,
-                                    String conractNumber);
+                                    String contractNumber);
 
     /**
      *
      * @param url destination address
      * @param request request for send
-     * @return
+     * @return string with result
      */
     String SendRequest(String url, String request);
 

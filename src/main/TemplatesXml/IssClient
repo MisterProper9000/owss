@@ -1,0 +1,25 @@
+<UFXMsg scheme="WAY4Appl" msg_type="Application" version="2.0" direction="Rq">
+    <MsgId>AAA-555-333-EEE-23124145</MsgId>
+    <Source app="MobileApp"/>
+    <MsgData>
+        <Application>
+            <RegNumber>regNumberApp</RegNumber>
+            <Institution>0001</Institution>
+            <OrderDprt>0101</OrderDprt>
+            <ObjectType>Client</ObjectType>
+            <ActionType>Add</ActionType>
+            <Data>
+                <Client>
+                    <ClientType>PR</ClientType>
+                    <ClientInfo>
+                        <ClientNumber>clientNumber</ClientNumber>
+                        <RegNumber>regNumberApp</RegNumber>
+                        <RegNumberDetails>RegDetails</RegNumberDetails>
+                        <FirstName>name</FirstName>
+                        <LastName>sName</LastName>
+                    </ClientInfo>
+                </Client>
+            </Data>
+        </Application>
+    </MsgData>
+</UFXMsg>

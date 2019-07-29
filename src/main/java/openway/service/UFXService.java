@@ -32,8 +32,19 @@ public interface UFXService {
                                     String regNumberApp,
                                     String conractNumber);
 
+    /**
+     *
+     * @param url destination address
+     * @param request request for send
+     * @return
+     */
     String SendRequest(String url, String request);
 
+    /**
+     *
+     * @param data data for generation
+     * @return string with generated id for client and etc
+     */
     String GenerateId(String data);
 
 }

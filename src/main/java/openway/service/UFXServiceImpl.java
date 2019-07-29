@@ -152,6 +152,7 @@ public class UFXServiceImpl implements UFXService {
         return response.toString();
     }
 
+    //TODO: finish this
     @Override
     public String GenerateId(String data){
         return  "XML_SS_001";

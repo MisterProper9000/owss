@@ -123,6 +123,11 @@ public class UFXServiceImpl implements UFXService {
     }
 
     @Override
+    public String RequestCreateAcqContract(){
+        return "";
+    }
+
+    @Override
     public String SendRequest(String url, String request){
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);

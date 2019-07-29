@@ -52,7 +52,7 @@ public class MainController {
             String tst_regNumberApp = rnd + "_A";
             String tst_conractNumber = rnd;
 
-            String urlUfxAdapter = "10.101.124.36:17777";
+            String urlUfxAdapter = "http://10.101.124.36:17777";
 
             String requestCreateClient = ufxSer.RequestCreateClient(tst_sName, tst_Name,
                     tst_clientNumber, tst_regNumberClient);

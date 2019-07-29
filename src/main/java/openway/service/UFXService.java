@@ -32,6 +32,8 @@ public interface UFXService {
                                     String regNumberApp,
                                     String contractNumber);
 
+    String RequestCreateAcqContract();
+
     /**
      *
      * @param url destination address

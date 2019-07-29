@@ -59,4 +59,10 @@ public class UFXServiceImpl implements UFXService{
         return res;
     }
 
+    public String requestCreateIssContract(String sName, String name,
+                                    int clientNumber, String email,
+                                    String regNumber){
+        return "";
+    }
+
 }

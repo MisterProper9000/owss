@@ -14,7 +14,7 @@ public interface UFXService {
                                int clientNUmber,
                                String email, String regNumber);
 
-    public String requestCreateIssContract(String sName, String name,
+    String requestCreateIssContract(String sName, String name,
                                       int clientNumber, String email,
                                       String regNumber);
 

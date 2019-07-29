@@ -58,17 +58,18 @@ public class MainController {
                     tst_clientNumber, tst_regNumberClient);
             String requestCreateIssContract = ufxSer.RequestCreateIssContract(tst_clientNumber,
                     tst_regNumberClient,  tst_regNumberApp, tst_conractNumber);
-//
-//            logger.info("create client request: " + requestCreateClient);
-//            logger.info("create client request: " + requestCreateIssContract);
-//
-//            String res = ufxSer.SendRequest(urlUfxAdapter, requestCreateClient);
-//            logger.info(res);
-//            res = ufxSer.SendRequest(urlUfxAdapter, requestCreateIssContract);
-//            logger.info(res);
+
+            logger.info("create client request: " + requestCreateClient);
+            logger.info("create client request: " + requestCreateIssContract);
+
+            String res = ufxSer.SendRequest(urlUfxAdapter, requestCreateClient);
+            logger.info(res);
+            res = ufxSer.SendRequest(urlUfxAdapter, requestCreateIssContract);
+            logger.info(res);
 
             return true;
         } catch (Exception e) {
+            e.printStackTrace();
             logger.info("error with saving data: not added new lessor");
             return false;
         }
@@ -99,19 +100,6 @@ public class MainController {
         logger.info("way4test" + s);
         return s;
     }
-
-//    void way() {
-//        HttpClient client = HttpClient.newBuilder().build();
-//        HttpRequest request = HttpRequest.newBuilder()
-//                .uri(URI.create(uri))
-//                .POST(BodyPublishers.ofString(data))
-//                .build();
-//
-//        HttpResponse<?> response = client.send(request, BodyHandlers.discarding());
-//        System.out.println(response.statusCode());
-//    }
-
-
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/info")

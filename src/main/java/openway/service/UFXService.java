@@ -33,5 +33,8 @@ public interface UFXService {
                                     String conractNumber);
 
     String SendRequest(String url, String request);
+
+    String GenerateId(String data);
+
 }
 

@@ -13,18 +13,19 @@ public class ufxTest {
 
         String tst_sName = "tst_sName_08";
         String tst_Name = "tst_Name_08";
-        String tst_clientNumber = "XML_BB_08";
-        String tst_regNumberClient = "XML_BB_08";
+        String def = ufxSer.GenerateId("kek");
+        String tst_clientNumber = def;
+        String tst_regNumberClient = def;
 
 
         String requestCreateClient = ufxSer.RequestCreateClient(tst_sName, tst_Name,
                 tst_clientNumber, tst_regNumberClient);
 
 
-        String tst_regNumberApp = "XML_BB_08" + "_A";
-        String tst_conractNumber = "XML_BB_08";
+        String tst_regNumberApp = def + "_A";
+        String tst_contractNumber = def;
         String requestCreateIssContract = ufxSer.RequestCreateIssContract(tst_clientNumber,
-                tst_regNumberClient,  tst_regNumberApp, tst_conractNumber);
+                tst_regNumberClient,  tst_regNumberApp, tst_contractNumber);
 
         //System.out.println(requestCreateClient);
         //System.out.println(requestCreateIssContract);

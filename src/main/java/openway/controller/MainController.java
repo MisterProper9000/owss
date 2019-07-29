@@ -44,22 +44,24 @@ public class MainController {
             UFXService ufxSer = new UFXServiceImpl();
             String tst_sName = "tstFromServer_sName";
             String tst_Name = "tstFromServer_Name";
-            String tst_clientNumber = "XML_BB_10";
-            String tst_regNumberClient = "XML_BB_0010";
-            String tst_regNumberApp = "XML_BB_0010" + "_A";
-            String tst_conractNumber = "XML_BB_10";
+
+            String rnd = ufxSer.GenerateId("kek");
+
+            String tst_clientNumber = rnd;
+            String tst_regNumberClient = rnd;
+            String tst_regNumberApp = rnd + "_A";
+            String tst_conractNumber = rnd;
 
             String urlUfxAdapter = "10.101.124.36:17777";
-
 
             String requestCreateClient = ufxSer.RequestCreateClient(tst_sName, tst_Name,
                     tst_clientNumber, tst_regNumberClient);
             String requestCreateIssContract = ufxSer.RequestCreateIssContract(tst_clientNumber,
                     tst_regNumberClient,  tst_regNumberApp, tst_conractNumber);
-
-            //logger.info("create client request: " + requestCreateClient);
-            //logger.info("create client request: " + requestCreateIssContract);
-
+//
+//            logger.info("create client request: " + requestCreateClient);
+//            logger.info("create client request: " + requestCreateIssContract);
+//
 //            String res = ufxSer.SendRequest(urlUfxAdapter, requestCreateClient);
 //            logger.info(res);
 //            res = ufxSer.SendRequest(urlUfxAdapter, requestCreateIssContract);

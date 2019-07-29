@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:ScooterSharing"
+             mc:Ignorable="d"
+             Title="Account"
+             x:Class="ScooterSharing.Account">
+    <ContentPage.BindingContext>
+        <local:PaymentsViewModel/>
+    </ContentPage.BindingContext>
+
+
+    <StackLayout>
+        <StackLayout HeightRequest="400">
+            <Grid Grid.Row="0">
+                <Image x:Name="backPhoto" 
+                       Aspect="AspectFill" 
+                       Scale="1"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       Grid.ColumnSpan="3"
+                       Grid.RowSpan="2"
+                       HorizontalOptions="FillAndExpand"/>
+                <Image x:Name="offers"
+                               Scale="0.65"
+                               Grid.Column="0"
+                               Opacity="1"
+                               Grid.RowSpan="2"/>
+                <Image x:Name="userIcon"
+                               Grid.Column="1"
+                               Grid.Row="0"
+                               Scale="1"
+                               TranslationY="10"/>
+                <Frame HeightRequest="20" 
+                               WidthRequest="20" 
+                               CornerRadius="10" 
+                               HorizontalOptions="Center" 
+                               VerticalOptions="Center"
+                               TranslationX="30"
+                               TranslationY="-20"
+                               Grid.Column="0"
+                               Grid.RowSpan="2"
+                               Margin="0" 
+                               IsEnabled="False"
+                               IsVisible="False"
+                               Padding="0" 
+                               BackgroundColor="Maroon">
+                    <Label Text="7" 
+                                   FontSize="10"
+                                   TextColor="White"
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center" 
+                                   HorizontalTextAlignment="Center" 
+                                   VerticalTextAlignment="Center" />
+                </Frame>
+                <Label x:Name="cash"
+                               Grid.Row="1"
+                               Text="100$"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               TextColor="DarkGoldenrod"
+                               FontSize="30"
+                               FontAttributes="Bold"
+                               Grid.Column="1"/>
+
+                <Image x:Name="wallet"
+                               Grid.Column="2"
+                               Opacity="1"
+                               Scale="0.7"
+                               Grid.RowSpan="2"/>
+            </Grid>
+        </StackLayout>
+        <ListView x:Name="payList"
+                      ItemsSource="{Binding Payments}"
+                      ItemTapped="PayTapped"
+                      SeparatorVisibility="None"
+                      HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="{Binding Date}"/>
+                            <Frame HeightRequest="40" 
+                                   WidthRequest="40" 
+                                   CornerRadius="20" 
+                                   HorizontalOptions="Center" 
+                                   VerticalOptions="Center"
+                                   TranslationX="0"
+                                   TranslationY="0"
+                                   Margin="0" 
+                                   Padding="0" 
+                                   BackgroundColor="Maroon">
+                                <Label Text="{Binding Price}" 
+                                           FontSize="10"
+                                           TextColor="White"
+                                           HorizontalOptions="Center" 
+                                           VerticalOptions="Center" 
+                                           HorizontalTextAlignment="Center" 
+                                           VerticalTextAlignment="Center" />
+                            </Frame>
+                            <ListView IsVisible="{Binding IsVisible}"
+                                          ItemsSource="{Binding list}"
+                                          SeparatorVisibility="None"
+                                     HeightRequest="{Binding height}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <ViewCell>
+                                            <StackLayout>
+                                                <Label Text="{Binding txt}"/>
+                                            </StackLayout>
+                                        </ViewCell>
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+
+</ContentPage>

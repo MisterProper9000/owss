@@ -8,10 +8,8 @@ class StartPage extends Component {
         return (
             <div>
                 <NavbarComp/>
-                <h1 className="title">ScooShar</h1>
-                <h2 className="title2">Бери и катайся!</h2>
-                <img src={scooter} className="img_scooter"/>
-                <img src={scooter} className="img_scooter"/>
+                <h2 className="title1">ScooShar</h2>
+                <h1 className="title2">Fast. Easy. Comfortable.</h1>
             </div>
         );
     }

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:PinchGesture"
+             mc:Ignorable="d"
+             Title="Map"
+             x:Class="ScooterSharing.XMap">
+    <ContentPage.Content>
+        <StackLayout x:Name="mainStack">
+            
+            <Grid x:Name="mainGrid">
+                <WebView x:Name="Browser" 
+                         HeightRequest="3000" 
+                         WidthRequest="2000" 
+                         Grid.Row="0"
+                         Grid.RowSpan="2"
+                         IsEnabled="False"
+                         IsVisible="False"/>
+                <ScrollView x:Name="dummyMap" 
+                            Orientation="Both"
+                            Grid.Row="0"
+                            IsEnabled="True"
+                            IsVisible="True">
+                    <StackLayout>
+                        <Image x:Name="map" 
+                           Aspect="AspectFill" 
+                           Scale="1"
+                           WidthRequest="1920"
+                           HeightRequest="1080"
+                           HorizontalOptions="Center" 
+                           VerticalOptions="Center">
+                        </Image>
+                        <Image x:Name="customPin1"
+                                 Scale="1"
+                                 >                            
+                        </Image>
+                    </StackLayout>
+                </ScrollView>
+                <ListView x:Name="scooterList"
+                          SeparatorVisibility="Default"
+                          Grid.Row="1"
+                          BackgroundColor="Firebrick"
+                          HasUnevenRows="True"
+                          SelectionMode="Single"
+                          ItemSelected="OnScooterSelected"
+                          SeparatorColor="DarkGreen"
+                          RefreshControlColor="LightSeaGreen"
+                          ItemTapped="OnScooterTapped"
+                          ItemsSource="{Binding Scooters}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid Padding="10" BackgroundColor="YellowGreen">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions >
+                                    <Image Grid.RowSpan="2"
+                                           Source="{Binding ImageSource}"
+                                           Aspect="AspectFill"
+                                           HeightRequest="60"
+                                           WidthRequest="60" />
+                                    <Label Grid.Column="1"
+                                           LineBreakMode="CharacterWrap"
+                                           Grid.ColumnSpan="2"
+                                           Text="{Binding Name}"
+                                           FontAttributes="Bold" />
+                                    <Label Grid.Column="3"
+                                           Grid.RowSpan="2"
+                                           FontSize="Medium"
+                                           Text="{Binding Price}"
+                                           FontAttributes="Bold" />
+                                    <Label Grid.Row="1"
+                                           Grid.Column="1"
+                                           Text="{Binding Lat}"
+                                           VerticalOptions="End"
+                                           HorizontalOptions="Fill"/>
+                                    <Label Grid.Row="1"
+                                           Grid.Column="2"
+                                           Text="{Binding Lng}"
+                                           VerticalOptions="End" />
+                                    
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <BoxView Color="DarkOliveGreen"
+                         HeightRequest="10"
+                         VerticalOptions="Center"
+                         Grid.Row="0"
+                         Grid.RowSpan="2"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

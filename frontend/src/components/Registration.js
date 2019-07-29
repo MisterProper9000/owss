@@ -8,13 +8,17 @@ class Registration extends Component {
         super(props);
         this.state = {
             id: '',
-            name: '',
+            first_name: '',
+            last_name: '',
+            company_name: '',
             type: "Individuals",
             email: '',
             address: '',
             phone: '',
             sum_moto: '',
+            bank_account: '',
             password: '',
+            errorMsg: '',
             data: [],
         };
         this.handleChange = this.handleChange.bind(this);
@@ -27,19 +31,29 @@ class Registration extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {name, type, email, phone, address, sum_moto, password} = this.state;
+        const {first_name, last_name, company_name, type, email, phone, address, sum_moto, bank_account, password} = this.state;
 
         fetch('http://10.101.177.21:9091/reg', {
             method: 'POST',
             body: JSON.stringify({
-                name,
+                first_name,
+                last_name,
+                company_name,
                 type,
                 email,
                 password,
                 phone,
                 address,
+                bank_account,
                 sum_moto
             })
+        }).then(response => response.json()).then(response => {
+            if (response != null) {
+                this.setState({errorMsg: ''});
+                window.location = "/login"
+            } else {
+                this.setState({errorMsg: 'Enter correct data!'});
+            }
         })
     }
 
@@ -47,21 +61,31 @@ class Registration extends Component {
     }
 
     render() {
-        const {name, type, email, phone, address, sum_moto, password} = this.state;
+        const {first_name, last_name, company_name, type, email, phone, address, sum_moto, bank_account, password} = this.state;
 
         return (
             <div>
                 <NavbarComp/>
                 <form className="formLogin" onSubmit={this.handleSubmit}>
-                    <h1>Sign up</h1>
+                    <h1 className="title">Sign up</h1>
+                    <div className="errorMsg">{this.state.errorMsg}</div>
                     <div>
                         <select className="option" name="type" value={type} onChange={this.handleChange}>
                             <option value="Individuals">Individuals</option>
                             <option value="Entities">Entities</option>
                         </select>
                     </div>
-                    <input className="input" type="text" placeholder="name" name="name"
-                           value={name}
+                    <input className="input" type="text" placeholder="first name" name="first_name"
+                           value={first_name}
+                           onChange={this.handleChange}/><br/>
+                    <input className="input" type="text" placeholder="last name" name="last_name"
+                           value={last_name}
+                           onChange={this.handleChange}/><br/>
+                    <input className="input" type="text" placeholder="company name" name="company_name"
+                           value={company_name}
+                           onChange={this.handleChange}/><br/>
+                    <input className="input" type="text" placeholder="bank account" name="bank_account"
+                           value={bank_account}
                            onChange={this.handleChange}/><br/>
                     <input className="input" type="text" placeholder="email" name="email"
                            value={email}
@@ -78,7 +102,6 @@ class Registration extends Component {
                     <input className="input" type="password" placeholder="password" name="password"
                            value={password}
                            onChange={this.handleChange}/><br/>
-                    <div className="errorMsg">{this.state.errorMsg}</div>
                     <input type="submit" name="buttonLogin" className="input btn btn-secondary"
                            value="Ok"/>
                 </form>

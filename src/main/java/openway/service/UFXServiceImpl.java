@@ -29,6 +29,7 @@ public class UFXServiceImpl implements UFXService {
     private String urlUfxAdapter = "http://10.101.124.36:17777";
 
 
+
     /**
      *
      * @param client class client with data for creating
@@ -45,8 +46,6 @@ public class UFXServiceImpl implements UFXService {
         String regNumberClient = rnd;
         String regNumberApp = rnd + "_A";
         String contractNumber = rnd;
-
-        //String urlUfxAdapter = "http://10.101.124.36:17777";
 
         String requestCreateClient = RequestCreateClient(sName, name,
                 clientNumber, regNumberClient);
@@ -87,8 +86,11 @@ public class UFXServiceImpl implements UFXService {
         return res;
     }
 
-    public String BalanceRequestInWay4(Client client){
-        return "";
+    public String BalanceRequestInWay4(String clientNumber){
+        String request = RequestCreateBalanceInquery(clientNumber);
+        String response = SendRequest(urlUfxAdapter, request);
+        String balance = BalanceResponseParse(response);
+        return balance;
     }
 
 
@@ -297,6 +299,47 @@ public class UFXServiceImpl implements UFXService {
         return res;
     }
 
+
+    private String RequestCreateBalanceInquery(String clientNumber){
+        String regNumberApp = clientNumber + "_B";
+        String request = "<UFXMsg direction=\"Rq\" msg_type=\"Information\" scheme=\"WAY4Appl\" version=\"2.0\">\n" +
+                "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
+                "    <Source app=\"MobileApp\"/>\n" +
+                "    <MsgData>\n" +
+                "        <Information>\n" +
+                "            <RegNumber>" +
+                            regNumberApp +
+                            "</RegNumber>\n" +
+                "            <ObjectType>Contract</ObjectType>\n" +
+                "            <ActionType>Inquiry</ActionType>\n" +
+                "            <ResultDtls>\n" +
+                "                <Parm>\n" +
+                "                    <ParmCode>Status</ParmCode>\n" +
+                "                    <Value>Y</Value>\n" +
+                "                </Parm>\n" +
+                "                <Parm>\n" +
+                "                    <ParmCode>Balance</ParmCode>\n" +
+                "                    <Value>AVAILABLE</Value>\n" +
+                "                </Parm>\n" +
+                "            </ResultDtls>\n" +
+                "            <ObjectFor>\n" +
+                "                <ContractIDT>\n" +
+                "                    <!-- contractNumber == clientNumber-->\n" +
+                "                    <ContractNumber>" +
+                                    clientNumber +
+                                    "</ContractNumber>\n" +
+                "                </ContractIDT>\n" +
+                "            </ObjectFor>\n" +
+                "        </Information>\n" +
+                "    </MsgData>\n" +
+                "</UFXMsg>";
+        return  request;
+    }
+
+    private String BalanceResponseParse(String response){
+        return "";
+    }
+
     /**
      *
      * @param url destination address
@@ -344,4 +387,7 @@ public class UFXServiceImpl implements UFXService {
     private String GenerateId(String data){
         return  "XML_SS_";
     }
+
+
+
 }

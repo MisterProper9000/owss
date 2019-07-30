@@ -1,0 +1,27 @@
+<UFXMsg direction="Rq" msg_type="Information" scheme="WAY4Appl" version="2.0">
+    <MsgId>AAA-555-333-EEE-23124141</MsgId>
+    <Source app="MobileApp"/>
+    <MsgData>
+        <Information>
+            <RegNumber>regNumberApp</RegNumber>
+            <ObjectType>Contract</ObjectType>
+            <ActionType>Inquiry</ActionType>
+            <ResultDtls>
+                <Parm>
+                    <ParmCode>Status</ParmCode>
+                    <Value>Y</Value>
+                </Parm>
+                <Parm>
+                    <ParmCode>Balance</ParmCode>
+                    <Value>AVAILABLE</Value>
+                </Parm>
+            </ResultDtls>
+            <ObjectFor>
+                <ContractIDT>
+                    <!-- contractNumber == clientNumber-->
+                    <ContractNumber>contractNumber</ContractNumber>
+                </ContractIDT>
+            </ObjectFor>
+        </Information>
+    </MsgData>
+</UFXMsg>

@@ -9,7 +9,7 @@ public interface UFXService {
 
     String AddNewLesserInWay4(Lesser lesser);
 
-    String BalanceRequestInWay4(Client client);
+    String BalanceRequestInWay4(String clientNumber);
 
 }
 

@@ -3,23 +3,32 @@ package openway.service;
 
 import openway.model.Client;
 import openway.model.Lesser;
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Service;
+import sun.misc.IOUtils;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 public class UFXServiceImpl implements UFXService {
 
     private final static Logger logger = Logger.getLogger(UFXServiceImpl.class.getName());
     private String IssProductCode1 = "CLIENT_ISS_001";
+    private String AcqProductCode1 = "LESSER_ASQ_001";
     private String urlUfxAdapter = "http://10.101.124.36:17777";
 
 
@@ -64,15 +73,18 @@ public class UFXServiceImpl implements UFXService {
         String sName = lesser.getLast_name();
         String companyName = lesser.getCompany_name();
 
-        String rnd = GenerateId("kek") + lesser.getId();
+        //String rnd = GenerateId("kek") + lesser.getId();
+        String rnd = GenerateId("kek") + 26;
         String clientNumber = rnd;
         String regNumberClient = rnd;
         String regNumberApp = rnd + "_A";
         String contractNumber = rnd;
+        String contractName = contractNumber + "_N";
 
         String requestAcqContract = RequestCreateAcqContract(sName, name, companyName,
-                email, regNumberClient, regNumberApp, contractNumber);
+                email, clientNumber, regNumberClient, regNumberApp, contractNumber, contractName);
 
+        //System.out.println(requestAcqContract);
         String res = SendRequest(urlUfxAdapter, requestAcqContract);
 
         return res;
@@ -209,34 +221,107 @@ public class UFXServiceImpl implements UFXService {
      */
     private String RequestCreateAcqContract(String sName, String name,
                                             String companyName, String email,
+                                            String clientNumber,
                                             String regNumberClient,
                                             String regNumberApp,
-                                            String contractNumber){
+                                            String contractNumber,
+                                            String contractName){
 
-        return "";
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+        String dateString = format.format(new Date());
+
+        String res = "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
+                "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
+                "    <Source app=\"WebApp\"/>\n" +
+                "    <MsgData>\n" +
+                "        <Application>\n" +
+                "            <RegNumber>" +
+                             regNumberApp +
+                             "</RegNumber>\n" +
+                "            <Institution>0001</Institution>\n" +
+                "            <OrderDprt>0101</OrderDprt>\n" +
+                "            <ObjectType>ClientContract</ObjectType>\n" +
+                "            <ActionType>Add</ActionType>\n" +
+                "            <Data>\n" +
+                "                <ClientContract>\n" +
+                "                    <Client>\n" +
+                "                        <ClientType>CR</ClientType>\n" +
+                "                        <ClientInfo>\n" +
+                "                            <ClientNumber>" +
+                                            clientNumber +
+                                            "</ClientNumber>\n" +
+                "                            <RegNumber>" +
+                                            regNumberClient +
+                                            "</RegNumber>\n" +
+                "                            <FirstName>" +
+                                            name +
+                                            "</FirstName>\n" +
+                "                            <LastName>" +
+                                            sName +
+                                            "</LastName>\n" +
+                "                            <CompanyName>" +
+                                            companyName +
+                                            "</CompanyName>\n" +
+                "                        </ClientInfo>\n" +
+                "                        <BaseAddress>\n" +
+                "                            <EMail>" +
+                                            email +
+                                            "</EMail>\n" +
+                "                        </BaseAddress>\n" +
+                "                    </Client>\n" +
+                "                    <Contract>\n" +
+                "                        <ContractIDT>\n" +
+                "                            <!-- contractNumber == clientNumber-->\n" +
+                "                            <ContractNumber>" +
+                                            contractNumber +
+                                            "</ContractNumber>\n" +
+                "                        </ContractIDT>\n" +
+                "                        <ContractName>" +
+                                        contractName +
+                                        "</ContractName>\n" +
+                "                        <Product>\n" +
+                "                            <ProductCode1>" +
+                                            AcqProductCode1 +
+                                            "</ProductCode1>\n" +
+                "                        </Product>\n" +
+                "                        <DateOpen>" +
+                                        dateString +
+                                        "</DateOpen>\n" +
+                "                    </Contract>\n" +
+                "                </ClientContract>\n" +
+                "            </Data>\n" +
+                "        </Application>\n" +
+                "    </MsgData>\n" +
+                "</UFXMsg>";
+
+        return res;
     }
 
     /**
      *
      * @param url destination address
      * @param request request for send
-     * @return
+     * @return string with response content
      */
     private String SendRequest(String url, String request){
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
         CloseableHttpResponse response;
+        ResponseHandler <String> handler = new BasicResponseHandler();
+        String responseString;
 
         try{
             StringEntity entityCreateClient = new StringEntity(request);
             httpPost.setEntity(entityCreateClient);
             httpPost.setHeader("Content-type", "text/xml");
-
             response = httpClient.execute(httpPost);
-            System.out.println(response.toString());
+            HttpEntity ent = response.getEntity();
+
+            responseString = new BufferedReader(new InputStreamReader(ent.getContent()))
+                    .lines().collect(Collectors.joining("\n"));
 
             httpClient.close();
-
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
             return e.toString();
@@ -248,7 +333,7 @@ public class UFXServiceImpl implements UFXService {
             return e.toString();
         }
 
-        return response.toString();
+        return responseString;
     }
 
 

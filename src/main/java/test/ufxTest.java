@@ -1,18 +1,21 @@
 package test;
 
+import openway.model.Lesser;
 import openway.service.UFXService;
 import openway.service.UFXServiceImpl;
 
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class ufxTest {
 
     public static void main(String argv[]){
         UFXService ufxSer = new UFXServiceImpl();
 
+        Lesser ls = new Lesser("entity", "Vanya", "GiperCheburekov",
+                "BD", "mymail@mail.ru", "pass", "5553535",
+                "Leningrad", "1234123412341234", 25);
 
-
+        String res = ufxSer.AddNewLesserInWay4(ls);
+        //System.out.println(res);
 
 
 //        String tst_sName = "tst_sName_08";

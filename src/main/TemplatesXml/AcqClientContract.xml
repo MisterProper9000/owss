@@ -14,7 +14,7 @@
                         <ClientType>CR</ClientType>
                         <ClientInfo>
                             <ClientNumber>clientNumber</ClientNumber>
-                            <RegNumber>regNumberCLient</RegNumber>
+                            <RegNumber>regNumberClient</RegNumber>
                             <FirstName>client_name</FirstName>
                             <LastName>client_sName</LastName>
                             <CompanyName>companyName</CompanyName>

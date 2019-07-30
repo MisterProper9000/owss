@@ -4,18 +4,15 @@ package openway.service;
 import openway.model.Client;
 import openway.model.Lesser;
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.InputStreamEntity;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Service;
-import sun.misc.IOUtils;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
@@ -90,6 +87,11 @@ public class UFXServiceImpl implements UFXService {
         return res;
     }
 
+    public String BalanceRequestInWay4(Client client){
+        return "";
+    }
+
+
 
     /**
      *
@@ -159,6 +161,9 @@ public class UFXServiceImpl implements UFXService {
                                            String regNumberClient,
                                            String regNumberApp,
                                            String contractNumber){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String dateString = format.format(new Date());
+
         String res  = "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
                 "    <MsgId>AAA-555-333-EEE-23124145</MsgId>\n" +
                 "    <Source app=\"MobileApp\"/>\n" +
@@ -197,14 +202,9 @@ public class UFXServiceImpl implements UFXService {
                     "</ProductCode1>\n" +
 
                 "\t\t\t\t</Product>\n" +
-                "\t\t\t\t<DateOpen>2019-07-22</DateOpen>\n" +
-                "\t\t\t\t<CreditLimit>\n" +
-                "\t\t\t\t\t<FinanceLimit>\n" +
-                "\t\t\t\t\t\t<Amount>0</Amount>\n" +
-                "\t\t\t\t\t\t<Currency>USD</Currency>\n" +
-                "\t\t\t\t\t</FinanceLimit>\n" +
-                "\t\t\t\t<ReasonDetails>Reason details for credit limit</ReasonDetails>\n" +
-                "\t\t\t\t</CreditLimit>\n" +
+                "\t\t\t\t<DateOpen>" +
+                dateString +
+                "</DateOpen>\n" +
                 "\t\t\t\t</Contract>\n" +
                 "\t\t\t</Data>\n" +
                 "\t\t</Application>\n" +
@@ -228,7 +228,6 @@ public class UFXServiceImpl implements UFXService {
                                             String contractName){
 
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
         String dateString = format.format(new Date());
 
         String res = "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
@@ -342,7 +341,6 @@ public class UFXServiceImpl implements UFXService {
      * @param data data for generation
      * @return
      */
-    //TODO: finish this
     private String GenerateId(String data){
         return  "XML_SS_";
     }

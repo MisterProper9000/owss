@@ -19,7 +19,6 @@ public class Order {
     private int id_client;
     private float cost;
 
-
     public Order() {
     }
 

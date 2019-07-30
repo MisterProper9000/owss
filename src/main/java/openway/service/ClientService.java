@@ -7,4 +7,5 @@ public interface ClientService {
     List<Client> findAll();
     String addNewClient(String newClient);
     String authenticationClient(String auth);
+    boolean isEmailOfClientExist(String email);
 }

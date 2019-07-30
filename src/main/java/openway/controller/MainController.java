@@ -76,7 +76,7 @@ public class MainController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
-    String getLoginPassword(@RequestBody String auth) {
+    boolean getLoginPassword(@RequestBody String auth) {
         logger.info("check auth");
         logger.info("prooooooooooooooooob   "+lesserService.authentication(auth));
         //goToWay4(s);

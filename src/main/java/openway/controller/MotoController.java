@@ -19,7 +19,7 @@ public class MotoController {
 
     @GetMapping("/ardget")
     boolean getForms() {
-        //logger.info("moto status: " + motoService.getStatus(1));
+        logger.info("moto status: " + motoService.getStatus(1));
         return motoService.getStatus(1);
     }
 

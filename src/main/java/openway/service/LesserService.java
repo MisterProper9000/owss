@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface LesserService {
     void addNewLesser(String newLesser);
-   String authentication(String auth);
+   boolean authentication(String auth);
    List<Lesser> findAll();
 
     List<Integer> listofidlessers();

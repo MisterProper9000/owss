@@ -1,0 +1,41 @@
+<UFXMsg scheme="WAY4Appl" msg_type="Application" version="2.0" direction="Rq">
+    <MsgId>AAA-555-333-EEE-23124141</MsgId>
+    <Source app="WebApp"/>
+    <MsgData>
+        <Application>
+            <RegNumber>regNumberApp</RegNumber>
+            <Institution>0001</Institution>
+            <OrderDprt>0101</OrderDprt>
+            <ObjectType>ClientContract</ObjectType>
+            <ActionType>Add</ActionType>
+            <Data>
+                <ClientContract>
+                    <Client>
+                        <ClientType>CR</ClientType>
+                        <ClientInfo>
+                            <ClientNumber>clientNumber</ClientNumber>
+                            <RegNumber>regNumberClient</RegNumber>
+                            <FirstName>client_name</FirstName>
+                            <LastName>client_sName</LastName>
+                            <CompanyName>companyName</CompanyName>
+                        </ClientInfo>
+                        <BaseAddress>
+                            <EMail>email_acq@acqmail.ru</EMail>
+                        </BaseAddress>
+                    </Client>
+                    <Contract>
+                        <ContractIDT>
+                            <!-- contractNumber == clientNumber-->
+                            <ContractNumber>contractNumber</ContractNumber>
+                        </ContractIDT>
+                        <ContractName>contractName</ContractName>
+                        <Product>
+                            <ProductCode1>LESSER_ASQ_001</ProductCode1>
+                        </Product>
+                        <DateOpen>2019-07-30</DateOpen>
+                    </Contract>
+                </ClientContract>
+            </Data>
+        </Application>
+    </MsgData>
+</UFXMsg>

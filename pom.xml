@@ -135,6 +135,13 @@
         <version>4.5.1</version>
     </dependency>
 
+    <!-- for QR-code -->
+    <dependency>
+        <groupId>net.glxn.qrgen</groupId>
+        <artifactId>javase</artifactId>
+        <version>2.0</version>
+    </dependency>
+
 
 </dependencies>
 

@@ -2,6 +2,7 @@ package openway.controller;
 
 import openway.model.Lesser;
 import openway.service.LesserService;
+import openway.service.MotoService;
 import openway.service.UFXService;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +16,14 @@ public class MainController {
     private final static Logger logger = Logger.getLogger(MainController.class.getName());
 
     private final LesserService lesserService;
+
+    private final MotoService motoService;
     private final UFXService ufxService;
 
-    public MainController(LesserService lesserService, UFXService ufxService) {
+    public MainController(LesserService lesserService, MotoService motoService, UFXService ufxService) {
 
         this.lesserService = lesserService;
+        this.motoService = motoService;
         this.ufxService = ufxService;
     }
 
@@ -80,6 +84,7 @@ public class MainController {
         logger.info("check auth");
         logger.info("prooooooooooooooooob   "+lesserService.authentication(auth));
         //goToWay4(s);
+        motoService.createQrCode(1);
         return lesserService.authentication(auth);
     }
 

@@ -31,14 +31,7 @@
                     <Product>
                         <ProductCode1>CLIENT_ISS_001</ProductCode1>
                     </Product>
-                    <DateOpen>2019-07-22</DateOpen>
-                    <CreditLimit>
-                        <FinanceLimit>
-                            <Amount>100</Amount>
-                            <Currency>USD</Currency>
-                        </FinanceLimit>
-                        <ReasonDetails>Reason details for credit limit</ReasonDetails>
-                    </CreditLimit>
+                    <DateOpen>2019-07-30</DateOpen>
                 </Contract>
             </Data>
             <Status>

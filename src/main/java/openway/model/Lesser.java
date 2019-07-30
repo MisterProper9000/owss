@@ -61,6 +61,18 @@ public class Lesser {
         return id;
     }
 
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public String getCompany_name() {
+        return company_name;
+    }
+
     public String setPassword(String password){
         return password;
     }

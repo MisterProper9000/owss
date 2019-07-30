@@ -25,7 +25,6 @@ public class MainController {
     private final static Logger logger = Logger.getLogger(MainController.class.getName());
 
     private final LesserService lesserService;
-
     private final MotoService motoService;
     private final UFXService ufxService;
 

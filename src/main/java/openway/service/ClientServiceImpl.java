@@ -77,4 +77,9 @@ public class ClientServiceImpl implements ClientService {
     public boolean isEmailOfClientExist(String email) {
         return clientRepository.findClientByEmail(email).getEmail() != null;
     }
+
+    @Override
+    public int findClientByEmail(String email){
+        return clientRepository.findClientByEmail(email).getId();
+    }
 }

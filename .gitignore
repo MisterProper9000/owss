@@ -222,3 +222,4 @@ yarn-error.log*
 # idea files
 *.idea*
 *.iml
+*workspace.xml

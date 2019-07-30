@@ -26,36 +26,32 @@ public class LesserServiceImpl implements LesserService {
     public void addNewLesser(String newLesser) {
         logger.info("called addNewLesser()");
         Gson g = new Gson();
-
         Lesser lesser = g.fromJson(newLesser, Lesser.class);
-
-        //setPasswordHash(lesser);
-
-        Lesser saved = lesserRepository.save(lesser);
+        lesserRepository.save(lesser);
         logger.info("save to database:" + lesser);
-        logger.info("save to database:" + saved);
     }
 
     @Override
-    public String authentication(String auth) {
+    public boolean authentication(String auth) {
         logger.info("called authentication()" + auth);
         Gson g = new Gson();
         Login lesser = g.fromJson(auth, Login.class);
-        logger.info("lesser.getmail"+lesser.getEmail());
+        logger.info("lesser.getmail:   "+lesser.getEmail());
         Lesser lesserInDB = lesserRepository.findLesserByEmail(lesser.getEmail());
-        logger.info("lesserInDB"+lesserInDB);
+        logger.info("lesserInDB:   "+lesserInDB);
         try {
             if (lesserInDB.getPassword().equals(lesser.getPassword())){
                 logger.info("checked entered data from start page");
-                return "ok";
+                return true;
             }
-            else {
-                logger.info("error with login");
-                return "error";
-            }
-        } catch (Exception e) {
+            else return false;
+        }catch (NullPointerException e) {
+            logger.info("error with login or password");
+            return false;
+        }
+        catch (Exception e) {
             e.printStackTrace();
-            return "error";
+            return false;
         }
     }
 

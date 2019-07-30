@@ -2,7 +2,9 @@ package openway.model;
 
 import lombok.Data;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
+import java.util.Set;
 
 @Data
 @Entity
@@ -21,6 +23,8 @@ public class Lesser {
     private String address;
     private String bank_account;
     private int sum_moto;
+
+
 
     public Lesser() {
     }

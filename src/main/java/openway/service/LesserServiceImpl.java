@@ -26,9 +26,15 @@ public class LesserServiceImpl implements LesserService {
     public void addNewLesser(String newLesser) {
         logger.info("called addNewLesser()");
         Gson g = new Gson();
+        UFXService ufxService = new UFXServiceImpl();
+
         Lesser lesser = g.fromJson(newLesser, Lesser.class);
         lesserRepository.save(lesser);
         logger.info("save to database:" + lesser);
+
+        String resWay4 = ufxService.AddNewLesserInWay4(lesser);
+        logger.info("saved way4: " + resWay4);
+
     }
 
     @Override

@@ -40,9 +40,6 @@ public class MainController {
         try {
             lesserService.addNewLesser(newItem);
             logger.info("add new lessor in database");
-            //String resWay4 = ufxService.AddNewLessorInWay4(newItem);
-            //logger.info(resWay4);
-
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -57,8 +54,7 @@ public class MainController {
     @PostMapping("/login")
     boolean getLoginPassword(@RequestBody String auth) {
         logger.info("check auth");
-        logger.info("prooooooooooooooooob   " + lesserService.authentication(auth));
-        //goToWay4(s);
+        logger.info("auth: " + lesserService.authentication(auth));
         return lesserService.authentication(auth);
     }
 

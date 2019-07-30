@@ -2,6 +2,7 @@ package openway.service;
 
 
 import openway.model.Client;
+import openway.model.Lesser;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -19,7 +20,14 @@ public class UFXServiceImpl implements UFXService {
 
     private final static Logger logger = Logger.getLogger(UFXServiceImpl.class.getName());
     private String IssProductCode1 = "CLIENT_ISS_001";
+    private String urlUfxAdapter = "http://10.101.124.36:17777";
 
+
+    /**
+     *
+     * @param client class client with data for creating
+     * @return string with result of 2 request^ create client iss + create contract iss
+     */
     public String AddNewClientInWay4(Client client){
 
         String name = client.getFirst_name();
@@ -30,14 +38,14 @@ public class UFXServiceImpl implements UFXService {
         String clientNumber = rnd;
         String regNumberClient = rnd;
         String regNumberApp = rnd + "_A";
-        String conractNumber = rnd;
+        String contractNumber = rnd;
 
-        String urlUfxAdapter = "http://10.101.124.36:17777";
+        //String urlUfxAdapter = "http://10.101.124.36:17777";
 
         String requestCreateClient = RequestCreateClient(sName, name,
                 clientNumber, regNumberClient);
         String requestCreateIssContract = RequestCreateIssContract(clientNumber,
-                regNumberClient,  regNumberApp, conractNumber);
+                regNumberClient,  regNumberApp, contractNumber);
 
         logger.info("create client request: " + requestCreateClient);
         logger.info("create client request: " + requestCreateIssContract);
@@ -49,6 +57,27 @@ public class UFXServiceImpl implements UFXService {
 
         return resCl + "\n " + resCt;
     }
+
+    public String AddNewLesserInWay4(Lesser lesser){
+        String email = lesser.getEmail();
+        String name = lesser.getFirst_name();
+        String sName = lesser.getLast_name();
+        String companyName = lesser.getCompany_name();
+
+        String rnd = GenerateId("kek") + lesser.getId();
+        String clientNumber = rnd;
+        String regNumberClient = rnd;
+        String regNumberApp = rnd + "_A";
+        String contractNumber = rnd;
+
+        String requestAcqContract = RequestCreateAcqContract(sName, name, companyName,
+                email, regNumberClient, regNumberApp, contractNumber);
+
+        String res = SendRequest(urlUfxAdapter, requestAcqContract);
+
+        return res;
+    }
+
 
     /**
      *
@@ -178,7 +207,12 @@ public class UFXServiceImpl implements UFXService {
      *
      * @return
      */
-    private String RequestCreateAcqContract(){
+    private String RequestCreateAcqContract(String sName, String name,
+                                            String companyName, String email,
+                                            String regNumberClient,
+                                            String regNumberApp,
+                                            String contractNumber){
+
         return "";
     }
 

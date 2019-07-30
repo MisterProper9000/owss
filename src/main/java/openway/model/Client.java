@@ -48,6 +48,10 @@ public class Client {
         return password;
     }
 
+    public int getId() {
+        return id;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }

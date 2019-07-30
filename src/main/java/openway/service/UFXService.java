@@ -1,9 +1,10 @@
 package openway.service;
 
+import openway.model.Client;
+
 public interface UFXService {
 
-
-    String AddNewLessorInWay4(String newLesser);
+    String AddNewClientInWay4(Client client);
 
 }
 

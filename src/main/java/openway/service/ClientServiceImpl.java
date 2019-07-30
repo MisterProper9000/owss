@@ -30,15 +30,16 @@ public class ClientServiceImpl implements ClientService {
     public String addNewClient(String newClient) {
         logger.info("called addNewLesser()");
         Gson g = new Gson();
+        UFXService ufxService = new UFXServiceImpl();
+
         Client clientDb = g.fromJson(newClient, Client.class);
-
-
 
         try {
             clientRepository.save(clientDb);
             logger.info("save to database: " + clientDb);
 
-            //TODO finish that
+            String res = ufxService.AddNewClientInWay4(clientDb);
+            logger.info("res of saving to way4: " + res);
 
             return String.valueOf(Status.OK);
         } catch (DataIntegrityViolationException e) {

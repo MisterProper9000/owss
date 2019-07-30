@@ -1,8 +1,7 @@
 package openway.service;
 
 
-import com.google.gson.Gson;
-import openway.model.Lesser;
+import openway.model.Client;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
@@ -13,50 +12,42 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.util.logging.Logger;
 
 @Service
 public class UFXServiceImpl implements UFXService {
 
+    private final static Logger logger = Logger.getLogger(UFXServiceImpl.class.getName());
     private String IssProductCode1 = "CLIENT_ISS_001";
 
-    private class LesserWay4{
-        public String name;
-        public String sName;
-        public String email;
-    }
+    public String AddNewClientInWay4(Client client){
 
-    public String AddNewLessorInWay4(String newLesser){
+        String name = client.getFirst_name();
+        String sName = client.getLast_name();
 
-        Gson gson = new Gson();
+        String rnd = GenerateId("kek") + client.getId();
 
-        gson.fromJson(newLesser, LesserWay4.class);
+        String clientNumber = rnd;
+        String regNumberClient = rnd;
+        String regNumberApp = rnd + "_A";
+        String conractNumber = rnd;
 
-        String tst_sName = "tstFromServer_sName";
-        String tst_Name = "tstFromServer_Name";
+        String urlUfxAdapter = "http://10.101.124.36:17777";
 
-//        String rnd = ufxSer.GenerateId("kek");
-//
-//        String tst_clientNumber = rnd;
-//        String tst_regNumberClient = rnd;
-//        String tst_regNumberApp = rnd + "_A";
-//        String tst_conractNumber = rnd;
-//
-//        String urlUfxAdapter = "http://10.101.124.36:17777";
-//
-//        String requestCreateClient = ufxSer.RequestCreateClient(tst_sName, tst_Name,
-//                tst_clientNumber, tst_regNumberClient);
-//        String requestCreateIssContract = ufxSer.RequestCreateIssContract(tst_clientNumber,
-//                tst_regNumberClient,  tst_regNumberApp, tst_conractNumber);
-//
-//        logger.info("create client request: " + requestCreateClient);
-//        logger.info("create client request: " + requestCreateIssContract);
-//
-//        String res = ufxSer.SendRequest(urlUfxAdapter, requestCreateClient);
-//        logger.info(res);
-//        res = ufxSer.SendRequest(urlUfxAdapter, requestCreateIssContract);
-//        logger.info(res);
+        String requestCreateClient = RequestCreateClient(sName, name,
+                clientNumber, regNumberClient);
+        String requestCreateIssContract = RequestCreateIssContract(clientNumber,
+                regNumberClient,  regNumberApp, conractNumber);
 
-        return "";
+        logger.info("create client request: " + requestCreateClient);
+        logger.info("create client request: " + requestCreateIssContract);
+
+        String resCl = SendRequest(urlUfxAdapter, requestCreateClient);
+        logger.info(resCl);
+        String resCt = SendRequest(urlUfxAdapter, requestCreateIssContract);
+        logger.info(resCt);
+
+        return resCl + "\n " + resCt;
     }
 
     /**
@@ -234,6 +225,6 @@ public class UFXServiceImpl implements UFXService {
      */
     //TODO: finish this
     private String GenerateId(String data){
-        return  "XML_SS_001";
+        return  "XML_SS_";
     }
 }

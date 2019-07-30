@@ -1,0 +1,45 @@
+<UFXMsg scheme="WAY4Appl" msg_type="Application" version="2.0" direction="Rq">
+    <MsgId>AAA-555-333-EEE-23124145</MsgId>
+    <Source app="MobileApp"/>
+    <MsgData>
+        <Application>
+            <!-- regNumberApp must be Unique -->
+            <RegNumber>regNumberApp</RegNumber>
+            <Institution>0001</Institution>
+            <OrderDprt>0101</OrderDprt>
+            <ObjectType>Contract</ObjectType>
+            <ActionType>Add</ActionType>
+            <ObjectFor>
+                <ClientIDT>
+                    <ClientType>PR</ClientType>
+                    <ClientInfo>
+                        <!-- client with this ad must be in database already -->
+                        <ClientNumber>clientNumber</ClientNumber>
+                        <!-- regNumberClient == regNumberApp from create iss client request -->
+                        <RegNumber>regNumberClient</RegNumber>
+                    </ClientInfo>
+                </ClientIDT>
+            </ObjectFor>
+            <Data>
+                <Contract>
+                    <ContractIDT>
+                        <!-- we use clientNumber (contractNumber == clientNumber) -->
+                        <ContractNumber>contractNumber</ContractNumber>
+                        <RBSNumber>XML-BB-03-rbs_123456789123456791</RBSNumber>
+                    </ContractIDT>
+                    <Product>
+                        <ProductCode1>CLIENT_ISS_001</ProductCode1>
+                    </Product>
+                    <DateOpen>2019-07-22</DateOpen>
+                    <CreditLimit>
+                        <FinanceLimit>
+                            <Amount>100</Amount>
+                            <Currency>USD</Currency>
+                        </FinanceLimit>
+                        <ReasonDetails>Reason details for credit limit</ReasonDetails>
+                    </CreditLimit>
+                </Contract>
+            </Data>
+        </Application>
+    </MsgData>
+</UFXMsg>

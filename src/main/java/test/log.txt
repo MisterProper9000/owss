@@ -1,0 +1,1 @@
+HttpResponseProxy{HTTP/1.1 200 OK [content-type: text/xml, content-length: 1208] ResponseEntityProxy{[Content-Type: text/xml,Content-Length: 1208,Chunked: false]}}HttpResponseProxy{HTTP/1.1 200 OK [content-type: text/xml, content-length: 1354] ResponseEntityProxy{[Content-Type: text/xml,Content-Length: 1354,Chunked: false]}}

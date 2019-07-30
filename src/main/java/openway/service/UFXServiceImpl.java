@@ -1,80 +1,230 @@
 package openway.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
+import openway.model.Client;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Service;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.logging.Logger;
 
 @Service
 public class UFXServiceImpl implements UFXService {
-    @Override
-    public String requestCreateClient(String sName, String name,
-                                      int clientNumber,
-                                      String email, String regNumber) {
-        String fileName = "CreateClientRequest.xml";
-        String clientNumberStr = Integer.toString(clientNumber);
 
-        try {
-            File file = new File(fileName);
-            boolean status = file.createNewFile();
-            FileWriter writer = new FileWriter(file, false);
+    private final static Logger logger = Logger.getLogger(UFXServiceImpl.class.getName());
+    private String IssProductCode1 = "CLIENT_ISS_001";
+
+    public String AddNewClientInWay4(Client client){
+
+        String name = client.getFirst_name();
+        String sName = client.getLast_name();
+
+        String rnd = GenerateId("kek") + client.getId();
+
+        String clientNumber = rnd;
+        String regNumberClient = rnd;
+        String regNumberApp = rnd + "_A";
+        String conractNumber = rnd;
+
+        String urlUfxAdapter = "http://10.101.124.36:17777";
+
+        String requestCreateClient = RequestCreateClient(sName, name,
+                clientNumber, regNumberClient);
+        String requestCreateIssContract = RequestCreateIssContract(clientNumber,
+                regNumberClient,  regNumberApp, conractNumber);
+
+        logger.info("create client request: " + requestCreateClient);
+        logger.info("create client request: " + requestCreateIssContract);
+
+        String resCl = SendRequest(urlUfxAdapter, requestCreateClient);
+        logger.info(resCl);
+        String resCt = SendRequest(urlUfxAdapter, requestCreateIssContract);
+        logger.info(resCt);
+
+        return resCl + "\n " + resCt;
+    }
+
+    /**
+     *
+     * @param sName surname
+     * @param name name
+     * @param clientNumber client id from db,
+     *                     must be unique
+     * @param regNumberApp application id,
+     *                  must be unique
+     *
+     * clientNumber == regNumber in this function, but this is not the same fields in general
+     *
+     * @return
+     */
+    private String RequestCreateClient(String sName, String name,
+                                      String clientNumber, String regNumberApp) {
+
+        String res = "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
+                "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
+                "    <Source app=\"MobileApp\"/>\n" +
+                "    <MsgData>\n" +
+                "        <Application>\n" +
+                "            <RegNumber>" +
+                                regNumberApp +
+                             "</RegNumber>\n" +
+                "\t\t\t<Institution>0001</Institution>\n" +
+                "            <OrderDprt>0101</OrderDprt>\n" +
+                "            <ObjectType>Client</ObjectType>\n" +
+                "            <ActionType>Add</ActionType>\n" +
+                "            <Data>\n" +
+                "                <Client>\n" +
+                "                    <ClientType>PR</ClientType>\n" +
+                "                    <ClientInfo>\n" +
+                "                        <ClientNumber>" +
+                                         clientNumber +
+                                         "</ClientNumber>\n" +
+                "                        <RegNumber>" +
+                                         regNumberApp +
+                                         "</RegNumber>\n" +
+                "                        <RegNumberDetails>RegDetails</RegNumberDetails>\n" +
+                "                        <FirstName>" +
+                                         name +
+                                         "</FirstName>\n" +
+                "                        <LastName>" +
+                                         sName +
+                                         "</LastName>\n" +
+                "                    </ClientInfo>\n" +
+                "                </Client>\n" +
+                "            </Data>\n" +
+                "        </Application>\n" +
+                "\t</MsgData>\n" +
+                "</UFXMsg>";
+        return res;
+    }
+
+    /**
+     *
+     * @param clientNumber client id just created in CreateClientRequest, must be the same
+     * @param regNumberClient client reg number, also from createClientRequest, must be the same
+     * @param regNumberApp application reg number, must be unique
+     *
+     * clientNumber == regNumberClient != regNumberApp
+     * @param contractNumber
+     * @return
+     */
+    private String RequestCreateIssContract(String clientNumber,
+                                           String regNumberClient,
+                                           String regNumberApp,
+                                           String contractNumber){
+        String res  = "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
+                "    <MsgId>AAA-555-333-EEE-23124145</MsgId>\n" +
+                "    <Source app=\"MobileApp\"/>\n" +
+                "    <MsgData>\n" +
+                "\t\t<Application>\n" +
+                "\t\t\t<RegNumber>" +
+                        regNumberApp +
+                        "</RegNumber>\n" +
+                "\t\t\t<Institution>0001</Institution>\n" +
+                "\t\t\t<OrderDprt>0101</OrderDprt>\n" +
+                "\t\t\t<ObjectType>Contract</ObjectType>\n" +
+                "\t\t\t<ActionType>Add</ActionType>\n" +
+                "\t\t\t<ObjectFor>\n" +
+                "\t\t\t\t<ClientIDT>\n" +
+                "\t\t\t\t\t<ClientType>PR</ClientType>\n" +
+                "\t\t\t\t\t<ClientInfo>\n" +
+                "\t\t\t\t\t\t<ClientNumber>" +
+                            clientNumber +
+                            "</ClientNumber>\n" +
+                "                        <RegNumber>" +
+                                            regNumberClient +
+                                         "</RegNumber>\n" +
+                "\t\t\t\t\t</ClientInfo>\n" +
+                "\t\t\t\t</ClientIDT>\n" +
+                "\t\t\t</ObjectFor>\n" +
+                "\t\t\t<Data>\n" +
+                "\t\t\t\t<Contract>\n" +
+                "\t\t\t\t\t<ContractIDT>\n" +
+                "<ContractNumber>" + contractNumber + "</ContractNumber>" +
+                "\t\t\t\t\t\t<RBSNumber>XML-BB-03-rbs_123456789123456791</RBSNumber>\n" +
+                "\t\t\t\t\t</ContractIDT>\n" +
+                "\t\t\t\t<Product>\n" +
+
+                    "\t\t\t\t\t<ProductCode1>" +
+                    IssProductCode1 +
+                    "</ProductCode1>\n" +
+
+                "\t\t\t\t</Product>\n" +
+                "\t\t\t\t<DateOpen>2019-07-22</DateOpen>\n" +
+                "\t\t\t\t<CreditLimit>\n" +
+                "\t\t\t\t\t<FinanceLimit>\n" +
+                "\t\t\t\t\t\t<Amount>0</Amount>\n" +
+                "\t\t\t\t\t\t<Currency>USD</Currency>\n" +
+                "\t\t\t\t\t</FinanceLimit>\n" +
+                "\t\t\t\t<ReasonDetails>Reason details for credit limit</ReasonDetails>\n" +
+                "\t\t\t\t</CreditLimit>\n" +
+                "\t\t\t\t</Contract>\n" +
+                "\t\t\t</Data>\n" +
+                "\t\t</Application>\n" +
+                "\t</MsgData>\n" +
+                "</UFXMsg>";
 
 
-            writer.write("<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" " +
-                    "version=\"2.0\" direction=\"Rq\">\n" +
-                    "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
-                    "    <Source app=\"MobileApp\"/>");
+        return res;
+    }
 
-            writer.write("\n    <MsgData>\n" +
-                    "        <Application>\n" +
-                    "            <RegNumber>" +
-                    regNumber +
-                    "</RegNumber>\n" +
-                    "\t\t\t<Institution>0001</Institution>\n" +
-                    "            <OrderDprt>0101</OrderDprt>\n" +
-                    "            <ObjectType>Client</ObjectType>\n" +
-                    "            <ActionType>Add</ActionType>\n" +
-                    "            <Data>\n" +
-                    "                <Client>\n" +
-                    "                    <ClientType>PR</ClientType>\n" +
-                    "                    <ClientInfo>\n" +
-                    "                        <ClientNumber>" +
-                    clientNumberStr +
-                    "</ClientNumber>\n" +
-                    "                        <RegNumberType>RegNumberType</RegNumberType>\n" +
-                    "                        <RegNumber>" +
-                    clientNumberStr +
-                    "</RegNumber>\n" +
-                    "                        <RegNumberDetails>RegDetails</RegNumberDetails>\n" +
-                    "                        <FirstName>" +
-                    name +
-                    "</FirstName>\n" +
-                    "                        <LastName>" +
-                    sName +
-                    "</LastName>\n" +
-                    "                    </ClientInfo>\n\n" +
-                    "                    <AddInfo>\n" +
-                    "                        <AddInfo01>add_info_1_3456789_12345678</AddInfo01>\n" +
-                    "                        <AddInfo02>add_info_2_3456789_12345678</AddInfo02>\n" +
-                    "                        <AddDate01>1981-08-13</AddDate01>\n" +
-                    "                        <AddDate02>1985-06-12</AddDate02>\n" +
-                    "                        <AnyTagClient>AnyTagClientValue</AnyTagClient>\n" +
-                    "                        <SecondAnyTagClient>SecondAnyTagClientValue</SecondAnyTagClient>\n" +
-                    "                    </AddInfo>\n" +
-                    "                </Client>\n" +
-                    "            </Data>\n" +
-                    "        </Application>\n" +
-                    "\t</MsgData>\n" +
-                    "</UFXMsg>");
+    /** //TODO: finish doc
+     *
+     * @return
+     */
+    private String RequestCreateAcqContract(){
+        return "";
+    }
 
-            writer.flush();
-            writer.close();
+    /**
+     *
+     * @param url destination address
+     * @param request request for send
+     * @return
+     */
+    private String SendRequest(String url, String request){
+        CloseableHttpClient httpClient = HttpClients.createDefault();
+        HttpPost httpPost = new HttpPost(url);
+        CloseableHttpResponse response;
+
+        try{
+            StringEntity entityCreateClient = new StringEntity(request);
+            httpPost.setEntity(entityCreateClient);
+            httpPost.setHeader("Content-type", "text/xml");
+
+            response = httpClient.execute(httpPost);
+            System.out.println(response.toString());
+
+            httpClient.close();
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+            return e.toString();
+        } catch (ClientProtocolException e) {
+            e.printStackTrace();
+            return e.toString();
         } catch (IOException e) {
+            e.printStackTrace();
             return e.toString();
         }
 
-        return "";
+        return response.toString();
+    }
+
+
+    /**
+     *
+     * @param data data for generation
+     * @return
+     */
+    //TODO: finish this
+    private String GenerateId(String data){
+        return  "XML_SS_";
     }
 }

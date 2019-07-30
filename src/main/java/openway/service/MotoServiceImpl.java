@@ -29,18 +29,20 @@ public class MotoServiceImpl implements MotoService {
     @Override
     public void createQrCode(int id) {
         ByteArrayOutputStream bout =
-                QRCode.from("https://memorynotfound.com")
+                QRCode.from("sfb_moto" + id)
                         .withSize(250, 250)
                         .to(ImageType.PNG)
                         .stream();
 
         try {
-            OutputStream out = new FileOutputStream("/tmp/qr-code.png");
+            String currentWorkingDir = System.getProperty("user.dir");
+            OutputStream out = new FileOutputStream(currentWorkingDir + "\\src\\main\\resources\\qr_codes\\qr-code" + id + ".png");
             bout.writeTo(out);
             out.flush();
             out.close();
+            logger.info("generate Qr-code");
 
-        } catch (FileNotFoundException e){
+        } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

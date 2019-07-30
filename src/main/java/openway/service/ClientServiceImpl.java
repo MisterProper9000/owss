@@ -54,7 +54,7 @@ public class ClientServiceImpl implements ClientService {
         logger.info("called authentication()" + auth);
         Gson g = new Gson();
         Client client = g.fromJson(auth, Client.class);
-        logger.info("err"+client);
+        logger.info("err" + client);
 
 
 //        logger.info(String.valueOf(clientRepository.findClientByEmail(client.getEmail())));
@@ -71,5 +71,10 @@ public class ClientServiceImpl implements ClientService {
             return (String.valueOf(Status.DOESNTEXIST));
         }
         return String.valueOf(Status.OTHER);
+    }
+
+    @Override
+    public String BalanceRequest(String data){
+        return "";
     }
 }

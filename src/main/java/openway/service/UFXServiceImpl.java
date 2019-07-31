@@ -55,7 +55,7 @@ public class UFXServiceImpl implements UFXService {
                 regNumberClient,  regNumberApp, contractNumber);
 
         logger.info("create client request: " + requestCreateClient);
-        logger.info("create client request: " + requestCreateIssContract);
+        logger.info("create contract request: " + requestCreateIssContract);
 
         String resCl = SendRequest(urlUfxAdapter, requestCreateClient);
         logger.info(resCl);
@@ -86,9 +86,9 @@ public class UFXServiceImpl implements UFXService {
         return res;
     }
 
-    public String BalanceRequestInWay4(String clientNumber){
-        String tmp = GenerateId("") + clientNumber;
-        String request = RequestCreateBalanceInquery(tmp);
+    public String BalanceRequestInWay4(int clientId){
+        String clientNumber = GenerateId("") + clientId;
+        String request = RequestCreateBalanceInquery(clientNumber);
         String response = SendRequest(urlUfxAdapter, request);
         String balance = BalanceResponseParse(response);
         return balance;
@@ -367,7 +367,7 @@ public class UFXServiceImpl implements UFXService {
     }
 
     private String RequestCreateGetDeposit(String clientNumber,
-                                           String lesserNumer,
+                                           String lesserNumber,
                                            String sum, String currency){
 
         String RRN = GenerateRRN("time");
@@ -403,7 +403,7 @@ public class UFXServiceImpl implements UFXService {
                 "            </Requestor>\n" +
                 "            <Source>\n" +
                 "                <ContractNumber>" +
-                                lesserNumer +
+                                lesserNumber +
                                 "</ContractNumber>\n" +
                 "            </Source>       \n" +
                 "            <Transaction>\n" +

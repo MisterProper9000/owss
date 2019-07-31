@@ -9,7 +9,7 @@ public interface UFXService {
 
     String AddNewLesserInWay4(Lesser lesser);
 
-    String BalanceRequestInWay4(String clientNumber);
+    String BalanceRequestInWay4(int clientId);
 
     String GetDepositFromClient(int clientId, int lesserId);
 

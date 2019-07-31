@@ -66,4 +66,9 @@ public class Client {
     public String getLast_name() {
         return last_name;
     }
+
+    public String setId(int id){
+        this.id = id;
+        return "";
+    }
 }

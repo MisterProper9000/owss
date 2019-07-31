@@ -81,12 +81,10 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public String CheckBalance(String data){
         logger.info("called check balance" + data);
-        //Gson g = new Gson();
-        //Client client = g.fromJson(data, Client.class);
-        String clientNumber = Integer.toString(clientRepository.findClientByEmail(data).getId());
-        UFXService ufxService = new UFXServiceImpl();
+        int clientId = clientRepository.findClientByEmail(data).getId();
 
-        String balance = ufxService.BalanceRequestInWay4(clientNumber);
+        UFXService ufxService = new UFXServiceImpl();
+        String balance = ufxService.BalanceRequestInWay4(clientId);
 
         return balance;
     }

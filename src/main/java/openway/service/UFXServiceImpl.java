@@ -2,6 +2,7 @@ package openway.service;
 
 import openway.model.Client;
 import openway.model.Lesser;
+import openway.utils.DateUfx;
 import openway.utils.XMLParse;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
@@ -18,8 +19,6 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -29,6 +28,9 @@ public class UFXServiceImpl implements UFXService {
     private String IssProductCode1 = "CLIENT_ISS_001";
     private String AcqProductCode1 = "LESSER_ASQ_001";
     private String urlUfxAdapter = "http://10.101.124.36:17777";
+    private String depositSize = "200";
+    private String depositCurrency = "USD";
+
 
     /**
      *
@@ -91,6 +93,20 @@ public class UFXServiceImpl implements UFXService {
         String balance = BalanceResponseParse(response);
         return balance;
     }
+
+    public String GetDepositFromClient(int clientId, int lesserId){
+
+        String clientNumber = GenerateId("") + clientId;
+        String lesserNumber = GenerateId("") + lesserId;
+
+        String requestGetDeposit = RequestCreateGetDeposit(clientNumber, lesserNumber,
+                depositSize, depositCurrency);
+        String resDeposit = SendRequest(urlUfxAdapter, requestGetDeposit);
+
+        //return requestGetDeposit;
+        return resDeposit;
+    }
+
 
     /**
      *
@@ -352,6 +368,61 @@ public class UFXServiceImpl implements UFXService {
         return amount + " "  + currency;
     }
 
+    private String RequestCreateGetDeposit(String clientNumber,
+                                           String lesserNumer,
+                                           String sum, String currency){
+
+        String RRN = GenerateRRN("time");
+        String dateStr = DateUfx.getTime();
+
+        String res = "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
+                "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
+                "    <Source app=\"MobileApp\"/>\n" +
+                "    <MsgData>\n" +
+                "        <Doc>\n" +
+                "            <TransType>\n" +
+                "                <TransCode>\n" +
+                "                    <MsgCode>auth_purchase</MsgCode>\n" +
+                "                </TransCode>\n" +
+                "                <TransCondition>AUTHENTICATED,AUTH_AGENT,CARD,CARDHOLDER,DATA_TRACK,MERCH,PBT,PBT_CRYPTO,PBT_ONLINE,READ_TRACK,TERM,TERM_TRACK</TransCondition>\n" +
+                "            </TransType>\n" +
+                "            <DocRefSet>\n" +
+                "                <Parm>\n" +
+                "                    <ParmCode>RRN</ParmCode>\n" +
+                "                    <Value>" +
+                                    RRN +
+                                    "</Value>\n" +
+                "                </Parm>\n" +
+                "            </DocRefSet>\n" +
+                "            <LocalDt>" +
+                            dateStr +
+                            "</LocalDt>\n" +
+                "            <Requestor>\n" +
+                "                <ContractNumber>" +
+                                clientNumber +
+                                "</ContractNumber>\n" +
+                "                <MemberId>0001</MemberId>\n" +
+                "            </Requestor>\n" +
+                "            <Source>\n" +
+                "                <ContractNumber>" +
+                                lesserNumer +
+                                "</ContractNumber>\n" +
+                "            </Source>       \n" +
+                "            <Transaction>\n" +
+                "                <Currency>" +
+                                currency +
+                                "</Currency>\n" +
+                "                <Amount>" +
+                                sum +
+                                "</Amount>\n" +
+                "            </Transaction>\n" +
+                "        </Doc>\n" +
+                "    </MsgData>\n" +
+                "</UFXMsg>";
+        return res;
+    }
+
+
     /**
      *
      * @param url destination address
@@ -396,6 +467,17 @@ public class UFXServiceImpl implements UFXService {
      * @return
      */
     private String GenerateId(String data){
-        return  "XML_SSS_";
+        return  "XML_SS_";
+    }
+
+    private String GenerateRRN(String type){
+        String res = "";
+        if(type.equals("time"))
+        {
+            SimpleDateFormat format = new SimpleDateFormat("yyMMddHHmmss");
+            String dateString = format.format(new Date());
+            return dateString;
+        }
+        return res;
     }
 }

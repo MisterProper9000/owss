@@ -6,6 +6,7 @@ import openway.model.Client;
 import openway.model.Motoroller;
 import openway.model.Order;
 import openway.repository.ClientRepository;
+import openway.repository.LesserRepository;
 import openway.repository.MotoRepository;
 import openway.repository.OrderRepository;
 import org.springframework.stereotype.Service;
@@ -21,10 +22,11 @@ public class OrderServiceImpl implements OrderService {
 
     final private OrderRepository orderRepository;
     final private ClientRepository clientRepository;
-
     final private MotoRepository motoRepository;
 
-    public OrderServiceImpl(OrderRepository orderRepository, ClientRepository clientRepository, MotoRepository motoRepository) {
+    public OrderServiceImpl(OrderRepository orderRepository,
+                            ClientRepository clientRepository,
+                            MotoRepository motoRepository){
         this.orderRepository = orderRepository;
         this.clientRepository = clientRepository;
         this.motoRepository = motoRepository;
@@ -36,6 +38,8 @@ public class OrderServiceImpl implements OrderService {
         JsonObject jsonObject = new JsonParser().parse(qrAndEmail).getAsJsonObject();
         String qr = jsonObject.get("qr").getAsString();
         String email = jsonObject.get("email").getAsString();
+        UFXService ufxService = new UFXServiceImpl();
+
 
         //qr format: sfb_moto:{id}
         String[] dataOfQrCode = qr.split(":", 2);
@@ -52,6 +56,14 @@ public class OrderServiceImpl implements OrderService {
         if ((motoRepository.findMotorollerById(id_moto) != null) && (client.getEmail() != null)) {
             logger.info("called checkQr(): correct qr");
 
+            Motoroller moto = motoRepository.findMotorollerById(id_moto);
+            moto.setStatus(true);
+            motoRepository.save(moto);
+            int id_lesser = moto.getId_owner();
+            String resDeposit = ufxService.GetDepositFromClient(id_client, id_lesser);
+
+            logger.info("deposit getting in way4" + resDeposit);
+
             SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
             Date begin_time = new Date(System.currentTimeMillis());
             logger.info("begin_date rent:  " + formatter.format(begin_time));
@@ -63,9 +75,7 @@ public class OrderServiceImpl implements OrderService {
             orderRepository.save(order);
 
             int id_order = order.getId();
-            Motoroller moto = motoRepository.findMotorollerById(id_moto);
-            moto.setStatus(true);
-            motoRepository.save(moto);
+
 
             logger.info("startRent() return:" + Status.OK + "|" + id_order);
 

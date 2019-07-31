@@ -11,5 +11,7 @@ public interface UFXService {
 
     String BalanceRequestInWay4(String clientNumber);
 
+    String GetDepositFromClient(int clientId, int lesserId);
+
 }
 

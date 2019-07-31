@@ -36,4 +36,8 @@ public class Motoroller {
     public void setStatus(boolean status) {
         this.status = status;
     }
+
+    public int getId_owner() {
+        return id_owner;
+    }
 }

@@ -3,21 +3,12 @@ package openway.controller;
 import openway.model.Lesser;
 import openway.service.LesserService;
 import openway.service.MotoService;
-import openway.service.UFXService;
-import openway.service.UFXServiceImpl;
 
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.CloseableHttpClient;
+import openway.service.OrderService;
 import org.springframework.web.bind.annotation.*;
-import org.apache.http.impl.client.HttpClients;
-import sun.net.www.http.HttpClient;
 
-import javax.xml.soap.Name;
 import java.util.List;
 import java.util.logging.Logger;
-
 
 @RestController
 public class MainController {
@@ -26,13 +17,13 @@ public class MainController {
 
     private final LesserService lesserService;
     private final MotoService motoService;
-    private final UFXService ufxService;
+    private final OrderService orderService;
 
-    public MainController(LesserService lesserService, MotoService motoService, UFXService ufxService) {
+    public MainController(LesserService lesserService, MotoService motoService, OrderService orderService) {
 
         this.lesserService = lesserService;
         this.motoService = motoService;
-        this.ufxService = ufxService;
+        this.orderService = orderService;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -51,7 +42,6 @@ public class MainController {
         }
 
     }
-
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")

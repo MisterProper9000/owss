@@ -4,6 +4,7 @@ import net.glxn.qrgen.core.image.ImageType;
 import net.glxn.qrgen.javase.QRCode;
 import openway.model.Motoroller;
 import openway.repository.MotoRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -15,14 +16,10 @@ public class MotoServiceImpl implements MotoService {
     private static Logger logger = Logger.getLogger(MotoServiceImpl.class.getName());
 
     final private MotoRepository motoRepository;
-    final private OrderService orderService;
 
-    final private ClientService clientService;
-
-    public MotoServiceImpl(MotoRepository motoRepository, OrderService orderService, ClientService clientService) {
+    @Autowired
+    public MotoServiceImpl(MotoRepository motoRepository) {
         this.motoRepository = motoRepository;
-        this.orderService = orderService;
-        this.clientService = clientService;
     }
 
     @Override

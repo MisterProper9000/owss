@@ -3,11 +3,11 @@ package openway.service;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import openway.model.Client;
+import openway.model.Motoroller;
 import openway.model.Order;
 import openway.repository.ClientRepository;
 import openway.repository.MotoRepository;
 import openway.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -19,60 +19,96 @@ public class OrderServiceImpl implements OrderService {
 
     final private static Logger logger = Logger.getLogger(OrderServiceImpl.class.getName());
 
-    final private ClientRepository clientRepository;
     final private OrderRepository orderRepository;
+    final private ClientRepository clientRepository;
+
     final private MotoRepository motoRepository;
 
-    @Autowired
-    public OrderServiceImpl(ClientRepository clientRepository, OrderRepository orderRepository, MotoRepository motoRepository) {
-        this.clientRepository = clientRepository;
+    public OrderServiceImpl(OrderRepository orderRepository, ClientRepository clientRepository, MotoRepository motoRepository) {
         this.orderRepository = orderRepository;
+        this.clientRepository = clientRepository;
         this.motoRepository = motoRepository;
     }
 
-//    @Override
-//    public String startRent(String qrAndEmail) {
-//        JsonObject jsonObject = new JsonParser().parse(qrAndEmail).getAsJsonObject();
-//        String qr = jsonObject.get("qr").getAsString();
-//        String email = jsonObject.get("email").getAsString();
-//
-//        //qr format: sfb_moto:{id}
-//        String[] dataOfQrCode = qr.split(":", 2);
-//        int id_moto = Integer.valueOf(dataOfQrCode[1]);
-//
-//        Client client = clientRepository.findClientByEmail(email);
-//
-//        if ((motoRepository.findMotorollerById(id_moto) != null) && (client.getEmail() != null)) {
-//            logger.info("called checkQr(): correct qr");
-//
-//            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-//            Date begin_time = new Date(System.currentTimeMillis());
-//            logger.info("begin_date rent:  " + formatter.format(begin_time));
-//
-//            int id_client = client.getId();
-//            Order order = new Order(begin_time,id_moto,id_client);
-//            orderRepository.save(order);
-//            int id_order = orderRepository.findOrderByBegin_time(begin_time).getId();
-//
-//            return Status.OK+"|"+id_order;
-//        } else {
-//            logger.info("called checkQr(): incorrect qr");
-//            return String.valueOf(Status.DOESNTEXIST);
-//        }
-//    }
-//
-//    @Override
-//    public String endRent(String id_order) {
-//        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
-//        Date end_time = new Date(System.currentTimeMillis());
-//        logger.info("begin_date rent:  " + formatter.format(end_time));
-//
-//        Order order = orderRepository.findOrderById(Integer.parseInt(id_order));
-//        order.setEnd_time(end_time);
-//
-//        Date begin_time = order.getBegin_time();
-//        int calculateTime = Integer.valueOf(String.valueOf(end_time)) - Integer.valueOf(String.valueOf(begin_time));
-//        float cost = order.getTariff()*calculateTime;
+
+    @Override
+    public String startRent(String qrAndEmail) {
+        JsonObject jsonObject = new JsonParser().parse(qrAndEmail).getAsJsonObject();
+        String qr = jsonObject.get("qr").getAsString();
+        String email = jsonObject.get("email").getAsString();
+
+        //qr format: sfb_moto:{id}
+        String[] dataOfQrCode = qr.split(":", 2);
+        int id_moto = Integer.valueOf(dataOfQrCode[1]);
+
+
+        logger.info("id_moto: " + id_moto + ",  email: " + email);
+
+        Client client = clientRepository.findClientByEmail(email);
+        int id_client = client.getId();
+
+        logger.info("client: " + client);
+
+        if ((motoRepository.findMotorollerById(id_moto) != null) && (client.getEmail() != null)) {
+            logger.info("called checkQr(): correct qr");
+
+            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+            Date begin_time = new Date(System.currentTimeMillis());
+            logger.info("begin_date rent:  " + formatter.format(begin_time));
+            logger.info("begin_date rent:  " + begin_time);
+
+
+            Order order = new Order(String.valueOf(begin_time), id_moto, id_client);
+            logger.info("order save: " + orderRepository.save(order));
+            orderRepository.save(order);
+
+            int id_order = order.getId();
+            Motoroller moto = motoRepository.findMotorollerById(id_moto);
+            moto.setStatus(true);
+            motoRepository.save(moto);
+
+            logger.info("startRent() return:" + Status.OK + "|" + id_order);
+
+            return Status.OK + "|" + id_order;
+        } else {
+            logger.info("called checkQr(): incorrect qr");
+            return String.valueOf(Status.DOESNTEXIST);
+        }
+    }
+
+    @Override
+    public String endRent(String id_orderStr) {
+        int id_order = Integer.parseInt(id_orderStr);
+        logger.info("id_order"+id_order);
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss z");
+        Date end_time = new Date(System.currentTimeMillis());
+        logger.info("end_date rent:  " + formatter.format(end_time));
+        logger.info("end_time: " + end_time);
+
+
+        Order order = orderRepository.findOrderById(id_order);
+        logger.info("order: " + order);
+        if (order != null) {
+            order.setEnd_time(String.valueOf(end_time));
+            orderRepository.save(order);
+            Motoroller moto = motoRepository.findMotorollerById(order.getId_moto());
+            if(moto != null){
+                moto.setStatus(false);
+                motoRepository.save(moto);
+            }
+        }
+
+        //String begin_time = order.getBegin_time();
+        //int calculateTime = Integer.valueOf(String.valueOf(end_time)) - Integer.valueOf(String.valueOf(begin_time));
+        //logger.info("begin_time: "+formatter.format(begin_time));
+        //logger.info("begin_time: "+begin_time);
+
+//        //float cost = order.getTariff()*calculateTime;
+//        float cost = (float) order.getTariff()*200;
+//        //order.setCost(cost);
+//        logger.info("cost: "+cost);
 //        return String.valueOf(cost);
-//    }
+        return "200";
+    }
 }

@@ -1,6 +1,7 @@
 package openway.model;
 
 import lombok.Data;
+import sun.util.calendar.BaseCalendar;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -12,9 +13,9 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private Date begin_time;
-    private Date end_time;
-    private int id_motor;
+    private String begin_time;
+    private String end_time;
+    private int id_moto;
     private int id_client;
     private int tariff = 1;
     private float cost;
@@ -22,21 +23,18 @@ public class Order {
     public Order() {
     }
 
-    public Order(Date begin_time, int id_motor, int id_client) {
+    public Order(String begin_time, int id_moto, int id_client) {
         this.begin_time = begin_time;
-        this.id_motor = id_motor;
+        this.id_moto = id_moto;
         this.id_client = id_client;
     }
 
-    public Order(boolean status, Date end_time) {
+
+    public void setEnd_time(String end_time) {
         this.end_time = end_time;
     }
 
-    public void setEnd_time(Date end_time) {
-        this.end_time = end_time;
-    }
-
-    public Date getBegin_time() {
+    public String getBegin_time() {
         return begin_time;
     }
 
@@ -50,5 +48,9 @@ public class Order {
 
     public int getTariff() {
         return tariff;
+    }
+
+    public int getId_moto() {
+        return id_moto;
     }
 }

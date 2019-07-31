@@ -5,6 +5,7 @@ import openway.model.Lesser;
 import openway.model.Login;
 import openway.repository.LesserRepository;
 import openway.utils.HashUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,7 @@ public class LesserServiceImpl implements LesserService {
 
     final private LesserRepository lesserRepository;
 
+    @Autowired
     public LesserServiceImpl(LesserRepository lesserRepository) {
         this.lesserRepository = lesserRepository;
     }
@@ -42,9 +44,9 @@ public class LesserServiceImpl implements LesserService {
         logger.info("called authentication()" + auth);
         Gson g = new Gson();
         Login lesser = g.fromJson(auth, Login.class);
-        logger.info("lesser.getmail:   "+lesser.getEmail());
+        //logger.info("lesser.getmail:   "+lesser.getEmail());
         Lesser lesserInDB = lesserRepository.findLesserByEmail(lesser.getEmail());
-        logger.info("lesserInDB:   "+lesserInDB);
+        //logger.info("lesserInDB:   "+lesserInDB);
         try {
             if (lesserInDB.getPassword().equals(lesser.getPassword())){
                 logger.info("checked entered data from start page");

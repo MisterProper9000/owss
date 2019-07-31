@@ -71,7 +71,7 @@ public class UFXServiceImpl implements UFXService {
         String companyName = lesser.getCompany_name();
 
         //String rnd = GenerateId("kek") + lesser.getId();
-        String rnd = GenerateId("kek") + 27;
+        String rnd = GenerateId("kek") + 28;
         String clientNumber = rnd;
         String regNumberClient = rnd;
         String regNumberApp = rnd + "_A";

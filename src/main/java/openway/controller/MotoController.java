@@ -15,7 +15,6 @@ public class MotoController {
     private final MotoService motoService;
     private final OrderService orderService;
 
-
     public MotoController(MotoService motoService, OrderService orderService) {
         this.motoService = motoService;
         this.orderService = orderService;
@@ -27,15 +26,15 @@ public class MotoController {
         return motoService.getStatus(1);
     }
 
-//    @PostMapping("/ardstart")
-//    String startRent(@RequestBody String qrAndEmail) {
-//        logger.info("start rent data: "+qrAndEmail);
-//        return orderService.startRent(qrAndEmail);
-//    }
-//
-//    @PostMapping("/ardqrend")
-//    String endRent(@RequestBody String id_order) {
-//        logger.info("end rent data: "+id_order);
-//        return orderService.endRent(id_order);
-//    }
+    @PostMapping("/ardstart")
+    String startRent(@RequestBody String qrAndEmail) {
+        logger.info("start rent data: " + qrAndEmail);
+        return orderService.startRent(qrAndEmail);
+    }
+
+    @PostMapping("/ardend")
+    String endRent(@RequestBody String id_order) {
+        logger.info("end rent data: " + id_order);
+        return orderService.endRent(id_order);
+    }
 }

@@ -30,7 +30,6 @@ class Registration extends Component {
             email: '',
             address: '',
             phone: '',
-            sum_moto: '',
             bank_account: '',
             password: '',
             errorMsg: '',
@@ -148,7 +147,7 @@ class Registration extends Component {
                            value={password}
                            onChange={this.handleChange}/><br/>
 
-                    <input type="submit" name="buttonLogin" className="input btn btn-secondary"
+                    <input type="submit" name="buttonLogin" className="input btn btn-outline-danger"
                            value="Ok"/>
                     {/*<Button variant="primary" onClick={this.handleSubmit}>*/}
                     {/*    Ok*/}

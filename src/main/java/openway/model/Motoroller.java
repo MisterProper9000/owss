@@ -37,7 +37,12 @@ public class Motoroller {
         this.status = status;
     }
 
+
     public int getId_owner() {
         return id_owner;
+    }
+
+    public int getId() {
+        return id;
     }
 }

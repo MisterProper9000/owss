@@ -2,7 +2,6 @@ package openway.controller;
 
 import openway.model.Lesser;
 import openway.service.LesserService;
-import openway.service.MotoService;
 
 import openway.service.OrderService;
 import org.springframework.web.bind.annotation.*;
@@ -16,13 +15,10 @@ public class MainController {
     private final static Logger logger = Logger.getLogger(MainController.class.getName());
 
     private final LesserService lesserService;
-    private final MotoService motoService;
     private final OrderService orderService;
 
-    public MainController(LesserService lesserService, MotoService motoService, OrderService orderService) {
-
+    public MainController(LesserService lesserService, OrderService orderService) {
         this.lesserService = lesserService;
-        this.motoService = motoService;
         this.orderService = orderService;
     }
 
@@ -48,6 +44,7 @@ public class MainController {
     boolean getLoginPassword(@RequestBody String auth) {
         logger.info("check auth");
         logger.info("auth: " + lesserService.authentication(auth));
+
         return lesserService.authentication(auth);
     }
 

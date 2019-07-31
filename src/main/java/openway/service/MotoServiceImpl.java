@@ -1,5 +1,6 @@
 package openway.service;
 
+import com.google.gson.Gson;
 import net.glxn.qrgen.core.image.ImageType;
 import net.glxn.qrgen.javase.QRCode;
 import openway.model.Motoroller;
@@ -8,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -48,4 +51,32 @@ public class MotoServiceImpl implements MotoService {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void addMoto(String moto) {
+        logger.info("called addNewLesser()");
+        Gson g = new Gson();
+        Motoroller motoroller = g.fromJson(moto,Motoroller.class);
+        motoRepository.save(motoroller);
+        logger.info("save moto to database:" + moto);
+    }
+
+    @Override
+    public List<Motoroller> findAll() {
+        return motoRepository.findAll();
+    }
+
+    @Override
+    public List<Integer> listofidmoto() {
+        List<Integer> listOfId = new ArrayList<>();
+        List<Motoroller> forms = findAll();
+        for (Motoroller form : forms) {
+            listOfId.add(form.getId());
+        }
+        int i = listOfId.size();
+        logger.info("listOfId.size()=  " + i);
+        return listOfId;
+    }
+
+
 }

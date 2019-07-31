@@ -30,7 +30,6 @@ class Registration extends Component {
             email: '',
             address: '',
             phone: '',
-            sum_moto: '',
             bank_account: '',
             password: '',
             errorMsg: '',

@@ -1,6 +1,5 @@
 package openway.service;
 
-
 import openway.model.Client;
 import openway.model.Lesser;
 import openway.utils.XMLParse;
@@ -31,8 +30,6 @@ public class UFXServiceImpl implements UFXService {
     private String AcqProductCode1 = "LESSER_ASQ_001";
     private String urlUfxAdapter = "http://10.101.124.36:17777";
 
-
-
     /**
      *
      * @param client class client with data for creating
@@ -43,7 +40,7 @@ public class UFXServiceImpl implements UFXService {
         String name = client.getFirst_name();
         String sName = client.getLast_name();
 
-        String rnd = GenerateId("kek") + client.getId();
+        String rnd = GenerateId("") + client.getId();
 
         String clientNumber = rnd;
         String regNumberClient = rnd;
@@ -72,8 +69,7 @@ public class UFXServiceImpl implements UFXService {
         String sName = lesser.getLast_name();
         String companyName = lesser.getCompany_name();
 
-        //String rnd = GenerateId("kek") + lesser.getId();
-        String rnd = GenerateId("kek") + 28;
+        String rnd = GenerateId("") + lesser.getId();
         String clientNumber = rnd;
         String regNumberClient = rnd;
         String regNumberApp = rnd + "_A";
@@ -83,20 +79,18 @@ public class UFXServiceImpl implements UFXService {
         String requestAcqContract = RequestCreateAcqContract(sName, name, companyName,
                 email, clientNumber, regNumberClient, regNumberApp, contractNumber, contractName);
 
-        //System.out.println(requestAcqContract);
         String res = SendRequest(urlUfxAdapter, requestAcqContract);
 
         return res;
     }
 
     public String BalanceRequestInWay4(String clientNumber){
-        String request = RequestCreateBalanceInquery(clientNumber);
+        String tmp = GenerateId("") + clientNumber;
+        String request = RequestCreateBalanceInquery(tmp);
         String response = SendRequest(urlUfxAdapter, request);
         String balance = BalanceResponseParse(response);
         return balance;
     }
-
-
 
     /**
      *
@@ -396,16 +390,12 @@ public class UFXServiceImpl implements UFXService {
         return responseString;
     }
 
-
     /**
      *
      * @param data data for generation
      * @return
      */
     private String GenerateId(String data){
-        return  "XML_SS_";
+        return  "XML_SSS_";
     }
-
-
-
 }

@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
 
-
 @RestController
 public class MobileController {
 
@@ -34,5 +33,4 @@ public class MobileController {
         logger.info("balance request " + data);
         return clientService.CheckBalance(data);
     }
-
 }

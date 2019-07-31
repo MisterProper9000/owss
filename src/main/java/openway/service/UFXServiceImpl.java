@@ -3,6 +3,7 @@ package openway.service;
 
 import openway.model.Client;
 import openway.model.Lesser;
+import openway.utils.XMLParse;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.ResponseHandler;
@@ -92,7 +93,6 @@ public class UFXServiceImpl implements UFXService {
         String request = RequestCreateBalanceInquery(clientNumber);
         String response = SendRequest(urlUfxAdapter, request);
         String balance = BalanceResponseParse(response);
-        //String balance = BalanceResponseParse("");
         return balance;
     }
 
@@ -340,27 +340,42 @@ public class UFXServiceImpl implements UFXService {
     }
 
     private String BalanceResponseParse(String response){
-        Pattern patternBalanceString = Pattern.compile("<Balances>" +
-                                            "<Balance>" +
-                                            "<Name>Available</Name>" +
-                                            "<Type>AVAILABLE</Type>.*?" +
-                                            "<Currency>USD</Currency>" +
-                                            "</Balance>");
-        Matcher matcherBalanceString = patternBalanceString.matcher(response);
-        matcherBalanceString.find();
-        String balanceString = matcherBalanceString.group();
+//        Pattern patternBalanceString = Pattern.compile("<Balances>" +
+//                                            "<Balance>" +
+//                                            "<Name>Available</Name>" +
+//                                            "<Type>AVAILABLE</Type>.*?" +
+//                                            "<Currency>USD</Currency>" +
+//                                            "</Balance>");
+//        Matcher matcherBalanceString = patternBalanceString.matcher(response);
+//        matcherBalanceString.find();
+//        String balanceString = matcherBalanceString.group();
+        String balanceTemplate = "<Balances>" +
+                                "<Balance>" +
+                                "<Name>Available</Name>" +
+                                "<Type>AVAILABLE</Type>.*?" +
+                                "<Currency>USD</Currency>" +
+                                "</Balance>";
 
-        Pattern patternAmount = Pattern.compile("<Amount>.*<\\/Amount>");
-        Matcher matcherAmountString = patternAmount.matcher(balanceString);
-        matcherAmountString.find();
-        String amount = matcherAmountString.group().replaceAll("[^0-9.\\s]", "");
+        String balanceString = XMLParse.findValueInString(response, balanceTemplate);
 
-        Pattern patternCur = Pattern.compile("<Currency>.*<\\/Currency>");
-        Matcher matcherCurString = patternCur.matcher(balanceString);
-        matcherCurString.find();
-        String cur = matcherCurString.group().substring(10, 13);
+        String amountTemplate = "<Amount>.*<\\/Amount>";
+        String amount = XMLParse.findValueInString(balanceString, amountTemplate).
+                replaceAll("[^0-9.\\s]", "");
 
-        return amount + " "  + cur;
+//        Pattern patternAmount = Pattern.compile("<Amount>.*<\\/Amount>");
+//        Matcher matcherAmountString = patternAmount.matcher(balanceString);
+//        matcherAmountString.find();
+//        String amount = matcherAmountString.group().replaceAll("[^0-9.\\s]", "");
+
+        String currencyTemplate = "<Currency>.*<\\/Currency>";
+        String currency = XMLParse.findValueInString(balanceString, currencyTemplate)
+                .substring(10, 13);
+//        Pattern patternCur = Pattern.compile("<Currency>.*<\\/Currency>");
+//        Matcher matcherCurString = patternCur.matcher(balanceString);
+//        matcherCurString.find();
+//        String cur = matcherCurString.group().substring(10, 13);
+
+        return amount + " "  + currency;
     }
 
     /**

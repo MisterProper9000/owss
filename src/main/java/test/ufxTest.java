@@ -8,13 +8,17 @@ import openway.service.UFXServiceImpl;
 public class ufxTest {
 
     public static void main(String argv[]){
+
         UFXService ufxSer = new UFXServiceImpl();
 
-        Lesser ls = new Lesser("entity", "Vanya", "GiperCheburekov",
-                "BD", "mymail@mail.ru", "pass", "5553535",
-                "Leningrad", "1234123412341234", 25);
+        String bal = ufxSer.BalanceRequestInWay4("XML_SS_10");
+        //System.out.println(bal);
 
-        String res = ufxSer.AddNewLesserInWay4(ls);
+//        Lesser ls = new Lesser("entity", "Vanya", "GiperCheburekov",
+//                "BD", "mymail@mail.ru", "pass", "5553535",
+//                "Leningrad", "1234123412341234", 25);
+
+//        String res = ufxSer.AddNewLesserInWay4(ls);
         //System.out.println(res);
 
 

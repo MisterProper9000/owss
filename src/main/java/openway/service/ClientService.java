@@ -8,5 +8,5 @@ public interface ClientService {
     String addNewClient(String newClient);
     String authenticationClient(String auth);
     boolean isEmailOfClientExist(String email);
-    int findClientByEmail(String email);
+    String CheckBalance(String data);
 }

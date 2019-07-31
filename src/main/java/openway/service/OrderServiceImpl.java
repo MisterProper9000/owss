@@ -119,6 +119,6 @@ public class OrderServiceImpl implements OrderService {
 //        //order.setCost(cost);
 //        logger.info("cost: "+cost);
 //        return String.valueOf(cost);
-        return "200";
+        return "OK|200";
     }
 }

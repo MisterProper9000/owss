@@ -11,15 +11,15 @@ public class ufxTest {
 
         UFXService ufxSer = new UFXServiceImpl();
 
-        System.out.println(ufxSer.GetDepositFromClient(10, 0));
+        //System.out.println(ufxSer.GetDepositFromClient(10, 0));
 
 
 
         //String res = DateUfx.getTime();
         //System.out.println(res.replaceAll("-*", ""));
 
-//        String bal = ufxSer.BalanceRequestInWay4("XML_SS_10");
-        //System.out.println(bal);
+        String bal = ufxSer.BalanceRequestInWay4("10");
+        System.out.println(bal);
 
 //        Lesser ls = new Lesser("entity", "Vanya", "GiperCheburekov",
 //                "BD", "mymail@mail.ru", "pass", "5553535",

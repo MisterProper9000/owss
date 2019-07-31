@@ -17,13 +17,13 @@ public class Order {
     private String end_time;
     private int id_moto;
     private int id_client;
-    private int tariff = 1;
+    private double tariff = 1;
     private float cost;
 
     public Order() {
     }
 
-    public Order(String begin_time, int id_moto, int id_client, int tariff) {
+    public Order(String begin_time, int id_moto, int id_client, double tariff) {
         this.begin_time = begin_time;
         this.id_moto = id_moto;
         this.id_client = id_client;
@@ -47,7 +47,7 @@ public class Order {
         this.cost = cost;
     }
 
-    public int getTariff() {
+    public double getTariff() {
         return tariff;
     }
 

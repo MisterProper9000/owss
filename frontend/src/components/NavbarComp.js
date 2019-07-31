@@ -11,6 +11,7 @@ class NavbarComp extends Component {
                 <Navbar.Brand href="/login">Sign in</Navbar.Brand>
                 <Navbar.Brand href="/reg">Sign up</Navbar.Brand>
                 <Navbar.Brand href="/info_lesser">Info</Navbar.Brand>
+                <Navbar.Brand href="/regmoto">RegMoto</Navbar.Brand>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">

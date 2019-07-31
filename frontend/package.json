@@ -9,6 +9,7 @@
     "react-bootstrap-table": "^4.3.1",
     "react-bootstrap-validation": "^0.1.11",
     "react-dom": "^16.8.6",
+    "react-localization": "^1.0.15",
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1"
   },

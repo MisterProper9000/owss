@@ -36,7 +36,7 @@ public class OrderServiceImpl implements OrderService {
         JsonObject jsonObject = new JsonParser().parse(qrEmailTariff).getAsJsonObject();
         String qr = jsonObject.get("qr").getAsString();
         String email = jsonObject.get("email").getAsString();
-        int tariff = Integer.valueOf(jsonObject.get("tariff").getAsString());
+        double tariff = Double.valueOf(jsonObject.get("tariff").getAsString());
 
         //qr format: sfb_moto:{id}
         String[] dataOfQrCode = qr.split(":", 2);
@@ -89,7 +89,7 @@ public class OrderServiceImpl implements OrderService {
             String begin_time = order.getBegin_time();
         float timeOfRent = (float) (setStringDateToDate(end_time).getTime()-setStringDateToDate(begin_time).getTime())/10000;
         logger.info("time of Rent: "+timeOfRent);
-        float cost = order.getTariff() * timeOfRent;
+        float cost = (float)order.getTariff() * timeOfRent;
         order.setCost(cost);
         orderRepository.save(order);
         logger.info("cost: " + cost);

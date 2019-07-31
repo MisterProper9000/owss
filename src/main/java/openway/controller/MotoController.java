@@ -37,4 +37,12 @@ public class MotoController {
         logger.info("end rent data: " + id_order);
         return orderService.endRent(id_order);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/addmoto")
+    void addMotoToDB(@RequestBody String moto) {
+        logger.info("check auth");
+        logger.info("auth: " + moto);
+        motoService.addMoto(moto);
+    }
 }

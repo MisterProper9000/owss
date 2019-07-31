@@ -1,5 +1,6 @@
 package openway.service;
 
+import com.google.gson.Gson;
 import net.glxn.qrgen.core.image.ImageType;
 import net.glxn.qrgen.javase.QRCode;
 import openway.model.Motoroller;
@@ -47,5 +48,14 @@ public class MotoServiceImpl implements MotoService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void addMoto(String moto) {
+        logger.info("called addNewLesser()");
+        Gson g = new Gson();
+        Motoroller motoroller = g.fromJson(moto,Motoroller.class);
+        motoRepository.save(motoroller);
+        logger.info("save moto to database:" + moto);
     }
 }

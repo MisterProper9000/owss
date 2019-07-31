@@ -148,7 +148,7 @@ class Registration extends Component {
                            value={password}
                            onChange={this.handleChange}/><br/>
 
-                    <input type="submit" name="buttonLogin" className="input btn btn-secondary"
+                    <input type="submit" name="buttonLogin" className="input btn btn-outline-danger"
                            value="Ok"/>
                     {/*<Button variant="primary" onClick={this.handleSubmit}>*/}
                     {/*    Ok*/}

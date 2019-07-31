@@ -23,10 +23,11 @@ public class Order {
     public Order() {
     }
 
-    public Order(String begin_time, int id_moto, int id_client) {
+    public Order(String begin_time, int id_moto, int id_client, int tariff) {
         this.begin_time = begin_time;
         this.id_moto = id_moto;
         this.id_client = id_client;
+        this.tariff = tariff;
     }
 
 
@@ -52,5 +53,9 @@ public class Order {
 
     public int getId_moto() {
         return id_moto;
+    }
+
+    public String getEnd_time() {
+        return end_time;
     }
 }

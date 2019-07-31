@@ -5,5 +5,6 @@ public enum Status {
     ALREADYEXIST,
     DOESNTEXIST,
     MISMATCH,
+    ERROR,
     OTHER
 }

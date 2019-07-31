@@ -4,6 +4,7 @@ import openway.service.MotoService;
 import openway.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.logging.Logger;
 
 @RestController
@@ -32,7 +33,7 @@ public class MotoController {
     }
 
     @PostMapping("/ardend")
-    String endRent(@RequestBody String id_order) {
+    String endRent(@RequestBody String id_order) throws ParseException {
         logger.info("end rent data: " + id_order);
         return orderService.endRent(id_order);
     }

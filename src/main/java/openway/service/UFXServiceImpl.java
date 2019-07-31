@@ -18,6 +18,8 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 @Service
@@ -90,6 +92,7 @@ public class UFXServiceImpl implements UFXService {
         String request = RequestCreateBalanceInquery(clientNumber);
         String response = SendRequest(urlUfxAdapter, request);
         String balance = BalanceResponseParse(response);
+        //String balance = BalanceResponseParse("");
         return balance;
     }
 
@@ -337,7 +340,27 @@ public class UFXServiceImpl implements UFXService {
     }
 
     private String BalanceResponseParse(String response){
-        return "";
+        Pattern patternBalanceString = Pattern.compile("<Balances>" +
+                                            "<Balance>" +
+                                            "<Name>Available</Name>" +
+                                            "<Type>AVAILABLE</Type>.*?" +
+                                            "<Currency>USD</Currency>" +
+                                            "</Balance>");
+        Matcher matcherBalanceString = patternBalanceString.matcher(response);
+        matcherBalanceString.find();
+        String balanceString = matcherBalanceString.group();
+
+        Pattern patternAmount = Pattern.compile("<Amount>.*<\\/Amount>");
+        Matcher matcherAmountString = patternAmount.matcher(balanceString);
+        matcherAmountString.find();
+        String amount = matcherAmountString.group().replaceAll("[^0-9.\\s]", "");
+
+        Pattern patternCur = Pattern.compile("<Currency>.*<\\/Currency>");
+        Matcher matcherCurString = patternCur.matcher(balanceString);
+        matcherCurString.find();
+        String cur = matcherCurString.group().substring(10, 13);
+
+        return amount + " "  + cur;
     }
 
     /**

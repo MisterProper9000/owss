@@ -28,4 +28,11 @@ public class MobileController {
         logger.info("called loginClient()" + auth);
         return clientService.authenticationClient(auth);
     }
+
+    @PostMapping("/balanceInquery")
+    String clientBalanceRequest(@RequestBody String data) {
+        logger.info("balance request " + data);
+        return clientService.CheckBalance(data);
+    }
+
 }

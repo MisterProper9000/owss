@@ -42,7 +42,7 @@ public class UFXServiceImpl implements UFXService {
         String name = client.getFirst_name();
         String sName = client.getLast_name();
 
-        String rnd = GenerateId("") + client.getId();
+        String rnd = GenerateId("") + client.getId()+"CL";
 
         String clientNumber = rnd;
         String regNumberClient = rnd;
@@ -71,7 +71,7 @@ public class UFXServiceImpl implements UFXService {
         String sName = lesser.getLast_name();
         String companyName = lesser.getCompany_name();
 
-        String rnd = GenerateId("") + lesser.getId();
+        String rnd = GenerateId("") + lesser.getId()+"LES";
         String clientNumber = rnd;
         String regNumberClient = rnd;
         String regNumberApp = rnd + "_A";
@@ -87,17 +87,18 @@ public class UFXServiceImpl implements UFXService {
     }
 
     public String BalanceRequestInWay4(int clientId){
-        String clientNumber = GenerateId("") + clientId;
+        String clientNumber = GenerateId("") + clientId+"CL";
         String request = RequestCreateBalanceInquery(clientNumber);
         String response = SendRequest(urlUfxAdapter, request);
+        logger.info("request: "+request+" , response: "+response);
         String balance = BalanceResponseParse(response);
         return balance;
     }
 
     public String GetDepositFromClient(int clientId, int lesserId){
 
-        String clientNumber = GenerateId("") + clientId;
-        String lesserNumber = GenerateId("") + lesserId;
+        String clientNumber = GenerateId("") + clientId+"CL";
+        String lesserNumber = GenerateId("") + lesserId+"LES";
 
         String requestGetDeposit = RequestCreateGetDeposit(clientNumber, lesserNumber,
                 depositSize, depositCurrency);
@@ -465,7 +466,7 @@ public class UFXServiceImpl implements UFXService {
      * @return
      */
     private String GenerateId(String data){
-        return  "XML_SS_";
+        return  "XML_FF_";
     }
 
     private String GenerateRRN(String type){

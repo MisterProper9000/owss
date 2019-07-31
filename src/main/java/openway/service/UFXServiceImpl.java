@@ -102,8 +102,6 @@ public class UFXServiceImpl implements UFXService {
         String requestGetDeposit = RequestCreateGetDeposit(clientNumber, lesserNumber,
                 depositSize, depositCurrency);
         String resDeposit = SendRequest(urlUfxAdapter, requestGetDeposit);
-
-        //return requestGetDeposit;
         return resDeposit;
     }
 

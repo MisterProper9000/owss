@@ -3,6 +3,7 @@ package openway.controller;
 import openway.model.Lesser;
 import openway.service.LesserService;
 
+import openway.service.MotoService;
 import openway.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,10 +17,12 @@ public class MainController {
 
     private final LesserService lesserService;
     private final OrderService orderService;
+    private final MotoService motoService;
 
-    public MainController(LesserService lesserService, OrderService orderService) {
+    public MainController(LesserService lesserService, OrderService orderService, MotoService motoService) {
         this.lesserService = lesserService;
         this.orderService = orderService;
+        this.motoService = motoService;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -44,6 +47,7 @@ public class MainController {
     boolean getLoginPassword(@RequestBody String auth) {
         logger.info("check auth");
         logger.info("auth: " + lesserService.authentication(auth));
+        motoService.createQrCode(1);
 
         return lesserService.authentication(auth);
     }

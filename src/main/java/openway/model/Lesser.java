@@ -22,8 +22,7 @@ public class Lesser {
     private String phone;
     private String address;
     private String bank_account;
-    private int sum_moto;
-
+    private int sum_moto = 0;
 
 
     public Lesser() {
@@ -49,11 +48,11 @@ public class Lesser {
         this.sum_moto = sum_moto;
     }
 
-    public String getEmail(){
+    public String getEmail() {
         return email;
     }
 
-    public String getPassword(){
+    public String getPassword() {
         return password;
     }
 
@@ -73,7 +72,15 @@ public class Lesser {
         return company_name;
     }
 
-    public String setPassword(String password){
+    public String setPassword(String password) {
         return password;
+    }
+
+    public int getSum_moto() {
+        return sum_moto;
+    }
+
+    public void setSum_moto(int sum_moto) {
+        this.sum_moto = sum_moto;
     }
 }

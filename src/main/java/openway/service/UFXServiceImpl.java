@@ -625,4 +625,8 @@ public class UFXServiceImpl implements UFXService {
         }
         return res;
     }
+
+    public double getDepositSize() {
+        return Double.valueOf(depositSize);
+    }
 }

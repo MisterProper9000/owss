@@ -53,12 +53,13 @@ public class MotoServiceImpl implements MotoService {
     }
 
     @Override
-    public void addMoto(String moto) {
+    public boolean addMoto(String moto) {
         logger.info("called addNewLesser()");
         Gson g = new Gson();
         Motoroller motoroller = g.fromJson(moto,Motoroller.class);
         motoRepository.save(motoroller);
         logger.info("save moto to database:" + moto);
+        return true;
     }
 
     @Override

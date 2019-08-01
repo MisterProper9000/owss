@@ -53,6 +53,13 @@ public class OrderServiceImpl implements OrderService {
         Client client = clientRepository.findClientByEmail(email);
         int id_client = client.getId();
 
+        String balanceStr = ufxService.BalanceRequestInWay4(id_client).split(" ")[0];
+        double balance = Double.valueOf(balanceStr);
+        if(balance < ufxService.getDepositSize()){
+            return String.valueOf(Status.NOTENOUGH);
+        }
+
+
         if ((motoRepository.findMotorollerById(id_moto) != null) && (client.getEmail() != null)) {
             logger.info("called checkQr(): correct qr");
 

@@ -33,7 +33,6 @@ public class LesserServiceImpl implements LesserService {
         Lesser lesser = g.fromJson(newLesser, Lesser.class);
         lesserRepository.save(lesser);
         logger.info("save to database:" + lesser);
-
         String resWay4 = ufxService.AddNewLesserInWay4(lesser);
         logger.info("saved way4: " + resWay4);
 
@@ -48,16 +47,14 @@ public class LesserServiceImpl implements LesserService {
         Lesser lesserInDB = lesserRepository.findLesserByEmail(lesser.getEmail());
         //logger.info("lesserInDB:   "+lesserInDB);
         try {
-            if (lesserInDB.getPassword().equals(lesser.getPassword())){
+            if (lesserInDB.getPassword().equals(lesser.getPassword())) {
                 logger.info("checked entered data from start page");
                 return true;
-            }
-            else return false;
-        }catch (NullPointerException e) {
+            } else return false;
+        } catch (NullPointerException e) {
             logger.info("error with login or password");
             return false;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

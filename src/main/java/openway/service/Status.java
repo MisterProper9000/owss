@@ -6,5 +6,6 @@ public enum Status {
     DOESNTEXIST,
     MISMATCH,
     ERROR,
-    OTHER
+    OTHER,
+    NOTENOUGH
 }

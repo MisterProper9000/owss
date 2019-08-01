@@ -1,0 +1,33 @@
+<UFXMsg direction="Rq" msg_type="Doc" scheme="WAY4Doc" version="2.0">
+    <MsgId>AAA-555-333-EEE-23124141</MsgId>
+    <Source app="MobileApp"/>
+    <MsgData>
+        <Doc>
+            <TransType>
+                <TransCode>
+                    <MsgCode>02000R</MsgCode>
+                </TransCode>
+                <TransCondition>AUTHENTICATED,AUTH_AGENT,CARD,CARDHOLDER,DATA_TRACK,MERCH,PBT,PBT_CRYPTO,PBT_ONLINE,READ_TRACK,TERM,TERM_TRACK</TransCondition>
+            </TransType>
+            <DocRefSet>
+                <Parm>
+                    <ParmCode>RRN</ParmCode>
+                    <Value>552299888012</Value>
+                </Parm>
+            </DocRefSet>
+            <LocalDt>2019-07-30 23:18:26</LocalDt>
+            <Requestor>
+                <ContractNumber>CLIENT_TEST_100</ContractNumber>
+                <MemberId>0001</MemberId>
+            </Requestor>
+            <Source>
+                <ContractNumber>LESSER_TEST_100</ContractNumber>
+            </Source>
+            <Transaction>
+                <Currency>USD</Currency>
+                <Amount>30</Amount>
+            </Transaction>
+        </Doc>
+    </MsgData>
+</UFXMsg>
+

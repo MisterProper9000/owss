@@ -18,11 +18,22 @@ public class ufxTest {
 
         //ufxSer.AddNewClientInWay4(client);
 
-
-        String bal = ufxSer.BalanceRequestInWay4(10);
+//        ufxSer.GetDepositFromClient(1,1);
+//        String rrn = ufxSer.GetRrn();
+//
+//        String bal = ufxSer.BalanceRequestInWay4(1);
+//        System.out.println(bal);
+//
+//        String res = ufxSer.reverseDeposit(1,1, rrn);
+//        System.out.println(res);
+//        //System.out.println(ufxSer.GetDepositFromClient(10, 0));
+//
+//        bal = ufxSer.BalanceRequestInWay4(1);
+//        System.out.println(bal);
+        ufxSer.GetPayment(1,1,20);
+        String bal = ufxSer.BalanceRequestInWay4(1);
         System.out.println(bal);
 
-        //System.out.println(ufxSer.GetDepositFromClient(10, 0));
 
 
     }

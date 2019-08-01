@@ -38,7 +38,6 @@ class Registration extends Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        //this.handleClose = this.handleClose.bind(this);
     }
 
     handleChange(event) {
@@ -49,7 +48,7 @@ class Registration extends Component {
         event.preventDefault();
         const {
             first_name, last_name, company_name, type, email, phone, address,
-            sum_moto, bank_account, password
+            bank_account, password
         } = this.state;
 
         fetch('http://10.101.177.21:9091/reg', {
@@ -63,8 +62,7 @@ class Registration extends Component {
                 password,
                 phone,
                 address,
-                bank_account,
-                sum_moto
+                bank_account
             })
         }).then((resp) => {
             return resp.json()
@@ -73,7 +71,7 @@ class Registration extends Component {
             if (response === true) {
                 this.setState({errorMsg: 'You are registered'});
                 this.setState({isRegOk: true});
-                //console.log("isRegOk: " + this.state.isRegOk);
+                window.location = "/login";
                 //this.setShow(true);
 
             } else {
@@ -94,7 +92,7 @@ class Registration extends Component {
     // }
 
     render() {
-        const {first_name, last_name, company_name, type, email, phone, address, sum_moto, bank_account, password} = this.state;
+        const {first_name, last_name, company_name, type, email, phone, address, bank_account, password} = this.state;
 
         return (
             <div>
@@ -139,9 +137,6 @@ class Registration extends Component {
                            onChange={this.handleChange}/><br/>
                     <input className="input" type="text" placeholder="address" name="address"
                            value={address}
-                           onChange={this.handleChange}/><br/>
-                    <input className="input" type="text" placeholder="sum_moto" name="sum_moto"
-                           value={sum_moto}
                            onChange={this.handleChange}/><br/>
                     <input className="input" type="password" placeholder="password" name="password"
                            value={password}

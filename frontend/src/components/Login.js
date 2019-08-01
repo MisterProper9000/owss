@@ -41,7 +41,7 @@ class Login extends Component {
             if (response === true) {
                 this.setState({errorMsg: ''});
                 console.log(response + "test");
-                window.location = "/info_lesser";
+                window.location = "/regmoto";
             } else {
                 this.setState({errorMsg: 'Error with login or password'});
                 //window.location = "/info_lesser";

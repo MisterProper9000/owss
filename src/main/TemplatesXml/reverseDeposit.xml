@@ -1,0 +1,34 @@
+<UFXMsg direction="Rq" msg_type="Doc" scheme="WAY4Doc" version="2.0">
+    <MsgId>AAA-555-333-EEE-23124141</MsgId>
+    <Source app="MobileApp"/>
+    <MsgData>
+        <Doc>
+            <TransType>
+                <TransCode>
+                    <MsgCode>auth_purchase_rev</MsgCode>
+                </TransCode>
+                <TransCondition>AUTHENTICATED,AUTH_AGENT,CARD,CARDHOLDER,DATA_TRACK,MERCH,PBT,PBT_CRYPTO,PBT_ONLINE,READ_TRACK,TERM,TERM_TRACK</TransCondition>
+            </TransType>
+            <DocRefSet>
+                <Parm>
+                    <ParmCode>RRN</ParmCode>
+                    <!-- rrn == date in format yymmddHHmmss-->
+                    <!-- rrn == rrn from getDeposit-->
+                    <Value>Generated RRN</Value>
+                </Parm>
+            </DocRefSet>
+            <LocalDt>2019-07-31 18:35:58</LocalDt>
+            <Requestor>
+                <ContractNumber>clientNumber</ContractNumber>
+                <MemberId>0001</MemberId>
+            </Requestor>
+            <Source>
+                <ContractNumber>lesserNumber</ContractNumber>
+            </Source>
+            <Transaction>
+                <Currency>currency</Currency>
+                <Amount>amount</Amount>
+            </Transaction>
+        </Doc>
+    </MsgData>
+</UFXMsg>

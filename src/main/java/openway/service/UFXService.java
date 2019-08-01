@@ -13,5 +13,12 @@ public interface UFXService {
 
     String GetDepositFromClient(int clientId, int lesserId);
 
+    String GetRrn();
+
+    String reverseDeposit(int clientId, int lesserId, String RRN);
+
+    String GetPayment(int clientId, int lesserId, float cost);
+
+    double getDepositSize();
 }
 

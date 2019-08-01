@@ -53,6 +53,13 @@ public class OrderServiceImpl implements OrderService {
         Client client = clientRepository.findClientByEmail(email);
         int id_client = client.getId();
 
+        String balanceStr = ufxService.BalanceRequestInWay4(id_client).split(" ")[0];
+        double balance = Double.valueOf(balanceStr);
+        if(balance < ufxService.getDepositSize()){
+            return String.valueOf(Status.NOTENOUGH);
+        }
+
+
         if ((motoRepository.findMotorollerById(id_moto) != null) && (client.getEmail() != null)) {
             logger.info("called checkQr(): correct qr");
 
@@ -68,7 +75,10 @@ public class OrderServiceImpl implements OrderService {
 
             logger.info("begin_date rent:  " + begin_time);
 
-            Order order = new Order(begin_time, id_moto, id_client,tariff);
+            String RRN = ufxService.GetRrn();
+            Order order = new Order(begin_time, id_moto, id_client, tariff, RRN);
+
+            //Order order = new Order(begin_time, id_moto, id_client, tariff);
             orderRepository.save(order);
 
             int id_order = order.getId();
@@ -93,20 +103,31 @@ public class OrderServiceImpl implements OrderService {
 
         Order order = orderRepository.findOrderById(id_order);
         logger.info("order: " + order);
-            order.setEnd_time(end_time);
-            Motoroller moto = motoRepository.findMotorollerById(order.getId_moto());
-            if(moto != null){
-                moto.setStatus(false);
-                motoRepository.save(moto);
-            }
-            String begin_time = order.getBegin_time();
-        float timeOfRent = (float) (setStringDateToDate(end_time).getTime()-setStringDateToDate(begin_time).getTime())/10000;
-        logger.info("time of Rent: "+timeOfRent);
+        order.setEnd_time(end_time);
+        Motoroller moto = motoRepository.findMotorollerById(order.getId_moto());
+        if(moto != null){
+            moto.setStatus(false);
+            motoRepository.save(moto);
+        }
+        String begin_time = order.getBegin_time();
+        float timeOfRent = (float) (setStringDateToDate(end_time).getTime() - setStringDateToDate(begin_time).getTime())/10000;
+        logger.info("time of Rent: " + timeOfRent);
         float cost = (float)order.getTariff() * timeOfRent;
         order.setCost(cost);
         orderRepository.save(order);
+
+        // TODO check here
+        UFXService ufxService = new UFXServiceImpl();
+        int clientId = order.getId_client();
+        int lesserId = moto.getId_owner();
+        String RRN = order.getRRN();
+
+        String resRevDeposit = ufxService.reverseDeposit(clientId, lesserId, RRN);
+        logger.info(resRevDeposit);
+
+
         logger.info("cost: " + cost);
-        return "OK|"+cost;
+        return "OK| " + cost;
     }
 
     private String setCurrentDataToString(){

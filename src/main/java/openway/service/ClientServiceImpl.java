@@ -2,7 +2,11 @@ package openway.service;
 
 import com.google.gson.Gson;
 import openway.model.Client;
+import openway.model.Motoroller;
+import openway.model.Order;
 import openway.repository.ClientRepository;
+import openway.repository.MotoRepository;
+import openway.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -15,10 +19,16 @@ public class ClientServiceImpl implements ClientService {
 
     private final static Logger logger = Logger.getLogger(ClientServiceImpl.class.getName());
     final private ClientRepository clientRepository;
+    final private OrderRepository orderRepository;
+    final private MotoRepository motoRepository;
 
     @Autowired
-    public ClientServiceImpl(ClientRepository clientRepository) {
+    public ClientServiceImpl(ClientRepository clientRepository,
+                             OrderRepository orderRepository,
+                             MotoRepository motoRepository) {
         this.clientRepository = clientRepository;
+        this.orderRepository = orderRepository;
+        this.motoRepository = motoRepository;
     }
 
     @Override
@@ -88,4 +98,22 @@ public class ClientServiceImpl implements ClientService {
 
         return balance;
     }
+
+    @Override
+    public String payRent(String data){
+        logger.info("called payRent " + data);
+        UFXService ufxService = new UFXServiceImpl();
+        int orderId = Integer.valueOf(data);
+        Order order = orderRepository.findOrderById(orderId);
+        int clientId = order.getId_client();
+        float cost = order.getCost();
+        int motoId = order.getId_moto();
+        Motoroller moto = motoRepository.findMotorollerById(motoId);
+        int lesserId = moto.getId_owner();
+
+        String status = ufxService.GetPayment(clientId, lesserId, cost);
+        logger.info(status);
+        return String.valueOf(Status.OK);
+    }
+
 }

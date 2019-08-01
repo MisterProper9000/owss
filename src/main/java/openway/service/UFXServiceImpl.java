@@ -31,11 +31,15 @@ public class UFXServiceImpl implements UFXService {
     private String depositSize = "200";
     private String depositCurrency = "USD";
 
+    private String RRN;
+
+//TODO fix bug with clients id(contract numbers)
+
 
     /**
      *
      * @param client class client with data for creating
-     * @return string with result of 2 request^ create client iss + create contract iss
+     * @return string with result of 2 requests: create client iss + create contract iss
      */
     public String AddNewClientInWay4(Client client){
 
@@ -97,14 +101,42 @@ public class UFXServiceImpl implements UFXService {
 
     public String GetDepositFromClient(int clientId, int lesserId){
 
-        String clientNumber = GenerateId("") + clientId+"CL";
-        String lesserNumber = GenerateId("") + lesserId+"LES";
+        String clientNumber = GenerateId("") + clientId + "CL";
+        String lesserNumber = GenerateId("") + lesserId + "LES";
 
         String requestGetDeposit = RequestCreateGetDeposit(clientNumber, lesserNumber,
                 depositSize, depositCurrency);
         String resDeposit = SendRequest(urlUfxAdapter, requestGetDeposit);
         return resDeposit;
     }
+
+
+    public String reverseDeposit(int clientId, int lesserId, String RRN){
+
+        String clientNumber = GenerateId("") + clientId + "CL";
+        String lesserNumber = GenerateId("") + lesserId + "LES";
+
+        String requestReverseDeposit = RequestCreateReverseDeposit(clientNumber, lesserNumber,
+                RRN, depositSize, depositCurrency);
+
+        String resReverseDeposit = SendRequest(urlUfxAdapter, requestReverseDeposit);
+        return resReverseDeposit;
+        //return  requestReverseDeposit;
+    }
+
+    public String GetPayment(int clientId, int lesserId, float cost){
+        String clientNumber = GenerateId("") + clientId + "CL";
+        String lesserNumber = GenerateId("") + lesserId + "LES";
+        String sum = Float.toString(cost);
+
+        String requestPayment = RequestCreatePayment(clientNumber, lesserNumber,
+                sum, depositCurrency);
+
+        String resRequestPayment = SendRequest(urlUfxAdapter, requestPayment);
+        return resRequestPayment;
+        //return "";
+    }
+
 
 
     /**
@@ -373,6 +405,7 @@ public class UFXServiceImpl implements UFXService {
 
         String RRN = GenerateRRN("time");
         String dateStr = DateUfx.getTime();
+        this.RRN = RRN;
 
         String res = "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
                 "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
@@ -421,6 +454,119 @@ public class UFXServiceImpl implements UFXService {
         return res;
     }
 
+    private String RequestCreateReverseDeposit(String clientNumber,
+                                               String lesserNumber,
+                                               String RRN,
+                                               String sum, String currency) {
+        String dateStr = DateUfx.getTime();
+        String request = "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
+                "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
+                "    <Source app=\"MobileApp\"/>\n" +
+                "    <MsgData>\n" +
+                "        <Doc>\n" +
+                "            <TransType>\n" +
+                "                <TransCode>\n" +
+                "                    <MsgCode>auth_purchase_rev</MsgCode>\n" +
+                "                </TransCode>\n" +
+                "                <TransCondition>AUTHENTICATED,AUTH_AGENT,CARD,CARDHOLDER,DATA_TRACK,MERCH,PBT,PBT_CRYPTO,PBT_ONLINE,READ_TRACK,TERM,TERM_TRACK</TransCondition>\n" +
+                "            </TransType>\n" +
+                "            <DocRefSet>\n" +
+                "                <Parm>\n" +
+                "                    <ParmCode>RRN</ParmCode>\n" +
+                "                    <!-- rrn == date in format yymmddHHmmss-->\n" +
+                "                    <!-- rrn == rrn from getDeposit-->\n" +
+                "                    <Value>" +
+                                    RRN +
+                                    "</Value>\n" +
+                "                </Parm>\n" +
+                "            </DocRefSet>\n" +
+                "            <LocalDt>" +
+                            dateStr +
+                            "</LocalDt>\n" +
+                "            <Requestor>\n" +
+                "                <ContractNumber>" +
+                                clientNumber +
+                                "</ContractNumber>\n" +
+                "                <MemberId>0001</MemberId>\n" +
+                "            </Requestor>\n" +
+                "            <Source>\n" +
+                "                <ContractNumber>" +
+                                lesserNumber +
+                                "</ContractNumber>\n" +
+                "            </Source>\n" +
+                "            <Transaction>\n" +
+                "                <Currency>" +
+                                currency +
+                                "</Currency>\n" +
+                "                <Amount>" +
+                                sum +
+                                "</Amount>\n" +
+                "            </Transaction>\n" +
+                "        </Doc>\n" +
+                "    </MsgData>\n" +
+                "</UFXMsg>";
+        return request;
+    }
+
+    private String RequestCreatePayment(String clientNumber,
+                                        String lesserNumber,
+                                        String sum, String currency){
+
+        String RRN = GenerateRRN("time");
+        String dateStr = DateUfx.getTime();
+        String request = "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
+                "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
+                "    <Source app=\"MobileApp\"/>\n" +
+                "    <MsgData>\n" +
+                "        <Doc>\n" +
+                "            <TransType>\n" +
+                "                <TransCode>\n" +
+                "                    <MsgCode>02000R</MsgCode>\n" +
+                "                </TransCode>\n" +
+                "                <TransCondition>AUTHENTICATED,AUTH_AGENT,CARD,CARDHOLDER,DATA_TRACK,MERCH,PBT,PBT_CRYPTO,PBT_ONLINE,READ_TRACK,TERM,TERM_TRACK</TransCondition>\n" +
+                "            </TransType>\n" +
+                "            <DocRefSet>\n" +
+                "                <Parm>\n" +
+                "                    <ParmCode>RRN</ParmCode>\n" +
+                "                    <Value>" +
+                                    RRN +
+                                    "</Value>\n" +
+                "                </Parm>\n" +
+                "            </DocRefSet>\n" +
+                "            <LocalDt>" +
+                            dateStr +
+                            "</LocalDt>\n" +
+                "            <Requestor>\n" +
+                "                <ContractNumber>" +
+                                clientNumber +
+                                "</ContractNumber>\n" +
+                "                <MemberId>0001</MemberId>\n" +
+                "            </Requestor>\n" +
+                "            <Source>\n" +
+                "                <ContractNumber>" +
+                                lesserNumber +
+                                "</ContractNumber>\n" +
+                "            </Source>\n" +
+                "            <Transaction>\n" +
+                "                <Currency>" +
+                                currency +
+                                "</Currency>\n" +
+                "                <Amount>" +
+                                sum +
+                                "</Amount>\n" +
+                "            </Transaction>\n" +
+                "        </Doc>\n" +
+                "    </MsgData>\n" +
+                "</UFXMsg>";
+
+        return request;
+
+    }
+
+
+    public  String GetRrn(){
+        return this.RRN;
+    }
 
     /**
      *
@@ -478,5 +624,9 @@ public class UFXServiceImpl implements UFXService {
             return dateString;
         }
         return res;
+    }
+
+    public double getDepositSize() {
+        return Double.valueOf(depositSize);
     }
 }

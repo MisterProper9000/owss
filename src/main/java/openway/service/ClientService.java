@@ -9,4 +9,5 @@ public interface ClientService {
     String authenticationClient(String auth);
     boolean isEmailOfClientExist(String email);
     String CheckBalance(String data);
+    String payRent(String data);
 }

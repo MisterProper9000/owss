@@ -5,7 +5,7 @@
         <Doc>
             <TransType>
                 <TransCode>
-                    <MsgCode>auth_purchase</MsgCode>
+                    <MsgCode>auth_purchase_rev</MsgCode>
                 </TransCode>
                 <TransCondition>AUTHENTICATED,AUTH_AGENT,CARD,CARDHOLDER,DATA_TRACK,MERCH,PBT,PBT_CRYPTO,PBT_ONLINE,READ_TRACK,TERM,TERM_TRACK</TransCondition>
             </TransType>
@@ -13,6 +13,7 @@
                 <Parm>
                     <ParmCode>RRN</ParmCode>
                     <!-- rrn == date in format yymmddHHmmss-->
+                    <!-- rrn == rrn from getDeposit-->
                     <Value>Generated RRN</Value>
                 </Parm>
             </DocRefSet>

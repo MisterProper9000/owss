@@ -33,4 +33,11 @@ public class MobileController {
         logger.info("balance request " + data);
         return clientService.CheckBalance(data);
     }
+
+    @PostMapping("/payRent")
+    String payRent(@RequestBody String data) {
+        logger.info("pay rent request " + data);
+        return clientService.payRent(data);
+    }
+
 }

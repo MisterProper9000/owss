@@ -19,6 +19,7 @@ public class Order {
     private int id_client;
     private double tariff = 1;
     private float cost;
+    private String RRN;
 
     public Order() {
     }
@@ -28,6 +29,14 @@ public class Order {
         this.id_moto = id_moto;
         this.id_client = id_client;
         this.tariff = tariff;
+    }
+
+    public Order(String begin_time, int id_moto, int id_client, double tariff, String RRN) {
+        this.begin_time = begin_time;
+        this.id_moto = id_moto;
+        this.id_client = id_client;
+        this.tariff = tariff;
+        this.RRN = RRN;
     }
 
 
@@ -53,6 +62,18 @@ public class Order {
 
     public int getId_moto() {
         return id_moto;
+    }
+
+    public int getId_client() {
+        return id_client;
+    }
+
+    public float getCost() {
+        return cost;
+    }
+
+    public String getRRN() {
+        return RRN;
     }
 
     public String getEnd_time() {

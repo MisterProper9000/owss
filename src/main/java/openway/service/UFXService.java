@@ -13,5 +13,7 @@ public interface UFXService {
 
     String GetDepositFromClient(int clientId, int lesserId);
 
+    String getPayment(int clientId, int lesserId);
+
 }
 

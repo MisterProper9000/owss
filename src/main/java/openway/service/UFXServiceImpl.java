@@ -31,6 +31,8 @@ public class UFXServiceImpl implements UFXService {
     private String depositSize = "200";
     private String depositCurrency = "USD";
 
+//TODO fix bug with clients id(contract numbers)
+
 
     /**
      *

@@ -112,7 +112,8 @@ public class ClientServiceImpl implements ClientService {
         int lesserId = moto.getId_owner();
 
         String status = ufxService.GetPayment(clientId, lesserId, cost);
-        return status;
+        logger.info(status);
+        return String.valueOf(Status.OK);
     }
 
 }

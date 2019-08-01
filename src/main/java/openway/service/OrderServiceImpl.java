@@ -111,10 +111,13 @@ public class OrderServiceImpl implements OrderService {
 
         // TODO check here
         UFXService ufxService = new UFXServiceImpl();
-        int clientId = order.getId();
+        int clientId = order.getId_client();
         int lesserId = moto.getId_owner();
         String RRN = order.getRRN();
-        ufxService.reverseDeposit(clientId, lesserId, RRN);
+
+        String resRevDeposit = ufxService.reverseDeposit(clientId, lesserId, RRN);
+        logger.info(resRevDeposit);
+
 
         logger.info("cost: " + cost);
         return "OK| " + cost;

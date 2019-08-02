@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import '../css/Login.css';
 import NavbarComp from "./NavbarComp";
+import Cookies from "js-cookie";
+
 
 class Login extends Component {
 
@@ -37,14 +39,14 @@ class Login extends Component {
         }).then((resp) => {
             return resp.json()
         }).then(response => {
-            //console.log(response + "- response");
-            if (response === true) {
+            console.log(response + "- response");
+            if (response != false) {
+                Cookies.set('token',response);
                 this.setState({errorMsg: ''});
-                console.log(response + "test");
-                window.location = "/regmoto";
+                this.setState({is_login: true});
+                window.location = "/lesser";
             } else {
                 this.setState({errorMsg: 'Error with login or password'});
-                //window.location = "/info_lesser";
             }
         });
     }

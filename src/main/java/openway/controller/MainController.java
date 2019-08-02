@@ -41,11 +41,18 @@ public class MainController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/login")
-    boolean getLoginPassword(@RequestBody String auth) {
+    String getLoginPassword(@RequestBody String auth) {
         logger.info("check auth");
         logger.info("auth: " + lesserService.authentication(auth));
 
         return lesserService.authentication(auth);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/logout")
+    String logout(@RequestBody String id) {
+        logger.info("logout lessor:"+id);
+        return lesserService.logout(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -60,5 +67,12 @@ public class MainController {
     List<Integer> getListOfId() {
         logger.info("get list of appliers id (called listOfIdClients())");
         return lesserService.listofidlessers();
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/lesserinfo")
+    List<String> getLesInfo(@RequestBody String id) {
+        logger.info("get lesser "+id);
+        return lesserService.getNameSerName(id);
     }
 }

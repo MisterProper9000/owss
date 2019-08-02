@@ -5,9 +5,13 @@ import NotFound from './components/NotFound';
 import StartPage from './components/StartPage';
 import Login from './components/Login';
 import Reg from './components/Registration';
+
+
 import InfoLesser from './components/Info';
 import RegMotoroller from './components/RegMotoroller';
-import Infomoooo from "./components/Moto";
+import Lesser from "./components/Lesser";
+import Logout from "./components/Logout";
+
 
 ReactDOM.render(
     <div>
@@ -27,9 +31,12 @@ ReactDOM.render(
                 />
                 <Route exact path="/regmoto"
                        render={() => <RegMotoroller/>}
+                />}
+                <Route exact path="/lesser"
+                       render={() => <Lesser/>}
                 />
-                <Route exact path="/infomoto"
-                       render={() => <Infomoooo/>}
+                <Route exact path="/logout"
+                       render={() => <Logout/>}
                 />
                 <Route component={NotFound}/>
             </Switch>

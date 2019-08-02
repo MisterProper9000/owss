@@ -3,19 +3,10 @@ import '../css/Login.css';
 import NavbarComp from "./NavbarComp";
 
 import {Modal, Button} from "react-bootstrap";
-import DialogWindow from "./Dialog window";
 
 
-function goToInfo(props) {
-    const isLoggedIn = props;
-    if (isLoggedIn) {
-        console.log("test : ok");
-        return <DialogWindow/>;
-    } else {
-        console.log("test : error");
-        return <DialogWindow/>;
-    }
-}
+
+
 
 class Registration extends Component {
 

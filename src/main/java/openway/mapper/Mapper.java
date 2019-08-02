@@ -1,4 +1,4 @@
-//package openway.mapper;
+package openway.mapper;//package openway.mapper;
 //
 //import openway.model.Client;
 //import openway.model.dto.ClientVO;

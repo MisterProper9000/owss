@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 @RestController
 public class MotoController {
 
+    private int moto_id = 1;
+
     private final static Logger logger = Logger.getLogger(MotoController.class.getName());
 
     private final MotoService motoService;
@@ -23,9 +25,10 @@ public class MotoController {
     }
 
     @GetMapping("/ardgetstatus")
-    boolean sendStatus() {
-        logger.info("moto status: " + motoService.getStatus(1));
-        return motoService.getStatus(1);
+    String sendStatus() {
+        logger.info("moto status: rent = " + motoService.getStatusRent(moto_id) +
+                "res = " + motoService.getStatusRes(moto_id));
+        return motoService.getStatusRent(moto_id) + "res=" + motoService.getStatusRes(moto_id);
     }
 
     @PostMapping("/ardstart")
@@ -61,4 +64,5 @@ public class MotoController {
         logger.info("get list of appliers id (called listOfIdClients())");
         return motoService.listofidmoto();
     }
+
 }

@@ -9,11 +9,13 @@ import openway.repository.ClientRepository;
 import openway.repository.LesserRepository;
 import openway.repository.MotoRepository;
 import openway.repository.OrderRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.logging.Logger;
 
 
@@ -25,6 +27,8 @@ public class OrderServiceImpl implements OrderService {
     final private OrderRepository orderRepository;
     final private ClientRepository clientRepository;
     final private MotoRepository motoRepository;
+
+    private float reserveCancelPenalty = 1;
 
     public OrderServiceImpl(OrderRepository orderRepository,
                             ClientRepository clientRepository,
@@ -43,7 +47,6 @@ public class OrderServiceImpl implements OrderService {
 
         double tariff = Double.valueOf(jsonObject.get("tariff").getAsString());
 
-
         //qr format: sfb_moto:{id}
         String[] dataOfQrCode = qr.split(":", 2);
         int id_moto = Integer.valueOf(dataOfQrCode[1]);
@@ -56,9 +59,35 @@ public class OrderServiceImpl implements OrderService {
         if ((motoRepository.findMotorollerById(id_moto) != null) && (client.getEmail() != null)) {
             logger.info("called checkQr(): correct qr");
 
+            Order tmp = null;
+            int tmpOrderId = 0;
             Motoroller moto = motoRepository.findMotorollerById(id_moto);
-            moto.setStatus(true);
+            if(moto.isRes())
+            {
+                List<Order> orders = orderRepository.findOrderByBegin_timeIsNull();
+                int i;
+                for(i = 0; i< orders.size(); i++){
+                    if(orders.get(i).getId_client() == id_client){
+                        tmp = orders.get(i);
+                        tmpOrderId = tmp.getId();
+                        break;
+                    }
+                }
+
+                if(i == orders.size())
+                    return String.valueOf(Status.BLOCKED);
+
+                moto.setStatusReserve(false);
+                String resReverseDeposit = ufxService.ReverseDeposit(id_client, moto.getId_owner(), tmp.getRRN());
+
+                logger.info("reverse deposit by starting rent: " + resReverseDeposit);
+                orderRepository.deleteById(tmpOrderId);
+            }
+
+            moto.setStatusRent(true);
+            moto.setStatusReserve(false);
             motoRepository.save(moto);
+
             int id_lesser = moto.getId_owner();
             String resDeposit = ufxService.GetDepositFromClient(id_client, id_lesser);
 
@@ -70,8 +99,6 @@ public class OrderServiceImpl implements OrderService {
 
             String RRN = ufxService.GetRrn();
             Order order = new Order(begin_time, id_moto, id_client, tariff, RRN);
-
-            //Order order = new Order(begin_time, id_moto, id_client, tariff);
             orderRepository.save(order);
 
             int id_order = order.getId();
@@ -87,6 +114,50 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public String motoReserve(int moto_id, String email){
+        Motoroller moto = motoRepository.findMotorollerById(moto_id);
+        UFXService ufxService = new UFXServiceImpl();
+        if(moto.isRes() || moto.isRent())
+            return String.valueOf(false);
+
+        moto.setStatusReserve(true);
+        motoRepository.save(moto);
+
+        Client client = clientRepository.findClientByEmail(email);
+        if(client == null)
+            return String.valueOf(false);
+
+        Order order = new Order(moto_id, client.getId(), ufxService.GetRrn());
+        orderRepository.save(order);
+
+        String resGetDep = ufxService.GetDepositFromClient(client.getId(), moto.getId_owner());
+        logger.info("get dep for client by reserve " + resGetDep);
+
+        return "OK|" + String.valueOf(true) + "|" + order.getId();
+    }
+
+    @Override
+    public String motoReserveCanceled(int moto_id, String data){
+        String str[] = data.split("|");
+        int order_id = Integer.valueOf(str[0]);
+        UFXService ufxService = new UFXServiceImpl();
+        String email = str[1];
+
+        Order order = orderRepository.findOrderById(order_id);
+        Client client = clientRepository.findClientByEmail(email);
+        Motoroller moto = motoRepository.findMotorollerById(moto_id);
+
+        String  RRN = order.getRRN();
+        String resReverseDeposit = ufxService.ReverseDeposit(client.getId(), moto.getId_owner(), RRN);
+        logger.info("reverse deposit ny reserve canceled: " + resReverseDeposit);
+
+
+        String payRes = ufxService.GetPayment(client.getId(), moto.getId_owner(), reserveCancelPenalty);
+        logger.info("get payment for cancelled reserve: " + payRes);
+        return "OK";
+    }
+
+    @Override
     public String endRent(String id_orderStr) throws ParseException {
         int id_order = Integer.parseInt(id_orderStr);
         logger.info("id_order"+id_order);
@@ -99,7 +170,7 @@ public class OrderServiceImpl implements OrderService {
         order.setEnd_time(end_time);
         Motoroller moto = motoRepository.findMotorollerById(order.getId_moto());
         if(moto != null){
-            moto.setStatus(false);
+            moto.setStatusRent(false);
             motoRepository.save(moto);
         }
         String begin_time = order.getBegin_time();

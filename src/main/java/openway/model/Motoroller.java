@@ -16,27 +16,34 @@ public class Motoroller {
     private String model;
     private int id_owner;
     private boolean insurance;
-    private boolean status = false;
+    private boolean status_rent = false;
+    private boolean status_reserv = false;
 
     public Motoroller() {
     }
 
-    public Motoroller(String auto_number, String model, int id_owner, boolean insurance, boolean status) {
+    public Motoroller(String auto_number, String model, int id_owner, boolean insurance, boolean status_rent) {
         this.auto_number = auto_number;
         this.model = model;
         this.id_owner = id_owner;
         this.insurance = insurance;
-        this.status = status;
+        this.status_rent = status_rent;
+
     }
 
-    public boolean isStatus() {
-        return status;
+    public boolean isRent() {
+        return status_rent;
     }
 
-    public void setStatus(boolean status) {
-        this.status = status;
+    public boolean isRes() {return status_reserv; }
+
+    public void setStatusRent(boolean statusRent) {
+        this.status_rent = statusRent;
     }
 
+    public void setStatusReserve(boolean statusRes){
+        this.status_reserv = statusRes;
+    }
 
     public int getId_owner() {
         return id_owner;

@@ -115,9 +115,8 @@ public class OrderServiceImpl implements OrderService {
         int lesserId = moto.getId_owner();
         String RRN = order.getRRN();
 
-        String resRevDeposit = ufxService.reverseDeposit(clientId, lesserId, RRN);
+        String resRevDeposit = ufxService.ReverseDeposit(clientId, lesserId, RRN);
         logger.info(resRevDeposit);
-
 
         logger.info("cost: " + cost);
         return "OK| " + cost;

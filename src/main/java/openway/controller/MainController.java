@@ -49,13 +49,6 @@ public class MainController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/logout")
-    String logout(@RequestBody String id) {
-        logger.info("logout lessor:"+id);
-        return lesserService.logout(id);
-    }
-
-    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/info")
     List<Lesser> getForms() {
         logger.info("get all info about applications (called findAll())");

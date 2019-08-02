@@ -2,12 +2,6 @@ import React, {Component, useState} from 'react';
 import '../css/Login.css';
 import NavbarComp from "./NavbarComp";
 
-import {Modal, Button} from "react-bootstrap";
-
-
-
-
-
 class Registration extends Component {
 
     constructor(props) {
@@ -16,8 +10,7 @@ class Registration extends Component {
             id: '',
             first_name: '',
             last_name: '',
-            company_name: '',
-            type: "Individuals",
+            type: "Personal owner",
             email: '',
             address: '',
             phone: '',
@@ -25,7 +18,6 @@ class Registration extends Component {
             password: '',
             errorMsg: '',
             data: [],
-            isRegOk: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -38,7 +30,7 @@ class Registration extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const {
-            first_name, last_name, company_name, type, email, phone, address,
+            first_name, last_name, type, email, phone, address,
             bank_account, password
         } = this.state;
 
@@ -47,7 +39,6 @@ class Registration extends Component {
             body: JSON.stringify({
                 first_name,
                 last_name,
-                company_name,
                 type,
                 email,
                 password,
@@ -58,54 +49,32 @@ class Registration extends Component {
         }).then((resp) => {
             return resp.json()
         }).then(response => {
-            //console.log(response + "- response");
             if (response === true) {
                 this.setState({errorMsg: 'You are registered'});
-                this.setState({isRegOk: true});
+                alert("You are successfully registered");
                 window.location = "/login";
-                //this.setShow(true);
-
             } else {
                 this.setState({errorMsg: 'Enter correct data!'});
-                //console.log("isRegOk: " + this.state.isRegOk);
-                //setShow(true);
             }
-
         })
     }
 
     componentDidMount() {
     }
 
-    // handleClose(props) {
-    //     setShow(props);
-    //     window.location = "/info_lesser";
-    // }
-
     render() {
-        const {first_name, last_name, company_name, type, email, phone, address, bank_account, password} = this.state;
+        const {first_name, last_name, type, email, phone, address, bank_account, password} = this.state;
 
         return (
             <div>
-                {/*<Modal show={show} onHide={this.handleClose}>*/}
-                {/*    <Modal.Header closeButton>*/}
-                {/*        <Modal.Title>Rigistration</Modal.Title>*/}
-                {/*    </Modal.Header>*/}
-                {/*    <Modal.Body>You have been successfully registered!<br/> Go to your account.</Modal.Body>*/}
-                {/*    <Modal.Footer>*/}
-                {/*        <Button variant="secondary" onClick={this.handleClose}>*/}
-                {/*            Ok*/}
-                {/*        </Button>*/}
-                {/*    </Modal.Footer>*/}
-                {/*</Modal>*/}
                 <NavbarComp/>
                 <form className="formLogin" onSubmit={this.handleSubmit}>
                     <h1 className="title">Sign up</h1>
                     <div className="errorMsg">{this.state.errorMsg}</div>
                     <div>
                         <select className="option" name="type" value={type} onChange={this.handleChange}>
-                            <option value="Individuals">Individuals</option>
-                            <option value="Entities">Entities</option>
+                            <option value="Personal Owner">Personal Owner</option>
+                            <option value="Organization">Organization</option>
                         </select>
                     </div>
                     <input className="input" type="text" placeholder="first name" name="first_name"
@@ -113,9 +82,6 @@ class Registration extends Component {
                            onChange={this.handleChange}/><br/>
                     <input className="input" type="text" placeholder="last name" name="last_name"
                            value={last_name}
-                           onChange={this.handleChange}/><br/>
-                    <input className="input" type="text" placeholder="company name" name="company_name"
-                           value={company_name}
                            onChange={this.handleChange}/><br/>
                     <input className="input" type="text" placeholder="bank account" name="bank_account"
                            value={bank_account}
@@ -135,9 +101,6 @@ class Registration extends Component {
 
                     <input type="submit" name="buttonLogin" className="input btn btn-outline-danger"
                            value="Ok"/>
-                    {/*<Button variant="primary" onClick={this.handleSubmit}>*/}
-                    {/*    Ok*/}
-                    {/*</Button>*/}
                 </form>
             </div>
         );

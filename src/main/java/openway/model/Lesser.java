@@ -22,9 +22,6 @@ public class Lesser {
     private String address;
     private String bank_account;
     private int sum_moto;
-    private boolean islogin;
-
-
 
     public Lesser() {
     }
@@ -35,8 +32,8 @@ public class Lesser {
     }
 
     public Lesser(String type, String first_name, String last_name,
-                  String email, String password, String phone, String address,
-                  String bank_account, int sum_moto, boolean islogin) {
+                  String email, String password, String phone,
+                  String address, String bank_account, int sum_moto) {
         this.type = type;
         this.first_name = first_name;
         this.last_name = last_name;
@@ -46,7 +43,6 @@ public class Lesser {
         this.address = address;
         this.bank_account = bank_account;
         this.sum_moto = sum_moto;
-        this.islogin = islogin;
     }
 
     public String getEmail(){
@@ -75,10 +71,6 @@ public class Lesser {
 
     public String setPassword(String password){
         return password;
-    }
-
-    public void setIslogin(boolean islogin) {
-        this.islogin = islogin;
     }
 
     public void setSum_moto(int sum_moto) {

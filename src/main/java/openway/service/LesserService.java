@@ -13,8 +13,6 @@ public interface LesserService {
 
     List<Integer> listofidlessers();
 
-    String logout(String id);
-
     List<String> getNameSerName(String i);
     //void setPasswordHash();
 

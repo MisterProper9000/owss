@@ -9,9 +9,7 @@ class NavbarComp extends Component {
             return (
                 <Navbar style={navbarColor} collapseOnSelect expand="lg"  variant="dark">
                     <Navbar.Brand href="/">ScooShar</Navbar.Brand>
-                    <Navbar.Brand href="/login">Sign in</Navbar.Brand>
                     <Navbar.Brand href="/logout">Log out</Navbar.Brand>
-                    <Navbar.Brand href="/reg">Sign up</Navbar.Brand>
                     <Navbar.Brand href="/info_lesser">Info</Navbar.Brand>
                     <Navbar.Brand href="/regmoto">RegMoto</Navbar.Brand>
                     <Navbar.Brand href="/infomoto">InfoMoto</Navbar.Brand>
@@ -28,7 +26,6 @@ class NavbarComp extends Component {
                     <Navbar style={navbarColor} collapseOnSelect expand="lg"  variant="dark">
                         <Navbar.Brand href="/">ScooShar</Navbar.Brand>
                         <Navbar.Brand href="/login">Sign in</Navbar.Brand>
-                        <Navbar.Brand href="/logout">Log out</Navbar.Brand>
                         <Navbar.Brand href="/reg">Sign up</Navbar.Brand>
                         <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                         <Navbar.Collapse id="responsive-navbar-nav">

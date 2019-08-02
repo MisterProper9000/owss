@@ -6,11 +6,8 @@ import com.google.gson.JsonParser;
 import openway.model.Lesser;
 import openway.model.Login;
 import openway.repository.LesserRepository;
-import openway.utils.HashUtil;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +15,7 @@ import java.util.logging.Logger;
 
 @Service
 public class LesserServiceImpl implements LesserService {
+
     private final static Logger logger = Logger.getLogger(LesserServiceImpl.class.getName());
 
     final private LesserRepository lesserRepository;
@@ -34,13 +32,11 @@ public class LesserServiceImpl implements LesserService {
         UFXService ufxService = new UFXServiceImpl();
 
         Lesser lesser = g.fromJson(newLesser, Lesser.class);
-        lesser.setIslogin(false);
         lesser.setSum_moto(0);
         lesserRepository.save(lesser);
         logger.info("save to database:" + lesser);
         //String resWay4 = ufxService.AddNewLesserInWay4(lesser);
         //logger.info("saved way4: " + resWay4);
-
     }
 
     @Override
@@ -52,8 +48,6 @@ public class LesserServiceImpl implements LesserService {
         logger.info("lesserInDB: " + lesserInDB);
         try {
             if (lesserInDB.getPassword().equals(lesser.getPassword()) && lesserInDB.getEmail().equals(lesser.getEmail())) {
-                lesserInDB.setIslogin(true);
-                lesserRepository.save(lesserInDB);
                 logger.info("checked entered data from start page");
                 String s = String.valueOf(lesserInDB.getId());
                 logger.info("auth id_lessor: " + s);
@@ -87,16 +81,6 @@ public class LesserServiceImpl implements LesserService {
         int i = listOfId.size();
         logger.info("listOfId.size()=  " + i);
         return listOfId;
-    }
-
-    @Override
-    public String logout(String id) {
-        JsonObject jsonObject = new JsonParser().parse(id).getAsJsonObject();
-        int id_lessor = jsonObject.get("id").getAsInt();
-        Lesser lesser = lesserRepository.findLesserById(id_lessor);
-        lesser.setIslogin(false);
-        lesserRepository.save(lesser);
-        return "true";
     }
 
     @Override

@@ -19,5 +19,6 @@ public interface UFXService {
 
     String GetPayment(int clientId, int lesserId, float cost);
 
+    String GenerateRRN(String type);
 }
 

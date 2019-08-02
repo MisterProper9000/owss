@@ -603,7 +603,7 @@ public class UFXServiceImpl implements UFXService {
      *             time => RRN == date in format yyMMddHHmmss
      * @return
      */
-    private String GenerateRRN(String type){
+    public String GenerateRRN(String type){
         String res = "";
         if(type.equals("time"))
         {

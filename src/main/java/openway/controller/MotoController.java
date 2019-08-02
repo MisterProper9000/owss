@@ -27,8 +27,25 @@ public class MotoController {
     @GetMapping("/ardgetstatus")
     String sendStatus() {
         logger.info("moto status: rent = " + motoService.getStatusRent(moto_id) +
-                "res = " + motoService.getStatusRes(moto_id));
-        return motoService.getStatusRent(moto_id) + "res=" + motoService.getStatusRes(moto_id);
+                " res = " + motoService.getStatusRes(moto_id));
+        boolean rent = motoService.getStatusRent(moto_id);
+        boolean res = motoService.getStatusRes(moto_id);
+        if(!rent && ! res){
+
+            logger.info("false");
+            return "false";
+        }
+        if(!rent && res){
+            logger.info("falseres1");
+            return "falseres1";
+        }
+        if(rent && res){
+            logger.info("true");
+            return "true";
+        }
+        return "dermo";
+        //logger.info();
+        //return motoService.getStatusRent(moto_id) + "res1" ;//" + motoService.getStatusRes(moto_id);
     }
 
     @PostMapping("/ardstart")
@@ -41,6 +58,14 @@ public class MotoController {
     String endRent(@RequestBody String id_order) throws ParseException {
         logger.info("end rent data: " + id_order);
         return orderService.endRent(id_order);
+    }
+
+    @PostMapping("/ardRT")
+    String resTT(@RequestBody String id_motoStr) throws ParseException {
+        logger.info("reserve timeout data: " + id_motoStr);
+        //int id_moto = Integer.valueOf(id_motoStr);
+        return  orderService.reserveTM(moto_id);
+        //return orderService.reserveTm(id_moto);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

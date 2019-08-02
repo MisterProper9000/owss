@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
@@ -8,18 +7,17 @@ using Xamarin.Forms.Xaml;
 namespace ScooterSharing
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class Pay : ContentPage
+    public partial class UnPay : ContentPage
     {
         private int flNameCharLimit = 40;
         private int cardNumCharLimit = 19;
         private int cvc2CharLimit = 3;
-        public Pay()
+        public UnPay()
         {
             InitializeComponent();
             //NavigationPage.SetHasNavigationBar(this, false);
             epay.Source = ImageSource.FromResource("ScooterSharing.epay.png");
         }
-
         public void DetectTrash(object sender, EventArgs e)
         {
             var entry = (Entry)sender;
@@ -83,28 +81,27 @@ namespace ScooterSharing
                     break;
             }
         }
-
         private void CheckNumbers(object sender, EventArgs e)
         {
             var entry = (Entry)sender;
             switch (entry.ClassId)
             {
                 case "cvc2":
-                    if (cvc2.Text != "" && cvc2.Text.Length < cvc2CharLimit)
+                    if (cvc2.Text.Length < cvc2CharLimit)
                     {
                         cvc2.Text = "";
                         DisplayAlert(AppRes.Attention, AppRes.Too_short_code, AppRes.OK);
                     }
                     break;
                 case "cardNum":
-                    if (cardNum.Text != "" && cardNum.Text.Length < cardNumCharLimit)
+                    if (cardNum.Text.Length < cardNumCharLimit)
                     {
                         cardNum.Text = "";
                         DisplayAlert(AppRes.Attention, AppRes.Too_short_card_number, AppRes.OK);
                     }
                     break;
                 case "exdate":
-                    if (cardNum.Text != "" && cardNum.Text.Length < 5)
+                    if (cardNum.Text.Length < 5)
                     {
                         cardNum.Text = "";
                         DisplayAlert(AppRes.Attention, AppRes.Too_short_code, AppRes.OK);
@@ -114,10 +111,9 @@ namespace ScooterSharing
                     break;
             }
         }
-
         async private void DoPay(object sender, EventArgs e)
         {
-            if(fName.Text == "" || lName.Text == "" || cardNum.Text == "" || cvc2.Text == "" || exdate.Text == "" 
+            if (fName.Text == "" || lName.Text == "" || cardNum.Text == "" || cvc2.Text == "" || exdate.Text == ""
                 || payAmount.Text == "")
             {
                 await DisplayAlert(AppRes.Attention, AppRes.All_fields_must_be_filled, AppRes.OK);
@@ -132,77 +128,5 @@ namespace ScooterSharing
             payAnim.IsEnabled = false;
             payAnim.IsVisible = false;
         }
-    }
-
-    public class MaskedBehaviorCardNum : Behavior<Entry>
-    {
-        private string _mask = "";
-        public string Mask
-        {
-            get => _mask;
-            set
-            {
-                _mask = value;
-                SetPositions();
-            }
-        }
-
-        protected override void OnAttachedTo(Entry entry)
-        {
-            entry.TextChanged += OnEntryTextChanged;
-            base.OnAttachedTo(entry);
-        }
-
-        protected override void OnDetachingFrom(Entry entry)
-        {
-            entry.TextChanged -= OnEntryTextChanged;
-            base.OnDetachingFrom(entry);
-        }
-
-        IDictionary<int, char> _positions;
-
-        void SetPositions()
-        {
-            if (string.IsNullOrEmpty(Mask))
-            {
-                _positions = null;
-                return;
-            }
-
-            var list = new Dictionary<int, char>();
-            for (var i = 0; i < Mask.Length; i++)
-                if (Mask[i] != 'X')
-                    list.Add(i, Mask[i]);
-
-            _positions = list;
-        }
-
-        private void OnEntryTextChanged(object sender, TextChangedEventArgs args)
-        {
-            var entry = sender as Entry;
-
-            var text = entry.Text;
-
-            if (string.IsNullOrWhiteSpace(text) || _positions == null)
-                return;
-
-            if (text.Length > _mask.Length)
-            {
-                entry.Text = text.Remove(text.Length - 1);
-                return;
-            }
-
-            foreach (var position in _positions)
-                if (text.Length >= position.Key + 1)
-                {
-                    var value = position.Value.ToString();
-                    if (text.Substring(position.Key, 1) != value)
-                        text = text.Insert(position.Key, value);
-                }
-
-            if (entry.Text != text)
-                entry.Text = text;
-        }
-
     }
 }

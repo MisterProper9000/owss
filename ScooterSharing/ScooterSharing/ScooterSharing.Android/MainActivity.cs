@@ -6,6 +6,11 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using Xamarin.Forms.Platform.Android;
+using Xamarin.Forms;
+using System.Linq;
+using Android.Text;
+using Android.Content;
 
 namespace ScooterSharing.Droid
 {
@@ -18,9 +23,8 @@ namespace ScooterSharing.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(savedInstanceState);
-            
+
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            Xamarin.FormsMaps.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             ZXing.Mobile.MobileBarcodeScanner.Initialize(Application);
             LoadApplication(new App());

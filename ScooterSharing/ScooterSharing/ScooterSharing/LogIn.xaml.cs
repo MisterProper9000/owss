@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.ComponentModel;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using System.Net.Http;
-using System.Net;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
 
@@ -18,6 +12,8 @@ namespace ScooterSharing
     
     public partial class LogIn : ContentPage
     {
+        private bool mailOK = false;
+        private bool phoneOK = false;
         private int fsNameCharLimit = 40;
         private int phoneCharLimit = 17;
         private enum UIMode{Default,LogIn,SignUp };
@@ -121,30 +117,42 @@ namespace ScooterSharing
             if(uiMode == UIMode.SignUp && (fName.Text == "" || sName.Text == "" || phone.Text == "" || mail.Text == "" ||
                 password.Text == "" || confirmPassword.Text == ""))
             {
-                DisplayAlert("Attention", "All fields must be filled", "OK");
+                DisplayAlert(AppRes.Attention, AppRes.All_fields_must_be_filled, AppRes.OK);
                 return;
             }
 
-            if (uiMode == UIMode.SignUp && phone.Text.Length < phoneCharLimit)
+            //if (uiMode == UIMode.SignUp && phone.Text.Length < phoneCharLimit)
+            //{
+            //    DisplayAlert(AppRes.Attention, AppRes.Too_short_phone_number, AppRes.OK);
+            //    return;
+            //}
+
+            if(!phoneOK)
             {
-                DisplayAlert("Attention", "Too short phone number", "OK");
+                DisplayAlert(AppRes.Attention, AppRes.Too_short_phone_number, AppRes.OK);
+                return;
+            }
+
+            if(!mailOK)
+            {
+                DisplayAlert(AppRes.Attention, AppRes.Invalid_email, AppRes.OK);
                 return;
             }
 
             if (uiMode == UIMode.LogIn && (mail.Text == "" || password.Text == ""))
             {
-                DisplayAlert("Attention", "All fields must be filled", "OK");
+                DisplayAlert(AppRes.Attention, AppRes.All_fields_must_be_filled, AppRes.OK);
                 return;
             }
 
             if (uiMode == UIMode.SignUp && confirmPassword.Text != password.Text)
             {
-                DisplayAlert("Attention", "Mismatched passwords", "OK");
+                DisplayAlert(AppRes.Attention, AppRes.Mismatched_passwords, AppRes.OK);
                 return;
             }
             if (uiMode == UIMode.SignUp)
             {
-                DisplayAlert("Attention", "A confirmation code will be sent to your email", "OK");
+                DisplayAlert(AppRes.Attention, AppRes.A_confirmation_code_will_be_sent_to_your_email, AppRes.OK);
 
                 fName.IsEnabled = false;
                 fName.IsVisible = false;
@@ -286,6 +294,7 @@ namespace ScooterSharing
                 App.Current.Properties["isLoggedIn"] = "yes";
                 App.Current.Properties["fName"] = parseRes[1];
                 App.Current.Properties["lName"] = parseRes[2];
+                App.Current.Properties["email"] = mail.Text;
                 //App.Current.Properties["balance"] = parseResult.balance;
                 await App.Current.SavePropertiesAsync();
 
@@ -299,7 +308,7 @@ namespace ScooterSharing
             }
             else if(parseRes[0] == RequestResult.DOESNTEXIST.ToString())
             {
-                await DisplayAlert("Error", "User doesn't exist", "OK");
+                await DisplayAlert(AppRes.Error, AppRes.User_doesn_t_exist, AppRes.OK);
                 if (uiMode == UIMode.LogIn)
                 {
                     ToStartFromLogin();
@@ -313,7 +322,7 @@ namespace ScooterSharing
             }
             else
             {
-                await DisplayAlert("Error", "Something goes wrong", "OK");
+                await DisplayAlert(AppRes.Error, AppRes.Something_goes_wrong, AppRes.OK);
                 if (uiMode == UIMode.LogIn)
                 {
                     ToStartFromLogin();
@@ -341,7 +350,7 @@ namespace ScooterSharing
             string[] parseRes = result.Split('|');
             if (parseRes[0] == RequestResult.ALREADYEXIST.ToString())
             {
-                await DisplayAlert("Error", "User already exist", "OK");
+                await DisplayAlert(AppRes.Error, AppRes.User_already_exists, AppRes.OK);
                 if (uiMode == UIMode.LogIn)
                 {
                     ToStartFromLogin();
@@ -356,7 +365,7 @@ namespace ScooterSharing
             }
             if (parseRes[0] != RequestResult.OK.ToString())
             {
-                await DisplayAlert("Error", "Something wrong with server", "OK");
+                await DisplayAlert(AppRes.Error, AppRes.Something_wrong_with_server, AppRes.OK);
                 if (uiMode == UIMode.LogIn)
                 {
                     ToStartFromLogin();
@@ -372,6 +381,7 @@ namespace ScooterSharing
             App.Current.Properties["isLoggedIn"] = "yes";
             App.Current.Properties["fName"] = fName.Text;
             App.Current.Properties["lName"] = sName.Text;
+            App.Current.Properties["email"] = mail.Text;
             App.Current.Properties["balance"] = "0$";
             await App.Current.SavePropertiesAsync();
             TabbedPage tabbedPage = new TabbedPage();
@@ -423,36 +433,50 @@ namespace ScooterSharing
                         {
                             phone.Text = phone.Text.Substring(0, phone.Text.Length - 1);
                         }
+                    if (phone.Text != "" && phone.Text.Length < phoneCharLimit)
+                    {
+                        phoneOK = false;
+                        DisplayAlert(AppRes.Attention, AppRes.Too_short_phone_number, AppRes.OK);
+                        return;
+                    }
+                    else
+                    {
+                        phoneOK = true;
+                    }
                     break;
                 case "mail":
-                    if(!ValidateEmail(mail.Text))
+                    if(mail.Text != "" && !ValidateEmail(mail.Text))
                     {
-                        mail.Text = "";
-                        DisplayAlert("Attention", "Invalid email", "OK");
+                        mailOK = false;
+                        DisplayAlert(AppRes.Attention, AppRes.Invalid_email, AppRes.OK);
+                    }
+                    else
+                    {
+                        mailOK = true;
                     }
                     break;
                 case "password":
-                    if(password.Text.Length < 8)
+                    if(password.Text != "" && password.Text.Length < 8)
                     {
                         password.Text = "";
-                        DisplayAlert("Attention", "Password must contain at least 8 characters", "OK");
+                        DisplayAlert(AppRes.Attention, AppRes.Password_must_contain_at_least_8_characters, AppRes.OK);
                     }
                     if(confirmPassword.Text != "" && confirmPassword.Text != password.Text)
                     {
                         password.Text = "";
-                        DisplayAlert("Attention", "Mismatched passwords", "OK");
+                        DisplayAlert(AppRes.Attention, AppRes.Mismatched_passwords, AppRes.OK);
                     }
                     break;
                 case "confirmpassword":
-                    if (confirmPassword.Text.Length < 8)
+                    if (confirmPassword.Text != "" && confirmPassword.Text.Length < 8)
                     {
                         confirmPassword.Text = "";
-                        DisplayAlert("Attention", "Password must contain at least 8 characters", "OK");
+                        DisplayAlert(AppRes.Attention, AppRes.Password_must_contain_at_least_8_characters, AppRes.OK);
                     }
                     if (password.Text != "" && confirmPassword.Text != password.Text)
                     {
                         confirmPassword.Text = "";
-                        DisplayAlert("Attention", "Mismatched passwords", "OK");
+                        DisplayAlert(AppRes.Attention, AppRes.Mismatched_passwords, AppRes.OK);
                     }
                     break;
                 default:
@@ -472,7 +496,7 @@ namespace ScooterSharing
         async public void ConfirmCode(object sender, EventArgs e)
         {
             if (code.Text == "")
-                await DisplayAlert("Attention", "You must enter verification code", "OK");
+                await DisplayAlert(AppRes.Attention, AppRes.You_must_enter_verification_code, AppRes.OK);
             //code sent
             var verCode = new VerificationCode {
                 mail = mail.Text,
@@ -484,7 +508,7 @@ namespace ScooterSharing
 
             if (false)//some server responce
             {
-                await DisplayAlert("Error", "Wrong verification code", "OK");
+                await DisplayAlert(AppRes.Error, AppRes.Wrong_verification_code, AppRes.OK);
                 code.Text = "";
                 code.IsEnabled = false;
                 code.IsVisible = false;
@@ -495,6 +519,7 @@ namespace ScooterSharing
                 ToStart(sender, e);
                 return;
             }
+            code.IsEnabled = false;
             ToAccount();
         }
     }
@@ -564,10 +589,8 @@ namespace ScooterSharing
                     if (text.Substring(position.Key, 1) != value)
                         text = text.Insert(position.Key, value);
                 }
-
             if (entry.Text != text)
                 entry.Text = text;
         }
-
     }
 }

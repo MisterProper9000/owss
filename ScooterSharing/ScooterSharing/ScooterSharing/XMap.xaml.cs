@@ -1,15 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
-using Android.Views;
-using Xamarin.Forms.Internals;
-using System.Reflection;
 
 using System.Collections.ObjectModel;
 using System.Windows.Input;
@@ -19,9 +14,10 @@ namespace ScooterSharing
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class XMap : ContentPage
     {
+        public string btnResText { get; set; }
         private IList<object> pins { get; set; }
         private object selected { get; set; }
-        public ObservableCollection<Scooter> Scooters { get; private set; }
+        public ObservableCollection<Scooter> Scooters { get; set; }
         private Location curLoc = null;
         private int latLongDigitNumber = 10;
         private string mapsRequest;
@@ -44,54 +40,64 @@ namespace ScooterSharing
             //can't bind images -- local and by url :(
             Scooters.Add(new Scooter
             {
+                btnResText = AppRes.Reserve,
+                id = "sfb_moto:1",
                 fuelLvl = generator.NextDouble(),
                 Lat = 59.9648886,
                 Lng = 30.3454112,
                 CompanyName = "CoolRentCompany9000",
                 color = Color.WhiteSmoke,
                 ImageSource = "http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42560-motor-scooter-icon.png",
-                Price ="2$/h"
+                Price = App.Current.Properties["showtariff"].ToString()
             });
             selected = Scooters[0];
             Scooters.Add(new Scooter
             {
+                btnResText = AppRes.Reserve,
+                id = "sfb_moto:1",
                 fuelLvl = generator.NextDouble(),
                 Lat = 59.954833,
                 Lng = 30.337149,
                 CompanyName = "AnotherRentCompany9000",
                 color = Color.WhiteSmoke,
                 ImageSource = "http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42560-motor-scooter-icon.png",
-                Price = "2.5$/h"
+                Price = App.Current.Properties["showtariff"].ToString()
             });;
             Scooters.Add(new Scooter
             {
+                btnResText = AppRes.Reserve,
+                id = "sfb_moto:1",
                 fuelLvl = generator.NextDouble(),
                 Lat = 59.954833,
                 Lng = 30.337149,
                 CompanyName = "AnotherRentCompany9000",
                 color = Color.WhiteSmoke,
                 ImageSource = "http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42560-motor-scooter-icon.png",
-                Price = "2.5$/h"
+                Price = App.Current.Properties["showtariff"].ToString()
             });
             Scooters.Add(new Scooter
             {
+                btnResText = AppRes.Reserve,
+                id = "sfb_moto:1",
                 fuelLvl = generator.NextDouble(),
                 Lat = 59.954833,
                 Lng = 30.337149,
                 CompanyName = "AnotherRentCompany6000",
                 color = Color.WhiteSmoke,
                 ImageSource = "http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42560-motor-scooter-icon.png",
-                Price = "2.5$/h"
+                Price = App.Current.Properties["showtariff"].ToString()
             });
             Scooters.Add(new Scooter
             {
+                btnResText = AppRes.Reserve,
+                id = "sfb_moto:1",
                 fuelLvl = generator.NextDouble(),
                 Lat = 59.954833,
                 Lng = 30.337149,
                 CompanyName = "AnotherRentCompany9000",
                 color = Color.WhiteSmoke,
                 ImageSource = "http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42560-motor-scooter-icon.png",
-                Price = "2.5$/h"
+                Price = App.Current.Properties["showtariff"].ToString()
             });
             BindingContext = this;
             
@@ -108,7 +114,6 @@ namespace ScooterSharing
             pins.Add(customPin1);
             pins.Add(customPin2);
             pins.Add(customPin3);
-
         }
 
         private void PinTap(object sender, EventArgs e)
@@ -121,7 +126,9 @@ namespace ScooterSharing
                 {
                     Scooter tmp = Scooters[i];
                     Scooters.Remove(Scooters[i]);
+
                     tmp.color = Color.WhiteSmoke;
+                    tmp.reservable = false;
                     Scooters.Insert(i, tmp);
                     break;
                 }
@@ -137,6 +144,7 @@ namespace ScooterSharing
                     Scooter tmp = Scooters[i];
                     Scooters.Remove(Scooters[i]);
                     tmp.color = Color.YellowGreen;
+                    tmp.reservable = true;
                     Scooters.Insert(i, tmp);
                     return;
                 }
@@ -153,6 +161,36 @@ namespace ScooterSharing
             loc.Longitude = Math.Round(loc.Longitude, Math.Max(0, latLongDigitNumber - str[0].Length));
         }
 
+        async private void Reserve(object sender, EventArgs e)
+        {
+            if(App.Current.Properties["res"].ToString() != "no")
+            {
+                await RequestStuff.doRequest("motoResCanc", App.Current.Properties["resId"].ToString()+"|"+App.Current.Properties["email"].ToString());
+                App.Current.Properties["res"] = "no";
+                return;
+            }
+
+            Scooter scooter = scooterList.SelectedItem as Scooter;
+            string result = await RequestStuff.doRequest("motoRes", scooter.id+"|"+App.Current.Properties["email"].ToString());
+            string[] parseRes = result.Split('|');
+            if(parseRes[0] != RequestResult.OK.ToString())
+            {
+                await DisplayAlert(AppRes.Attention, AppRes.Something_goes_wrong, AppRes.OK);
+                return;
+            }
+            if(parseRes[1] != "true")
+            {
+                await DisplayAlert(AppRes.Attention, AppRes.This_scooter_already_rented_or_reserved, AppRes.OK);
+                return;
+            }
+            App.Current.Properties["resId"] = parseRes[2];
+            scooter.color = Color.Gold;
+            int idx = Math.Min(3, Scooters.IndexOf(scooter));
+            //((Image)FindByName("customPin" + idx.ToString())).Scale += 1;
+            scooter.btnResText = "UnReserve";
+            App.Current.Properties["res"] = idx;
+            
+        }
         async private void SetLoc()
         {
             curLoc = await Geolocation.GetLocationAsync();
@@ -163,6 +201,10 @@ namespace ScooterSharing
         public void OnScooterSelected(object sender, SelectedItemChangedEventArgs e)
         {
             Scooter selectedItem = e.SelectedItem as Scooter;
+        }
+        async private Task RefreshScooters()
+        {
+            await RequestStuff.doRequest("", "");
         }
     
         public void OnScooterTapped(object sender, ItemTappedEventArgs e)
@@ -178,6 +220,7 @@ namespace ScooterSharing
                     Scooter tmp = Scooters[i];
                     Scooters.Remove(Scooters[i]);
                     tmp.color = Color.WhiteSmoke;
+                    tmp.reservable = false;
                     Scooters.Insert(i, tmp);
                     break;
                 }
@@ -190,9 +233,10 @@ namespace ScooterSharing
                 {
                     scooterList.ScrollTo(it, ScrollToPosition.Start, true);
                     scooterList.SelectedItem = it;
-                    Scooter tmp = Scooters[i];
+                    Scooter tmp = Scooters[i];                    
                     Scooters.Remove(Scooters[i]);
                     tmp.color = Color.YellowGreen;
+                    tmp.reservable = true;
                     Scooters.Insert(i, tmp);
                     break;
                 }
@@ -210,7 +254,7 @@ namespace ScooterSharing
                 isRouteMode = true;
             }
             else
-                DisplayAlert("Attention", "Can't get device location\nRouting unavaliable", "Got it");
+                DisplayAlert(AppRes.Attention, AppRes.Location_unavailable, AppRes.Got_it);
         }
 
         protected override bool OnBackButtonPressed()
@@ -222,6 +266,25 @@ namespace ScooterSharing
                 Browser.IsEnabled = false;
                 Browser.IsVisible = false;
                 Browser.Source = mapsRequest;
+
+                int i = 0;
+                foreach (var it in scooterList.ItemsSource)
+                {
+                    if (Scooters[i].color != Color.WhiteSmoke)
+                    {
+                        Scooter tmp = Scooters[i];
+                        Scooters.Remove(Scooters[i]);
+                        if (App.Current.Properties["res"].ToString() != "no" && tmp.color != Color.Gold)
+                        {
+                            tmp.color = Color.WhiteSmoke;
+                            tmp.reservable = false;
+                        }
+                        Scooters.Insert(i, tmp);
+                        break;
+                    }
+                    i++;
+                };
+
                 return true;
             }
             else
@@ -261,11 +324,38 @@ namespace ScooterSharing
                 {
                     IsRefreshing = true;
 
-                    await Task.Delay(2000);
+                    await RefreshScooters();
 
                     IsRefreshing = false;
                 });
             }
         }
+        protected override void OnAppearing()
+        {
+            for(int i =0; i < Scooters.Count; i++)
+            {
+                Scooter tmp = Scooters[i];
+                Scooters.Remove(Scooters[i]);
+                tmp.Price = App.Current.Properties["showtariff"].ToString();
+                
+                if (App.Current.Properties["res"].ToString() == "no")
+                {
+                    tmp.color = Color.WhiteSmoke;
+                    tmp.reservable = false;
+                    tmp.btnResText = AppRes.Reserve;
+                    if (tmp.color == Color.Gold)
+                    {
+                        int idx = Scooters.IndexOf(tmp);
+                        ((Image)FindByName("customPin" + idx.ToString())).Scale -= 1;
+                    }
+                }
+                Scooters.Insert(i, tmp);
+            }
+            base.OnAppearing();
+        }
+
+
+
     }
 }
+

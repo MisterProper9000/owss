@@ -5,8 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:ScooterSharing"
              mc:Ignorable="d"
+             xmlns:local1="clr-namespace:ScooterSharing.Extensions"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              BackgroundColor="WhiteSmoke"
-             Title="Account"
+             Title="{Binding [Account], Source={x:Static local1:Translator.Instance}}"
              x:Class="ScooterSharing.Account">
     <ContentPage.BindingContext>
         <local:PaymentsViewModel/>
@@ -56,7 +58,7 @@
                                IsEnabled="False"
                                IsVisible="False"
                                Padding="0" 
-                               BackgroundColor="Maroon">
+                               BackgroundColor="DarkGreen">
                     <Label Text="7" 
                                    FontSize="10"
                                    TextColor="White"
@@ -67,11 +69,10 @@
                 </Frame>
                 <Label x:Name="cash"
                                Grid.Row="1"
-                               Text="100$"
                                HorizontalTextAlignment="Center"
                                VerticalTextAlignment="Center"
-                               TextColor="DarkGoldenrod"
-                               FontSize="30"
+                               TextColor="Black"
+                               FontSize="20"
                                FontAttributes="Bold"
                                Grid.Column="1"/>
 
@@ -85,11 +86,22 @@
                     </Image.GestureRecognizers>
                 </Image>
             </Grid>
-            <Button x:Name="QR"
-                    Text="Scan QR to rent scooter"
-                    BackgroundColor="Green"
-                    TextColor="WhiteSmoke"
-                    Clicked="scanQr"/>
+            <Grid>
+                <Button x:Name="QR"
+                        Grid.Row="0"
+                        Text="{Binding [Scan_QR_to_rent_scooter], Source={x:Static local1:Translator.Instance}}"
+                        BackgroundColor="Green"
+                        IsEnabled="True"
+                        TextColor="WhiteSmoke"
+                        Clicked="scanQr"/>
+                <Button x:Name="toRentDetails"
+                        Grid.Row="0"
+                        Text="{Binding [To_renting_details], Source={x:Static local1:Translator.Instance}}"
+                        IsEnabled="False"
+                        BackgroundColor="Green"
+                        TextColor="WhiteSmoke"
+                        Clicked="ToRentDetails"/>
+            </Grid>
         </StackLayout>
         <ListView x:Name="payList"
                       ItemsSource="{Binding Payments}"
@@ -139,5 +151,4 @@
             </ListView.ItemTemplate>
         </ListView>
     </StackLayout>
-
 </ContentPage>

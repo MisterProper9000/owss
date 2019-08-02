@@ -4,24 +4,45 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             Title="Details"
+             xmlns:local="clr-namespace:ScooterSharing.Extensions"
+             Title="{Binding [Details], Source={x:Static local:Translator.Instance}}"
              BackgroundColor="WhiteSmoke"
              x:Class="ScooterSharing.AccountDetail">
     <ContentPage.Content>
         <StackLayout>
-            <Grid>
-                <Image x:Name="logout"
-                        Grid.Column="1"
+            <Image x:Name="logout"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Start"
                        Scale="0.5">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="logOut"/>
-                    </Image.GestureRecognizers>
-                </Image>
-                <Label Grid.Column="2"/>
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="logOut"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Grid Padding="50,0,50,0">
+                
+                <Grid Grid.Row="0">
+                    <Label x:Name="First_Name"
+                           Grid.Row="0"
+                           HorizontalOptions="Center"
+                           Grid.Column="0"/>
+                    <Label x:Name="Last_Name"
+                           Grid.Row="0"
+                           HorizontalOptions="Center"
+                           Grid.Column="1"/>
+                </Grid>
+                <Picker x:Name="langSelect"
+                        Title="{Binding [Select_language], Source={x:Static local:Translator.Instance}}"
+                        TitleColor="Green"
+                        Grid.Row="1"
+                        VerticalOptions="Center"
+                        SelectedIndexChanged="setLang"/>
+                <Label Text="{Binding [Here_is_some_account_details], Source={x:Static local:Translator.Instance}}"
+                       VerticalOptions="CenterAndExpand" 
+                       HorizontalOptions="CenterAndExpand"
+                       Grid.Row="2"/>
+                
             </Grid>
-            <Label Text="Here is some account details"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

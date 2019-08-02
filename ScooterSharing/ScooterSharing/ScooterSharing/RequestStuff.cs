@@ -1,21 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Net.Http;
 using System.Net;
-using Newtonsoft.Json;
 using System.Threading.Tasks;
-using System.Collections.ObjectModel;
-using System.Linq;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Xamarin.Essentials;
-using Android.Views;
-using Xamarin.Forms.Internals;
-using System.Reflection;
-
-using System.Windows.Input;
 
 namespace ScooterSharing
 { 
@@ -35,18 +22,30 @@ namespace ScooterSharing
         ALREADYEXIST,
         DOESNTEXIST,
         VERCODEMISMATCH,
+        RENTALREADYSTARTED,
+        NOTENOUGH,
+        BLOCKED,
         OTHER
     }
     
-    public class Balance
+    public class PaymentRequest
     {
-        public readonly string type = RequestType.BALANCE.ToString();
-        public string mail { get; set; }
+        public string fName { get; set; }
+        public string lName { get; set; }
+        public string cardNum { get; set; }
+        public string cvc2 { get; set; }
+        public string exDate { get; set; }
+        public string sum { get; set; }
     }
-
+    public class QRstart
+    {
+        public string period { get; set; }
+        public string tariff { get; set; }
+        public string email { get; set; }
+        public string qr { get; set; }
+    }
     public class VerificationCode
     {
-        public readonly string type = RequestType.VERCODE.ToString();
         public string code { get; set; }
         public string mail { get; set; }
     }
@@ -66,13 +65,6 @@ namespace ScooterSharing
         public string password { get; set; }
     }
 
-    public class UserPay
-    {
-        public readonly string type = RequestType.ADDMONEY.ToString();
-        string cardNum;
-        string mail;
-    }
-
     public class Scooter
     {
         public double fuelLvl { get; set; }
@@ -82,6 +74,9 @@ namespace ScooterSharing
         public string Price { get; set; }
         public string ImageSource { get; set; }
         public Color color { get; set; }
+        public string id { get; set; }
+        public bool reservable { get; set; }
+        public string btnResText { get; set; }
 
         public override string ToString()
         {

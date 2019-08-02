@@ -1,6 +1,11 @@
 ﻿using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using System.Globalization;
+using System.Resources;
+using System.Reflection;
+using System.Diagnostics;
+using Plugin.Multilingual;
 
 namespace ScooterSharing
 {
@@ -9,7 +14,6 @@ namespace ScooterSharing
         public App()
         {
             InitializeComponent();
-
             MainPage = new MainPage();
         }
 

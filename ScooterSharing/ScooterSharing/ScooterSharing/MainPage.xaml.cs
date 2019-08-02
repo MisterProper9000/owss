@@ -1,6 +1,8 @@
-﻿using System;
+﻿using ScooterSharing.Extensions;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +17,10 @@ namespace ScooterSharing
     {
         public MainPage()
         {
+            
             InitializeComponent();
             //data to save in app current property: first name, last name, balance
-            if(!App.Current.Properties.ContainsKey("fName"))
+            if (!App.Current.Properties.ContainsKey("fName"))
             {
                 App.Current.Properties.Add("fName", "");
             }
@@ -28,6 +31,63 @@ namespace ScooterSharing
             if (!App.Current.Properties.ContainsKey("balance"))
             {
                 App.Current.Properties.Add("balance", "");
+            }
+            if (!App.Current.Properties.ContainsKey("lang"))
+            {
+                App.Current.Properties.Add("lang", "");
+            }
+            if (!App.Current.Properties.ContainsKey("email"))
+            {
+                App.Current.Properties.Add("email", "");
+            }
+            if (!App.Current.Properties.ContainsKey("rent"))
+            {
+                App.Current.Properties.Add("rent", "no");
+            }
+            if (!App.Current.Properties.ContainsKey("block"))
+            {
+                App.Current.Properties.Add("block", "no");
+            }
+            if (!App.Current.Properties.ContainsKey("tariff"))
+            {
+                App.Current.Properties.Add("tariff", "1|1");
+            }
+            if (!App.Current.Properties.ContainsKey("startRent"))
+            {
+                App.Current.Properties.Add("startRent", "");
+            }
+            if (!App.Current.Properties.ContainsKey("qr"))
+            {
+                App.Current.Properties.Add("qr", "");
+            }
+            if (!App.Current.Properties.ContainsKey("id"))
+            {
+                App.Current.Properties.Add("id", "");
+            }
+            if (!App.Current.Properties.ContainsKey("time"))
+            {
+                App.Current.Properties.Add("time", "");
+            }
+            if (!App.Current.Properties.ContainsKey("cost"))
+            {
+                App.Current.Properties.Add("cost", "");
+            }
+            if (!App.Current.Properties.ContainsKey("showtariff"))
+            {
+                App.Current.Properties.Add("showtariff", "");
+            }
+            if (!App.Current.Properties.ContainsKey("res"))//запрещаем юзеру бронить больше одного скутера
+            {
+                App.Current.Properties.Add("res", "no");
+            }
+            if (!App.Current.Properties.ContainsKey("resId"))//id заказа на бронь
+            {
+                App.Current.Properties.Add("resId", "");
+            }
+            if (App.Current.Properties["lang"].ToString() != "")
+            {
+                AppRes.Culture = new CultureInfo(App.Current.Properties["lang"].ToString());
+                Translator.Instance.Invalidate();
             }
         }
 
@@ -58,17 +118,30 @@ namespace ScooterSharing
                 }
                 else
                 {
-                    TabbedPage tabbedPage = new TabbedPage();
-                    tabbedPage.Children.Add(new Account());
-                    tabbedPage.Children.Add(new XMap());
+                    if (App.Current.Properties["rent"].ToString() == "yes")
+                    {
+                        TabbedPage tabbedPage = new TabbedPage();
+                        tabbedPage.Children.Add(new Account());
+                        tabbedPage.Children.Add(new XMap());
 
-                    tabbedPage.BarBackgroundColor = Color.Green;
-                    NavigationPage.SetHasNavigationBar(tabbedPage, false);
-                    Application.Current.MainPage = new NavigationPage(tabbedPage);
+                        tabbedPage.BarBackgroundColor = Color.Green;
+                        NavigationPage.SetHasNavigationBar(tabbedPage, false);
+                        Application.Current.MainPage = new NavigationPage(tabbedPage);
+                    }
+                    else
+                    {
+                        TabbedPage tabbedPage = new TabbedPage();
+                        tabbedPage.Children.Add(new Account());
+                        tabbedPage.Children.Add(new XMap());
+
+                        tabbedPage.BarBackgroundColor = Color.Green;
+                        NavigationPage.SetHasNavigationBar(tabbedPage, false);
+                        Application.Current.MainPage = new NavigationPage(tabbedPage);
+                    }
                 }
             }
-            
-            
         }
+
+      
     }
 }

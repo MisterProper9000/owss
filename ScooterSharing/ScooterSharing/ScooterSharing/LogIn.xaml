@@ -5,6 +5,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
              xmlns:behavior1="clr-namespace:ScooterSharing"
+             xmlns:translator="clr-namespace:ScooterSharing.Extensions"
              mc:Ignorable="d"
              BackgroundColor="WhiteSmoke"
              x:Class="ScooterSharing.LogIn">
@@ -27,7 +28,7 @@
                 <Entry x:Name="fName"
                        ClassId="fName"
                        Text=""
-                       Placeholder="First Name"
+                       Placeholder="{Binding [First_Name], Source={x:Static translator:Translator.Instance}}"
                        Grid.Row="0"
                        Opacity="0"              
                        IsEnabled="False"
@@ -36,7 +37,7 @@
                        PlaceholderColor="DarkGreen"/>
                 <Button x:Name="btnSignUp"
                         Clicked="MoveToSignUp"
-                        Text="Sign Up"
+                        Text="{Binding [Sign_Up], Source={x:Static translator:Translator.Instance}}"
                         Grid.Row="2"
                         VerticalOptions="FillAndExpand" 
 	                    HorizontalOptions="FillAndExpand"
@@ -44,7 +45,7 @@
                         TextColor="LightGreen"/>
                 <Button x:Name="btnLogIn"
                         Clicked="MoveToLogIn"
-                        Text="Log in"
+                        Text="{Binding [Log_in], Source={x:Static translator:Translator.Instance}}"
                         Grid.Row="3"
                         VerticalOptions="FillAndExpand" 
 	                    HorizontalOptions="FillAndExpand"
@@ -53,7 +54,7 @@
                 <Entry x:Name="sName"
                        ClassId="sName"
                        Text=""
-                       Placeholder="Last Name"
+                       Placeholder="{Binding [Last_Name], Source={x:Static translator:Translator.Instance}}"
                        Grid.Row="1"
                        Opacity="0"
                        TextChanged="DetectTrash"
@@ -64,7 +65,7 @@
                        ClassId="phone"
                        Text=""
                        CursorPosition="2"
-                       Placeholder="Phone number"
+                       Placeholder="{Binding [Phone_number], Source={x:Static translator:Translator.Instance}}"
                        Grid.Row="2"
                        Opacity="0"
                        IsEnabled="False"
@@ -72,7 +73,7 @@
                        Keyboard="Numeric"
                        ReturnType="Next"
                        PlaceholderColor="DarkGreen"
-                       TextChanged="DetectTrash">
+                       Unfocused="DetectTrash">
                     <Entry.Behaviors>
                         <behavior1:MaskedBehavior Mask="+7 (XXX) XXX-XXXX" />
                     </Entry.Behaviors>
@@ -81,14 +82,14 @@
                        ClassId="code"
                        Text=""
                        TextChanged="DetectTrash"
-                       Placeholder="verification code"
+                       Placeholder="{Binding [Verification_code], Source={x:Static translator:Translator.Instance}}"
                        Grid.Row="3"
                        IsEnabled="False"
                        IsVisible="False"
                        ReturnType="Next"
                        PlaceholderColor="DarkGreen"/>
                 <Button x:Name="sendCode"
-                        Text="Confirm code"
+                        Text="{Binding [Confirm_code], Source={x:Static translator:Translator.Instance}}"
                         Grid.Row="4"
                         IsEnabled="False"
                         IsVisible="False"
@@ -109,7 +110,7 @@
                        ClassId="password"
                        Text=""
                        MaxLength="50"
-                       Placeholder="Password"
+                       Placeholder="{Binding [Password], Source={x:Static translator:Translator.Instance}}"
                        Grid.Row="4"
                        Opacity="0"
                        IsPassword="True"
@@ -122,7 +123,7 @@
                        MaxLength="50"
                        ClassId="confirmpassword"
                        Text=""
-                       Placeholder="Confirm password"
+                       Placeholder="{Binding [Confirm_password], Source={x:Static translator:Translator.Instance}}"
                        Grid.Row="5"
                        Opacity="0"
                        IsPassword="True"

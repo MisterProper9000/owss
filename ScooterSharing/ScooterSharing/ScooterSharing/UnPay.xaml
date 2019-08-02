@@ -3,16 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             mc:Ignorable="d"
              xmlns:behavior1="clr-namespace:ScooterSharing"
              xmlns:translator="clr-namespace:ScooterSharing.Extensions"
-             mc:Ignorable="d"
-             Title="{Binding [Refill], Source={x:Static translator:Translator.Instance}}"
-             BackgroundColor="WhiteSmoke"
-             x:Class="ScooterSharing.Pay">
+             Title="{Binding [Withdrawal_of_funds], Source={x:Static translator:Translator.Instance}}"
+             xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             x:Class="ScooterSharing.UnPay">
     <ContentPage.Content>
         <StackLayout>
-            <Image x:Name="epay"/>
+            <Image x:Name="epay"
+                   ScaleX="-1"/>
             <Grid Padding="50, 0, 50, 0">
                 <Entry x:Name="fName"
                        ClassId="fName"
@@ -35,6 +35,7 @@
                 <Entry x:Name="cardNum"
                        ClassId="cardNum"
                        Text=""
+                       Keyboard="Numeric"
                        VerticalOptions="Center"
                        Placeholder="{Binding [Card_num], Source={x:Static translator:Translator.Instance}}"
                        Grid.Row="2"
@@ -96,17 +97,17 @@
                         FontAttributes="Bold"
                         TextColor="DarkGray"
                         HorizontalOptions="Center"
-                        Text="{Binding [Top_up_account], Source={x:Static translator:Translator.Instance}}"/>
+                        Text="{Binding [Withdraw_funds], Source={x:Static translator:Translator.Instance}}"/>
             </Grid>
             <forms:AnimationView x:Name="payAnim"
 	                             Animation="pay.json" 
 	                             Loop="True"
+                                 Speed="-1"
                                  IsEnabled="False"
 	                             AutoPlay="False"
                                  IsVisible="False"
                                  Scale="1"
                                  HeightRequest="120"/>
-            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

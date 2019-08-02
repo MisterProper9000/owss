@@ -26,13 +26,13 @@ namespace ScooterSharing.Droid
 
             var scanner = new MobileBarcodeScanner()
             {
-                TopText = "Scan the QR Code to start rent",
-                BottomText = "Please Wait",
+                TopText = AppRes.Scan_QR_to_rent_scooter,
+                BottomText = AppRes.Please_wait,
             };
 
             var scanResult = await scanner.Scan(optionsCustom);
             if (scanResult == null)
-                return "";
+                return null;
             return scanResult.Text;
         }
     }

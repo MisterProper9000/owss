@@ -4,6 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             xmlns:local="clr-namespace:ScooterSharing.Extensions"
              mc:Ignorable="d"
              BackgroundColor="WhiteSmoke"
              x:Class="ScooterSharing.MainPage">
@@ -12,7 +13,7 @@
         <!-- Place new controls here -->
         <Grid>
             <Label x:Name="welcome"
-                   Text="Welcome!" 
+                   Text="{Binding [Welcome], Source={x:Static local:Translator.Instance}}"
                    FontSize="30"
                    HorizontalOptions="Center"
                    Grid.Row="0"
@@ -43,7 +44,7 @@
 	                            VerticalOptions="FillAndExpand" 
 	                            HorizontalOptions="FillAndExpand" />
             <Label x:Name="util"
-                   Text="some important info" 
+                   Text="{Binding [some_important_info], Source={x:Static local:Translator.Instance}}" 
                    FontSize="10"
                    HorizontalOptions="Center"
                    TextColor="ForestGreen"

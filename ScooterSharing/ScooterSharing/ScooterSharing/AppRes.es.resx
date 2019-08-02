@@ -1,0 +1,355 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Account" xml:space="preserve">
+    <value>Perfil</value>
+  </data>
+  <data name="All_fields_must_be_filled" xml:space="preserve">
+    <value>Todos los campos son obligatorios</value>
+  </data>
+  <data name="April" xml:space="preserve">
+    <value>Abril</value>
+  </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Atención</value>
+  </data>
+  <data name="August" xml:space="preserve">
+    <value>Agosto</value>
+  </data>
+  <data name="A_confirmation_code_will_be_sent_to_your_email" xml:space="preserve">
+    <value>Se enviará un código de confirmación a su correo electrónico</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Card_num" xml:space="preserve">
+    <value>Número de tarjeta</value>
+  </data>
+  <data name="Choose_tariff" xml:space="preserve">
+    <value>Elegir tarifa</value>
+  </data>
+  <data name="Confirm_code" xml:space="preserve">
+    <value>Confirma código</value>
+  </data>
+  <data name="Confirm_password" xml:space="preserve">
+    <value>Confirmar contraseña</value>
+    <comment>login page</comment>
+  </data>
+  <data name="December" xml:space="preserve">
+    <value>Diciembre</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Detalles</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Exit_are_you_sure" xml:space="preserve">
+    <value>Salida. ¿Estás seguro?</value>
+  </data>
+  <data name="Expiration_date" xml:space="preserve">
+    <value>Fecha de caducidad</value>
+  </data>
+  <data name="February" xml:space="preserve">
+    <value>Febrero</value>
+  </data>
+  <data name="Finish_rental" xml:space="preserve">
+    <value>Terminar el alquiler</value>
+  </data>
+  <data name="First_Name" xml:space="preserve">
+    <value>Primer nombre</value>
+    <comment>login page</comment>
+  </data>
+  <data name="Got_it" xml:space="preserve">
+    <value>lo tengo</value>
+  </data>
+  <data name="Here_is_some_account_details" xml:space="preserve">
+    <value>Aquí hay algunos detalles de la cuenta</value>
+  </data>
+  <data name="Invalid email" xml:space="preserve">
+    <value>Email inválido</value>
+  </data>
+  <data name="January" xml:space="preserve">
+    <value>Enero</value>
+  </data>
+  <data name="July" xml:space="preserve">
+    <value>Julio</value>
+  </data>
+  <data name="June" xml:space="preserve">
+    <value>Junio</value>
+  </data>
+  <data name="Last_Name" xml:space="preserve">
+    <value>Apellido</value>
+    <comment>login page</comment>
+  </data>
+  <data name="Location_unavailable" xml:space="preserve">
+    <value>No se puede obtener la ubicación del dispositivo\nEnrutamiento no disponible</value>
+  </data>
+  <data name="Log_in" xml:space="preserve">
+    <value>Iniciar sesión</value>
+    <comment>login page</comment>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Mapa</value>
+  </data>
+  <data name="March" xml:space="preserve">
+    <value>Marzo</value>
+  </data>
+  <data name="May" xml:space="preserve">
+    <value>Mayo</value>
+  </data>
+  <data name="Mismatched_passwords" xml:space="preserve">
+    <value>Contraseñas no coincidentes</value>
+  </data>
+  <data name="Not_enough_money_for_deposit" xml:space="preserve">
+    <value>No hay suficiente dinero para depositar</value>
+  </data>
+  <data name="November" xml:space="preserve">
+    <value>Noviembre</value>
+  </data>
+  <data name="October" xml:space="preserve">
+    <value>Octubre</value>
+  </data>
+  <data name="Offers" xml:space="preserve">
+    <value>Ofertas</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Contraseña</value>
+    <comment>login page</comment>
+  </data>
+  <data name="Password_must_contain_at_least_8_characters" xml:space="preserve">
+    <value>La contraseña debe contener al menos 8 caracteres</value>
+  </data>
+  <data name="Pay" xml:space="preserve">
+    <value>Paga</value>
+  </data>
+  <data name="Payments" xml:space="preserve">
+    <value>Pagos</value>
+  </data>
+  <data name="Payment_amount" xml:space="preserve">
+    <value>Monto del pago</value>
+  </data>
+  <data name="per_minute" xml:space="preserve">
+    <value>Por minuto</value>
+  </data>
+  <data name="Phone_number" xml:space="preserve">
+    <value>Número de teléfono</value>
+    <comment>login page</comment>
+  </data>
+  <data name="Please_wait" xml:space="preserve">
+    <value>Por favor espera</value>
+  </data>
+  <data name="Refill" xml:space="preserve">
+    <value>Rellenar</value>
+  </data>
+  <data name="Rental" xml:space="preserve">
+    <value>Alquiler</value>
+  </data>
+  <data name="Rental_cost" xml:space="preserve">
+    <value>Costo de alquiler</value>
+  </data>
+  <data name="Reserve" xml:space="preserve">
+    <value>Reserva</value>
+  </data>
+  <data name="Scan_QR_to_rent_scooter" xml:space="preserve">
+    <value>Escanee QR para alquilar scooter</value>
+  </data>
+  <data name="Select_language" xml:space="preserve">
+    <value>Seleccione el idioma</value>
+  </data>
+  <data name="September" xml:space="preserve">
+    <value>Septiembre</value>
+  </data>
+  <data name="Sign_Up" xml:space="preserve">
+    <value>Regístrate</value>
+    <comment>login page</comment>
+  </data>
+  <data name="Something_goes wrong" xml:space="preserve">
+    <value>Algo va mal</value>
+  </data>
+  <data name="Something_wrong_with_server" xml:space="preserve">
+    <value>Algo anda mal con el servidor</value>
+  </data>
+  <data name="some_important_info" xml:space="preserve">
+    <value>Alguna información importante</value>
+    <comment>splash screen</comment>
+  </data>
+  <data name="Start_rental" xml:space="preserve">
+    <value>Comience a alquilar</value>
+  </data>
+  <data name="Tariff" xml:space="preserve">
+    <value>Tarifa</value>
+  </data>
+  <data name="There_will_be_information_about_tariffs_and_discounts" xml:space="preserve">
+    <value>Habrá información sobre tarifas y descuentos</value>
+  </data>
+  <data name="This_scooter_already_rented_or_reserved" xml:space="preserve">
+    <value>Este scooter ya está alquilado o reservado</value>
+  </data>
+  <data name="Too_short_card_number" xml:space="preserve">
+    <value>Número de tarjeta demasiado corto</value>
+  </data>
+  <data name="Too_short_code" xml:space="preserve">
+    <value>Código demasiado corto</value>
+  </data>
+  <data name="Too_short_phone_number" xml:space="preserve">
+    <value>Número de teléfono demasiado corto</value>
+  </data>
+  <data name="Top_up_account" xml:space="preserve">
+    <value>Cuenta de recarga</value>
+  </data>
+  <data name="To_renting_details" xml:space="preserve">
+    <value>Para detalles de alquiler</value>
+  </data>
+  <data name="User already exists" xml:space="preserve">
+    <value>El usuario ya existe</value>
+  </data>
+  <data name="User_doesn't_exist" xml:space="preserve">
+    <value>El usuario no existe</value>
+  </data>
+  <data name="Verification_code" xml:space="preserve">
+    <value>Código de verificación</value>
+    <comment>login page</comment>
+  </data>
+  <data name="Welcome" xml:space="preserve">
+    <value>¡Bienvenido!</value>
+    <comment>splash screen</comment>
+  </data>
+  <data name="Withdrawal_of_funds" xml:space="preserve">
+    <value>Retiro de fondos</value>
+  </data>
+  <data name="Withdraw_funds" xml:space="preserve">
+    <value>Retirar Fondos</value>
+  </data>
+  <data name="Wrong verification code" xml:space="preserve">
+    <value>Código de verificación incorrecto</value>
+  </data>
+  <data name="Wrong_Qr" xml:space="preserve">
+    <value>Qr incorrecto</value>
+  </data>
+  <data name="You_can't_log_out_during_renting" xml:space="preserve">
+    <value>No puedes cerrar sesión durante el alquiler</value>
+  </data>
+  <data name="You_must_enter_verification_code" xml:space="preserve">
+    <value>Debes ingresar el código de verificación</value>
+  </data>
+</root>

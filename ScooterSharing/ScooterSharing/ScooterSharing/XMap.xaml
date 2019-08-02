@@ -5,9 +5,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:local="clr-namespace:PinchGesture"
              xmlns:local1="clr-namespace:ScooterSharing"
+             xmlns:translator="clr-namespace:ScooterSharing.Extensions"
              mc:Ignorable="d"
              BackgroundColor="WhiteSmoke"
-             Title="Map"
+             Title="{Binding [Map], Source={x:Static translator:Translator.Instance}}"
              x:Class="ScooterSharing.XMap">
     <ContentPage.Content>
         <StackLayout x:Name="mainStack">
@@ -131,7 +132,14 @@
                                            Grid.Column="2"
                                            Text="{Binding Lng}"
                                            VerticalOptions="End" />
-                                    
+                                    <Button Grid.Column="1"
+                                            Grid.Row="2"
+                                            Grid.ColumnSpan="3"
+                                            IsVisible="{Binding reservable}"
+                                            IsEnabled="{Binding reservable}"
+                                            Clicked="Reserve"
+                                            Text="{Binding btnResText}"/>
+
                                 </Grid>
                             </ViewCell>
                         </DataTemplate>

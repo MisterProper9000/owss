@@ -3,17 +3,47 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+             xmlns:translator="clr-namespace:ScooterSharing.Extensions"
              mc:Ignorable="d"
-             Title="Offers"
+             Title="{Binding [Offers], Source={x:Static translator:Translator.Instance}}"
              BackgroundColor="WhiteSmoke"
              x:Class="ScooterSharing.Offers">
     <ContentPage.Content>
         <StackLayout>
-            
-            <Label Text="There will be information about tariffs and discounts"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Grid>
+                <Label Text="{Binding [Choose_tariff], Source={x:Static translator:Translator.Instance}}"
+                       FontSize="20"
+                       Grid.Row="0"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TextColor="DarkGreen"/>
+                <ListView x:Name="TariffList"
+                          Grid.Row="1"
+                          ItemsSource="{Binding tariffs}"
+                          RefreshCommand="{Binding RefreshCommand}"
+                          IsRefreshing="{Binding IsRefreshing}"
+                          RefreshControlColor="LightSeaGreen"
+                          ItemSelected="TariffTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Label Text="{Binding m_text}"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+
+                <Label Text="{Binding [Important_information], Source={x:Static translator:Translator.Instance}}"
+                       VerticalOptions="CenterAndExpand" 
+                       Grid.Row="2"
+                       FontSize="20"
+                       HorizontalOptions="CenterAndExpand" />
+                <Label Text="infa epta"/>
+            </Grid>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

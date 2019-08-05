@@ -1,0 +1,48 @@
+<UFXMsg direction="Rq" msg_type="Doc" scheme="WAY4Doc" version="2.0">
+    <MsgId>1211372852124</MsgId>
+    <Source app="MOB"/>
+    <MsgData>
+        <Doc>
+            <TransType>
+                <TransCode>
+                    <MsgCode>OrdReq</MsgCode>
+                    <ServiceCode>P2P</ServiceCode>
+                </TransCode>
+                <TransCondition>MBSMS</TransCondition>
+                <TransRules>
+                    <TransRule>
+                        <ParmCode>CreditTransCondition</ParmCode>
+                        <Value>TBAPPL,MNET,ENET,NO_CARD,NO_TERM</Value>
+                    </TransRule>
+                    <TransRule>
+                        <ParmCode>BusinessApplicationIdentifier</ParmCode>
+                        <Value>MP</Value>
+                    </TransRule>
+                </TransRules>
+            </TransType>
+            <LocalDt>2019-08-01 23:36:06</LocalDt>
+            <Requestor>
+                <ContractNumber>1000040176379547</ContractNumber> <!-- Put your test card number (sender) here -->
+                <CardInfo>
+                    <CardExpiry>2008</CardExpiry> <!-- Put your test card (sender) expiration date in format YYMM here -->
+                </CardInfo>
+                <SecurityData>
+                    <SecParm>
+                        <Code>CVV2</Code>
+                        <Value>970</Value> <!-- Put your test card (sender) CVV2 here -->
+                    </SecParm>
+                </SecurityData>
+            </Requestor>
+            <Source>
+                <ContractNumber>SOA0001</ContractNumber> <!-- Put your virtual POS terminal ID here -->
+            </Source>
+            <Destination>
+                <ContractNumber>clientNumber</ContractNumber> <!-- Put your test card number (receive) here -->
+            </Destination>
+            <Transaction>
+                <Currency>currency</Currency>
+                <Amount>amount</Amount>
+            </Transaction>
+        </Doc>
+    </MsgData>
+</UFXMsg>

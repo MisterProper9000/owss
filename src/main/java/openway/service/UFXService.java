@@ -19,5 +19,10 @@ public interface UFXService {
 
     String GetPayment(int clientId, int lesserId, float cost);
 
+    String CheckRes(String res);
+
+    String ClientTopUp(String name, String sName, String cardNum,
+                              String cvc2, String exDate,String amount, int clientId);
+
 }
 

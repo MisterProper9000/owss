@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static java.lang.Math.ceil;
+import static java.lang.Math.log;
 
 
 @Service
@@ -31,6 +32,9 @@ public class OrderServiceImpl implements OrderService {
     final private MotoRepository motoRepository;
 
     private float reserveCancelPenalty = 1;
+
+
+    private int TIME_OUT_RES = 15;
 
     public OrderServiceImpl(OrderRepository orderRepository,
                             ClientRepository clientRepository,
@@ -144,7 +148,9 @@ public class OrderServiceImpl implements OrderService {
         if(client == null)
             return String.valueOf(false);
 
-        Order order = new Order("null", "null",
+        String begin_time = setCurrentDataToString();
+
+        Order order = new Order(begin_time, "null",
                 moto_id, client.getId(), 10,1  ,-1, ufxService.GenerateRRN("time"));
         orderRepository.save(order);
 
@@ -224,25 +230,51 @@ public class OrderServiceImpl implements OrderService {
     public String reserveTM(int id_moto) {
         UFXService ufxService = new UFXServiceImpl();
         Order tmp = null;
-        int tmpOrderId = 0;
+
         Motoroller moto = motoRepository.findMotorollerById(id_moto);
-        List<Order> orders = orderRepository.findOrdersByCost(-1.0f);
-        int i;
-        for (i = 0; i < orders.size(); i++) {
-            if (orders.get(i).getId_moto() == id_moto) {
-                tmp = orders.get(i);
-                tmpOrderId = tmp.getId();
-                break;
-            }
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+        Date currentDate = new Date();
+        Date dateStart = new Date();
+        try {
+            dateStart = formatter.parse(moto.getTime_res_st());
+
+        } catch (Exception e) {
+            return e.toString();
         }
-        ufxService.ReverseDeposit(tmp.getId_client(), moto.getId_owner(), tmp.getRRN());
-        ufxService.GetPayment(tmp.getId_client(), moto.getId_owner(), 1);
+
+        long timeDelta = (currentDate.getTime() - dateStart.getTime()) / (60 * 1000);
+        if (timeDelta > TIME_OUT_RES) {
+            moto.setStatusReserve(false);
+            try {
+                moto.setTime_res_st(formatter.parse("00-00-0000 00:00").toString());
+            } catch (Exception e) {
+                return e.toString();
+            }
+            motoRepository.save(moto);
+
+            int tmpOrderId = 0;
+            List<Order> orders = orderRepository.findOrdersByCost(-1.0f);
+            int i;
+            for (i = 0; i < orders.size(); i++) {
+                if (orders.get(i).getId_moto() == moto.getId()) {
+                    tmp = orders.get(i);
+                    tmpOrderId = tmp.getId();
+                    break;
+                }
+            }
+
+            
+            String resRevDeposit = ufxService.ReverseDeposit(tmp.getId_client(), moto.getId_owner(), tmp.getRRN());
+            logger.info("reverse deposit by timeout of reserve: " + resRevDeposit);
+            String resPayment = ufxService.GetPayment(tmp.getId_client(), moto.getId_owner(), 1);
+            logger.info("get payment by timeout reservation: " + resPayment);
+        }
         return "OK|";
     }
 
 
     private String setCurrentDataToString(){
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
         Date currentDate = new Date();
         return formatter.format(currentDate);
     }

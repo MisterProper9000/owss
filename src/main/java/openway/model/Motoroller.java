@@ -18,6 +18,7 @@ public class Motoroller {
     private boolean insurance;
     private boolean status_rent = false;
     private boolean status_reserv = false;
+    private String time_res_st;
 
     public Motoroller() {
     }
@@ -28,7 +29,16 @@ public class Motoroller {
         this.id_owner = id_owner;
         this.insurance = insurance;
         this.status_rent = status_rent;
+    }
 
+    public Motoroller(String auto_number, String model, int id_owner, boolean insurance, boolean status_rent,
+                      String time_res_st) {
+        this.auto_number = auto_number;
+        this.model = model;
+        this.id_owner = id_owner;
+        this.insurance = insurance;
+        this.status_rent = status_rent;
+        this.time_res_st = time_res_st;
     }
 
     public boolean isRent() {
@@ -51,5 +61,13 @@ public class Motoroller {
 
     public int getId() {
         return id;
+    }
+
+    public String getTime_res_st() {
+        return time_res_st;
+    }
+
+    public void setTime_res_st(String time_res_st) {
+        this.time_res_st = time_res_st;
     }
 }

@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -27,10 +29,10 @@ public class MotoServiceImpl implements MotoService {
 
     @Override
     public boolean getStatusRent(int id) {
-        //Motoroller moto = motoRepository.findMotorollerById(id);
-        //return moto.isRent();
         return motoRepository.findMotorollerById(id).isRent();
     }
+
+
 
     @Override
     public boolean getStatusRes(int id){

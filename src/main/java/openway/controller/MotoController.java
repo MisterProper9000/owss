@@ -14,6 +14,7 @@ public class MotoController {
 
     private int moto_id = 1;
 
+
     private final static Logger logger = Logger.getLogger(MotoController.class.getName());
 
     private final MotoService motoService;
@@ -28,8 +29,12 @@ public class MotoController {
     String sendStatus() {
         logger.info("moto status: rent = " + motoService.getStatusRent(moto_id) +
                 " res = " + motoService.getStatusRes(moto_id));
+
         boolean rent = motoService.getStatusRent(moto_id);
         boolean res = motoService.getStatusRes(moto_id);
+
+        String resTm = orderService.reserveTM(moto_id);
+
         if(!rent && ! res){
 
             logger.info("false");
@@ -44,8 +49,7 @@ public class MotoController {
             return "true";
         }
         return "dermo";
-        //logger.info();
-        //return motoService.getStatusRent(moto_id) + "res1" ;//" + motoService.getStatusRes(moto_id);
+
     }
 
     @PostMapping("/ardstart")
@@ -60,13 +64,6 @@ public class MotoController {
         return orderService.endRent(id_order);
     }
 
-    @PostMapping("/ardRT")
-    String resTT(@RequestBody String id_motoStr) throws ParseException {
-        logger.info("reserve timeout data: " + id_motoStr);
-        //int id_moto = Integer.valueOf(id_motoStr);
-        return  orderService.reserveTM(moto_id);
-        //return orderService.reserveTm(id_moto);
-    }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/addmoto")

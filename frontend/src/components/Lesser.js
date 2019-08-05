@@ -70,6 +70,18 @@ class Lesser extends Component {
 
 
     componentDidMount() {
+        fetch('http://10.101.177.21:9091/info')
+            .then(resp => {
+                return resp.json()
+            })
+            .then(resp => this.setState(
+                {
+                    forms: resp,
+                    isContentShown: true
+                }))
+            .catch(error => {
+                console.log(error);
+            });
 
 
 

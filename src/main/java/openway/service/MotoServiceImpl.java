@@ -3,7 +3,9 @@ package openway.service;
 import com.google.gson.Gson;
 import net.glxn.qrgen.core.image.ImageType;
 import net.glxn.qrgen.javase.QRCode;
+import openway.model.Lesser;
 import openway.model.Motoroller;
+import openway.repository.LesserRepository;
 import openway.repository.MotoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,13 +55,13 @@ public class MotoServiceImpl implements MotoService {
     }
 
     @Override
-    public boolean addMoto(String moto) {
+    public int addMoto(String moto) {
         logger.info("called addNewLesser()");
         Gson g = new Gson();
         Motoroller motoroller = g.fromJson(moto,Motoroller.class);
         motoRepository.save(motoroller);
         logger.info("save moto to database:" + moto);
-        return true;
+        return motoroller.getId_owner();
     }
 
     @Override

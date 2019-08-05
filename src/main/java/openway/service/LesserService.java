@@ -13,9 +13,11 @@ public interface LesserService {
 
     List<Integer> listofidlessers();
 
-    List<String> getNameSerName(String i);
+    Lesser getNameSerName(String i);
 
     String checkBalanceLessor(String data);
+
+    boolean addMotoToLesser(int id);
 
     //void setPasswordHash();
 

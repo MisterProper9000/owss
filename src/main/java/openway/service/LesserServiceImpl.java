@@ -84,14 +84,11 @@ public class LesserServiceImpl implements LesserService {
     }
 
     @Override
-    public List<String> getNameSerName(String id) {
-        JsonObject jsonObject = new JsonParser().parse(id).getAsJsonObject();
-        int id_lessor = jsonObject.get("id").getAsInt();
-        Lesser lesser = lesserRepository.findLesserById(id_lessor);
-        List<String> list = new ArrayList<>();
-        list.add(lesser.getFirst_name());
-        list.add(lesser.getLast_name());
-        return list;
+    public Lesser getNameSerName(String id) {
+
+        Lesser lesser = lesserRepository.findLesserById(Integer.parseInt(id));
+
+        return lesser;
     }
 
     @Override
@@ -108,6 +105,13 @@ public class LesserServiceImpl implements LesserService {
         balanceObj.addProperty("balance",balance);
         logger.info("balance lesser:"+balanceObj);
         return String.valueOf(balanceObj);
+    }
+
+    public boolean addMotoToLesser(int id) {
+        Lesser lesser = lesserRepository.findLesserById(id);
+        lesser.setSum_moto(lesser.getSum_moto()+1);
+        lesserRepository.save(lesser);
+        return true;
     }
 
 

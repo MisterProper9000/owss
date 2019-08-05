@@ -64,8 +64,8 @@ public class MainController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/lesserinfo")
-    List<String> getLesInfo(@RequestBody String id) {
-        logger.info("get lesser "+id);
+    Lesser getLesInfo(@RequestBody String id) {
+        logger.info("get lesser /lesserinfo :"+id);
         return lesserService.getNameSerName(id);
     }
 

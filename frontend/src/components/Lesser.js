@@ -13,6 +13,7 @@ class Lesser extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            id_client: Cookies.get('token'),
             type: 'Personal Owner',
             first_name: 'Jools',
             last_name: 'Blinnikova',
@@ -22,6 +23,8 @@ class Lesser extends Component {
             address: 'Torzhkovskaya 15',
             sum_moto: '1',
             bank_account: '1234567',
+
+            lesserData: [],
 
             id: '',
             auto_number: '',
@@ -70,35 +73,41 @@ class Lesser extends Component {
 
 
     componentDidMount() {
-        fetch('http://10.101.177.21:9091/info')
-            .then(resp => {
-                return resp.json()
-            })
+
+        fetch('http://10.101.177.21:9091/lesserinfo', {
+            method: 'POST',
+            body: this.state.id_client
+        }).then(resp => {
+            return resp.json()
+        })
             .then(resp => this.setState(
                 {
-                    forms: resp,
-                    isContentShown: true
+                    first_name: resp.first_name,
+                    last_name: resp.last_name,
+                    type: resp.type,
+                    email: resp.email,
+                    phone: resp.phone,
+                    company_name: resp.company_name,
+                    address: resp.address,
+                    sum_moto: resp.sum_moto,
+                    bank_account: resp.bank_account,
                 }))
-            .catch(error => {
-                console.log(error);
-            });
 
 
-
-        fetch('http://10.101.177.21:9091/balanceInqueryLessor', {
-            method: 'POST',
-            body: JSON.stringify({
-                    email: 'test2@gmail.com',
-                }
-            )
-        }).then((resp) => {
-            return resp.json()
-        }).then(function (jsonData) {
-            return JSON.stringify(jsonData);
-        }).then(resp => {
-            var bal = resp.split('"balance":');
-            this.setState({balance: bal});
-        })
+        // fetch('http://10.101.177.21:9091/balanceInqueryLessor', {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //             email: 'test2@gmail.com',
+        //         }
+        //     )
+        // }).then((resp) => {
+        //     return resp.json()
+        // }).then(function (jsonData) {
+        //     return JSON.stringify(jsonData);
+        // }).then(resp => {
+        //     var bal = resp.split('"balance":');
+        //     this.setState({balance: bal});
+        // })
 
 
         // fetch('http://10.101.177.21:9091/motoinfo')

@@ -61,8 +61,8 @@ class Info extends Component {
             })
             .then(resp => this.setState(
                 {
-                    forms: resp,
-                    isContentShown: true
+                    first_name: resp.first_name,
+                    last_name: resp.last_name,
                 }))
             .catch(error => {
                 console.log(error);

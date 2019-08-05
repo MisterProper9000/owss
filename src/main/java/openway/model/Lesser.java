@@ -77,5 +77,7 @@ public class Lesser {
         this.sum_moto = sum_moto;
     }
 
-
+    public int getSum_moto() {
+        return sum_moto;
+    }
 }

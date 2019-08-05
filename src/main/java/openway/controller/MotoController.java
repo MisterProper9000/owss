@@ -1,6 +1,7 @@
 package openway.controller;
 
 import openway.model.Motoroller;
+import openway.service.LesserService;
 import openway.service.MotoService;
 import openway.service.OrderService;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,12 @@ public class MotoController {
 
     private final MotoService motoService;
     private final OrderService orderService;
+    private final LesserService lesserService;
 
-    public MotoController(MotoService motoService, OrderService orderService) {
+    public MotoController(MotoService motoService, OrderService orderService, LesserService lesserService) {
         this.motoService = motoService;
         this.orderService = orderService;
+        this.lesserService = lesserService;
     }
 
     @GetMapping("/ardgetstatus")
@@ -45,7 +48,8 @@ public class MotoController {
     boolean addMotoToDB(@RequestBody String moto) {
         logger.info("check auth");
         logger.info("auth: " + moto);
-        return motoService.addMoto(moto);
+        int id_lessor = motoService.addMoto(moto);
+        return lesserService.addMotoToLesser(id_lessor);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

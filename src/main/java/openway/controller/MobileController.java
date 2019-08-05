@@ -1,9 +1,13 @@
 package openway.controller;
 
 import openway.service.ClientService;
+import openway.service.MotoService;
+import openway.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
+
+
 
 @RestController
 public class MobileController {
@@ -11,9 +15,13 @@ public class MobileController {
     private final static Logger logger = Logger.getLogger(MobileController.class.getName());
 
     private final ClientService clientService;
+    private final OrderService orderService;
+    private int moto_id = 1;
 
-    public MobileController(ClientService clientService) {
+
+    public MobileController(ClientService clientService, OrderService orderService) {
         this.clientService = clientService;
+        this.orderService = orderService;
     }
 
     @PostMapping("/regclient")
@@ -39,5 +47,33 @@ public class MobileController {
         logger.info("pay rent request " + data);
         return clientService.payRent(data);
     }
+
+    @PostMapping("/motoRes")
+    String reserveStart(@RequestBody String resData) {
+        logger.info("moto reserve request:" + resData);
+        String reserveResult = orderService.motoReserve(moto_id, resData);
+        logger.info("moto reserved:" + reserveResult);
+
+        return reserveResult;
+
+    }
+
+    @PostMapping("/motoResCanc")
+    String reserveCanceled(@RequestBody String resCancData) {
+        logger.info("moto reserve request: + " + resCancData);
+        String reserveCancelResult = orderService.motoReserveCanceled(moto_id, resCancData);
+        logger.info("moto reserved:" + reserveCancelResult);
+        return reserveCancelResult;
+    }
+
+
+    //@GetMapping("/motoResFinish")
+    //String reserveFinish(@RequestBody String resData) {
+    //    logger.info("moto reserve request: + " + resData);
+    //    String reserveResult = orderService.motoReserve(moto_id, resData);
+    //    logger.info("moto reserved: " + reserveResult);
+    //    return "OK|" + reserveResult;
+    //}
+
 
 }

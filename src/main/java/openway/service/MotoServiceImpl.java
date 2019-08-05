@@ -28,11 +28,17 @@ public class MotoServiceImpl implements MotoService {
     }
 
     @Override
-    public boolean getStatus(int id) {
-        Motoroller moto = motoRepository.findMotorollerById(id);
-        boolean motoStatus = moto.isStatus();
-        return motoStatus;
+    public boolean getStatusRent(int id) {
+        //Motoroller moto = motoRepository.findMotorollerById(id);
+        //return moto.isRent();
+        return motoRepository.findMotorollerById(id).isRent();
     }
+
+    @Override
+    public boolean getStatusRes(int id){
+        return motoRepository.findMotorollerById(id).isRes();
+    }
+
 
     @Override
     public void createQrCode(int id) {

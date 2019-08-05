@@ -5,7 +5,9 @@ import openway.model.Motoroller;
 import java.util.List;
 
 public interface MotoService {
-    boolean getStatus(int id);
+    boolean getStatusRent(int id);
+    boolean getStatusRes(int id);
+
     void createQrCode(int id);
     int addMoto(String moto);
     List<Motoroller> findAll();

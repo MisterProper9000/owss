@@ -33,8 +33,6 @@ public class UFXServiceImpl implements UFXService {
 
     private String RRN;
 
-//TODO fix bug with clients id(contract numbers)
-
 
     /**
      *
@@ -120,7 +118,7 @@ public class UFXServiceImpl implements UFXService {
     }
 
 
-    public String reverseDeposit(int clientId, int lesserId, String RRN){
+    public String ReverseDeposit(int clientId, int lesserId, String RRN){
 
         String clientNumber = GenerateId("") + clientId + "CL";
         String lesserNumber = GenerateId("") + lesserId + "LES";
@@ -130,7 +128,6 @@ public class UFXServiceImpl implements UFXService {
 
         String resReverseDeposit = SendRequest(urlUfxAdapter, requestReverseDeposit);
         return resReverseDeposit;
-        //return  requestReverseDeposit;
     }
 
     public String GetPayment(int clientId, int lesserId, float cost){
@@ -146,6 +143,9 @@ public class UFXServiceImpl implements UFXService {
         //return "";
     }
 
+    public  String GetRrn(){
+        return this.RRN;
+    }
 
 
     /**
@@ -164,7 +164,7 @@ public class UFXServiceImpl implements UFXService {
     private String RequestCreateClient(String sName, String name,
                                       String clientNumber, String regNumberApp) {
 
-        String res = "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
+        return "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
                 "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
                 "    <Source app=\"MobileApp\"/>\n" +
                 "    <MsgData>\n" +
@@ -199,7 +199,6 @@ public class UFXServiceImpl implements UFXService {
                 "        </Application>\n" +
                 "\t</MsgData>\n" +
                 "</UFXMsg>";
-        return res;
     }
 
     /**
@@ -219,7 +218,7 @@ public class UFXServiceImpl implements UFXService {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = format.format(new Date());
 
-        String res  = "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
+        return  "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
                 "    <MsgId>AAA-555-333-EEE-23124145</MsgId>\n" +
                 "    <Source app=\"MobileApp\"/>\n" +
                 "    <MsgData>\n" +
@@ -266,8 +265,6 @@ public class UFXServiceImpl implements UFXService {
                 "\t</MsgData>\n" +
                 "</UFXMsg>";
 
-
-        return res;
     }
 
     /** //TODO: finish doc
@@ -285,7 +282,7 @@ public class UFXServiceImpl implements UFXService {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         String dateString = format.format(new Date());
 
-        String res = "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
+        return  "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
                 "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
                 "    <Source app=\"WebApp\"/>\n" +
                 "    <MsgData>\n" +
@@ -348,14 +345,12 @@ public class UFXServiceImpl implements UFXService {
                 "        </Application>\n" +
                 "    </MsgData>\n" +
                 "</UFXMsg>";
-
-        return res;
     }
 
 
     private String RequestCreateBalanceInquery(String clientNumber){
         String regNumberApp = clientNumber + "_B";
-        String request = "<UFXMsg direction=\"Rq\" msg_type=\"Information\" scheme=\"WAY4Appl\" version=\"2.0\">\n" +
+        return  "<UFXMsg direction=\"Rq\" msg_type=\"Information\" scheme=\"WAY4Appl\" version=\"2.0\">\n" +
                 "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
                 "    <Source app=\"MobileApp\"/>\n" +
                 "    <MsgData>\n" +
@@ -386,7 +381,6 @@ public class UFXServiceImpl implements UFXService {
                 "        </Information>\n" +
                 "    </MsgData>\n" +
                 "</UFXMsg>";
-        return  request;
     }
 
     private String BalanceResponseParse(String response){
@@ -416,7 +410,7 @@ public class UFXServiceImpl implements UFXService {
         String dateStr = DateUfx.getTime();
         this.RRN = RRN;
 
-        String res = "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
+        return  "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
                 "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
                 "    <Source app=\"MobileApp\"/>\n" +
                 "    <MsgData>\n" +
@@ -460,7 +454,6 @@ public class UFXServiceImpl implements UFXService {
                 "        </Doc>\n" +
                 "    </MsgData>\n" +
                 "</UFXMsg>";
-        return res;
     }
 
     private String RequestCreateReverseDeposit(String clientNumber,
@@ -468,7 +461,7 @@ public class UFXServiceImpl implements UFXService {
                                                String RRN,
                                                String sum, String currency) {
         String dateStr = DateUfx.getTime();
-        String request = "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
+        return  "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
                 "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
                 "    <Source app=\"MobileApp\"/>\n" +
                 "    <MsgData>\n" +
@@ -514,7 +507,6 @@ public class UFXServiceImpl implements UFXService {
                 "        </Doc>\n" +
                 "    </MsgData>\n" +
                 "</UFXMsg>";
-        return request;
     }
 
     private String RequestCreatePayment(String clientNumber,
@@ -523,7 +515,7 @@ public class UFXServiceImpl implements UFXService {
 
         String RRN = GenerateRRN("time");
         String dateStr = DateUfx.getTime();
-        String request = "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
+        return  "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
                 "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
                 "    <Source app=\"MobileApp\"/>\n" +
                 "    <MsgData>\n" +
@@ -567,14 +559,6 @@ public class UFXServiceImpl implements UFXService {
                 "        </Doc>\n" +
                 "    </MsgData>\n" +
                 "</UFXMsg>";
-
-        return request;
-
-    }
-
-
-    public  String GetRrn(){
-        return this.RRN;
     }
 
     /**
@@ -587,7 +571,6 @@ public class UFXServiceImpl implements UFXService {
         CloseableHttpClient httpClient = HttpClients.createDefault();
         HttpPost httpPost = new HttpPost(url);
         CloseableHttpResponse response;
-        ResponseHandler <String> handler = new BasicResponseHandler();
         String responseString;
 
         try{
@@ -599,7 +582,6 @@ public class UFXServiceImpl implements UFXService {
 
             responseString = new BufferedReader(new InputStreamReader(ent.getContent()))
                     .lines().collect(Collectors.joining("\n"));
-
             httpClient.close();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -624,13 +606,18 @@ public class UFXServiceImpl implements UFXService {
         return  "XML_FF_";
     }
 
-    private String GenerateRRN(String type){
+    /**
+     *
+     * @param type type of data for generating RRN
+     *             time => RRN == date in format yyMMddHHmmss
+     * @return
+     */
+    public String GenerateRRN(String type){
         String res = "";
         if(type.equals("time"))
         {
             SimpleDateFormat format = new SimpleDateFormat("yyMMddHHmmss");
-            String dateString = format.format(new Date());
-            return dateString;
+            return format.format(new Date());
         }
         return res;
     }

@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 @RestController
 public class MotoController {
 
+    private int moto_id = 1;
+
     private final static Logger logger = Logger.getLogger(MotoController.class.getName());
 
     private final MotoService motoService;
@@ -26,9 +28,27 @@ public class MotoController {
     }
 
     @GetMapping("/ardgetstatus")
-    boolean sendStatus() {
-        logger.info("moto status: " + motoService.getStatus(1));
-        return motoService.getStatus(1);
+    String sendStatus() {
+        logger.info("moto status: rent = " + motoService.getStatusRent(moto_id) +
+                " res = " + motoService.getStatusRes(moto_id));
+        boolean rent = motoService.getStatusRent(moto_id);
+        boolean res = motoService.getStatusRes(moto_id);
+        if(!rent && ! res){
+
+            logger.info("false");
+            return "false";
+        }
+        if(!rent && res){
+            logger.info("falseres1");
+            return "falseres1";
+        }
+        if(rent && res){
+            logger.info("true");
+            return "true";
+        }
+        return "dermo";
+        //logger.info();
+        //return motoService.getStatusRent(moto_id) + "res1" ;//" + motoService.getStatusRes(moto_id);
     }
 
     @PostMapping("/ardstart")
@@ -41,6 +61,14 @@ public class MotoController {
     String endRent(@RequestBody String id_order) throws ParseException {
         logger.info("end rent data: " + id_order);
         return orderService.endRent(id_order);
+    }
+
+    @PostMapping("/ardRT")
+    String resTT(@RequestBody String id_motoStr) throws ParseException {
+        logger.info("reserve timeout data: " + id_motoStr);
+        //int id_moto = Integer.valueOf(id_motoStr);
+        return  orderService.reserveTM(moto_id);
+        //return orderService.reserveTm(id_moto);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -65,4 +93,5 @@ public class MotoController {
         logger.info("get list of appliers id (called listOfIdClients())");
         return motoService.listofidmoto();
     }
+
 }

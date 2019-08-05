@@ -13,14 +13,17 @@ public interface UFXService {
 
     String GetDepositFromClient(int clientId, int lesserId);
 
-    String GetRrn();
+    String ReverseDeposit(int clientId, int lesserId, String RRN);
 
-    String reverseDeposit(int clientId, int lesserId, String RRN);
+    String GetRrn();
 
     String GetPayment(int clientId, int lesserId, float cost);
 
     double getDepositSize();
 
     String BalanceLesserRequestInWay4(int clientId);
+
+    String GenerateRRN(String type);
+
 }
 

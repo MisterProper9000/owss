@@ -7,5 +7,6 @@ public enum Status {
     MISMATCH,
     ERROR,
     OTHER,
-    BLOCKED
+    BLOCKED,
+    NOTENOUGH
 }

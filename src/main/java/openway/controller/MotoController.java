@@ -70,10 +70,10 @@ public class MotoController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/addmoto")
-    void addMotoToDB(@RequestBody String moto) {
+    boolean addMotoToDB(@RequestBody String moto) {
         logger.info("check auth");
         logger.info("auth: " + moto);
-        motoService.addMoto(moto);
+        return motoService.addMoto(moto);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

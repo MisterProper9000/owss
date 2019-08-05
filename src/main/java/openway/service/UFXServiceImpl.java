@@ -6,11 +6,9 @@ import openway.utils.DateUfx;
 import openway.utils.XMLParse;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.BasicResponseHandler;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.springframework.stereotype.Service;
@@ -32,7 +30,7 @@ public class UFXServiceImpl implements UFXService {
     private String depositCurrency = "USD";
 
     private String RRN;
-
+    private String VPosId = "SOA0001";
 
     /**
      *
@@ -97,6 +95,15 @@ public class UFXServiceImpl implements UFXService {
         return balance;
     }
 
+    public String BalanceLesserRequestInWay4(int clientId){
+        String lesserNumber = GenerateId("") + clientId+"LES";
+        String request = RequestCreateBalanceInquery(lesserNumber);
+        String response = SendRequest(urlUfxAdapter, request);
+        logger.info("request: "+request+" , response: "+response);
+        String balance = BalanceResponseParse(response);
+        return balance;
+    }
+
     public String GetDepositFromClient(int clientId, int lesserId){
 
         String clientNumber = GenerateId("") + clientId + "CL";
@@ -107,7 +114,6 @@ public class UFXServiceImpl implements UFXService {
         String resDeposit = SendRequest(urlUfxAdapter, requestGetDeposit);
         return resDeposit;
     }
-
 
     public String ReverseDeposit(int clientId, int lesserId, String RRN){
 
@@ -138,6 +144,26 @@ public class UFXServiceImpl implements UFXService {
         return this.RRN;
     }
 
+    public String CheckRes(String str){
+        String sp = "Successfully processed";
+
+        String res = XMLParse.findValueInString(str, sp);
+        if(!res.equals(sp)){
+            return String.valueOf(Status.ERROR);
+        }
+        return String.valueOf(Status.OK);
+    }
+
+
+    public String ClientTopUp(String name, String sName, String cardNum,
+                              String cvc2, String exDate,String amount, int clientId){
+        String clientNumber = GenerateId("") + clientId + "CL";
+        //String clientNumber = "CLIENT_TEST_100";
+        String topUpRequest = RequestCreateTopUpCl(name, sName, cardNum,
+                cvc2, exDate, amount, clientNumber);
+        String resTopUp = SendRequest(urlUfxAdapter, topUpRequest);
+        return resTopUp;
+    }
 
     /**
      *
@@ -552,6 +578,81 @@ public class UFXServiceImpl implements UFXService {
                 "</UFXMsg>";
     }
 
+    private String RequestCreateTopUpCl(String name, String sName, String cardNum,
+                                        String cvc2, String exDate,String amount,
+                                        String clientNumber){
+        String dateStr = DateUfx.getTime();
+        return "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
+                "    <MsgId>1211372852124</MsgId>\n" +
+                "    <Source app=\"MOB\"/>\n" +
+                "    <MsgData>\n" +
+                "        <Doc>\n" +
+                "            <TransType>\n" +
+                "                <TransCode>\n" +
+                "                    <MsgCode>OrdReq</MsgCode>\n" +
+                "                    <ServiceCode>P2P</ServiceCode>\n" +
+                "                </TransCode>\n" +
+                "                <TransCondition>MBSMS</TransCondition>\n" +
+                "                <TransRules>\n" +
+                "                    <TransRule>\n" +
+                "                        <ParmCode>CreditTransCondition</ParmCode>\n" +
+                "                        <Value>TBAPPL,MNET,ENET,NO_CARD,NO_TERM</Value>\n" +
+                "                    </TransRule>\n" +
+                "                    <TransRule>\n" +
+                "                        <ParmCode>BusinessApplicationIdentifier</ParmCode>\n" +
+                "                        <Value>MP</Value>\n" +
+                "                    </TransRule>\n" +
+                "                </TransRules>\n" +
+                "            </TransType>\n" +
+                "            <LocalDt>" +
+                            dateStr +
+                            "</LocalDt>\n" +
+                "            <Requestor>\n" +
+                "                <ContractNumber>" +
+                                cardNum +
+                                "</ContractNumber> " +
+                "<!-- Put your test card number (sender) here -->\n" +
+                "                <CardInfo>\n" +
+                "                    <CardExpiry>" +
+                                    exDate +
+                                    "</CardExpiry> " +
+                "<!-- Put your test card (sender) expiration date in format YYMM here -->\n" +
+                "                </CardInfo>\n" +
+                "                <SecurityData>\n" +
+                "                    <SecParm>\n" +
+                "                        <Code>CVV2</Code>\n" +
+                "                        <Value>" +
+                                        cvc2 +
+                                        "</Value> " +
+                "<!-- Put your test card (sender) CVV2 here -->\n" +
+                "                    </SecParm>\n" +
+                "                </SecurityData>\n" +
+                "            </Requestor>\n" +
+                "            <Source>\n" +
+                "                <ContractNumber>" +
+                                VPosId +
+                                "</ContractNumber> " +
+                "<!-- Put your virtual POS terminal ID here -->\n" +
+                "            </Source>\n" +
+                "            <Destination>\n" +
+                "                <ContractNumber>" +
+                                clientNumber +
+                                "</ContractNumber> " +
+                "<!-- Put your test card number (receive) here -->\n" +
+                "            </Destination>\n" +
+                "            <Transaction>\n" +
+                "                <Currency>" +
+                                depositCurrency +
+                                "</Currency>\n" +
+                "                <Amount>" +
+                                amount +
+                                "</Amount>\n" +
+                "            </Transaction>\n" +
+                "        </Doc>\n" +
+                "    </MsgData>\n" +
+                "</UFXMsg>";
+    }
+
     /**
      *
      * @param url destination address
@@ -611,5 +712,9 @@ public class UFXServiceImpl implements UFXService {
             return format.format(new Date());
         }
         return res;
+    }
+
+    public double getDepositSize() {
+        return Double.valueOf(depositSize);
     }
 }

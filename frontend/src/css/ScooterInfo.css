@@ -1,0 +1,20 @@
+.tableMoto{
+    margin-left: 10%;
+}
+
+.columnScooter {
+    float: left;
+    width: 50%;
+    padding: 15px;
+}
+.titleDop{
+    margin-left: 35%;
+    color: #660033;
+}
+
+/* Clear floats after the columns */
+.rowScooter:after {
+    content: "";
+    display: table;
+    clear: both;
+}

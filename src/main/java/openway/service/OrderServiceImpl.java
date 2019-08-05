@@ -84,8 +84,8 @@ public class OrderServiceImpl implements OrderService {
                 }
 
                 if(i == orders.size()) {
-                    logger.info("start rent: last client id" + i);
-                    logger.info("start rent: list of zero costs list size" + orders.size());
+                    logger.info("start rent: last client id: " + i);
+                    logger.info("start rent: list of zero costs list size: " + orders.size());
                     logger.info("returned data: " + String.valueOf(Status.BLOCKED));
                     return String.valueOf(Status.BLOCKED);
                 }
@@ -149,15 +149,16 @@ public class OrderServiceImpl implements OrderService {
                 moto_id, client.getId(), 10,1  ,-1, ufxService.GenerateRRN("time"));
         orderRepository.save(order);
 
-        String checkBalance = ufxService.BalanceRequestInWay4(client.getId());
-        double balance = Double.valueOf(checkBalance);
+        String checkBalanceStr = ufxService.BalanceRequestInWay4(client.getId());
+        String checkBalance[] = checkBalanceStr.split(" ");
+        double balance = Double.valueOf(checkBalance[0]);
         if(balance < ufxService.getDepositSize()){
             return String.valueOf(false);
         }
 
         String resGetDep = ufxService.GetDepositFromClient(client.getId(), moto.getIdowner());
 
-        logger.info("get dep for client by reserve " + resGetDep);
+        logger.info("get dep for client by reserve: " + resGetDep);
 
         return "OK|" + String.valueOf(true) + "|" + order.getId();
     }

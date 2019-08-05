@@ -94,7 +94,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public String CheckBalance(String data){
-        logger.info("called check balance" + data);
+        logger.info("called check balance: " + data);
         int clientId = clientRepository.findClientByEmail(data).getId();
 
         UFXService ufxService = new UFXServiceImpl();
@@ -123,13 +123,13 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public String TopUp(String topUpData){
         String args[] = topUpData.split("\\|");
-        String name = args[0];
-        String sName = args[1];
-        String cardNum = args[2];
-        String cvc2 = args[3];
-        String exDate = args[4];
-        String amount = args[5];
-        String email = args[6];
+        String name = "";
+        String sName = "";
+        String cardNum = args[0];
+        String cvc2 = args[1];
+        String exDate = args[2];
+        String amount = args[3];
+        String email = args[4];
         UFXService ufxService = new UFXServiceImpl();
         Client client = clientRepository.findClientByEmail(email);
         int clientId = client.getId();

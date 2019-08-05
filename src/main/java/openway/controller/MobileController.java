@@ -39,7 +39,7 @@ public class MobileController {
 
     @PostMapping("/balanceInquery")
     String clientBalanceRequest(@RequestBody String data) {
-        logger.info("balance request " + data);
+        logger.info("balance request: " + data);
         return clientService.CheckBalance(data);
     }
 
@@ -61,13 +61,13 @@ public class MobileController {
 
     @PostMapping("/motoResCanc")
     String reserveCanceled(@RequestBody String resCancData) {
-        logger.info("moto reserve request: + " + resCancData);
+        logger.info("moto reserve cancel request: + " + resCancData);
         String reserveCancelResult = orderService.motoReserveCanceled(moto_id, resCancData);
-        logger.info("moto reserved:" + reserveCancelResult);
+        logger.info("moto reserv:" + reserveCancelResult);
         return reserveCancelResult;
     }
 
-    @GetMapping("topUpCl")
+    @PostMapping("topUpCl")
     String clientTopUp(@RequestBody String topUpData){
         logger.info("client top up request: + " + topUpData);
         String clienttopUpRes = clientService.TopUp(topUpData);

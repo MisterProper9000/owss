@@ -71,7 +71,7 @@ public class UFXServiceImpl implements UFXService {
         String sName = lesser.getLast_name();
         String companyName = lesser.getCompany_name();
 
-        String rnd = GenerateId("") + lesser.getId()+"LES";
+        String rnd = GenerateId("") + lesser.getId() + "LES";
         String clientNumber = rnd;
         String regNumberClient = rnd;
         String regNumberApp = rnd + "_A";
@@ -87,7 +87,7 @@ public class UFXServiceImpl implements UFXService {
     }
 
     public String BalanceRequestInWay4(int clientId){
-        String clientNumber = GenerateId("") + clientId+"CL";
+        String clientNumber = GenerateId("") + clientId + "CL";
         String request = RequestCreateBalanceInquery(clientNumber);
         String response = SendRequest(urlUfxAdapter, request);
         logger.info("request: "+request+" , response: "+response);
@@ -96,10 +96,10 @@ public class UFXServiceImpl implements UFXService {
     }
 
     public String BalanceLesserRequestInWay4(int clientId){
-        String lesserNumber = GenerateId("") + clientId+"LES";
+        String lesserNumber = GenerateId("") + clientId + "LES";
         String request = RequestCreateBalanceInquery(lesserNumber);
         String response = SendRequest(urlUfxAdapter, request);
-        logger.info("request: "+request+" , response: "+response);
+        logger.info("request: " + request+" , response: " + response);
         String balance = BalanceResponseParse(response);
         return balance;
     }
@@ -158,7 +158,9 @@ public class UFXServiceImpl implements UFXService {
     public String ClientTopUp(String name, String sName, String cardNum,
                               String cvc2, String exDate,String amount, int clientId){
         String clientNumber = GenerateId("") + clientId + "CL";
-        //String clientNumber = "CLIENT_TEST_100";
+        cardNum = cardNum.replaceAll("-", "");
+        exDate = exDate.replaceAll("\\/", "");
+
         String topUpRequest = RequestCreateTopUpCl(name, sName, cardNum,
                 cvc2, exDate, amount, clientNumber);
         String resTopUp = SendRequest(urlUfxAdapter, topUpRequest);
@@ -607,6 +609,12 @@ public class UFXServiceImpl implements UFXService {
                 "            <LocalDt>" +
                             dateStr +
                             "</LocalDt>\n" +
+                "      <SourceDtls>\n" +
+                "        <SIC>6012</SIC>\n" +
+                "        <Country>RU</Country>\n" +
+                "        <City>Merchant City</City>\n" +
+                "        <MerchantName>Merchant Name</MerchantName>\n" +
+                "      </SourceDtls>" +
                 "            <Requestor>\n" +
                 "                <ContractNumber>" +
                                 cardNum +

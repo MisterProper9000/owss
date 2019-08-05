@@ -11,6 +11,7 @@ class DepositMoney extends Component {
             security_code: '',
             name_on_card: '',
             expiration: '',
+            depositMoney: ''
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,7 +23,7 @@ class DepositMoney extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {card_number, security_code, name_on_card, expiration} = this.state;
+        const {card_number, security_code, name_on_card, expiration, depositMoney} = this.state;
 
         fetch('http://10.101.177.21:9091/depositmoney', {
             method: 'POST',
@@ -30,7 +31,8 @@ class DepositMoney extends Component {
                     card_number,
                     security_code,
                     name_on_card,
-                    expiration
+                    expiration,
+                    depositMoney
                 }
             )
         });
@@ -39,12 +41,12 @@ class DepositMoney extends Component {
     componentDidMount() {
     }
 
-    goBack(){
+    goBack() {
         window.location = "/lesser";
     }
 
     render() {
-        const {card_number, security_code, name_on_card, expiration} = this.state;
+        const {card_number, security_code, name_on_card, expiration, depositMoney} = this.state;
 
         return (
             <div>
@@ -63,6 +65,10 @@ class DepositMoney extends Component {
                            onChange={this.handleChange}/><br/>
                     <input className="input" type="text" placeholder="expiration" name="Expiration"
                            value={expiration}
+                           onChange={this.handleChange}/><br/>
+                    <br/>
+                    <input className="input" type="text" placeholder="Cost" name="depositMoney"
+                           value={depositMoney}
                            onChange={this.handleChange}/><br/>
                     <input type="submit" name="buttonLogin" className="buttonSubmit"
                            value="Submit"/>

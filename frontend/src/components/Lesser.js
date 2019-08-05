@@ -51,8 +51,7 @@ class Lesser extends Component {
     }
 
     depositMoney() {
-
-        //window.location = "/deposit_money";
+        window.location = "/deposit_money";
     }
 
     addNewScooter() {

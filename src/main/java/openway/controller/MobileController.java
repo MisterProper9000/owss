@@ -30,6 +30,7 @@ public class MobileController {
         return clientService.addNewClient(newItem);
     }
 
+
     @PostMapping("/loginclient")
     String loginClient(@RequestBody String auth) {
         logger.info("called loginClient()" + auth);
@@ -66,14 +67,12 @@ public class MobileController {
         return reserveCancelResult;
     }
 
-
-    //@GetMapping("/motoResFinish")
-    //String reserveFinish(@RequestBody String resData) {
-    //    logger.info("moto reserve request: + " + resData);
-    //    String reserveResult = orderService.motoReserve(moto_id, resData);
-    //    logger.info("moto reserved: " + reserveResult);
-    //    return "OK|" + reserveResult;
-    //}
-
+    @GetMapping("topUpCl")
+    String clientTopUp(@RequestBody String topUpData){
+        logger.info("client top up request: + " + topUpData);
+        String clienttopUpRes = clientService.TopUp(topUpData);
+        logger.info(clienttopUpRes);
+        return "OK|";
+    }
 
 }

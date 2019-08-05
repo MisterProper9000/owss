@@ -2,6 +2,7 @@ package test;
 
 import openway.model.Client;
 import openway.model.Lesser;
+import openway.repository.ClientRepository;
 import openway.service.UFXService;
 import openway.service.UFXServiceImpl;
 
@@ -12,9 +13,16 @@ public class ufxTest {
 
         UFXService ufxSer = new UFXServiceImpl();
 
-        String kek = "sfb_moto:1|danyaplaksin@gmail.com";
-        String rmail = kek.split("\\|")[1];
-        System.out.println(rmail);
+        String req = ufxSer.ClientTopUp("Daniil", "Plaksin",
+                "1000040176379547", "970", "2008", "25",
+                1);
+
+        System.out.println(req);
+//
+//        String kek = "sfb_moto:1|danyaplaksin@gmail.com";
+//        String rmail = kek.split("\\|")[1];
+//        System.out.println(rmail);
+
 //        Client client = new Client("Vasya", "Lalkov", "vl@gmail.com",
 //                "5553535", "123");
 
@@ -34,6 +42,7 @@ public class ufxTest {
 //
 //        bal = ufxSer.BalanceRequestInWay4(1);
 //        System.out.println(bal);
+
        // ufxSer.GetPayment(1,1,20);
         //String bal = ufxSer.BalanceRequestInWay4(1);
         //System.out.println(bal);

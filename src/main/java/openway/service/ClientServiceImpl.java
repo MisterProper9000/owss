@@ -49,7 +49,11 @@ public class ClientServiceImpl implements ClientService {
             logger.info("saved to database: " + clientDb);
 
             String res = ufxService.AddNewClientInWay4(clientDb);
-            logger.info("saved to way4: " + res);
+            String checkResWay4 = ufxService.CheckRes(res);
+            logger.info("saved to way4: " + checkResWay4);
+            if(!checkResWay4.equals(String.valueOf(Status.OK))){
+                return String.valueOf(Status.ERROR);
+            }
 
             return String.valueOf(Status.OK);
         } catch (DataIntegrityViolationException e) {
@@ -114,6 +118,27 @@ public class ClientServiceImpl implements ClientService {
         String status = ufxService.GetPayment(clientId, lesserId, cost);
         logger.info(status);
         return String.valueOf(Status.OK);
+    }
+
+    @Override
+    public String TopUp(String topUpData){
+        String args[] = topUpData.split("\\|");
+        String name = args[0];
+        String sName = args[1];
+        String cardNum = args[2];
+        String cvc2 = args[3];
+        String exDate = args[4];
+        String amount = args[5];
+        String email = args[6];
+        UFXService ufxService = new UFXServiceImpl();
+        Client client = clientRepository.findClientByEmail(email);
+        int clientId = client.getId();
+
+        //String testN = "CLE"
+        String resTopUp = ufxService.ClientTopUp(name, sName, cardNum, cvc2,
+                exDate, amount, clientId);
+
+        return resTopUp;
     }
 
 }

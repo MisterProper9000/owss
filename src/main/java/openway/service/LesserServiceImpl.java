@@ -35,8 +35,13 @@ public class LesserServiceImpl implements LesserService {
         lesser.setSum_moto(0);
         lesserRepository.save(lesser);
         logger.info("save to database:" + lesser);
+
+        // TODO check result
+        //  it's == OK or ERROR
         String resWay4 = ufxService.AddNewLesserInWay4(lesser);
-        logger.info("saved way4: " + resWay4);
+        String checkResWay4 = ufxService.CheckRes(resWay4);
+        logger.info("saved way4: " + checkResWay4);
+
     }
 
     @Override

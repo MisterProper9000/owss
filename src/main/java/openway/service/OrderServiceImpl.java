@@ -149,7 +149,14 @@ public class OrderServiceImpl implements OrderService {
                 moto_id, client.getId(), 10,1  ,-1, ufxService.GenerateRRN("time"));
         orderRepository.save(order);
 
+        String checkBalance = ufxService.BalanceRequestInWay4(client.getId());
+        double balance = Double.valueOf(checkBalance);
+        if(balance < ufxService.getDepositSize()){
+            return String.valueOf(false);
+        }
+
         String resGetDep = ufxService.GetDepositFromClient(client.getId(), moto.getIdowner());
+
         logger.info("get dep for client by reserve " + resGetDep);
 
         return "OK|" + String.valueOf(true) + "|" + order.getId();

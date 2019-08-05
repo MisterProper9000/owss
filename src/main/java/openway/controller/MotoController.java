@@ -99,4 +99,18 @@ public class MotoController {
         return motoService.listofidmoto();
     }
 
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/listScooterId")
+    List<Integer> getListOfIdScooters(@RequestBody String id) {
+        logger.info("get list of scooters id");
+        return motoService.listofidscooters(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/rentmoto")
+    List<Integer> getrent(@RequestBody String id) {
+        logger.info("get list of scooters id");
+        return motoService.listofidscooters(id);
+    }
+
 }

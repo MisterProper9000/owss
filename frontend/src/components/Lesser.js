@@ -164,8 +164,8 @@ class Lesser extends Component {
                                 </tr>
                                 <button className="buttonDeposit" onClick={this.depositMoney}>Deposit money</button>
                             </div>
-                            <button className="buttonPaymentInfo" onClick={this.goToPaymentInfo}>Payment Information
-                            </button>
+                            {/*<button className="buttonPaymentInfo" onClick={this.goToPaymentInfo}>Payment Information*/}
+                            {/*</button>*/}
                         </div>
 
                         <div className="columnLesser">
@@ -184,8 +184,8 @@ class Lesser extends Component {
                             </div>
                             <button className="buttonNewScooter" onClick={this.addNewScooter}>Add new scooter
                             </button>
-                            <button className="buttonInfoScooter" onClick={this.getScooterInfo}>Scooter Info
-                            </button>
+                            {/*<button className="buttonInfoScooter" onClick={this.getScooterInfo}>Scooter Info*/}
+                            {/*</button>*/}
 
                             {/*<div className="rowLesser">*/}
                             {/*    <div className="columnLesser">*/}

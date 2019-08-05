@@ -93,6 +93,18 @@ public class MotoServiceImpl implements MotoService {
         return listOfId;
     }
 
+    @Override
+    public List<Integer> listofidscooters(String id) {
+        List<Integer> listOfId = new ArrayList<>();
+        List<Motoroller> forms = motoRepository.findMotorollersById(Integer.parseInt(id));
+        for (Motoroller form : forms) {
+            listOfId.add(form.getId());
+        }
+        int i = listOfId.size();
+        logger.info("listOfId.size()=  " + i);
+        return listOfId;
+    }
+
 
 
 

@@ -15,7 +15,8 @@ class ScooterInfo extends Component {
         super(props);
         this.state = {
 
-            id_moto: '',
+            idowner: Cookies.get('token'),
+            id_moto: '1',
             auto_number: '',
             model: '',
             insurance: '',
@@ -26,15 +27,6 @@ class ScooterInfo extends Component {
             cost: '',
             tariff: '',
 
-
-            columnDefs: [
-                {headerName: "ID", field: "id_moto", width: 100},
-                {headerName: "Moto number", field: "auto_number"},
-                {headerName: "Model", field: "model"},
-                {headerName: "Insuranse", field: "insurance"}
-
-            ],
-            rowData: [],
 
             columnRent: [
                 {headerName: "ID", field: "id", width: 100},
@@ -60,51 +52,65 @@ class ScooterInfo extends Component {
 
 
     componentDidMount() {
-        // fetch('http://10.101.177.21:9091/motoinfo')
-        //     .then(result => result.json())
-        //     .then(rowData => this.setState({rowData}))
+        // fetch('http://10.101.177.21:9091/listScooterId')
+        //     .then((resp) => {
+        //         return resp.json()
+        //     })
+        //     .then(data => {
+        //         let idFromDB = data.map(id => {
+        //             return {value: id, display: id}
+        //         });
+        //         this.setState({listId: [{value: 'all', display: 'Select id'}].concat(idFromDB)});
+        //     }).catch(error => {
+        //     console.log(error);
+        // });
 
-        // fetch('http://10.101.177.21:9091/rentinfo')
+
+        // fetch('http://10.101.177.21:9091//rentmoto', {
+        //     method: 'POST',
+        //     body: this.state.id
+        // })
         //     .then(result => result.json())
         //     .then(rowRent => this.setState({rowRent}))
     }
 
     render() {
+        const {id} = this.state;
         return (
-            <div>
+            <div className="tableInfoScooter">
                 <NavbarComp/>
                 <button className="buttonBack" onClick={this.goBack}> Back</button>
                 <h1 className="titleDop">Scooter Information</h1>
-                <div className="rowScooter">
-                    <div className="columnScooter">
-                        <div className="tableMoto">
-                            <div
-                                className="ag-theme-balham"
-                                style={{height: '100px', width: '600px'}}
-                            >
-                                <AgGridReact
-                                    //pagination={true}
-                                    enableFilter={true}
-                                    enableSorting={true}
-                                    columnDefs={this.state.columnDefs}
-                                    rowData={this.state.rowData}>
-                                </AgGridReact>
-                            </div>
-                        </div>
-                        <div className="columnScooter">
+                {/*<text className="selectId">Select id</text>*/}
 
-                        </div>
-                    </div>
+                {/*<select name="id" className="form-control dark" value={id} onChange={this.handleChange}*/}
+                {/*        onClick={this.addDataToTheTable}>*/}
+                {/*    {this.state.listId.map((id) => <option key={id.value}*/}
+                {/*                                           value={id.value}>{id.display}</option>)}*/}
+                {/*</select>*/}
 
-                    <div className="columnScooter">
-
-                    </div>
+                <div>
+                    <table className="tableLesser">
+                        <tr>
+                            <th>Id scooter:</th>
+                            <td>{this.state.id_moto}</td>
+                        </tr>
+                        <tr>
+                            <th>Scooter number:</th>
+                            <td>{this.state.auto_number}</td>
+                        </tr>
+                        <tr>
+                            <th>Model</th>
+                            <td>{this.state.model}</td>
+                        </tr>
+                        <tr>
+                            <th>Insurance</th>
+                            <td>{this.state.insurance}</td>
+                        </tr>
+                    </table>
                 </div>
 
-                <br/>
-                <div className="tableMoto">
-                    <div>Rents</div>
-
+                <div>
                     <div
                         className="ag-theme-balham"
                         style={{height: '200px', width: '1000px'}}
@@ -118,8 +124,8 @@ class ScooterInfo extends Component {
                         </AgGridReact>
                     </div>
                 </div>
-
             </div>
+
         );
     }
 }

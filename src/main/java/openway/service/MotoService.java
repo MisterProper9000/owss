@@ -13,4 +13,5 @@ public interface MotoService {
     List<Motoroller> findAll();
     List<Motoroller> findLesserMoto(String id);
     List<Integer> listofidmoto();
+    List<Integer> listofidscooters(String id);
 }

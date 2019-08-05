@@ -20,5 +20,7 @@ public interface UFXService {
     String GetPayment(int clientId, int lesserId, float cost);
 
     double getDepositSize();
+
+    String BalanceLesserRequestInWay4(int clientId);
 }
 

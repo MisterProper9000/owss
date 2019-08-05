@@ -14,6 +14,9 @@ public interface LesserService {
     List<Integer> listofidlessers();
 
     List<String> getNameSerName(String i);
+
+    String checkBalanceLessor(String data);
+
     //void setPasswordHash();
 
 }

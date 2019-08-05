@@ -68,4 +68,11 @@ public class MainController {
         logger.info("get lesser "+id);
         return lesserService.getNameSerName(id);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/balanceInqueryLessor")
+    String lessortBalanceRequest(@RequestBody String data) {
+        logger.info("balance lesser request " + data);
+        return lesserService.checkBalanceLessor(data);
+    }
 }

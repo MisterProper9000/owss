@@ -33,6 +33,11 @@ public class MotoController {
                 " res = " + motoService.getStatusRes(moto_id));
         boolean rent = motoService.getStatusRent(moto_id);
         boolean res = motoService.getStatusRes(moto_id);
+
+        String resTmCheck = orderService.reserveTM(moto_id);
+        logger.info("check timeout: " + resTmCheck);
+
+
         if(!rent && ! res){
 
             logger.info("false");

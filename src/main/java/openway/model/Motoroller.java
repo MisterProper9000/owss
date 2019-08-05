@@ -23,7 +23,7 @@ public class Motoroller {
     }
 
 
-    public Motoroller(String auto_number, String model, int id_owner, boolean insurance, boolean status_rent) {
+    public Motoroller(String auto_number, String model, int idowner, boolean insurance, boolean status_rent) {
         this.auto_number = auto_number;
         this.model = model;
         this.idowner = idowner;

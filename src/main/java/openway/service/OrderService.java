@@ -8,4 +8,5 @@ public interface OrderService {
 
     String motoReserve(int moto_id, String email);
     String motoReserveCanceled(int moto_id, String data);
+    String reserveTM(int id_moto);
 }

@@ -18,6 +18,10 @@ public class ufxTest {
                 1);
 
         System.out.println(req);
+//
+//        String kek = "sfb_moto:1|danyaplaksin@gmail.com";
+//        String rmail = kek.split("\\|")[1];
+//        System.out.println(rmail);
 
 //        Client client = new Client("Vasya", "Lalkov", "vl@gmail.com",
 //                "5553535", "123");
@@ -38,7 +42,8 @@ public class ufxTest {
 //
 //        bal = ufxSer.BalanceRequestInWay4(1);
 //        System.out.println(bal);
-        //ufxSer.GetPayment(1,1,20);
+
+       // ufxSer.GetPayment(1,1,20);
         //String bal = ufxSer.BalanceRequestInWay4(1);
         //System.out.println(bal);
 

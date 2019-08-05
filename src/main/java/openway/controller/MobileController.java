@@ -49,20 +49,22 @@ public class MobileController {
         return clientService.payRent(data);
     }
 
-    @GetMapping("/motoRes")
+    @PostMapping("/motoRes")
     String reserveStart(@RequestBody String resData) {
-        logger.info("moto reserve request: + " + resData);
+        logger.info("moto reserve request:" + resData);
         String reserveResult = orderService.motoReserve(moto_id, resData);
-        logger.info("moto reserved: " + reserveResult);
-        return "OK|" + reserveResult;
+        logger.info("moto reserved:" + reserveResult);
+
+        return reserveResult;
+
     }
 
-    @GetMapping("/motoResCanc")
+    @PostMapping("/motoResCanc")
     String reserveCanceled(@RequestBody String resCancData) {
         logger.info("moto reserve request: + " + resCancData);
         String reserveCancelResult = orderService.motoReserveCanceled(moto_id, resCancData);
-        logger.info("moto reserved: " + reserveCancelResult);
-        return "OK|" + reserveCancelResult;
+        logger.info("moto reserved:" + reserveCancelResult);
+        return reserveCancelResult;
     }
 
     @GetMapping("topUpCl")

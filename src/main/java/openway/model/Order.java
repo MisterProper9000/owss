@@ -18,6 +18,7 @@ public class Order {
     private int id_moto;
     private int id_client;
     private double tariff = 1;
+    private int tariff_time;
     private float cost;
     private String RRN;
 
@@ -37,14 +38,35 @@ public class Order {
         this.RRN = RRN;
     }
 
-    public Order(String begin_time, int id_moto, int id_client, double tariff, String RRN) {
+    public Order(String begin_time, int id_moto, int id_client, double tariff, int tariff_time, String RRN) {
         this.begin_time = begin_time;
         this.id_moto = id_moto;
         this.id_client = id_client;
         this.tariff = tariff;
+        this.tariff_time = tariff_time;
         this.RRN = RRN;
     }
 
+    public Order(String begin_time, String end_time, int id_moto, int id_client, double tariff, float cost, String RRN) {
+        this.begin_time = begin_time;
+        this.end_time = end_time;
+        this.id_moto = id_moto;
+        this.id_client = id_client;
+        this.tariff = tariff;
+        this.cost = cost;
+        this.RRN = RRN;
+    }
+
+    public Order(String begin_time, String end_time, int id_moto, int id_client, double tariff, int tariff_time, float cost, String RRN) {
+        this.begin_time = begin_time;
+        this.end_time = end_time;
+        this.id_moto = id_moto;
+        this.id_client = id_client;
+        this.tariff = tariff;
+        this.tariff_time = tariff_time;
+        this.cost = cost;
+        this.RRN = RRN;
+    }
 
     public void setEnd_time(String end_time) {
         this.end_time = end_time;
@@ -80,6 +102,10 @@ public class Order {
 
     public String getRRN() {
         return RRN;
+    }
+
+    public int getTariff_time() {
+        return tariff_time;
     }
 
     public String getEnd_time() {

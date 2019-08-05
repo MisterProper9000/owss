@@ -1,13 +1,13 @@
 package openway.service;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import openway.model.Lesser;
 import openway.model.Login;
 import openway.repository.LesserRepository;
-import openway.utils.HashUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +15,7 @@ import java.util.logging.Logger;
 
 @Service
 public class LesserServiceImpl implements LesserService {
+
     private final static Logger logger = Logger.getLogger(LesserServiceImpl.class.getName());
 
     final private LesserRepository lesserRepository;
@@ -31,6 +32,7 @@ public class LesserServiceImpl implements LesserService {
         UFXService ufxService = new UFXServiceImpl();
 
         Lesser lesser = g.fromJson(newLesser, Lesser.class);
+        lesser.setSum_moto(0);
         lesserRepository.save(lesser);
         logger.info("save to database:" + lesser);
 
@@ -43,26 +45,27 @@ public class LesserServiceImpl implements LesserService {
     }
 
     @Override
-    public boolean authentication(String auth) {
+    public String authentication(String auth) {
         logger.info("called authentication()" + auth);
         Gson g = new Gson();
         Login lesser = g.fromJson(auth, Login.class);
-        //logger.info("lesser.getmail:   "+lesser.getEmail());
         Lesser lesserInDB = lesserRepository.findLesserByEmail(lesser.getEmail());
-        //logger.info("lesserInDB:   "+lesserInDB);
+        logger.info("lesserInDB: " + lesserInDB);
         try {
-            if (lesserInDB.getPassword().equals(lesser.getPassword())){
+            if (lesserInDB.getPassword().equals(lesser.getPassword()) && lesserInDB.getEmail().equals(lesser.getEmail())) {
                 logger.info("checked entered data from start page");
-                return true;
+                String s = String.valueOf(lesserInDB.getId());
+                logger.info("auth id_lessor: " + s);
+                return s;
+            } else {
+                logger.info("error with login or password");
+                return "false";
             }
-            else return false;
-        }catch (NullPointerException e) {
+        } catch (NullPointerException e) {
             logger.info("error with login or password");
-            return false;
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-            return false;
+            return "false";
+        } catch (Exception e) {
+            return "false";
         }
     }
 
@@ -83,6 +86,33 @@ public class LesserServiceImpl implements LesserService {
         int i = listOfId.size();
         logger.info("listOfId.size()=  " + i);
         return listOfId;
+    }
+
+    @Override
+    public List<String> getNameSerName(String id) {
+        JsonObject jsonObject = new JsonParser().parse(id).getAsJsonObject();
+        int id_lessor = jsonObject.get("id").getAsInt();
+        Lesser lesser = lesserRepository.findLesserById(id_lessor);
+        List<String> list = new ArrayList<>();
+        list.add(lesser.getFirst_name());
+        list.add(lesser.getLast_name());
+        return list;
+    }
+
+    @Override
+    public String checkBalanceLessor(String data){
+        logger.info("called check balance" + data);
+        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+        String email = jsonObject.get("email").getAsString();
+        int lesserId = lesserRepository.findLesserByEmail(email).getId();
+        logger.info("lesserId:"+lesserId);
+
+        UFXService ufxService = new UFXServiceImpl();
+        String balance = ufxService.BalanceLesserRequestInWay4(lesserId);
+        JsonObject balanceObj = new JsonObject();
+        balanceObj.addProperty("balance",balance);
+        logger.info("balance lesser:"+balanceObj);
+        return String.valueOf(balanceObj);
     }
 
 

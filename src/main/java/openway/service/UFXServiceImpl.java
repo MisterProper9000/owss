@@ -95,6 +95,15 @@ public class UFXServiceImpl implements UFXService {
         return balance;
     }
 
+    public String BalanceLesserRequestInWay4(int clientId){
+        String lesserNumber = GenerateId("") + clientId+"LES";
+        String request = RequestCreateBalanceInquery(lesserNumber);
+        String response = SendRequest(urlUfxAdapter, request);
+        logger.info("request: "+request+" , response: "+response);
+        String balance = BalanceResponseParse(response);
+        return balance;
+    }
+
     public String GetDepositFromClient(int clientId, int lesserId){
 
         String clientNumber = GenerateId("") + clientId + "CL";
@@ -703,5 +712,9 @@ public class UFXServiceImpl implements UFXService {
             return format.format(new Date());
         }
         return res;
+    }
+
+    public double getDepositSize() {
+        return Double.valueOf(depositSize);
     }
 }

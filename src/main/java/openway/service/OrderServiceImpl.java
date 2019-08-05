@@ -58,6 +58,13 @@ public class OrderServiceImpl implements OrderService {
         Client client = clientRepository.findClientByEmail(email);
         int id_client = client.getId();
 
+        String balanceStr = ufxService.BalanceRequestInWay4(id_client).split(" ")[0];
+        double balance = Double.valueOf(balanceStr);
+        if(balance < ufxService.getDepositSize()){
+            return String.valueOf(Status.NOTENOUGH);
+        }
+
+
         if ((motoRepository.findMotorollerById(id_moto) != null) && (client.getEmail() != null)) {
             logger.info("called checkQr(): correct qr");
 
@@ -140,6 +147,12 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order("null", "null",
                 moto_id, client.getId(), 10,1  ,-1, ufxService.GenerateRRN("time"));
         orderRepository.save(order);
+
+        String checkBalance = ufxService.BalanceRequestInWay4(client.getId());
+        double balance = Double.valueOf(checkBalance);
+        if(balance < ufxService.getDepositSize()){
+            return String.valueOf(false);
+        }
 
         String resGetDep = ufxService.GetDepositFromClient(client.getId(), moto.getId_owner());
         logger.info("get dep for client by reserve " + resGetDep);

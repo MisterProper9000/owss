@@ -25,5 +25,8 @@ public interface UFXService {
                               String cvc2, String exDate,String amount, int clientId);
 
     String GenerateRRN(String type);
+    double getDepositSize();
+
+    String BalanceLesserRequestInWay4(int clientId);
 }
 

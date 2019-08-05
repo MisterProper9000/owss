@@ -3,9 +3,9 @@
     margin-top: 2%;
 }
 
-.formLogin {
-    margin-top: 1%;
-    margin-left: 40%;
+.formLogin{
+    margin-left: 10%;
+    margin-top: 15%;
 }
 
 .input {
@@ -30,8 +30,59 @@
     width: 300px;
 }
 
+.column {
+    float: left;
+    width: 50%;
+    padding: 15px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 .title{
     margin-left: 0%;
     color: #890000;
     font-weight: bold;
+}
+
+.bglogo{
+    background-image: url("https://mdbootstrap.com/img/Photos/Horizontal/Nature/full page/img(20).jpg");
+    height: 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.titleSignUp{
+    color: #890000;
+    font-weight: bold;
+    border: none;
+    background: none;
+    margin-left: 18%;
+    width:200px;
+}
+
+.titleWords{
+    color: #890000;
+    font-weight: bold;
+    margin-left: 20%;
+    opacity: 0.5;
+    margin-top: 5%;
+    size: 50px;
+}
+
+.buttonSubmit{
+    margin-top: 2%;
+    width: 300px;
+    border: #229bcc;
+    padding: 8px;
+}
+
+.formReg{
+    margin-left: 10%;
+    margin-top: 5%;
 }

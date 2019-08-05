@@ -1,0 +1,67 @@
+.pagePersonalAccount{
+    margin-left: 5%;
+}
+
+.tableInfo {
+    margin-top: 3%;
+}
+
+.tableLesser{
+    width: 400px;
+    margin-top: 3%;
+    border: 4px double #bac0cc; /* Параметры границы */
+    padding: 10%; /* Поля вокруг текста */
+}
+
+.balance{
+    border: 4px double #bac0cc; /* Параметры границы */
+    padding: 10px; /* Поля вокруг текста */
+    width: 400px;
+}
+
+.container > div {
+    background-color: rgb(207, 232, 220);
+    border: 2px solid rgb(79, 185, 227);
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 50% 50% 50%;
+}
+
+.columnLesser {
+    float: left;
+    width: 35%;
+    padding: 15px;
+}
+.titleDop{
+    margin-left: 35%;
+    color: #660033;
+}
+
+/* Clear floats after the columns */
+.rowLesser:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.buttonDeposit{
+    width: 300px;
+}
+
+.buttonPaymentInfo{
+    width: 400px;
+}
+
+.buttonInfoScooter{
+    padding: 10%;
+    width: 250px;
+    margin-left: 140%;
+}
+
+
+.buttonNewScooter{
+    padding: 10%;
+    width: 250px;
+}

@@ -17,7 +17,8 @@
 **/Droid/**/[Rr]esource.[Dd]esigner.cs
 
 # Xamarin Components
-Components/
+# Components/
+*ScooterSharing*
 
 # Build results
 [Dd]ebug/
@@ -196,8 +197,7 @@ FakesAssemblies/
 
 # dependencies
 *node_modules*
-/.pnp
-.pnp.js
+
 
 # testing
 /coverage

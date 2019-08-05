@@ -109,7 +109,7 @@ public class ClientServiceImpl implements ClientService {
         float cost = order.getCost();
         int motoId = order.getId_moto();
         Motoroller moto = motoRepository.findMotorollerById(motoId);
-        int lesserId = moto.getId_owner();
+        int lesserId = moto.getIdowner();
 
         String status = ufxService.GetPayment(clientId, lesserId, cost);
         logger.info(status);

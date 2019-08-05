@@ -40,11 +40,7 @@ class Lesser extends Component {
                 {headerName: "Insuranse", field: "insurance"}
 
             ],
-            rowData: [
-                {id: "1", auto_number: "12345", model: "honda", insurance: "yes"},
-                {id: "2", auto_number: "12345", model: "porsche", insurance: "no"},
-                {id: "3", auto_number: "12345", model: "ford", insurance: "no"},
-            ],
+            rowData: [],
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -94,27 +90,28 @@ class Lesser extends Component {
                 }))
 
 
-        // fetch('http://10.101.177.21:9091/balanceInqueryLessor', {
-        //     method: 'POST',
-        //     body: JSON.stringify({
-        //             email: 'test2@gmail.com',
-        //         }
-        //     )
-        // }).then((resp) => {
-        //     return resp.json()
-        // }).then(function (jsonData) {
-        //     return JSON.stringify(jsonData);
-        // }).then(resp => {
-        //     var bal = resp.split('"balance":');
-        //     this.setState({balance: bal});
-        // })
+        fetch('http://10.101.177.21:9091/balanceInqueryLessor', {
+            method: 'POST',
+            body: JSON.stringify({
+                    email: 'test2@gmail.com',
+                }
+            )
+        }).then((resp) => {
+            return resp.json()
+        }).then(function (jsonData) {
+            return JSON.stringify(jsonData);
+        }).then(resp => {
+            var bal = resp.split('"balance":');
+            this.setState({balance: bal});
+        })
 
 
-        // fetch('http://10.101.177.21:9091/motoinfo')
-        //     .then(result => result.json())
-        //     .then(rowData => this.setState({rowData}))
-
-
+        fetch('http://10.101.177.21:9091//infomoto', {
+            method: 'POST',
+            body: this.state.id_client
+        })
+            .then(result => result.json())
+            .then(rowData => this.setState({rowData}))
     }
 
     render() {
@@ -122,7 +119,7 @@ class Lesser extends Component {
             <div>
                 <NavbarComp/>
                 <div className="pagePersonalAccount">
-                    <h1 className="titleDop">Personal Account</h1>
+                    <h1 className="titleDop">Personal account: {this.state.first_name} {this.state.last_name}</h1>
                     <div className="rowLesser">
                         <div className="columnLesser">
                             <table className="tableLesser">
@@ -186,16 +183,21 @@ class Lesser extends Component {
                                     rowData={this.state.rowData}>
                                 </AgGridReact>
                             </div>
-                            <div className="rowLesser">
-                                <div className="columnLesser">
-                                    <button className="buttonNewScooter" onClick={this.addNewScooter}>Add new scooter
-                                    </button>
-                                </div>
-                                <div className="columnLesser">
-                                    <button className="buttonInfoScooter" onClick={this.getScooterInfo}>Scooter Info
-                                    </button>
-                                </div>
-                            </div>
+                            <button className="buttonNewScooter" onClick={this.addNewScooter}>Add new scooter
+                            </button>
+                            <button className="buttonInfoScooter" onClick={this.getScooterInfo}>Scooter Info
+                            </button>
+
+                            {/*<div className="rowLesser">*/}
+                            {/*    <div className="columnLesser">*/}
+                            {/*        <button className="buttonNewScooter" onClick={this.addNewScooter}>Add new scooter*/}
+                            {/*        </button>*/}
+                            {/*    </div>*/}
+                            {/*    <div className="columnLesser">*/}
+                            {/*        <button className="buttonInfoScooter" onClick={this.getScooterInfo}>Scooter Info*/}
+                            {/*        </button>*/}
+                            {/*    </div>*/}
+                            {/*</div>*/}
 
                         </div>
                     </div>

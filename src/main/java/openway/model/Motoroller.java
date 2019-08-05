@@ -14,17 +14,17 @@ public class Motoroller {
     private int id;
     private String auto_number;
     private String model;
-    private int id_owner;
+    private int idowner;
     private boolean insurance;
     private boolean status = false;
 
     public Motoroller() {
     }
 
-    public Motoroller(String auto_number, String model, int id_owner, boolean insurance, boolean status) {
+    public Motoroller(String auto_number, String model, int idowner, boolean insurance, boolean status) {
         this.auto_number = auto_number;
         this.model = model;
-        this.id_owner = id_owner;
+        this.idowner = idowner;
         this.insurance = insurance;
         this.status = status;
     }
@@ -38,8 +38,8 @@ public class Motoroller {
     }
 
 
-    public int getId_owner() {
-        return id_owner;
+    public int getIdowner() {
+        return idowner;
     }
 
     public int getId() {

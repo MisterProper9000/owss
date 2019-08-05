@@ -53,10 +53,10 @@ public class MotoController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/infomoto")
-    List<Motoroller> getForms() {
+    @PostMapping("/infomoto")
+    List<Motoroller> getInfoMoto(@RequestBody String id) {
         logger.info("get all info about applications (called findAll())");
-        return motoService.findAll();
+        return motoService.findLesserMoto(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

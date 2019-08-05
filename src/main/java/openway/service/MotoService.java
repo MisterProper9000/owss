@@ -9,5 +9,6 @@ public interface MotoService {
     void createQrCode(int id);
     int addMoto(String moto);
     List<Motoroller> findAll();
+    List<Motoroller> findLesserMoto(String id);
     List<Integer> listofidmoto();
 }

@@ -29,7 +29,7 @@ class RegScooter extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const {auto_number, model, insurance} = this.state;
-        const id_owner = Cookies.get('token');
+        const idowner = Cookies.get('token');
 
         if(this.state.auto_number === "" || this.state.model === "" || this.state.insurance === "")
         {
@@ -42,7 +42,7 @@ class RegScooter extends Component {
             body: JSON.stringify({
                 auto_number,
                 model,
-                id_owner,
+                idowner,
                 insurance
             })
         }).then((resp) => {

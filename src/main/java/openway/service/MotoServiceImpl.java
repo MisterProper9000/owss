@@ -61,7 +61,7 @@ public class MotoServiceImpl implements MotoService {
         Motoroller motoroller = g.fromJson(moto,Motoroller.class);
         motoRepository.save(motoroller);
         logger.info("save moto to database:" + moto);
-        return motoroller.getId_owner();
+        return motoroller.getIdowner();
     }
 
     @Override
@@ -70,16 +70,24 @@ public class MotoServiceImpl implements MotoService {
     }
 
     @Override
+    public List<Motoroller> findLesserMoto(String id) {
+        int id_lesser = Integer.parseInt(id);
+        return motoRepository.findMotorollersByIdowner(id_lesser);
+    }
+
+    @Override
     public List<Integer> listofidmoto() {
         List<Integer> listOfId = new ArrayList<>();
-        List<Motoroller> forms = findAll();
-        for (Motoroller form : forms) {
-            listOfId.add(form.getId());
-        }
+//        List<Motoroller> forms =
+//        for (Motoroller form : forms) {
+//            listOfId.add(form.getId());
+//        }
         int i = listOfId.size();
         logger.info("listOfId.size()=  " + i);
         return listOfId;
     }
+
+
 
 
 }

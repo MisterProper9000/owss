@@ -66,7 +66,7 @@ public class OrderServiceImpl implements OrderService {
             Motoroller moto = motoRepository.findMotorollerById(id_moto);
             moto.setStatus(true);
             motoRepository.save(moto);
-            int id_lesser = moto.getId_owner();
+            int id_lesser = moto.getIdowner();
             String resDeposit = ufxService.GetDepositFromClient(id_client, id_lesser);
 
             logger.info("deposit getting in way4" + resDeposit);
@@ -119,7 +119,7 @@ public class OrderServiceImpl implements OrderService {
         // TODO check here
         UFXService ufxService = new UFXServiceImpl();
         int clientId = order.getId_client();
-        int lesserId = moto.getId_owner();
+        int lesserId = moto.getIdowner();
         String RRN = order.getRRN();
 
         String resRevDeposit = ufxService.reverseDeposit(clientId, lesserId, RRN);

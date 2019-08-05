@@ -17,7 +17,7 @@ class Moto extends Component {
             id: '',
             auto_number: '',
             model: '',
-            id_owner: '',
+            idowner: '',
             insurance: '',
             status: '',
             data: [],
@@ -78,7 +78,7 @@ class Moto extends Component {
                     id: this.state.forms[i].id,
                     auto_number: this.state.forms[i].auto_number,
                     model: this.state.forms[i].model,
-                    id_owner: this.state.forms[i].id_owner,
+                    idowner: this.state.forms[i].idowner,
                     insurance: this.state.forms[i].insurance,
                     status: this.state.forms[i].status,
                 });
@@ -131,7 +131,7 @@ class Moto extends Component {
                     <TableHeaderColumn dataField='model' tdStyle={{backgroundColor: 'white'}}>
                         Model
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField='id_owner' tdStyle={{backgroundColor: 'white'}}>
+                    <TableHeaderColumn dataField='idowner' tdStyle={{backgroundColor: 'white'}}>
                         Id_owner
                     </TableHeaderColumn>
                     <TableHeaderColumn iskey dataField='insurance' tdStyle={{backgroundColor: 'white'}}>

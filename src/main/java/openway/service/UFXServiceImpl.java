@@ -32,6 +32,26 @@ public class UFXServiceImpl implements UFXService {
     private String RRN;
     private String VPosId = "SOA0001";
 
+    private String adrStringTrans = "            <SourceDtls> \n" +
+            "               <SIC>6012</SIC>\n" +
+            "               <Country>RU</Country> \n" +
+            "               <City>Merchant City</City>\n" +
+            "               <MerchantName>Merchant Name</MerchantName>\n" +
+            "            </SourceDtls>\n";
+
+    private String adrStringAcq = "                        <BaseAddress>\n" +
+            "                            <EMail>email_acq@acqmail.ru</EMail>\n" +
+            "                            <City>Moscow</City>\n" +
+            "                            <PostalCode>00899334</PostalCode>\n" +
+            "                            <AddressLine1>smth</AddressLine1>\n" +
+            "                            <AddressLine2>smth</AddressLine2>\n" +
+            "                            <ActivityPeriod>\n" +
+            "                                <DateFrom>1970-01-25</DateFrom>\n" +
+            "                                <DateTo>2020-08-20</DateTo>\n" +
+            "                            </ActivityPeriod>\n" +
+            "                        </BaseAddress>";
+
+
     /**
      *
      * @param client class client with data for creating
@@ -42,7 +62,7 @@ public class UFXServiceImpl implements UFXService {
         String name = client.getFirst_name();
         String sName = client.getLast_name();
 
-        String rnd = GenerateId("") + client.getId()+"CL";
+        String rnd = GenerateId(client.getId() + "CL");
 
         String clientNumber = rnd;
         String regNumberClient = rnd;
@@ -71,7 +91,7 @@ public class UFXServiceImpl implements UFXService {
         String sName = lesser.getLast_name();
         String companyName = lesser.getCompany_name();
 
-        String rnd = GenerateId("") + lesser.getId()+"LES";
+        String rnd = GenerateId(lesser.getId() + "LES");
         String clientNumber = rnd;
         String regNumberClient = rnd;
         String regNumberApp = rnd + "_A";
@@ -87,27 +107,27 @@ public class UFXServiceImpl implements UFXService {
     }
 
     public String BalanceRequestInWay4(int clientId){
-        String clientNumber = GenerateId("") + clientId+"CL";
+        String clientNumber = GenerateId( clientId + "CL");
         String request = RequestCreateBalanceInquery(clientNumber);
+        logger.info("balance request client: " + request);
         String response = SendRequest(urlUfxAdapter, request);
-        logger.info("request: "+request+" , response: "+response);
-        String balance = BalanceResponseParse(response);
-        return balance;
+        logger.info("balance response client: " + response);
+        return BalanceResponseParse(response);
     }
 
-    public String BalanceLesserRequestInWay4(int clientId){
-        String lesserNumber = GenerateId("") + clientId+"LES";
+    public String BalanceLesserRequestInWay4(int lesserId){
+        String lesserNumber = GenerateId(lesserId + "LES");
         String request = RequestCreateBalanceInquery(lesserNumber);
+        logger.info("balance request lesser: " + request);
         String response = SendRequest(urlUfxAdapter, request);
-        logger.info("request: "+request+" , response: "+response);
-        String balance = BalanceResponseParse(response);
-        return balance;
+        logger.info("balance response lesser: " + response);
+        return BalanceResponseParse(response);
     }
 
     public String GetDepositFromClient(int clientId, int lesserId){
 
-        String clientNumber = GenerateId("") + clientId + "CL";
-        String lesserNumber = GenerateId("") + lesserId + "LES";
+        String clientNumber = GenerateId(clientId + "CL");
+        String lesserNumber = GenerateId(lesserId + "LES");
 
         String requestGetDeposit = RequestCreateGetDeposit(clientNumber, lesserNumber,
                 depositSize, depositCurrency);
@@ -117,8 +137,8 @@ public class UFXServiceImpl implements UFXService {
 
     public String ReverseDeposit(int clientId, int lesserId, String RRN){
 
-        String clientNumber = GenerateId("") + clientId + "CL";
-        String lesserNumber = GenerateId("") + lesserId + "LES";
+        String clientNumber = GenerateId(clientId + "CL");
+        String lesserNumber = GenerateId(lesserId + "LES");
 
         String requestReverseDeposit = RequestCreateReverseDeposit(clientNumber, lesserNumber,
                 RRN, depositSize, depositCurrency);
@@ -128,8 +148,8 @@ public class UFXServiceImpl implements UFXService {
     }
 
     public String GetPayment(int clientId, int lesserId, float cost){
-        String clientNumber = GenerateId("") + clientId + "CL";
-        String lesserNumber = GenerateId("") + lesserId + "LES";
+        String clientNumber = GenerateId(clientId + "CL");
+        String lesserNumber = GenerateId(lesserId + "LES");
         String sum = Float.toString(cost);
 
         String requestPayment = RequestCreatePayment(clientNumber, lesserNumber,
@@ -137,7 +157,6 @@ public class UFXServiceImpl implements UFXService {
 
         String resRequestPayment = SendRequest(urlUfxAdapter, requestPayment);
         return resRequestPayment;
-        //return "";
     }
 
     public  String GetRrn(){
@@ -154,11 +173,25 @@ public class UFXServiceImpl implements UFXService {
         return String.valueOf(Status.OK);
     }
 
-
     public String ClientTopUp(String name, String sName, String cardNum,
                               String cvc2, String exDate,String amount, int clientId){
-        String clientNumber = GenerateId("") + clientId + "CL";
         //String clientNumber = "CLIENT_TEST_100";
+        String clientNumber = GenerateId(clientId + "CL");
+        cardNum = cardNum.replaceAll("-", "");
+        exDate = exDate.replaceAll("\\/", "");
+
+        String topUpRequest = RequestCreateTopUpCl(name, sName, cardNum,
+                cvc2, exDate, amount, clientNumber);
+        String resTopUp = SendRequest(urlUfxAdapter, topUpRequest);
+        return resTopUp;
+    }
+
+    public String LesserTopUp(String name, String sName, String cardNum,
+                              String cvc2, String exDate,String amount, int clientId){
+        String clientNumber = GenerateId(clientId + "LES");
+        cardNum = cardNum.replaceAll("-", "");
+        exDate = exDate.replaceAll("\\/", "");
+
         String topUpRequest = RequestCreateTopUpCl(name, sName, cardNum,
                 cvc2, exDate, amount, clientNumber);
         String resTopUp = SendRequest(urlUfxAdapter, topUpRequest);
@@ -182,14 +215,14 @@ public class UFXServiceImpl implements UFXService {
                                       String clientNumber, String regNumberApp) {
 
         return "<UFXMsg scheme=\"WAY4Appl\" msg_type=\"Application\" version=\"2.0\" direction=\"Rq\">\n" +
-                "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
+                "    <MsgId>AAA-555-333-EEE-23124145</MsgId>\n" +
                 "    <Source app=\"MobileApp\"/>\n" +
                 "    <MsgData>\n" +
                 "        <Application>\n" +
                 "            <RegNumber>" +
-                                regNumberApp +
-                             "</RegNumber>\n" +
-                "\t\t\t<Institution>0001</Institution>\n" +
+                            regNumberApp +
+                            "</RegNumber>\n" +
+                "            <Institution>0001</Institution>\n" +
                 "            <OrderDprt>0101</OrderDprt>\n" +
                 "            <ObjectType>Client</ObjectType>\n" +
                 "            <ActionType>Add</ActionType>\n" +
@@ -197,24 +230,41 @@ public class UFXServiceImpl implements UFXService {
                 "                <Client>\n" +
                 "                    <ClientType>PR</ClientType>\n" +
                 "                    <ClientInfo>\n" +
+                "                        <!-- clientNumber == regNumberApp without \"_A\" -->\n" +
                 "                        <ClientNumber>" +
-                                         clientNumber +
-                                         "</ClientNumber>\n" +
+                                        clientNumber +
+                                        "</ClientNumber>\n" +
+                "                        <!-- regNumberClient == clientNumber -->\n" +
                 "                        <RegNumber>" +
-                                         regNumberApp +
-                                         "</RegNumber>\n" +
+                                        clientNumber +
+                                        "</RegNumber>\n" +
                 "                        <RegNumberDetails>RegDetails</RegNumberDetails>\n" +
                 "                        <FirstName>" +
-                                         name +
-                                         "</FirstName>\n" +
+                                        name +
+                                        "</FirstName>\n" +
                 "                        <LastName>" +
-                                         sName +
-                                         "</LastName>\n" +
+                                        sName +
+                                        "</LastName>\n" +
+                "                        <Country>RUS</Country>\n" +
                 "                    </ClientInfo>\n" +
+                "                    <BaseAddress>\n" +
+                "                        <!-- this is not clients email, it's for card-wallet operations\n" +
+                "                        all data in base address is fake-->\n" +
+                "                        <EMail>fake@email.com</EMail>\n" +
+                "                        <Country>RUS</Country>\n" +
+                "                        <City>Petersburg</City>\n" +
+                "                        <PostalCode>00334</PostalCode>\n" +
+                "                        <AddressLine1>1234523454567890_1</AddressLine1>\n" +
+                "                        <AddressLine2>1234523456789340_1</AddressLine2>\n" +
+                "                        <ActivityPeriod>\n" +
+                "                            <DateFrom>2010-08-20</DateFrom>\n" +
+                "                            <DateTo>2020-08-21</DateTo>\n" +
+                "                        </ActivityPeriod>\n" +
+                "                    </BaseAddress>\n" +
                 "                </Client>\n" +
                 "            </Data>\n" +
                 "        </Application>\n" +
-                "\t</MsgData>\n" +
+                "    </MsgData>\n" +
                 "</UFXMsg>";
     }
 
@@ -336,7 +386,16 @@ public class UFXServiceImpl implements UFXService {
                 "                            <EMail>" +
                                             email +
                                             "</EMail>\n" +
-                "                        </BaseAddress>\n" +
+                "                            <City>Moscow</City>\n" +
+                "                            <PostalCode>00899334</PostalCode>\n" +
+                "                            <AddressLine1>smth</AddressLine1>\n" +
+                "                            <AddressLine2>smth</AddressLine2>\n" +
+                "                            <ActivityPeriod>\n" +
+                "                                <DateFrom>1970-01-25</DateFrom>\n" +
+                "                                <DateTo>2020-08-20</DateTo>\n" +
+                "                            </ActivityPeriod>\n" +
+                "                        </BaseAddress>"
+                +
                 "                    </Client>\n" +
                 "                    <Contract>\n" +
                 "                        <ContractIDT>\n" +
@@ -584,7 +643,7 @@ public class UFXServiceImpl implements UFXService {
         String dateStr = DateUfx.getTime();
         return "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
                 "    <MsgId>1211372852124</MsgId>\n" +
-                "    <Source app=\"MOB\"/>\n" +
+                "    <Source app=\"mobileApp\"/>\n" +
                 "    <MsgData>\n" +
                 "        <Doc>\n" +
                 "            <TransType>\n" +
@@ -607,6 +666,7 @@ public class UFXServiceImpl implements UFXService {
                 "            <LocalDt>" +
                             dateStr +
                             "</LocalDt>\n" +
+                            adrStringTrans +
                 "            <Requestor>\n" +
                 "                <ContractNumber>" +
                                 cardNum +
@@ -695,7 +755,7 @@ public class UFXServiceImpl implements UFXService {
      * @return
      */
     private String GenerateId(String data){
-        return  "XML_FF_";
+        return  "XML_nFTest_" + data;
     }
 
     /**

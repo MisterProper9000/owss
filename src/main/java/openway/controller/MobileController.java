@@ -1,12 +1,10 @@
 package openway.controller;
 
 import openway.service.ClientService;
-import openway.service.MotoService;
 import openway.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
-
 
 
 @RestController
@@ -26,14 +24,14 @@ public class MobileController {
 
     @PostMapping("/regclient")
     String addNewClient(@RequestBody String newItem) {
-        logger.info("get moto registration data" + newItem);
+        logger.info("client reg from mob app: " + newItem);
         return clientService.addNewClient(newItem);
     }
 
 
     @PostMapping("/loginclient")
     String loginClient(@RequestBody String auth) {
-        logger.info("called loginClient()" + auth);
+        logger.info("login client from mobApp: " + auth);
         return clientService.authenticationClient(auth);
     }
 
@@ -51,10 +49,9 @@ public class MobileController {
 
     @PostMapping("/motoRes")
     String reserveStart(@RequestBody String resData) {
-        logger.info("moto reserve request:" + resData);
+        logger.info("moto reserve request: " + resData);
         String reserveResult = orderService.motoReserve(moto_id, resData);
-        logger.info("moto reserved:" + reserveResult);
-
+        logger.info("moto reservation status(new): " + reserveResult);
         return reserveResult;
 
     }
@@ -63,15 +60,21 @@ public class MobileController {
     String reserveCanceled(@RequestBody String resCancData) {
         logger.info("moto reserve request: + " + resCancData);
         String reserveCancelResult = orderService.motoReserveCanceled(moto_id, resCancData);
-        logger.info("moto reserved:" + reserveCancelResult);
+        logger.info("moto reservation status(new): " + reserveCancelResult);
         return reserveCancelResult;
     }
 
-    @GetMapping("topUpCl")
+    /**
+     *
+     * @param topUpData
+     *
+     * @return
+     */
+    @PostMapping("topUpCl")
     String clientTopUp(@RequestBody String topUpData){
         logger.info("client top up request: + " + topUpData);
-        String clienttopUpRes = clientService.TopUp(topUpData);
-        logger.info(clienttopUpRes);
+        String clientTopUpRes = clientService.TopUp(topUpData);
+        logger.info(clientTopUpRes);
         return "OK|";
     }
 

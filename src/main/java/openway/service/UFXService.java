@@ -25,8 +25,12 @@ public interface UFXService {
                               String cvc2, String exDate,String amount, int clientId);
 
     String GenerateRRN(String type);
+
     double getDepositSize();
 
-    String BalanceLesserRequestInWay4(int clientId);
+    String LesserTopUp(String name, String sName, String cardNum,
+                       String cvc2, String exDate,String amount, int clientId);
+
+    String BalanceLesserRequestInWay4(int lesserId);
 }
 

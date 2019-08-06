@@ -12,12 +12,29 @@
                 <Client>
                     <ClientType>PR</ClientType>
                     <ClientInfo>
+                        <!-- clientNumber == regNumberApp without "_A" -->
                         <ClientNumber>clientNumber</ClientNumber>
-                        <RegNumber>regNumberApp</RegNumber>
+                        <!-- regNumberClient == clientNumber -->
+                        <RegNumber>regNumberClient</RegNumber>
                         <RegNumberDetails>RegDetails</RegNumberDetails>
                         <FirstName>name</FirstName>
                         <LastName>sName</LastName>
+                        <Country>RUS</Country>
                     </ClientInfo>
+                    <BaseAddress>
+                        <!-- this is not clients email, it's for card-wallet operations
+                        all data in base address is fake-->
+                        <EMail>fake@email.com</EMail>
+                        <Country>RUS</Country>
+                        <City>Petersburg</City>
+                        <PostalCode>00334</PostalCode>
+                        <AddressLine1>1234523454567890_1</AddressLine1>
+                        <AddressLine2>1234523456789340_1</AddressLine2>
+                        <ActivityPeriod>
+                            <DateFrom>2010-08-20</DateFrom>
+                            <DateTo>2020-08-21</DateTo>
+                        </ActivityPeriod>
+                    </BaseAddress>
                 </Client>
             </Data>
         </Application>

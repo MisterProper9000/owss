@@ -13,18 +13,30 @@ public class ufxTest {
 
         UFXService ufxSer = new UFXServiceImpl();
 
-        String req = ufxSer.ClientTopUp("Daniil", "Plaksin",
-                "1000040176379547", "970", "2008", "25",
-                1);
+        //Client client = new Client("Vasya", "Lalkov", "vl@gmail.com",
+        //"5553535", "123");
+        //String newClientRes = ufxSer.AddNewClientInWay4(client);
 
-        System.out.println(req);
-//
+//        Lesser lesser = new Lesser("TestType", "Vasiliy",
+//                "Ivanovich", "AcqEmail@mail.com",
+//                "pass", "5553535", "kekova47", "1000040182277768",
+//                5);
+
+        //String newLesserRes = ufxSer.AddNewLesserInWay4(lesser);
+
+
+        String req = ufxSer.LesserTopUp("Daniil", "Plaksin",
+                "1000040176379547", "970", "2008", "25",
+                0);
+
+        //System.out.println(req);
+//        System.out.println(req);
+
 //        String kek = "sfb_moto:1|danyaplaksin@gmail.com";
 //        String rmail = kek.split("\\|")[1];
 //        System.out.println(rmail);
 
-//        Client client = new Client("Vasya", "Lalkov", "vl@gmail.com",
-//                "5553535", "123");
+
 
         //client.setId(34);
 

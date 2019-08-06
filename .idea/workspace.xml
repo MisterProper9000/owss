@@ -2,15 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5380fa1-d86d-4d3e-b8b6-8223656ba791" name="Default Changelist" comment="added function hash">
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Lesser.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Lesser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/ScooterInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ScooterInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/css/StartPage.css" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/css/StartPage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/controller/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/controller/MotoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/controller/MotoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/repository/MotoRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/repository/MotoRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/repository/OrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/DepositMoney.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DepositMoney.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -131,17 +124,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://e00b9076-0554-44b5-bd96-cacb6e027476/database/motosh/schema/public/table/lesser">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state projectRestartId="2c43fe4c-29ea-48a6-ad08-9ad5c6e8638a">
-              <filtering>
-                <filter text="" />
-              </filtering>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="das://e00b9076-0554-44b5-bd96-cacb6e027476/database/motosh/schema/public/table/ord">
           <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
             <state projectRestartId="2c43fe4c-29ea-48a6-ad08-9ad5c6e8638a">
@@ -153,24 +135,37 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://e00b9076-0554-44b5-bd96-cacb6e027476/database/motosh/schema/public/table/client">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state projectRestartId="2c43fe4c-29ea-48a6-ad08-9ad5c6e8638a">
-              <filtering>
-                <filter text="" />
-              </filtering>
+        <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="272" column="43" selection-start-line="272" selection-start-column="43" selection-end-line="272" selection-end-column="43" />
+              <folding>
+                <element signature="method#motoReserve#0;class#OrderServiceImpl#0" />
+                <element signature="method#motoReserveCanceled#0;class#OrderServiceImpl#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/DepositMoney.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="545">
-              <caret line="294" column="40" selection-start-line="294" selection-start-column="40" selection-end-line="294" selection-end-column="40" />
+            <state relative-caret-position="527">
+              <caret line="46" column="52" selection-start-line="46" selection-start-column="52" selection-end-line="46" selection-end-column="74" />
               <folding>
-                <element signature="method#motoReserve#0;class#OrderServiceImpl#0" />
-                <element signature="method#motoReserveCanceled#0;class#OrderServiceImpl#0" />
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/Login.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="460">
+              <caret line="59" column="74" lean-forward="true" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="74" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -287,7 +282,6 @@
         <option value="$PROJECT_DIR$/frontend/src/components/Table.js" />
         <option value="$PROJECT_DIR$/frontend/src/css/Lesser.css" />
         <option value="$PROJECT_DIR$/frontend/src/css/ScooterInfo.css" />
-        <option value="$PROJECT_DIR$/frontend/src/components/DepositMoney.js" />
         <option value="$PROJECT_DIR$/frontend/src/components/Info.js" />
         <option value="$PROJECT_DIR$/frontend/src/components/Login.js" />
         <option value="$PROJECT_DIR$/frontend/src/components/Moto.js" />
@@ -308,6 +302,7 @@
         <option value="$PROJECT_DIR$/frontend/src/components/Lesser.js" />
         <option value="$PROJECT_DIR$/src/main/java/openway/repository/MotoRepository.java" />
         <option value="$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java" />
+        <option value="$PROJECT_DIR$/frontend/src/components/DepositMoney.js" />
       </list>
     </option>
   </component>
@@ -698,7 +693,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="198467000" />
+    <option name="totallyTimeSpent" value="199493000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -723,13 +718,13 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.053285968" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989259" visible="true" weight="0.09476031" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989259" weight="0.7369008" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.8651059" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.7637655" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.4671126" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.042363435" />
+      <window_info anchor="bottom" id="Terminal" order="8" visible="true" weight="0.042363435" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50107414" side_tool="true" weight="0.62095875" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.40691194" />
@@ -861,13 +856,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/DepositMoney.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="8" selection-start-line="4" selection-start-column="8" selection-end-line="4" selection-end-column="23" />
         </state>
       </provider>
     </entry>
@@ -1046,16 +1034,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="307">
-          <caret line="50" column="27" selection-start-line="50" selection-start-column="27" selection-end-line="50" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/css/RegScooter.css">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -1124,15 +1102,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://e00b9076-0554-44b5-bd96-cacb6e027476/database/motosh/schema/public/table/ord">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="2c43fe4c-29ea-48a6-ad08-9ad5c6e8638a">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/openway/model/Order.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="213">
@@ -1147,13 +1116,6 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="179">
-          <caret line="51" column="51" lean-forward="true" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
         </state>
       </provider>
     </entry>
@@ -1184,13 +1146,49 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="179">
+          <caret line="51" column="51" lean-forward="true" selection-start-line="51" selection-start-column="51" selection-end-line="51" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e00b9076-0554-44b5-bd96-cacb6e027476/database/motosh/schema/public/table/ord">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="2c43fe4c-29ea-48a6-ad08-9ad5c6e8638a">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="545">
-          <caret line="294" column="40" selection-start-line="294" selection-start-column="40" selection-end-line="294" selection-end-column="40" />
+        <state relative-caret-position="187">
+          <caret line="272" column="43" selection-start-line="272" selection-start-column="43" selection-end-line="272" selection-end-column="43" />
           <folding>
             <element signature="method#motoReserve#0;class#OrderServiceImpl#0" />
             <element signature="method#motoReserveCanceled#0;class#OrderServiceImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/Login.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="460">
+          <caret line="59" column="74" lean-forward="true" selection-start-line="59" selection-start-column="16" selection-end-line="59" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/DepositMoney.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="527">
+          <caret line="46" column="52" selection-start-line="46" selection-start-column="52" selection-end-line="46" selection-end-column="74" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>

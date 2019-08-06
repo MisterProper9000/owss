@@ -13,7 +13,8 @@ class DepositMoney extends Component {
             security_code: '',
             name_on_card: '',
             expiration: '',
-            depositMoney: ''
+            depositMoney: '',
+            errorMsg: '',
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,12 +35,19 @@ class DepositMoney extends Component {
             body: JSON.stringify({
                     card_number,
                     security_code,
-                    name_on_card,
                     expiration,
                     depositMoney
                 }
             )
-        });
+        })
+            .then(resp =>{
+                if(resp){
+                    alert("You have successfully replenished your wallet in the amount of "+depositMoney)
+                }
+                else {
+                    this.setState({errorMsg: 'Replenishment error'});
+                }
+            });
     }
 
     componentDidMount() {
@@ -50,7 +58,7 @@ class DepositMoney extends Component {
     }
 
     render() {
-        const {card_number, security_code, name_on_card, expiration, depositMoney} = this.state;
+        const {card_number, security_code, expiration, depositMoney} = this.state;
 
         return (
             <div>
@@ -64,13 +72,11 @@ class DepositMoney extends Component {
                     <input className="input" type="text" placeholder="security_code" name="Security Code"
                            value={security_code}
                            onChange={this.handleChange}/><br/>
-                    <input className="input" type="text" placeholder="name_on_card" name="Name on card"
-                           value={name_on_card}
-                           onChange={this.handleChange}/><br/>
                     <input className="input" type="text" placeholder="expiration" name="Expiration"
                            value={expiration}
                            onChange={this.handleChange}/><br/>
                     <br/>
+                    <div className="errorMsg">{this.state.errorMsg}</div>
                     <input className="input" type="text" placeholder="Cost" name="depositMoney"
                            value={depositMoney}
                            onChange={this.handleChange}/><br/>

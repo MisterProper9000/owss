@@ -17,6 +17,7 @@ public interface LesserService {
 
     String checkBalanceLessor(String data);
 
+    String topUp(String data);
     //void setPasswordHash();
 
 }

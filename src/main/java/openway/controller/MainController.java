@@ -71,8 +71,17 @@ public class MainController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/balanceInqueryLessor")
-    String lessortBalanceRequest(@RequestBody String data) {
+    String lessorBalanceRequest(@RequestBody String data) {
         logger.info("balance lesser request " + data);
         return lesserService.checkBalanceLessor(data);
     }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/topUpLessor")
+    String lessorTopUpt(@RequestBody String data) {
+        logger.info("balance lesser request " + data);
+        return lesserService.topUp(data);
+    }
+
+
 }

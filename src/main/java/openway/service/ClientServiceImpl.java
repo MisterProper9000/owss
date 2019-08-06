@@ -134,7 +134,6 @@ public class ClientServiceImpl implements ClientService {
         Client client = clientRepository.findClientByEmail(email);
         int clientId = client.getId();
 
-        //String testN = "CLE"
         String resTopUp = ufxService.ClientTopUp(name, sName, cardNum, cvc2,
                 exDate, amount, clientId);
 

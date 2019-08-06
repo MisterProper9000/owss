@@ -13,7 +13,6 @@ class RegScooter extends Component {
             auto_number: '',
             model: '',
             insurance: 'false',
-            status: 'false',
 
         };
         this.handleChange = this.handleChange.bind(this);
@@ -45,7 +44,7 @@ class RegScooter extends Component {
                 auto_number,
                 model,
                 idowner,
-                insurance
+                insurance,
             })
         }).then((resp) => {
             return resp.json()

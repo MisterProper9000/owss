@@ -52,7 +52,8 @@ public class MobileController {
         logger.info("moto reserve request: " + resData);
         String reserveResult = orderService.motoReserve(moto_id, resData);
         logger.info("moto reservation status(new): " + reserveResult);
-        return reserveResult;
+        logger.info("moto reserved:" + reserveResult);
+        return (reserveResult.equals("false")?"OK|":"") + reserveResult;
 
     }
 

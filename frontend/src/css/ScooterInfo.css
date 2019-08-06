@@ -1,3 +1,5 @@
+
+
 .tableMoto{
     margin-left: 10%;
 }
@@ -17,4 +19,21 @@
     content: "";
     display: table;
     clear: both;
+}
+
+.tableInfoScooter{
+    margin-left: 30%;
+}
+
+/*table, td, th {*/
+/*    border: 1px solid black;*/
+/*}*/
+
+/*th {*/
+/*    background-color: rgba(255, 164, 170, 0.58);*/
+/*    color: #020202;*/
+/*}*/
+
+.tableInfoMoto{
+    margin-left: 20%;
 }

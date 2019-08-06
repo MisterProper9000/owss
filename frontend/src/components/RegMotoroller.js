@@ -26,7 +26,7 @@ class RegMotoroller extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {auto_number, model, insurance} = this.state;
+        const {auto_number, model, insurance,status} = this.state;
         const id_owner = Cookies.get('token');
 
         fetch(AndreyLocalIpOW + '/addmoto', {
@@ -35,7 +35,8 @@ class RegMotoroller extends Component {
                 auto_number,
                 model,
                 id_owner,
-                insurance
+                insurance,
+                status
             })
         }).then((resp) => {
             return resp.json()

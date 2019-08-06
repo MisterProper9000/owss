@@ -31,13 +31,11 @@ class Login extends Component {
         event.preventDefault();
         const {email, password} = this.state;
 
-        if(this.state.email === "" || this.state.password === "")
-        {
+        if (this.state.email === "" || this.state.password === "") {
             this.setState({errorMsg: 'All fields must be filled'});
             return;
         }
-        if(!this.state.email.includes("@") || !this.state.email.includes("."))
-        {
+        if (!this.state.email.includes("@") || !this.state.email.includes(".")) {
             this.setState({errorMsg: 'Wrong email'});
             return;
         }
@@ -54,7 +52,7 @@ class Login extends Component {
             return resp.json()
         }).then(response => {
             if (response != false) {
-                Cookies.set('token',response);
+                Cookies.set('token', response);
                 this.setState({errorMsg: ''});
                 alert("You are successfully logged in");
                 window.location = "/lesser";
@@ -64,7 +62,7 @@ class Login extends Component {
         });
     }
 
-    goToSignUp(){
+    goToSignUp() {
         window.location = "/reg";
     }
 
@@ -78,8 +76,8 @@ class Login extends Component {
             <div>
                 <NavbarComp/>
                 <div className="row">
-                    <div className="column" >
-                        <div className="bglogo"> </div>
+                    <div className="column">
+                        <div className="bglogo"></div>
                     </div>
 
                     <div className="column">
@@ -96,11 +94,11 @@ class Login extends Component {
                                    value="Ok"/>
                         </form>
                         <div className="titleWords">Don't have an account</div>
-                        <button className="input btn-info" className="titleSignUp" onClick={this.goToSignUp}>SIGN UP NOW</button>
+                        <button className="input btn-info" className="titleSignUp" onClick={this.goToSignUp}>SIGN UP
+                            NOW
+                        </button>
                     </div>
                 </div>
-
-
             </div>
         );
     }

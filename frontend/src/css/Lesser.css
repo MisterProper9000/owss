@@ -19,6 +19,13 @@
     width: 400px;
 }
 
+.selectScooter{
+    margin-top: 2.5%;
+    border: 4px double #bac0cc; /* Параметры границы */
+    padding: 10px; /* Поля вокруг текста */
+    width: 600px;
+}
+
 .container > div {
     background-color: rgb(207, 232, 220);
     border: 2px solid rgb(79, 185, 227);

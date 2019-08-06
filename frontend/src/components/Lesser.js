@@ -11,20 +11,25 @@ import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import {AndreyLocalIpOW} from "./ipConfigs";
 
 class Lesser extends Component {
+    goScooterInfo;
 
     constructor(props) {
         super(props);
         this.state = {
             id_client: Cookies.get('token'),
-            type: 'Personal Owner',
-            first_name: 'Jools',
-            last_name: 'Blinnikova',
-            email: 'kate@gmail.com',
+            type: '',
+            first_name: '',
+            last_name: '',
+            email: '',
             password: '',
-            phone: '89811234567',
-            address: 'Torzhkovskaya 15',
-            sum_moto: '1',
-            bank_account: '1234567',
+            phone: '',
+            address: '',
+            sum_moto: '',
+            bank_account: '',
+
+
+            selected_id: 0,
+
 
             lesserData: [],
 
@@ -32,6 +37,11 @@ class Lesser extends Component {
             auto_number: '',
             model: '',
             insurance: '',
+            status_reserv:'',
+            status_rent:'',
+
+            listid:[],
+
 
             balance: '',
 
@@ -39,7 +49,9 @@ class Lesser extends Component {
                 {headerName: "ID", field: "id", width: 100},
                 {headerName: "Scooter number", field: "auto_number"},
                 {headerName: "Model", field: "model"},
-                {headerName: "Insuranse", field: "insurance"}
+                {headerName: "Insuranse", field: "insurance"},
+                {headerName: "Reserved", field: "status_reserv"},
+                {headerName: "In rent", field: "status_rent"}
 
             ],
             rowData: [],
@@ -49,7 +61,7 @@ class Lesser extends Component {
     }
 
     handleChange(event) {
-        this.setState({[event.target.name]: event.target.value});
+        this.setState({selected_id: event});
     }
 
     depositMoney() {
@@ -60,8 +72,21 @@ class Lesser extends Component {
         window.location = "/regmoto";
     }
 
-    getScooterInfo() {
-        window.location = "/scooter_info";
+    getScooterInfo(selected_id) {
+        Cookies.remove('id_scooter');
+        this.setState({selected_id:selected_id});
+        Cookies.set('id_scooter',this.state.selected_id);
+        console.log(selected_id);
+
+        fetch(AndreyLocalIpOW + '/goToScooterInfo', {
+            method: 'POST',
+            body: Cookies.get('id_scooter')
+        })
+            .then(resp => {
+            //return resp.json()
+                console.log(resp.json());
+        })
+        //window.location = "/scooter_info";
     }
 
     goToPaymentInfo() {
@@ -71,7 +96,13 @@ class Lesser extends Component {
 
     componentDidMount() {
 
-        fetch('http://10.101.177.21:9091/lesserinfo', {
+        fetch(AndreyLocalIpOW + '/goToScooterInfo', {
+            method: 'POST',
+            body: this.state.id_client
+        })
+
+
+        fetch(AndreyLocalIpOW + '/lesserinfo', {
             method: 'POST',
             body: this.state.id_client
         }).then(resp => {
@@ -88,7 +119,7 @@ class Lesser extends Component {
                     address: resp.address,
                     sum_moto: resp.sum_moto,
                     bank_account: resp.bank_account,
-                }))
+                }));
 
         fetch(AndreyLocalIpOW + '/balanceInqueryLessor', {
         //fetch('http://10.101.177.21:9091/balanceInqueryLessor', {
@@ -107,15 +138,18 @@ class Lesser extends Component {
         })
 
 
-        fetch('http://10.101.177.21:9091//infomoto', {
+        fetch('http://10.101.177.21:9091/infomoto', {
             method: 'POST',
             body: this.state.id_client
         })
             .then(result => result.json())
-            .then(rowData => this.setState({rowData}))
+            .then(rowData => {
+               this.setState({rowData});
+            })
     }
 
     render() {
+        const {selected_id} = this.state;
         return (
             <div>
                 <NavbarComp/>
@@ -166,8 +200,8 @@ class Lesser extends Component {
                                 </tr>
                                 <button className="buttonDeposit" onClick={this.depositMoney}>Deposit money</button>
                             </div>
-                            <button className="buttonPaymentInfo" onClick={this.goToPaymentInfo}>Payment Information
-                            </button>
+                            {/*<button className="buttonPaymentInfo" onClick={this.goToPaymentInfo}>Payment Information*/}
+                            {/*</button>*/}
                         </div>
 
                         <div className="columnLesser">
@@ -186,20 +220,16 @@ class Lesser extends Component {
                             </div>
                             <button className="buttonNewScooter" onClick={this.addNewScooter}>Add new scooter
                             </button>
-                            <button className="buttonInfoScooter" onClick={this.getScooterInfo}>Scooter Info
-                            </button>
+                            <br/>
 
-                            {/*<div className="rowLesser">*/}
-                            {/*    <div className="columnLesser">*/}
-                            {/*        <button className="buttonNewScooter" onClick={this.addNewScooter}>Add new scooter*/}
-                            {/*        </button>*/}
-                            {/*    </div>*/}
-                            {/*    <div className="columnLesser">*/}
-                            {/*        <button className="buttonInfoScooter" onClick={this.getScooterInfo}>Scooter Info*/}
-                            {/*        </button>*/}
-                            {/*    </div>*/}
-                            {/*</div>*/}
-
+                            <div className="selectScooter">
+                                <tr>
+                                    <th>Scooter information</th>
+                                    <text className="selectId">Enter id scooter</text>
+                                    <input id="id_selected_input" type="text" placeholder="" name="selected_id"/><br/>
+                                </tr>
+                                <button className="buttonDeposit" onClick={()=>this.getScooterInfo(document.getElementById("id_selected_input").value)}>Find</button>
+                            </div>
                         </div>
                     </div>
                 </div>

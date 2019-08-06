@@ -117,7 +117,7 @@ public class ClientServiceImpl implements ClientService {
         UFXService ufxService = new UFXServiceImpl();
         int orderId = Integer.valueOf(data);
         Order order = orderRepository.findOrderById(orderId);
-        int clientId = order.getId_client();
+        int clientId = order.getIdclient();
         float cost = order.getCost();
         int motoId = order.getId_moto();
         Motoroller moto = motoRepository.findMotorollerById(motoId);

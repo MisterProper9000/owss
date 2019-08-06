@@ -76,7 +76,7 @@ public class MotoServiceImpl implements MotoService {
     }
 
     @Override
-    public List<Motoroller> findLesserMoto(String id) {
+    public List<Motoroller> findLesserMotos(String id) {
         int id_lesser = Integer.parseInt(id);
         return motoRepository.findMotorollersByIdowner(id_lesser);
     }
@@ -93,7 +93,25 @@ public class MotoServiceImpl implements MotoService {
         return listOfId;
     }
 
+    @Override
+    public List<Integer> listofidscooters(String id) {
+        List<Integer> listOfId = new ArrayList<>();
+        List<Motoroller> forms = motoRepository.findMotorollersById(Integer.parseInt(id));
+        for (Motoroller form : forms) {
+            listOfId.add(form.getId());
+        }
+        int i = listOfId.size();
+        logger.info("listOfId.size()=  " + i);
+        return listOfId;
+    }
 
+    @Override
+    public Motoroller findMotoById(String id) {
+        return motoRepository.findMotorollerById(Integer.parseInt(id));
+    }
 
-
+    @Override
+    public boolean isScooterIdExist(String id) {
+        return motoRepository.existsMotorollerById(Integer.parseInt(id));
+    }
 }

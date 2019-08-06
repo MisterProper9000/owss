@@ -8,43 +8,73 @@ import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
-
 class ScooterInfo extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
 
-            id_moto: '',
+
+            id: '',
             auto_number: '',
             model: '',
             insurance: '',
+            status_reserv: '',
+            status_rent: '',
 
-            id: '',
-            begin_time: '',
-            end_time: '',
-            cost: '',
-            tariff: '',
 
+            balance: '',
 
             columnDefs: [
-                {headerName: "ID", field: "id_moto", width: 100},
-                {headerName: "Moto number", field: "auto_number"},
+                {headerName: "ID", field: "id", width: 100},
+                {headerName: "Scooter number", field: "auto_number"},
                 {headerName: "Model", field: "model"},
-                {headerName: "Insuranse", field: "insurance"}
+                {headerName: "Insuranse", field: "insurance"},
+                {headerName: "Reserved", field: "status_reserv"},
+                {headerName: "In rent", field: "status_rent"}
 
             ],
             rowData: [],
 
-            columnRent: [
-                {headerName: "ID", field: "id", width: 100},
-                {headerName: "Begin time", field: "begin_time"},
-                {headerName: "End time", field: "end_time"},
-                {headerName: "Cost", field: "cost"},
-                {headerName: "Tariff", field: "tariff"},
-
-            ],
-            rowRent: [],
+            // //idowner: Cookies.get('token'),
+            // id: '',
+            // auto_number: '',
+            // model: '',
+            // insurance: '',
+            // status_reserv: '',
+            // status_rent: '',
+            // idowner:'',
+            // rent:'',
+            // res:'',
+            //
+            // // id: '1',
+            // // begin_time: '',
+            // // end_time: '',
+            // // cost: '',
+            // // tariff: '',
+            // //
+            // // data: [],
+            //
+            // // columnRent: [
+            // //     {headerName: "ID", field: "id", width: 100},
+            // //     {headerName: "Begin time", field: "begin_time"},
+            // //     {headerName: "End time", field: "end_time"},
+            // //     {headerName: "Cost", field: "cost"},
+            // //     {headerName: "Tariff", field: "tariff"},
+            // //
+            // // ],
+            // // rowRent: [],
+            //
+            // columnData: [
+            //     {headerName: "ID", field: "id", width: 100},
+            //     {headerName: "auto_number", field: "auto_number"},
+            //     {headerName: " model", field: "model"},
+            //     {headerName: "insurance", field: "insurance"},
+            //     {headerName: "status_reserv", field: "status_reserv"},
+            //     {headerName: "status_rent", field: "status_rent"},
+            //
+            // ],
+            // rowData: [],
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -60,13 +90,6 @@ class ScooterInfo extends Component {
 
 
     componentDidMount() {
-        // fetch('http://10.101.177.21:9091/motoinfo')
-        //     .then(result => result.json())
-        //     .then(rowData => this.setState({rowData}))
-
-        // fetch('http://10.101.177.21:9091/rentinfo')
-        //     .then(result => result.json())
-        //     .then(rowRent => this.setState({rowRent}))
     }
 
     render() {
@@ -74,52 +97,12 @@ class ScooterInfo extends Component {
             <div>
                 <NavbarComp/>
                 <button className="buttonBack" onClick={this.goBack}> Back</button>
-                <h1 className="titleDop">Scooter Information</h1>
-                <div className="rowScooter">
-                    <div className="columnScooter">
-                        <div className="tableMoto">
-                            <div
-                                className="ag-theme-balham"
-                                style={{height: '100px', width: '600px'}}
-                            >
-                                <AgGridReact
-                                    //pagination={true}
-                                    enableFilter={true}
-                                    enableSorting={true}
-                                    columnDefs={this.state.columnDefs}
-                                    rowData={this.state.rowData}>
-                                </AgGridReact>
-                            </div>
-                        </div>
-                        <div className="columnScooter">
-
-                        </div>
-                    </div>
-
-                    <div className="columnScooter">
-
-                    </div>
-                </div>
-
-                <br/>
-                <div className="tableMoto">
-                    <div>Rents</div>
-
-                    <div
-                        className="ag-theme-balham"
-                        style={{height: '200px', width: '1000px'}}
-                    >
-                        <AgGridReact
-                            //pagination={true}
-                            enableFilter={true}
-                            enableSorting={true}
-                            columnDefs={this.state.columnRent}
-                            rowData={this.state.rowRent}>
-                        </AgGridReact>
-                    </div>
+                <div className="mainMargin">
+                    <h1 className="titleDop">Scooter Information</h1>
                 </div>
 
             </div>
+
         );
     }
 }

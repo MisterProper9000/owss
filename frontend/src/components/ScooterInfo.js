@@ -112,6 +112,7 @@ class ScooterInfo extends Component {
                 <button className="buttonBack" onClick={this.goBack}> Back</button>
                 <div className="mainMargin">
                     <h1 className="titleDop">Rental History</h1>
+                    <h1 className="titleDop2">Id scooter: {this.state.idmoto}</h1>
                     {/*<div*/}
                     {/*    className="ag-theme-balham"*/}
                     {/*    style={{height: '100px', width: '100%'}}*/}

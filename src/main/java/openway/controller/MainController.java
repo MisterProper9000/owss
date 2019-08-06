@@ -4,8 +4,11 @@ import openway.model.Lesser;
 import openway.service.LesserService;
 
 import openway.service.OrderService;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -72,9 +75,11 @@ public class MainController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/balanceInqueryLessor")
-    String lessorBalanceRequest(@RequestBody String data) {
-        logger.info("balance lesser request " + data);
-        return lesserService.checkBalanceLessor(data);
+    String lessorBalanceRequest(@RequestBody String id) {
+        logger.info("balance lesser request " + id);
+        String res = lesserService.checkBalanceLessor(id);
+        logger.info("res balance: "+res);
+        return res;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -82,6 +87,23 @@ public class MainController {
     String lessorTopUpt(@RequestBody String data) {
         logger.info("balance lesser request " + data);
         return lesserService.topUp(data);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/findStat")
+    String getdataforstat(@RequestBody String data) throws ParseException {
+        logger.info("statistics " + data);
+        //orderService.dataForStat(data);
+
+        String jsonString;
+        try {
+            jsonString = new JSONObject()
+                    .put("JSON1", "Hello World!").toString();
+            return jsonString;
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return "" ;
+        }
     }
 
 

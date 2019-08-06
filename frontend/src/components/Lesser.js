@@ -87,13 +87,13 @@ class Lesser extends Component {
                 return resp.json()
             })
             .then(resp => {
-
                 //console.log(resp);
                 if (resp != true) {
                     this.setState({errorMsg: 'Enter an existing scooter'});
                 } else {
                     window.location = "/scooter_info";
                 }
+
             })
 
     }
@@ -135,17 +135,14 @@ class Lesser extends Component {
             //fetch('http://10.101.177.21:9091/balanceInqueryLessor', {
             method: 'POST',
             body: JSON.stringify({
-                    email: 'test2@gmail.com',
+                    id: Cookies.get('token')
                 }
             )
         }).then((resp) => {
             return resp.json()
-        }).then(function (jsonData) {
-            return JSON.stringify(jsonData);
         }).then(resp => {
-            var bal = resp.split('"balance":');
-            this.setState({balance: bal});
-        })
+            //this.setState({balance: resp});
+        });
 
 
         fetch(JuliaLocalIpOW + '/infomoto', {

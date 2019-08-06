@@ -767,7 +767,7 @@ public class UFXServiceImpl implements UFXService {
      * @return
      */
     private String GenerateId(String data){
-        return  "XML_XX_" + data;
+        return  "XML_FF_" + data;
     }
 
     /**

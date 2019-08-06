@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static java.lang.Math.ceil;
+import static java.lang.Math.log;
 
 
 @Service
@@ -36,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
 
     public OrderServiceImpl(OrderRepository orderRepository,
                             ClientRepository clientRepository,
-                            MotoRepository motoRepository, LesserRepository lesserRepository){
+                            MotoRepository motoRepository, LesserRepository lesserRepository) {
         this.orderRepository = orderRepository;
         this.clientRepository = clientRepository;
         this.motoRepository = motoRepository;
@@ -56,7 +57,7 @@ public class OrderServiceImpl implements OrderService {
         String[] dataOfQrCode = qr.split(":", 2);
         int id_moto = Integer.valueOf(dataOfQrCode[1]);
 
-        logger.info("id_moto: " + id_moto + ",  email: " + email+", tariff: "+tariff);
+        logger.info("id_moto: " + id_moto + ",  email: " + email + ", tariff: " + tariff);
 
         Client client = clientRepository.findClientByEmail(email);
         int id_client = client.getId();
@@ -68,19 +69,18 @@ public class OrderServiceImpl implements OrderService {
             Order tmp = null;
             int tmpOrderId = 0;
             Motoroller moto = motoRepository.findMotorollerById(id_moto);
-            if(moto.isRes())
-            {
+            if (moto.isRes()) {
                 List<Order> orders = orderRepository.findOrdersByCost(-1.0f);
                 int i;
-                for(i = 0; i < orders.size(); i++){
-                    if(orders.get(i).getIdclient() == id_client){
+                for (i = 0; i < orders.size(); i++) {
+                    if (orders.get(i).getIdclient() == id_client) {
                         tmp = orders.get(i);
                         tmpOrderId = tmp.getId();
                         break;
                     }
                 }
 
-                if(i == orders.size()) {
+                if (i == orders.size()) {
                     logger.info("start rent: last client id: " + i);
                     logger.info("start rent: list of zero costs list size: " + orders.size());
                     logger.info("returned data: " + String.valueOf(Status.BLOCKED));
@@ -106,10 +106,9 @@ public class OrderServiceImpl implements OrderService {
 
             String balanceStr = ufxService.BalanceRequestInWay4(id_client).split(" ")[0];
             double balance = Double.valueOf(balanceStr);
-            if(balance < ufxService.getDepositSize()){
+            if (balance < ufxService.getDepositSize()) {
                 return String.valueOf(Status.NOTENOUGH);
             }
-
 
 
             String resDeposit = ufxService.GetDepositFromClient(id_client, id_lesser);
@@ -137,10 +136,10 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public String motoReserve(int moto_id, String email){
+    public String motoReserve(int moto_id, String email) {
         Motoroller moto = motoRepository.findMotorollerById(moto_id);
         UFXService ufxService = new UFXServiceImpl();
-        if(moto.isRes() || moto.isRent())
+        if (moto.isRes() || moto.isRent())
             return String.valueOf(false);
 
         moto.setStatusReserve(true);
@@ -149,17 +148,17 @@ public class OrderServiceImpl implements OrderService {
         String rmail = email.split("\\|")[1];
         logger.info(rmail);
         Client client = clientRepository.findClientByEmail(rmail);
-        if(client == null)
+        if (client == null)
             return String.valueOf(false);
 
         Order order = new Order("null", "null",
-                moto_id, client.getId(), 10,1  ,-1, ufxService.GenerateRRN("time"));
+                moto_id, client.getId(), 10, 1, -1, ufxService.GenerateRRN("time"));
         orderRepository.save(order);
 
         String checkBalanceStr = ufxService.BalanceRequestInWay4(client.getId());
         String checkBalance[] = checkBalanceStr.split(" ");
         double balance = Double.valueOf(checkBalance[0]);
-        if(balance < ufxService.getDepositSize()){
+        if (balance < ufxService.getDepositSize()) {
             return String.valueOf(false);
         }
 
@@ -171,7 +170,7 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public String motoReserveCanceled(int moto_id, String data){
+    public String motoReserveCanceled(int moto_id, String data) {
         String str[] = data.split("\\|");
         int order_id = Integer.valueOf(str[0]);
         UFXService ufxService = new UFXServiceImpl();
@@ -181,7 +180,7 @@ public class OrderServiceImpl implements OrderService {
         Client client = clientRepository.findClientByEmail(email);
         Motoroller moto = motoRepository.findMotorollerById(moto_id);
 
-        String  RRN = order.getRRN();
+        String RRN = order.getRRN();
         String resReverseDeposit = ufxService.ReverseDeposit(client.getId(), moto.getIdowner(), RRN);
         logger.info("reverse deposit by reserve canceled: " + resReverseDeposit);
 
@@ -198,7 +197,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public String endRent(String id_orderStr) throws ParseException {
         int id_order = Integer.parseInt(id_orderStr);
-        logger.info("id_order"+id_order);
+        logger.info("id_order" + id_order);
 
         String end_time = setCurrentDataToString();
         logger.info("end_date rent: " + end_time);
@@ -207,14 +206,14 @@ public class OrderServiceImpl implements OrderService {
         logger.info("order: " + order);
         order.setEnd_time(end_time);
         Motoroller moto = motoRepository.findMotorollerById(order.getId_moto());
-        if(moto != null){
+        if (moto != null) {
             moto.setStatusRent(false);
             motoRepository.save(moto);
         }
         String begin_time = order.getBegin_time();
-        float timeOfRent = (float) (setStringDateToDate(end_time).getTime() - setStringDateToDate(begin_time).getTime())/10000;
+        float timeOfRent = (float) (setStringDateToDate(end_time).getTime() - setStringDateToDate(begin_time).getTime()) / 1000;
         logger.info("time of Rent: " + timeOfRent);
-        float cost = (float)ceil((float)order.getTariff() / order.getTariff_time()) * timeOfRent;
+        float cost = (float) ceil((float) order.getTariff() / order.getTariff_time()) * timeOfRent;
         order.setCost(cost);
         orderRepository.save(order);
 
@@ -253,11 +252,11 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> listrentmobile(String email) {
         Client client = clientRepository.findClientByEmail(email);
-        logger.info("orders:"+orderRepository.findOrdersByIdclient(client.getId()));
+        logger.info("orders:" + orderRepository.findOrdersByIdclient(client.getId()));
         List<Order> listorder = orderRepository.findOrdersByIdclient(client.getId());
         List<Order> list = new ArrayList<>();
-        for (Order order :listorder) {
-            if(order.getCost()>0){
+        for (Order order : listorder) {
+            if (order.getCost() > 0) {
                 list.add(order);
             }
         }
@@ -271,34 +270,74 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public float countAverageCost(String id) {
-        float sumCost =0 ;
+        return 0;
+    }
+
+
+    @Override
+    public float countAverageCost(int id, String startStatDate, String endStatDate) throws ParseException {
+
+
+
+        Date dateStart = new SimpleDateFormat("yyyy-MM-dd").parse(startStatDate);
+        Date dateEnd = new SimpleDateFormat("yyyy-MM-dd").parse(endStatDate);
+
+        logger.info("startDate, EndDate parsed: "+dateStart+"  "+dateEnd+"");
+
+        float sumCost = 0;
         ArrayList<Float> listCosts = new ArrayList<>();
         ArrayList<Integer> listIDMotors = new ArrayList<>();
 
-        List<Motoroller> listMotors = motoRepository.findMotorollersByIdowner(Integer.parseInt(id));
+        List<Motoroller> listMotors = motoRepository.findMotorollersByIdowner(id);
         for (Motoroller motoroller : listMotors) {
             listIDMotors.add(motoroller.getId());
         }
 
         List<Order> listOrders = orderRepository.findAll();
 
-        for (Order order :listOrders) {
+
+        for (Order order : listOrders) {
             for (Integer idMoto : listIDMotors) {
-                if(order.getCost()>0 && (order.getId_moto() == idMoto ) ){
-                    listCosts.add(order.getCost());
-                    logger.info("-------added to list order: "+order.getId());
-                }
+                logger.info("go to for");
+                logger.info("convertdata begin time: "+convertData(order.getBegin_time()));
+//                if (order.getCost() > 0 && (order.getId_moto() == idMoto) && (convertData(order.getBegin_time()).after(dateStart)) && (convertData(order.getEnd_time()).before(dateEnd))) {
+//
+//                    listCosts.add(order.getCost());
+//                    logger.info("-------added to list order: " + order.getId());
+//                }
             }
         }
 
-        for ( Float cost :listCosts) sumCost += cost;
-        float res = sumCost/listCosts.size();
-        logger.info("-----------------------countAverageCost: "+res);
+        for (Float cost : listCosts) sumCost += cost;
+        float res = sumCost / listCosts.size();
+        logger.info("-----------------------countAverageCost: " + res);
+        return res;
+    }
+
+    @Override
+    public float countAverageCostOneMoto(int idmoto)  {
+        float sumCost = 0;
+        ArrayList<Float> listCosts = new ArrayList<>();
+        ArrayList<Integer> listIDMotors = new ArrayList<>();
+
+        List<Order> listOrders = orderRepository.findAll();
+
+
+        for (Order order : listOrders) {
+                if (order.getCost() > 0 && (order.getId_moto() == idmoto)) {
+                    listCosts.add(order.getCost());
+                    logger.info("-------added to list order: " + order.getId());
+                }
+        }
+
+        for (Float cost : listCosts) sumCost += cost;
+        float res = sumCost / listCosts.size();
+        logger.info("-----------------------countAverageCost for one moto: " + res);
         return res;
     }
 
 
-    private String setCurrentDataToString(){
+    private String setCurrentDataToString() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
         Date currentDate = new Date();
         return formatter.format(currentDate);
@@ -309,6 +348,28 @@ public class OrderServiceImpl implements OrderService {
         return formatter.parse(dateStr);
 
     }
-    
-    
+
+    @Override
+    public String dataForStat(String data) throws ParseException {
+        logger.info("go to dataForStat");
+        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+        int lesserId = jsonObject.get("id").getAsInt();
+        String startStatDate = jsonObject.get("startStatDate").getAsString();
+        String endStatDate = jsonObject.get("endStatDate").getAsString();
+        logger.info("date" + lesserId + "   " + startStatDate + "  " + endStatDate);
+
+        countAverageCost(lesserId,startStatDate,endStatDate);
+
+        return null;
+    }
+
+    @Override
+    public Date convertData(String data) throws ParseException {
+        //02-8-2019 12:12:26 convert to 2019-8-02
+        String[] tmp = data.split(" ");
+        logger.info("converdata"+data);
+            Date dateInDb = new SimpleDateFormat("yyyy-MM-dd").parse(tmp[0]);
+            //logger.info("converdata"+dateInDb);
+            return dateInDb;
+    }
 }

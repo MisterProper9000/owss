@@ -7,10 +7,10 @@ import java.util.List;
 
 public interface MotoRepository extends JpaRepository<Motoroller, Integer> {
     Motoroller findMotorollerById(int id);
+
     List<Motoroller> findMotorollersByIdowner(int id);
 
     List<Motoroller> findMotorollersById(int parseInt);
 
     boolean existsMotorollerById(int id);
-
 }

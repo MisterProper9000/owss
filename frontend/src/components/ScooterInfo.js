@@ -22,6 +22,13 @@ class ScooterInfo extends Component {
             cost: '',
             tariff_time: '',
 
+            idmoto: Cookies.get('id_scooter'),
+            idowner: Cookies.get('token'),
+            auto_number: '',
+            model: '',
+            insurance: '',
+            status_reserv: '',
+            status_rent: '',
 
             balance: '',
 
@@ -35,56 +42,26 @@ class ScooterInfo extends Component {
             ],
             rowRent: [],
 
-            // columnDefs: [
-            //     {headerName: "ID", field: "id", width: 100},
-            //     {headerName: "Scooter number", field: "auto_number"},
-            //     {headerName: "Model", field: "model"},
-            //     {headerName: "Insuranse", field: "insurance"},
-            //     {headerName: "Reserved", field: "status_reserv"},
-            //     {headerName: "In rent", field: "status_rent"}
-            //
-            // ],
-            // rowData: [],
+            columnScooter: [
+                //{headerName: "ID", field: "idmoto", width: 100},
+                {headerName: "Scooter number", field: "auto_number"},
+                {headerName: "Model", field: "model"},
+                {headerName: "Insuranse", field: "insurance"},
+                {headerName: "Reserved", field: "status_reserv"},
+                {headerName: "In rent", field: "status_rent"}
 
-            // //idowner: Cookies.get('token'),
-            // id: '',
-            // auto_number: '',
-            // model: '',
-            // insurance: '',
-            // status_reserv: '',
-            // status_rent: '',
-            // idowner:'',
-            // rent:'',
-            // res:'',
-            //
-            // // id: '1',
-            // // begin_time: '',
-            // // end_time: '',
-            // // cost: '',
-            // // tariff: '',
-            // //
-            // // data: [],
-            //
-            // // columnRent: [
-            // //     {headerName: "ID", field: "id", width: 100},
-            // //     {headerName: "Begin time", field: "begin_time"},
-            // //     {headerName: "End time", field: "end_time"},
-            // //     {headerName: "Cost", field: "cost"},
-            // //     {headerName: "Tariff", field: "tariff"},
-            // //
-            // // ],
-            // // rowRent: [],
-            //
-            // columnData: [
-            //     {headerName: "ID", field: "id", width: 100},
-            //     {headerName: "auto_number", field: "auto_number"},
-            //     {headerName: " model", field: "model"},
-            //     {headerName: "insurance", field: "insurance"},
-            //     {headerName: "status_reserv", field: "status_reserv"},
-            //     {headerName: "status_rent", field: "status_rent"},
-            //
+            ],
+            rowScooter: [],
+
+            // rowScooter: [
+            //     {
+            //         auto_number: this.state.auto_number, model: this.state.model,
+            //         insurance: this.state.insurance, status_reserv: this.state.status_reserv,
+            //         status_rent: this.state.status_rent
+            //     },
             // ],
-            // rowData: [],
+
+
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -100,6 +77,23 @@ class ScooterInfo extends Component {
 
 
     componentDidMount() {
+        // fetch(JuliaLocalIpOW+'/infoaboutonemoto', {
+        //     method: 'POST',
+        //     body: Cookies.get('id_scooter')
+        // })
+        //     .then(result => result.json())
+        //     .then(rowScooter => {
+        //         //console.log(rowScooter)
+        //         this.setState({
+        //             rowScooter
+        //             // auto_number: this.state.auto_number,
+        //             // model: this.state.model,
+        //             // insurance: this.state.insurance,
+        //             // status_reserv: this.state.status_reserv,
+        //             // status_rent: this.state.status_rent
+        //         });
+        //     });
+
         fetch(JuliaLocalIpOW+'/gotorentforscooter', {
             method: 'POST',
             body: Cookies.get('id_scooter')
@@ -117,10 +111,24 @@ class ScooterInfo extends Component {
                 <NavbarComp/>
                 <button className="buttonBack" onClick={this.goBack}> Back</button>
                 <div className="mainMargin">
-                    <h1 className="titleDop">Scooter Information</h1>
+                    <h1 className="titleDop">Rental History</h1>
+                    {/*<div*/}
+                    {/*    className="ag-theme-balham"*/}
+                    {/*    style={{height: '100px', width: '100%'}}*/}
+                    {/*>*/}
+                    {/*    <AgGridReact*/}
+                    {/*        //pagination={true}*/}
+                    {/*        enableFilter={true}*/}
+                    {/*        enableSorting={true}*/}
+                    {/*        columnScooter={this.state.columnScooter}*/}
+                    {/*        rowScooter={this.state.rowScooter}>*/}
+                    {/*    </AgGridReact>*/}
+                    {/*</div>*/}
+                    {/*<br/>*/}
+                    {/*<br/>*/}
                     <div
                         className="ag-theme-balham"
-                        style={{height: '300px', width: '100%'}}
+                        style={{height: '400px', width: '100%'}}
                     >
                         <AgGridReact
                             //pagination={true}

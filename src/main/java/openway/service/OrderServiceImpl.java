@@ -269,6 +269,34 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findOrdersByIdmoto(Integer.parseInt(id));
     }
 
+    @Override
+    public float countAverageCost(String id) {
+        float sumCost =0 ;
+        ArrayList<Float> listCosts = new ArrayList<>();
+        ArrayList<Integer> listIDMotors = new ArrayList<>();
+
+        List<Motoroller> listMotors = motoRepository.findMotorollersByIdowner(Integer.parseInt(id));
+        for (Motoroller motoroller : listMotors) {
+            listIDMotors.add(motoroller.getId());
+        }
+
+        List<Order> listOrders = orderRepository.findAll();
+
+        for (Order order :listOrders) {
+            for (Integer idMoto : listIDMotors) {
+                if(order.getCost()>0 && (order.getId_moto() == idMoto ) ){
+                    listCosts.add(order.getCost());
+                    logger.info("-------added to list order: "+order.getId());
+                }
+            }
+        }
+
+        for ( Float cost :listCosts) sumCost += cost;
+        float res = sumCost/listCosts.size();
+        logger.info("-----------------------countAverageCost: "+res);
+        return res;
+    }
+
 
     private String setCurrentDataToString(){
         SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");

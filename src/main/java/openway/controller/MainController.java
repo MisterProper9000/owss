@@ -45,6 +45,7 @@ public class MainController {
         logger.info("check auth");
         logger.info("auth: " + lesserService.authentication(auth));
 
+        orderService.countAverageCost("27");
         return lesserService.authentication(auth);
     }
 

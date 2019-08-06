@@ -15,4 +15,6 @@ public interface OrderService {
 
     List<Order> listrentmobile(String email);
     List<Order> listrentForScooter(String id);
+
+    float countAverageCost(String id);
 }

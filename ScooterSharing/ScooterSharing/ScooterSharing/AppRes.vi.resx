@@ -135,6 +135,9 @@
   <data name="A_confirmation_code_will_be_sent_to_your_email" xml:space="preserve">
     <value>Mã xác nhận sẽ được gửi đến email của bạn</value>
   </data>
+  <data name="Bonus" xml:space="preserve">
+    <value>Chú ý: nếu kết thúc hợp đồng thuê xe, bạn rời khỏi xe tay ga với bình xăng đầy, bạn sẽ nhận được tiền thưởng!</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Hủy bỏ</value>
   </data>
@@ -319,6 +322,9 @@
   </data>
   <data name="To_renting_details" xml:space="preserve">
     <value>Cho thuê chi tiết</value>
+  </data>
+  <data name="Unreserve" xml:space="preserve">
+    <value>Hoàn thành đặt phòng</value>
   </data>
   <data name="User already exists" xml:space="preserve">
     <value>Người dùng đã tồn tại</value>

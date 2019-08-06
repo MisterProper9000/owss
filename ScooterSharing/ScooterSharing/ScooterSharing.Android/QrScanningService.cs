@@ -20,7 +20,7 @@ namespace ScooterSharing.Droid
     public class QrScanningService : IQrScannerService
     {
         public async Task<string> ScanAsync()
-        {
+        { 
             var optionsDefault = new MobileBarcodeScanningOptions();
             var optionsCustom = new MobileBarcodeScanningOptions();
 

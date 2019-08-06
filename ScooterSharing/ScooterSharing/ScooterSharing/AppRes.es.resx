@@ -302,7 +302,7 @@
   <data name="There_will_be_information_about_tariffs_and_discounts" xml:space="preserve">
     <value>Habrá información sobre tarifas y descuentos</value>
   </data>
-  <data name="This_scooter_already_rented_or_reserved" xml:space="preserve">
+  <data name="s_or_reserved" xml:space="preserve">
     <value>Este scooter ya está alquilado o reservado</value>
   </data>
   <data name="Too_short_card_number" xml:space="preserve">
@@ -351,5 +351,11 @@
   </data>
   <data name="You_must_enter_verification_code" xml:space="preserve">
     <value>Debes ingresar el código de verificación</value>
+  </data>
+  <data name="Bonus" xml:space="preserve">
+    <value>Atención: si al final del contrato de arrendamiento deja el scooter con el tanque lleno, ¡obtendrá un bono!</value>
+  </data>
+  <data name="Unreserve" xml:space="preserve">
+    <value>Reserva completa</value>
   </data>
 </root>

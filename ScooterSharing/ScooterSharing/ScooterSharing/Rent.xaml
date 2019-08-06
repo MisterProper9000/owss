@@ -11,10 +11,14 @@
     <ContentPage.Content>
         <StackLayout>
             <Grid Padding="50,0,50,0">
-                <Grid Grid.Row="0">
+                <Grid Grid.Row="0"
+                      Padding="-30,0,-30,0">
                     <Label x:Name="tariff"
                            Grid.Row="0"
                            Grid.Column="0"
+                           VerticalOptions="Center"
+                           VerticalTextAlignment="Center"
+                           HorizontalTextAlignment="Center"
                            TextColor="DarkGreen"/>
                     <Button x:Name="ToOffers"
                             Grid.Row="0"

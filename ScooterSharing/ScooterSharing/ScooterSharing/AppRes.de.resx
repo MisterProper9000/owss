@@ -135,6 +135,9 @@
   <data name="A_confirmation_code_will_be_sent_to_your_email" xml:space="preserve">
     <value>Ein Bestätigungscode wird an Ihre E-Mail gesendet</value>
   </data>
+  <data name="Bonus" xml:space="preserve">
+    <value>Achtung: Wenn Sie am Ende des Mietverhältnisses den Roller mit vollem Tank verlassen, erhalten Sie einen Bonus!</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Stornieren</value>
   </data>
@@ -320,6 +323,9 @@
   <data name="To_renting_details" xml:space="preserve">
     <value>Zu den Mietdetails</value>
   </data>
+  <data name="Unreserve" xml:space="preserve">
+    <value>Vollständige reservierung</value>
+  </data>
   <data name="User already exists" xml:space="preserve">
     <value>Benutzer existiert bereits</value>
   </data>
@@ -347,9 +353,9 @@
     <value>Falscher Qr</value>
   </data>
   <data name="You_can't_log_out_during_renting" xml:space="preserve">
-    <value>Du können sich während der Anmietung nicht abmelden</value>
+    <value>Du können sich während der anmietung nicht abmelden</value>
   </data>
   <data name="You_must_enter_verification_code" xml:space="preserve">
-    <value>Du müssen den Bestätigungscode eingeben</value>
+    <value>Du müssen den bestätigungscode eingeben</value>
   </data>
 </root>

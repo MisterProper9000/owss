@@ -17,9 +17,15 @@ namespace ScooterSharing
             MainPage = new MainPage();
         }
 
-        protected override void OnStart()
+        /*async*/ protected override void OnStart()
         {
             // Handle when your app starts
+           /* string result = await RequestStuff.doRequest("sas", "sas");
+            if (result.Split('|')[1] == "no")
+            {
+                App.Current.Properties["res"] = "no";
+                await App.Current.SavePropertiesAsync();
+            }*/
         }
 
         protected override void OnSleep()
@@ -27,9 +33,21 @@ namespace ScooterSharing
             // Handle when your app sleeps
         }
 
-        protected override void OnResume()
+        async protected override void OnResume()
         {
             // Handle when your app resumes
+            if(App.Current.Properties["res"].ToString() != "no")
+            {
+                string result = await RequestStuff.doRequest("checkresstat", App.Current.Properties["resId"].ToString());
+                if (result.Split('|')[0] != RequestResult.OK.ToString())
+                    return;
+                if (result.Split('|')[1] == "false")
+                {
+                    App.Current.Properties["res"] = "no";
+                    await App.Current.SavePropertiesAsync();
+                }
+            }
+            
         }
     }
 }

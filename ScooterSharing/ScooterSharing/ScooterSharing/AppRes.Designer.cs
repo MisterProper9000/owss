@@ -115,6 +115,15 @@ namespace ScooterSharing {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attention: if at the end of the lease you leave the scooter with a full tank, you will get a bonus!.
+        /// </summary>
+        public static string Bonus {
+            get {
+                return ResourceManager.GetString("Bonus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -592,10 +601,9 @@ namespace ScooterSharing {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This scooter already rented.
+        ///   Looks up a localized string similar to This scooter already rented or reserved.
         /// </summary>
-        public static string This_scooter_already_rented_or_reserved
-        {
+        public static string This_scooter_already_rented_or_reserved {
             get {
                 return ResourceManager.GetString("This_scooter_already_rented_or_reserved", resourceCulture);
             }
@@ -643,6 +651,15 @@ namespace ScooterSharing {
         public static string Top_up_account {
             get {
                 return ResourceManager.GetString("Top_up_account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Сomplete reservation.
+        /// </summary>
+        public static string Unreserve {
+            get {
+                return ResourceManager.GetString("Unreserve", resourceCulture);
             }
         }
         

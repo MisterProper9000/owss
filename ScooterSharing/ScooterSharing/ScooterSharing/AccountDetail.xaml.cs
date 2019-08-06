@@ -23,9 +23,9 @@ namespace ScooterSharing
         {
             
             InitializeComponent();
-            
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.Green;
             logout.Source = ImageSource.FromResource("ScooterSharing.logout.png");
-
+            
             foreach (string lang in langs.Keys)
             {
                 langSelect.Items.Add(lang);

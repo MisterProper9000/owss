@@ -5,6 +5,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using System.Globalization;
+using ScooterSharing.Extensions;
 
 namespace ScooterSharing
 {
@@ -21,6 +23,16 @@ namespace ScooterSharing
         int onFinishClose; // during moving to input mode both onFinish methods call before they actually will
                            // need, there is a need in counter of OnFinish calls for both OnFinish methods
 
+        private Dictionary<string, string> langs = new Dictionary<string, string>
+        {
+            { "English", "en" },
+            { "Русский", "ru" },
+            { "Deutsch", "de" },
+            { "Español", "es" },
+            { "Tiếng việt nam", "vi" },
+        };
+
+
         UIMode uiMode;
         public LogIn()
         {
@@ -28,11 +40,26 @@ namespace ScooterSharing
             uiMode = UIMode.Default;
             onFinishClose = 0;
             onFinishCheck = 0;
-        }
 
+            foreach (string lang in langs.Keys)
+            {
+                changeLan.Items.Add(lang);
+            }
+        }
+        async public void changeLang(object sender, EventArgs e)
+        {
+            var name = changeLan.Items[changeLan.SelectedIndex];
+            AppRes.Culture = new CultureInfo(langs[name]);
+            Translator.Instance.Invalidate();
+            App.Current.Properties["lang"] = langs[name];
+            await App.Current.SavePropertiesAsync();
+        }
         public void MoveToSignUp(object sender, EventArgs e)
         {
             uiMode = UIMode.SignUp;
+
+            changeLan.IsEnabled = false;
+            changeLan.IsVisible = false;
 
             check.Opacity = 1;
             check.Play();
@@ -79,6 +106,9 @@ namespace ScooterSharing
         public void MoveToLogIn(object sender, EventArgs e)
         {
             uiMode = UIMode.LogIn;
+
+            changeLan.IsEnabled = false;
+            changeLan.IsVisible = false;
 
             check.Opacity = 1;
             check.Play();
@@ -168,8 +198,8 @@ namespace ScooterSharing
                 confirmPassword.IsVisible = false;
 
                 close.IsEnabled = false;
-                close.IsVisible = false;
-                check.IsVisible = false;
+                close.Opacity = 0;
+                check.Opacity = 0;
                 check.IsEnabled = false;
 
                 code.IsEnabled = true;
@@ -201,8 +231,6 @@ namespace ScooterSharing
             {
                 ToStartFromSignUp();
             }
-            check.IsEnabled = false;
-            close.IsEnabled = false;
             uiMode = UIMode.Default;
         }
 
@@ -240,6 +268,11 @@ namespace ScooterSharing
             password.IsVisible = false;
             confirmPassword.IsEnabled = false;
             confirmPassword.IsVisible = false;
+            check.IsEnabled = false;
+            close.IsEnabled = false;
+
+            changeLan.IsEnabled = true;
+            changeLan.IsVisible = true;
         }
         public void ToStartFromLogin()
         {
@@ -256,6 +289,11 @@ namespace ScooterSharing
             mail.IsVisible = false;
             password.IsEnabled = false;
             password.IsVisible = false;
+            check.IsEnabled = false;
+            close.IsEnabled = false;
+
+            changeLan.IsEnabled = true;
+            changeLan.IsVisible = true;
 
             btnSignUp.FadeTo(1, 100, Easing.Linear);
             mail.FadeTo(0, 400, Easing.Linear);
@@ -592,5 +630,7 @@ namespace ScooterSharing
             if (entry.Text != text)
                 entry.Text = text;
         }
+
+       
     }
 }

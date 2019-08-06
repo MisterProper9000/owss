@@ -1,55 +1,31 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace ScooterSharing
 {
     public class PaymentsViewModel
     {
         public ObservableCollection<Payment> Payments { get; set; }
+        public IList<PaymentFromServer> paymentFromServers { get; set; }
         public PaymentsViewModel()
         {
-            IList<Child> sas = new List<Child>()
-            {
-                new Child
-                {
-                    txt = "sas",
-                },
-                new Child
-                {
-                    txt = "kek",
-                },
-                new Child
-                {
-                    txt = "sas",
-                },
-                new Child
-                {
-                    txt = "kek",
-                },
-                new Child
-                {
-                    txt = "sas",
-                },
-                new Child
-                {
-                    txt = "kek",
-                }
-            };
+            Payments = new ObservableCollection<Payment>();
+        }
 
-            IList<Child> sas1 = new List<Child>()
+        async public void Update()
+        {
+            string result = await RequestStuff.doRequest("listrentonmobile", App.Current.Properties["email"].ToString());
+            List<PaymentFromServer> obj = JsonConvert.DeserializeObject<List<PaymentFromServer>>(result);
+            Console.WriteLine("ALIVEALIVEALIVE");
+            Payments.Clear();
+            
+            for(int i = 0; i< obj.Count; i++)
             {
-                new Child
-                {
-                    txt = "wefwf",
-                },
-            };
-
-            Payments = new ObservableCollection<Payment>
-            {
-                new Payment("CoolrentCompany", "22$", "21.92.1443", "65.13.5355", sas),
-                new Payment("CoolrentCompany", "12$", "86.12.1314", "13.52.2425", sas1)
-            };
+                Payments.Add(new Payment("CoolRentCompany", obj[i]));
+            }
         }
 
         public void HideOrShowPayment(Payment payment)

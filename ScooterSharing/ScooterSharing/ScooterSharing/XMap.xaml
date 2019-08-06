@@ -25,7 +25,7 @@
                             Grid.Row="0"
                             IsEnabled="True"
                             IsVisible="True">
-                    <Grid>
+                    <Grid x:Name="grid">
                         <Image x:Name="map" 
                                Grid.Row="0"
                            Aspect="AspectFill" 
@@ -36,7 +36,7 @@
                            VerticalOptions="Center">
                         </Image>
                         <Image x:Name="customPin1"
-                                 Scale="0.03"
+                               Scale="0.03"
                                ClassId="0"
                                Grid.Row="0"
                                  >
@@ -85,7 +85,7 @@
                 <ListView x:Name="scooterList"
                           SeparatorVisibility="Default"
                           Grid.Row="1"
-                          BackgroundColor="Firebrick"
+                          BackgroundColor="WhiteSmoke"
                           HasUnevenRows="True"
                           SelectionMode="Single"
                           IsPullToRefreshEnabled="true"
@@ -116,7 +116,7 @@
                                     <Label Grid.Column="1"
                                            LineBreakMode="CharacterWrap"
                                            Grid.ColumnSpan="2"
-                                           Text="{Binding CompanyName}"
+                                           Text="{Binding scoo.model}"
                                            FontAttributes="Bold" />
                                     <Label Grid.Column="3"
                                            Grid.RowSpan="2"

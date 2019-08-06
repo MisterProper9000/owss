@@ -42,7 +42,14 @@
                        Grid.Row="2"
                        FontSize="20"
                        HorizontalOptions="CenterAndExpand" />
-                <Label Text="infa epta"/>
+                <Label Grid.Row="3"
+                       TextColor="Accent"
+                       BackgroundColor="Bisque"
+                       FontSize="Medium"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       FontAttributes="Bold"
+                       Text="{Binding [Bonus], Source={x:Static translator:Translator.Instance}}"/>
             </Grid>
         </StackLayout>
     </ContentPage.Content>

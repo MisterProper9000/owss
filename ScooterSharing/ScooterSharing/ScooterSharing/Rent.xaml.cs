@@ -126,13 +126,24 @@ namespace ScooterSharing
                 email = App.Current.Properties["email"].ToString()
             };
 
-            string result = await RequestStuff.doRequest("ardstart", JsonConvert.SerializeObject(Qr));
+            string result = await RequestStuff.doRequest("checkresstat", App.Current.Properties["resId"].ToString());
+            if (result.Split('|')[0] != RequestResult.OK.ToString())
+                return;
+            if (result.Split('|')[1] == "false" && App.Current.Properties["res"].ToString() != "no")
+            {
+                App.Current.Properties["res"] = "no";
+                await App.Current.SavePropertiesAsync();
+                await DisplayAlert("Attention", "You reservation was expired", "OK");
+            }
+
+            result = await RequestStuff.doRequest("ardstart", JsonConvert.SerializeObject(Qr));
             string[] parseResult = result.Split('|');
+            Console.WriteLine("GOVNO "+result);
             if (parseResult[0] == RequestResult.OK.ToString())
             {
                 App.Current.Properties["res"] = "no";
                 App.Current.Properties["id"] = parseResult[1];
-
+                await App.Current.SavePropertiesAsync();
                 btnstart.IsEnabled = false;
                 start.IsEnabled = true;
                 stop.IsEnabled = true;

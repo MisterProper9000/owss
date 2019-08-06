@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -117,20 +118,35 @@ namespace ScooterSharing
 
         async private void DoPay(object sender, EventArgs e)
         {
-            if(fName.Text == "" || lName.Text == "" || cardNum.Text == "" || cvc2.Text == "" || exdate.Text == "" 
+            if(cardNum.Text == "" || cvc2.Text == "" || exdate.Text == "" 
                 || payAmount.Text == "")
             {
                 await DisplayAlert(AppRes.Attention, AppRes.All_fields_must_be_filled, AppRes.OK);
                 return;
             }
+            PaymentRequest pr = new PaymentRequest
+            {
+                cvc2 = cvc2.Text,
+                cardNum = cardNum.Text,
+                exDate = exdate.Text,
+                sum = payAmount.Text
+            };
 
             payAnim.IsEnabled = true;
             payAnim.IsVisible = true;
             payAnim.Play();
-            await Task.Delay(2000);
+            string result = await RequestStuff.doRequest("topUpCl", pr.cardNum + "|" + pr.cvc2 + "|" + pr.exDate + "|" + pr.sum + "|" + App.Current.Properties["email"]);
             payAnim.Pause();
             payAnim.IsEnabled = false;
             payAnim.IsVisible = false;
+            if(result.Split('|')[0] == RequestResult.OK.ToString())
+                await DisplayAlert("Wallet refill was successful", "Money transferred: " + payAmount.Text + "$", AppRes.OK);
+            else if(result.Split('|')[0] == RequestResult.ERROR.ToString())
+                await DisplayAlert("Fail", "Wrong card data", AppRes.OK);
+            cardNum.Text = "";
+            cvc2.Text = "";
+            payAmount.Text = "";
+            exdate.Text = "";
         }
     }
 

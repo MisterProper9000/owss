@@ -23,10 +23,16 @@
                 <Grid Grid.Row="0">
                     <Label x:Name="First_Name"
                            Grid.Row="0"
+                           FontSize="20"
+                           TextColor="Green"
+                           FontAttributes="Bold"
                            HorizontalOptions="Center"
                            Grid.Column="0"/>
                     <Label x:Name="Last_Name"
                            Grid.Row="0"
+                           FontSize="20"
+                           TextColor="Green"
+                           FontAttributes="Bold"
                            HorizontalOptions="Center"
                            Grid.Column="1"/>
                 </Grid>

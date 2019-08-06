@@ -135,6 +135,9 @@
   <data name="A_confirmation_code_will_be_sent_to_your_email" xml:space="preserve">
     <value>Код подтверждения выслан на вашу почту</value>
   </data>
+  <data name="Bonus" xml:space="preserve">
+    <value>Внимание: если при окончании аренды Вы оставляете мотороллер с полным баком, то получите бонус!</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Закрыть</value>
   </data>
@@ -303,7 +306,7 @@
     <value>Здесь будет информация о скидках и предложениях</value>
   </data>
   <data name="This_scooter_already_rented_or_reserved" xml:space="preserve">
-    <value>Этот скутер уже сдан в аренду или зарезервирован</value>
+    <value>Этот скутер уже сдан в аренду или забронирован</value>
   </data>
   <data name="Too_short_card_number" xml:space="preserve">
     <value>Слишком короткий номер карты</value>
@@ -319,6 +322,9 @@
   </data>
   <data name="To_renting_details" xml:space="preserve">
     <value>К деталям аренды</value>
+  </data>
+  <data name="Unreserve" xml:space="preserve">
+    <value>Завершить бронирование</value>
   </data>
   <data name="User already exists" xml:space="preserve">
     <value>Пользователь уже существует</value>

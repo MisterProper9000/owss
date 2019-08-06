@@ -8,13 +8,14 @@
              xmlns:translator="clr-namespace:ScooterSharing.Extensions"
              Title="{Binding [Withdrawal_of_funds], Source={x:Static translator:Translator.Instance}}"
              xmlns:forms="clr-namespace:Lottie.Forms;assembly=Lottie.Forms"
+             BackgroundColor="SlateGray"
              x:Class="ScooterSharing.UnPay">
     <ContentPage.Content>
         <StackLayout>
             <Image x:Name="epay"
                    ScaleX="-1"/>
             <Grid Padding="50, 0, 50, 0">
-                <Entry x:Name="fName"
+                <d:Entry x:Name="fName"
                        ClassId="fName"
                        Text=""
                        VerticalOptions="Center"
@@ -23,7 +24,7 @@
                        TextChanged="DetectTrash"
                        ReturnType="Next"
                        PlaceholderColor="DarkGreen"/>
-                <Entry x:Name="lName"
+                <d:Entry x:Name="lName"
                        ClassId="lName"
                        Text=""
                        VerticalOptions="Center"
@@ -38,17 +39,17 @@
                        Keyboard="Numeric"
                        VerticalOptions="Center"
                        Placeholder="{Binding [Card_num], Source={x:Static translator:Translator.Instance}}"
-                       Grid.Row="2"
+                       Grid.Row="0"
                        TextChanged="DetectTrash"
                        Unfocused="CheckNumbers"
                        ReturnType="Next"
                        IsPassword="False"
-                       PlaceholderColor="DarkGreen">
+                       PlaceholderColor="WhiteSmoke">
                     <Entry.Behaviors>
                         <behavior1:MaskedBehaviorCardNum Mask="XXXX-XXXX-XXXX-XXXX" />
                     </Entry.Behaviors>
                 </Entry>
-                <Grid Grid.Row="3">
+                <Grid Grid.Row="1">
                     <Entry x:Name="cvc2"
                            ClassId="cvc2"
                            Text=""
@@ -61,7 +62,7 @@
                            Unfocused="CheckNumbers"
                            ReturnType="Next"
                            Keyboard="Numeric"
-                           PlaceholderColor="DarkGreen"/>
+                           PlaceholderColor="WhiteSmoke"/>
                     <Entry x:Name="exdate"
                            ClassId="exdate"
                            Text=""
@@ -75,7 +76,7 @@
                            TextChanged="DetectTrash"
                            Unfocused="CheckNumbers"
                            ReturnType="Next"
-                           PlaceholderColor="DarkGreen">
+                           PlaceholderColor="WhiteSmoke">
                         <Entry.Behaviors>
                             <behavior1:MaskedBehaviorCardNum Mask="XX/XX" />
                         </Entry.Behaviors>
@@ -86,13 +87,13 @@
                        Text=""
                        VerticalOptions="Center"
                        Placeholder="{Binding [Payment_amount], Source={x:Static translator:Translator.Instance}}"
-                       Grid.Row="4"
+                       Grid.Row="2"
                        Keyboard="Numeric"
-                       PlaceholderColor="DarkGreen"
+                       PlaceholderColor="WhiteSmoke"
                        TextChanged="DetectTrash"
                        ReturnType="Next"/>
                 <Button x:Name="pay"
-                        Grid.Row="5"
+                        Grid.Row="3"
                         Clicked="DoPay"
                         FontAttributes="Bold"
                         TextColor="DarkGray"

@@ -135,6 +135,9 @@
   <data name="A_confirmation_code_will_be_sent_to_your_email" xml:space="preserve">
     <value>A confirmation code will be sent to your email</value>
   </data>
+  <data name="Bonus" xml:space="preserve">
+    <value>Attention: if at the end of the lease you leave the scooter with a full tank, you will get a bonus!</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
@@ -302,8 +305,8 @@
   <data name="There_will_be_information_about_tariffs_and_discounts" xml:space="preserve">
     <value>There will be information about tariffs and discounts</value>
   </data>
-  <data name="This_scooter_already_rented" xml:space="preserve">
-    <value>This scooter already rented</value>
+  <data name="This_scooter_already_rented_or_reserved" xml:space="preserve">
+    <value>This scooter already rented or reserved</value>
   </data>
   <data name="Too_short_card_number" xml:space="preserve">
     <value>Too short card number</value>
@@ -319,6 +322,9 @@
   </data>
   <data name="To_renting_details" xml:space="preserve">
     <value>To rental details</value>
+  </data>
+  <data name="Unreserve" xml:space="preserve">
+    <value>Сomplete reservation</value>
   </data>
   <data name="User already exists" xml:space="preserve">
     <value>User already exists</value>

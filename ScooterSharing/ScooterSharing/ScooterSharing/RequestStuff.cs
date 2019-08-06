@@ -25,6 +25,7 @@ namespace ScooterSharing
         RENTALREADYSTARTED,
         NOTENOUGH,
         BLOCKED,
+        ERROR,
         OTHER
     }
     
@@ -67,16 +68,16 @@ namespace ScooterSharing
 
     public class Scooter
     {
-        public double fuelLvl { get; set; }
+        public ScootersFromServer scoo { get; set; }
         public double Lat { get; set; }
         public double Lng { get; set; }
         public string CompanyName { get; set; }
         public string Price { get; set; }
         public string ImageSource { get; set; }
         public Color color { get; set; }
-        public string id { get; set; }
         public bool reservable { get; set; }
         public string btnResText { get; set; }
+        public string id { get; set; }
 
         public override string ToString()
         {
@@ -104,7 +105,7 @@ namespace ScooterSharing
 
     public class RequestStuff
     {
-        public static readonly HttpClient httpClient = new HttpClient { BaseAddress = new Uri("http://10.101.177.21:9091/") };
+        public static readonly HttpClient httpClient = new HttpClient { BaseAddress = new Uri("http://10.101.177.12:9091/") };
         async public static Task<string> doRequest(string source, string requestBody)
         {
             HttpRequestMessage request = new HttpRequestMessage();

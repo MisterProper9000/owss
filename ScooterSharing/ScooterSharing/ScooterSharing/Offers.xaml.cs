@@ -35,12 +35,21 @@ namespace ScooterSharing
         public Offers()
         {
             InitializeComponent();
+            ((NavigationPage)Application.Current.MainPage).BarBackgroundColor = Color.Green;
             tariffs = new ObservableCollection<Tariff>();
             tariffs.Add(new Tariff(1, "USD", "m", 1));
             tariffs.Add(new Tariff(59.99, "USD", "h", 60));
             BindingContext = this;
-            App.Current.Properties["tariff"] = tariffs[0].m_money.ToString()+"|"+ tariffs[0].m_time.ToString();
+            
+            //App.Current.Properties["tariff"] = tariffs[0].m_money.ToString()+"|"+ tariffs[0].m_time.ToString();
             App.Current.SavePropertiesAsync();
+            foreach(var e in tariffs)
+            {
+                if (e.m_money.ToString()+"|"+e.m_time.ToString() == App.Current.Properties["tariff"].ToString())
+                {
+                    TariffList.SelectedItem = e;
+                }
+            }
             //NavigationPage.SetHasNavigationBar(this, false);
         }
         async private void TariffTapped(object sender, SelectedItemChangedEventArgs e)

@@ -45,21 +45,21 @@
                         <TapGestureRecognizer Tapped="toDetails"/>
                     </Image.GestureRecognizers>
                 </Image>
-                <Frame HeightRequest="20" 
+                <Frame x:Name="notifications"
+                        HeightRequest="20" 
                                WidthRequest="20" 
                                CornerRadius="10" 
                                HorizontalOptions="Center" 
                                VerticalOptions="Center"
                                TranslationX="30"
-                               TranslationY="-20"
+                               TranslationY="20"
                                Grid.Column="0"
                                Grid.RowSpan="2"
                                Margin="0" 
-                               IsEnabled="False"
-                               IsVisible="False"
                                Padding="0" 
-                               BackgroundColor="DarkGreen">
-                    <Label Text="7" 
+                               BackgroundColor="Maroon">
+                    <Label x:Name="notificationsTxt"
+                            Text="0" 
                                    FontSize="10"
                                    TextColor="White"
                                    HorizontalOptions="Center" 
@@ -106,45 +106,91 @@
         <ListView x:Name="payList"
                       ItemsSource="{Binding Payments}"
                       ItemTapped="PayTapped"
-                      SeparatorVisibility="None"
+                  
+                      SeparatorVisibility="Default"
+                  SeparatorColor="LightGreen"
                       HasUnevenRows="True">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <StackLayout>
-                            <Label Text="{Binding Date}"/>
-                            <Frame HeightRequest="40" 
-                                   WidthRequest="40" 
-                                   CornerRadius="20" 
+                        <StackLayout d:HeightRequest="80">
+                            <Grid>
+                                <BoxView Grid.Row="0"
+                                         Grid.ColumnSpan="3"
+                                         Grid.Column="0"
+                                         HeightRequest="2"
+                                         WidthRequest="150"
+                                         HorizontalOptions="Center"
+                                         VerticalOptions="Center"
+                                         Color="Green"/>
+                                <Frame Grid.Row="0" 
+                                       Grid.Column="1"
+                                       HeightRequest="70" 
+                                   WidthRequest="70" 
+                                   CornerRadius="35" 
                                    HorizontalOptions="Center" 
                                    VerticalOptions="Center"
                                    TranslationX="0"
                                    TranslationY="0"
                                    Margin="0" 
                                    Padding="0" 
-                                   BackgroundColor="Maroon">
-                                <Label Text="{Binding Price}" 
-                                           FontSize="10"
+                                   BackgroundColor="Green">
+                                    <Label Text="{Binding paymentData.cost}" 
+                                           FontSize="15"
                                            TextColor="White"
                                            HorizontalOptions="Center" 
                                            VerticalOptions="Center" 
                                            HorizontalTextAlignment="Center" 
                                            VerticalTextAlignment="Center" />
-                            </Frame>
-                            <ListView IsVisible="{Binding IsVisible}"
+                                </Frame>
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       FontSize="18"
+                                       TextColor="Green"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding paymentData.begin_time}"/>
+                                <Label Grid.Row="0"
+                                       Grid.Column="2"
+                                       FontSize="18"
+                                       TextColor="Green"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding paymentData.end_time}"/>
+                                <Label Grid.Row="1"
+                                       Grid.Column="0"
+                                       Grid.ColumnSpan="3"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Start"
+                                       FontSize="18"
+                                       TextColor="Green"
+                                       IsVisible="{Binding IsVisible}"
+                                       Text="{Binding Company}"/>
+                                <Label Text="Rental start"
+                                       Grid.Row="1"
+                                       Grid.Column="0"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Start"/>
+                                <Label Text="Rental end"
+                                       Grid.Row="1"
+                                       Grid.Column="2"
+                                       HorizontalTextAlignment="Center"
+                                       VerticalTextAlignment="Start"/>
+                                <d:ListView IsVisible="{Binding IsVisible}"
                                           ItemsSource="{Binding list}"
                                           SeparatorVisibility="None"
                                      HeightRequest="{Binding height}">
-                                <ListView.ItemTemplate>
-                                    <DataTemplate>
-                                        <ViewCell>
-                                            <StackLayout>
-                                                <Label Text="{Binding txt}"/>
-                                            </StackLayout>
-                                        </ViewCell>
-                                    </DataTemplate>
-                                </ListView.ItemTemplate>
-                            </ListView>
+                                    <ListView.ItemTemplate>
+                                        <DataTemplate>
+                                            <ViewCell>
+                                                <StackLayout>
+                                                    <Label Text="{Binding txt}"/>
+                                                </StackLayout>
+                                            </ViewCell>
+                                        </DataTemplate>
+                                    </ListView.ItemTemplate>
+                                </d:ListView>
+                            </Grid>
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

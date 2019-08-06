@@ -159,6 +159,13 @@
                                          Grid.Column="2"
 	                                     HeightRequest="20" />
                 </Grid>
+
+                <Picker x:Name="changeLan"
+                        Title="{Binding [Select_language], Source={x:Static translator:Translator.Instance}}"
+                        TitleColor="Green"
+                        Grid.Row="9"
+                        VerticalOptions="Center"
+                        SelectedIndexChanged="changeLang"/>
             </Grid>
             
         </StackLayout>

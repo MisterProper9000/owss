@@ -74,7 +74,7 @@ namespace ScooterSharing
             }
             if (!App.Current.Properties.ContainsKey("showtariff"))
             {
-                App.Current.Properties.Add("showtariff", "");
+                App.Current.Properties.Add("showtariff", "Tarif: 1 USD/m");
             }
             if (!App.Current.Properties.ContainsKey("res"))//запрещаем юзеру бронить больше одного скутера
             {
@@ -83,6 +83,10 @@ namespace ScooterSharing
             if (!App.Current.Properties.ContainsKey("resId"))//id заказа на бронь
             {
                 App.Current.Properties.Add("resId", "");
+            }
+            if (!App.Current.Properties.ContainsKey("notifications"))//id заказа на бронь
+            {
+                App.Current.Properties.Add("notifications", "1");
             }
             if (App.Current.Properties["lang"].ToString() != "")
             {

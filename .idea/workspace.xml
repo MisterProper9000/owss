@@ -2,20 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a5380fa1-d86d-4d3e-b8b6-8223656ba791" name="Default Changelist" comment="added function hash">
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/DepositMoney.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/DepositMoney.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Info.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Info.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/Lesser.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Lesser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Moto.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Moto.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/RegMotoroller.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RegMotoroller.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/RegScooter.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/RegScooter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/Registration.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/Registration.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/controller/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/controller/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/ScooterInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/ScooterInfo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/openway/controller/MotoController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/controller/MotoController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/service/LesserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/service/LesserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/service/LesserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/service/LesserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/service/MotoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/service/MotoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/openway/service/MotoServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/service/MotoServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/openway/model/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/model/Order.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/openway/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/repository/OrderRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/openway/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -169,10 +162,19 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/openway/model/Order.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1292">
+              <caret line="90" column="21" selection-start-line="90" selection-start-column="21" selection-end-line="90" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MotoController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="773">
-              <caret line="55" column="23" lean-forward="true" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
+            <state relative-caret-position="587">
+              <caret line="142" column="81" selection-start-line="142" selection-start-column="81" selection-end-line="142" selection-end-column="81" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -181,10 +183,13 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MobileController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/OrderService.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="782">
-              <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+            <state relative-caret-position="306">
+              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -192,46 +197,29 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
+            <state relative-caret-position="1046">
+              <caret line="85" selection-start-line="85" selection-end-line="85" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/LesserService.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/openway/repository/OrderRepository.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+            <state relative-caret-position="221">
+              <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/MotoServiceImpl.java">
+        <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1180">
-              <caret line="118" column="1" lean-forward="true" selection-start-line="118" selection-start-column="1" selection-end-line="118" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/UFXServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="106" column="19" lean-forward="true" selection-start-line="106" selection-start-column="19" selection-end-line="106" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/LesserServiceImpl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
-              <caret line="44" column="45" selection-start-line="44" selection-start-column="45" selection-end-line="44" selection-end-column="45" />
+            <state relative-caret-position="366">
+              <caret line="268" column="69" selection-start-line="268" selection-start-column="69" selection-end-line="268" selection-end-column="69" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="method#motoReserve#0;class#OrderServiceImpl#0" />
+                <element signature="method#motoReserveCanceled#0;class#OrderServiceImpl#0" />
               </folding>
             </state>
           </provider>
@@ -240,8 +228,20 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/frontend/src/components/Lesser.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="87" column="10" selection-start-line="87" selection-start-column="10" selection-end-line="87" selection-end-column="10" />
+            <state relative-caret-position="578">
+              <caret line="158" column="14" selection-start-line="151" selection-start-column="8" selection-end-line="158" selection-end-column="14" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/components/ScooterInfo.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="108" column="35" selection-start-line="108" selection-start-column="35" selection-end-line="108" selection-end-column="35" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -250,22 +250,12 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frontend/src/components/Registration.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
-              <folding>
-                <element signature="e#0#49#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/openway/repository/LesserRepository.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="5" column="17" selection-start-line="5" selection-start-column="17" selection-end-line="5" selection-end-column="17" />
+        <entry file="das://e00b9076-0554-44b5-bd96-cacb6e027476/database/motosh/schema/public/table/ord">
+          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+            <state projectRestartId="2c43fe4c-29ea-48a6-ad08-9ad5c6e8638a">
+              <filtering>
+                <filter text="" />
+              </filtering>
             </state>
           </provider>
         </entry>
@@ -301,6 +291,7 @@
       <find>AndreyLocalIpOW</find>
       <find>andre</find>
       <find>andr</find>
+      <find>goto</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -340,16 +331,11 @@
         <option value="$PROJECT_DIR$/src/main/java/openway/service/UFXServiceImpl.java" />
         <option value="$PROJECT_DIR$/frontend/src/index.js" />
         <option value="$PROJECT_DIR$/frontend/src/components/NavbarComp.js" />
-        <option value="$PROJECT_DIR$/src/main/java/openway/model/Order.java" />
         <option value="$PROJECT_DIR$/src/main/java/openway/service/ClientServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/openway/repository/OrderRepository.java" />
-        <option value="$PROJECT_DIR$/src/main/java/openway/service/OrderService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/.datagrid/cell" />
         <option value="$PROJECT_DIR$/src/main/java/openway/controller/MobileController.java" />
         <option value="$PROJECT_DIR$/frontend/src/components/Table.js" />
         <option value="$PROJECT_DIR$/frontend/src/css/StartPage.css" />
-        <option value="$PROJECT_DIR$/frontend/src/components/ScooterInfo.js" />
         <option value="$PROJECT_DIR$/frontend/src/css/Lesser.css" />
         <option value="$PROJECT_DIR$/frontend/src/css/ScooterInfo.css" />
         <option value="$PROJECT_DIR$/src/main/java/openway/repository/MotoRepository.java" />
@@ -359,13 +345,18 @@
         <option value="$PROJECT_DIR$/frontend/src/components/Moto.js" />
         <option value="$PROJECT_DIR$/frontend/src/components/RegMotoroller.js" />
         <option value="$PROJECT_DIR$/frontend/src/components/RegScooter.js" />
-        <option value="$PROJECT_DIR$/src/main/java/openway/controller/MotoController.java" />
         <option value="$PROJECT_DIR$/src/main/java/openway/service/MotoServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/openway/service/MotoService.java" />
-        <option value="$PROJECT_DIR$/frontend/src/components/Lesser.js" />
-        <option value="$PROJECT_DIR$/src/main/java/openway/controller/MainController.java" />
         <option value="$PROJECT_DIR$/src/main/java/openway/service/LesserServiceImpl.java" />
         <option value="$PROJECT_DIR$/frontend/src/components/Registration.js" />
+        <option value="$PROJECT_DIR$/frontend/src/components/Lesser.js" />
+        <option value="$PROJECT_DIR$/src/main/java/openway/model/Order.java" />
+        <option value="$PROJECT_DIR$/src/main/java/openway/repository/OrderRepository.java" />
+        <option value="$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java" />
+        <option value="$PROJECT_DIR$/src/main/java/openway/service/OrderService.java" />
+        <option value="$PROJECT_DIR$/src/main/java/openway/controller/MainController.java" />
+        <option value="$PROJECT_DIR$/frontend/src/components/ScooterInfo.js" />
+        <option value="$PROJECT_DIR$/src/main/java/openway/controller/MotoController.java" />
       </list>
     </option>
   </component>
@@ -774,7 +765,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="186604000" />
+    <option name="totallyTimeSpent" value="190024000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -789,7 +780,7 @@
     <frame x="1912" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22556391" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.13533835" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -799,13 +790,13 @@
       <window_info id="Web" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.053285968" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989259" visible="true" weight="0.16945374" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.4989259" visible="true" weight="0.06354515" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.8651059" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.7637655" />
       <window_info anchor="bottom" id="Spring" order="7" weight="0.4671126" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.09364548" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.61761427" />
       <window_info anchor="bottom" id="Docker" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.50107414" side_tool="true" weight="0.62095875" />
       <window_info anchor="bottom" id="Messages" order="11" weight="0.40691194" />
@@ -820,7 +811,7 @@
       <window_info anchor="right" id="Maven" order="3" weight="0.020408163" />
       <window_info anchor="right" id="Palette" order="4" />
       <window_info anchor="right" id="Capture Analysis" order="5" />
-      <window_info anchor="right" id="Database" order="6" visible="true" weight="0.29377013" />
+      <window_info active="true" anchor="right" id="Database" order="6" visible="true" weight="0.29377013" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="right" id="Bean Validation" order="9" />
@@ -921,13 +912,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/openway/model/Order.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="94" column="20" selection-start-line="94" selection-start-column="20" selection-end-line="94" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/ClientServiceImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
@@ -935,34 +919,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/openway/repository/OrderRepository.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="das://e00b9076-0554-44b5-bd96-cacb6e027476/database/motosh/schema/public/table/client">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="2c43fe4c-29ea-48a6-ad08-9ad5c6e8638a">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="254" column="66" selection-start-line="254" selection-start-column="66" selection-end-line="254" selection-end-column="66" />
-          <folding>
-            <element signature="method#motoReserve#0;class#OrderServiceImpl#0" />
-            <element signature="method#motoReserveCanceled#0;class#OrderServiceImpl#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="das://e00b9076-0554-44b5-bd96-cacb6e027476/database/motosh/schema/public/table/ord">
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state projectRestartId="2c43fe4c-29ea-48a6-ad08-9ad5c6e8638a">
           <filtering>
@@ -1004,29 +961,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="das://e00b9076-0554-44b5-bd96-cacb6e027476/database/motosh/schema/public/table/motoroller">
-      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-        <state projectRestartId="2c43fe4c-29ea-48a6-ad08-9ad5c6e8638a">
-          <filtering>
-            <filter text="" />
-          </filtering>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/openway/repository/MotoRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
           <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/OrderService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="45" selection-start-line="15" selection-start-column="45" selection-end-line="15" selection-end-column="45" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1066,15 +1004,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/components/ipConfigs.js">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/Logout.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/components/Moto.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1123,16 +1052,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/components/scooter.png">
       <provider selected="true" editor-type-id="images" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/ScooterInfo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="571">
-          <caret line="36" column="19" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/components/StartPage.js">
       <provider selected="true" editor-type-id="text-editor">
@@ -1186,13 +1105,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/Login.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204">
-          <caret line="6" column="13" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/openway/repository/ClientRepository.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -1214,34 +1126,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/MotoServiceImpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1180">
-          <caret line="118" column="1" lean-forward="true" selection-start-line="118" selection-start-column="1" selection-end-line="118" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MobileController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="782">
           <caret line="57" column="5" lean-forward="true" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MotoController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="773">
-          <caret line="55" column="23" lean-forward="true" selection-start-line="55" selection-start-column="23" selection-end-line="55" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="30" column="43" selection-start-line="30" selection-start-column="43" selection-end-line="30" selection-end-column="43" />
         </state>
       </provider>
     </entry>
@@ -1262,23 +1150,129 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/Lesser.js">
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/Registration.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="87" column="10" selection-start-line="87" selection-start-column="10" selection-end-line="87" selection-end-column="10" />
+        <state relative-caret-position="-513">
+          <caret line="67" column="27" selection-start-line="67" selection-start-column="16" selection-end-line="67" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/MotoServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="117" column="5" selection-start-line="117" selection-start-column="5" selection-end-line="117" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/Logout.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/components/Registration.js">
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/Login.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="66" column="46" selection-start-line="66" selection-start-column="46" selection-end-line="66" selection-end-column="46" />
+        <state relative-caret-position="307">
+          <caret line="50" column="27" selection-start-line="50" selection-start-column="27" selection-end-line="50" selection-end-column="27" />
           <folding>
-            <element signature="e#0#49#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/Lesser.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="158" column="14" selection-start-line="151" selection-start-column="8" selection-end-line="158" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/openway/model/Order.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1292">
+          <caret line="90" column="21" selection-start-line="90" selection-start-column="21" selection-end-line="90" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/openway/repository/OrderRepository.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="17" column="43" selection-start-line="17" selection-start-column="43" selection-end-line="17" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/OrderService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/components/ScooterInfo.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="108" column="35" selection-start-line="108" selection-start-column="35" selection-end-line="108" selection-end-column="35" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1046">
+          <caret line="85" selection-start-line="85" selection-end-line="85" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e00b9076-0554-44b5-bd96-cacb6e027476/database/motosh/schema/public/table/motoroller">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="2c43fe4c-29ea-48a6-ad08-9ad5c6e8638a">
+          <filtering>
+            <filter text="" />
+          </filtering>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/openway/service/OrderServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="366">
+          <caret line="268" column="69" selection-start-line="268" selection-start-column="69" selection-end-line="268" selection-end-column="69" />
+          <folding>
+            <element signature="method#motoReserve#0;class#OrderServiceImpl#0" />
+            <element signature="method#motoReserveCanceled#0;class#OrderServiceImpl#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/openway/controller/MotoController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="587">
+          <caret line="142" column="81" selection-start-line="142" selection-start-column="81" selection-end-line="142" selection-end-column="81" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://e00b9076-0554-44b5-bd96-cacb6e027476/database/motosh/schema/public/table/ord">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state projectRestartId="2c43fe4c-29ea-48a6-ad08-9ad5c6e8638a">
+          <filtering>
+            <filter text="" />
+          </filtering>
         </state>
       </provider>
     </entry>

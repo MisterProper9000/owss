@@ -7,6 +7,7 @@ import './../css/ScooterInfo.css'
 import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
+import {JuliaLocalIpOW} from "./ipConfigs";
 
 class ScooterInfo extends Component {
 
@@ -16,25 +17,34 @@ class ScooterInfo extends Component {
 
 
             id: '',
-            auto_number: '',
-            model: '',
-            insurance: '',
-            status_reserv: '',
-            status_rent: '',
+            begin_time: '',
+            end_time: '',
+            cost: '',
+            tariff_time: '',
 
 
             balance: '',
 
-            columnDefs: [
-                {headerName: "ID", field: "id", width: 100},
-                {headerName: "Scooter number", field: "auto_number"},
-                {headerName: "Model", field: "model"},
-                {headerName: "Insuranse", field: "insurance"},
-                {headerName: "Reserved", field: "status_reserv"},
-                {headerName: "In rent", field: "status_rent"}
+            columnRent: [
+                {headerName: "ID rent", field: "id", width: 100},
+                {headerName: "begin_time", field: "begin_time"},
+                {headerName: "end_time", field: "end_time"},
+                {headerName: "cost", field: "cost"},
+                {headerName: "tariff_time", field: "tariff_time"}
 
             ],
-            rowData: [],
+            rowRent: [],
+
+            // columnDefs: [
+            //     {headerName: "ID", field: "id", width: 100},
+            //     {headerName: "Scooter number", field: "auto_number"},
+            //     {headerName: "Model", field: "model"},
+            //     {headerName: "Insuranse", field: "insurance"},
+            //     {headerName: "Reserved", field: "status_reserv"},
+            //     {headerName: "In rent", field: "status_rent"}
+            //
+            // ],
+            // rowData: [],
 
             // //idowner: Cookies.get('token'),
             // id: '',
@@ -90,6 +100,15 @@ class ScooterInfo extends Component {
 
 
     componentDidMount() {
+        fetch(JuliaLocalIpOW+'/gotorentforscooter', {
+            method: 'POST',
+            body: Cookies.get('id_scooter')
+        })
+            .then(result => result.json())
+            .then(rowRent => {
+                //console.log(rowData)
+                this.setState({rowRent});
+            })
     }
 
     render() {
@@ -99,6 +118,18 @@ class ScooterInfo extends Component {
                 <button className="buttonBack" onClick={this.goBack}> Back</button>
                 <div className="mainMargin">
                     <h1 className="titleDop">Scooter Information</h1>
+                    <div
+                        className="ag-theme-balham"
+                        style={{height: '300px', width: '100%'}}
+                    >
+                        <AgGridReact
+                            //pagination={true}
+                            enableFilter={true}
+                            enableSorting={true}
+                            columnDefs={this.state.columnRent}
+                            rowData={this.state.rowRent}>
+                        </AgGridReact>
+                    </div>
                 </div>
 
             </div>

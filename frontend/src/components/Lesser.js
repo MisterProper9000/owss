@@ -27,8 +27,9 @@ class Lesser extends Component {
             sum_moto: '',
             bank_account: '',
 
+            errorMsg: '',
 
-            selected_id: 0,
+            selected_id: '',
 
 
             lesserData: [],
@@ -83,11 +84,21 @@ class Lesser extends Component {
             body: Cookies.get('id_scooter')
         })
             .then(resp => {
-            //return resp.json()
-                console.log(resp.json());
+            return resp.json()
         })
-        //window.location = "/scooter_info";
+            .then(resp => {
+                //console.log(resp);
+                if(resp != true){
+                    this.setState({errorMsg: 'Enter an existing scooter'});
+                }
+                else{
+                    window.location = "/scooter_info";
+                }
+            })
+
     }
+
+
 
     goToPaymentInfo() {
         window.location = "/payment_info"
@@ -222,10 +233,12 @@ class Lesser extends Component {
                             </button>
                             <br/>
 
+
                             <div className="selectScooter">
                                 <tr>
                                     <th>Scooter information</th>
                                     <text className="selectId">Enter id scooter</text>
+                                    <div className="errorMsg">{this.state.errorMsg}</div>
                                     <input id="id_selected_input" type="text" placeholder="" name="selected_id"/><br/>
                                 </tr>
                                 <button className="buttonDeposit" onClick={()=>this.getScooterInfo(document.getElementById("id_selected_input").value)}>Find</button>

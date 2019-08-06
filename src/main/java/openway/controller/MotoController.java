@@ -132,7 +132,15 @@ public class MotoController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/goToScooterInfo")
     String isIdScooterExist(@RequestBody String id) {
-        logger.info("isIdScooterExist: "+motoService.isScooterIdExist(id));
+        logger.info("isIdScooterExist"+id);
+        //logger.info("isIdScooterExist: "+motoService.isScooterIdExist(id));
         return motoService.isScooterIdExist(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/gotorentforscooter")
+    List<Order> getRentInfoForScooter(@RequestBody String id) {
+        logger.info("getRentInfoForScooter: "+orderService.listrentForScooter(id));
+        return orderService.listrentForScooter(id);
     }
 }

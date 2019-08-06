@@ -14,4 +14,5 @@ public interface OrderService {
     String reserveTM(int id_moto);
 
     List<Order> listrentmobile(String email);
+    List<Order> listrentForScooter(String id);
 }

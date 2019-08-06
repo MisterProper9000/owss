@@ -264,6 +264,11 @@ public class OrderServiceImpl implements OrderService {
         return list;
     }
 
+    @Override
+    public List<Order> listrentForScooter(String id) {
+        return orderRepository.findOrdersByIdmoto(Integer.parseInt(id));
+    }
+
 
     private String setCurrentDataToString(){
         SimpleDateFormat formatter = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");

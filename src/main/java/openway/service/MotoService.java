@@ -17,5 +17,5 @@ public interface MotoService {
 
     Motoroller findMotoById(String id);
 
-    boolean isScooterIdExist(String id);
+    String isScooterIdExist(String id);
 }

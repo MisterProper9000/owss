@@ -3,7 +3,7 @@ import '../css/Login.css';
 import NavbarComp from "./NavbarComp";
 import Cookies from "js-cookie";
 
-import {AndreyLocalIpOW} from "./ipConfigs";
+import {AndreyLocalIpOW, JuliaLocalIpOW} from "./ipConfigs";
 
 class RegMotoroller extends Component {
 
@@ -29,7 +29,7 @@ class RegMotoroller extends Component {
         const {auto_number, model, insurance,status} = this.state;
         const id_owner = Cookies.get('token');
 
-        fetch(AndreyLocalIpOW + '/addmoto', {
+        fetch(JuliaLocalIpOW + '/addmoto', {
             method: 'POST',
             body: JSON.stringify({
                 auto_number,

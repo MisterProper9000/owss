@@ -5,7 +5,7 @@ import openway.model.Lesser;
 import java.util.List;
 
 public interface LesserService {
-    void addNewLesser(String newLesser);
+    String addNewLesser(String newLesser);
 
     String authentication(String auth);
 

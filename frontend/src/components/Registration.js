@@ -1,8 +1,9 @@
 import React, {Component, useState} from 'react';
 import '../css/Login.css';
 import NavbarComp from "./NavbarComp";
+import Cookies from "js-cookie";
 
-import {AndreyLocalIpOW} from "./ipConfigs";
+import {AndreyLocalIpOW, JuliaLocalIpOW} from "./ipConfigs";
 
 class Registration extends Component {
 
@@ -48,7 +49,7 @@ class Registration extends Component {
             return;
         }
 
-        fetch(AndreyLocalIpOW + '/reg', {
+        fetch(JuliaLocalIpOW + '/reg', {
             method: 'POST',
             body: JSON.stringify({
                 first_name,
@@ -63,11 +64,12 @@ class Registration extends Component {
         }).then((resp) => {
             return resp.json()
         }).then(response => {
-            if (response === true) {
+            if (response != false) {
+                Cookies.set('token',response);
                 alert("You are successfully registered");
                 window.location = "/lesser";
             } else {
-                this.setState({errorMsg: 'Enter correct data!'});
+                this.setState({errorMsg: 'Error with registration'});
             }
         })
     }

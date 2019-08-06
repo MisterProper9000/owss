@@ -24,17 +24,17 @@ public class MainController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/reg")
-    boolean addNewLesser(@RequestBody String newItem) {
+    String addNewLesser(@RequestBody String newItem) {
         logger.info("called addNewLesser()");
 
         try {
-            lesserService.addNewLesser(newItem);
+            String id = lesserService.addNewLesser(newItem);
             logger.info("add new lessor in database");
-            return true;
+            return id;
         } catch (Exception e) {
             e.printStackTrace();
             logger.info("error with saving data: not added new lessor");
-            return false;
+            return "false";
         }
 
     }

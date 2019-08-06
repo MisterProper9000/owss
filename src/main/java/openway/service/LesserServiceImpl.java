@@ -26,7 +26,7 @@ public class LesserServiceImpl implements LesserService {
     }
 
     @Override
-    public void addNewLesser(String newLesser) {
+    public String addNewLesser(String newLesser) {
         logger.info("called addNewLesser()");
         Gson g = new Gson();
         UFXService ufxService = new UFXServiceImpl();
@@ -42,6 +42,7 @@ public class LesserServiceImpl implements LesserService {
         String checkResWay4 = ufxService.CheckRes(resWay4);
         logger.info("saved way4: " + checkResWay4);
 
+        return String.valueOf(lesser.getId());
     }
 
     @Override

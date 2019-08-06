@@ -8,7 +8,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
 
-import {AndreyLocalIpOW} from "./ipConfigs";
+import {AndreyLocalIpOW, JuliaLocalIpOW} from "./ipConfigs";
 
 class Lesser extends Component {
     goScooterInfo;
@@ -78,7 +78,7 @@ class Lesser extends Component {
         Cookies.set('id_scooter',this.state.selected_id);
         console.log(selected_id);
 
-        fetch(AndreyLocalIpOW + '/goToScooterInfo', {
+        fetch(JuliaLocalIpOW + '/goToScooterInfo', {
             method: 'POST',
             body: Cookies.get('id_scooter')
         })
@@ -96,13 +96,13 @@ class Lesser extends Component {
 
     componentDidMount() {
 
-        fetch(AndreyLocalIpOW + '/goToScooterInfo', {
+        fetch(JuliaLocalIpOW + '/goToScooterInfo', {
             method: 'POST',
             body: this.state.id_client
         })
 
 
-        fetch(AndreyLocalIpOW + '/lesserinfo', {
+        fetch(JuliaLocalIpOW + '/lesserinfo', {
             method: 'POST',
             body: this.state.id_client
         }).then(resp => {
@@ -121,11 +121,11 @@ class Lesser extends Component {
                     bank_account: resp.bank_account,
                 }));
 
-        fetch(AndreyLocalIpOW + '/balanceInqueryLessor', {
+        fetch(JuliaLocalIpOW + '/balanceInqueryLessor', {
         //fetch('http://10.101.177.21:9091/balanceInqueryLessor', {
             method: 'POST',
             body: JSON.stringify({
-                    email: 'a@mail.com',
+                    email: 'test2@gmail.com',
                 }
             )
         }).then((resp) => {
@@ -138,7 +138,7 @@ class Lesser extends Component {
         })
 
 
-        fetch('http://10.101.177.21:9091/infomoto', {
+        fetch(JuliaLocalIpOW+'/infomoto', {
             method: 'POST',
             body: this.state.id_client
         })

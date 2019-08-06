@@ -98,39 +98,31 @@ public class LesserServiceImpl implements LesserService {
 
     @Override
     public String checkBalanceLessor(String data){
-        logger.info("called check balance" + data);
+        logger.info("check balance lesser: " + data);
         JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
         String email = jsonObject.get("email").getAsString();
         int lesserId = lesserRepository.findLesserByEmail(email).getId();
-        logger.info("lesserId:"+lesserId);
+        logger.info("lesserId: " + lesserId);
 
         UFXService ufxService = new UFXServiceImpl();
         String balance = ufxService.BalanceLesserRequestInWay4(lesserId);
         JsonObject balanceObj = new JsonObject();
-        balanceObj.addProperty("balance",balance);
-        logger.info("balance lesser:"+balanceObj);
+        balanceObj.addProperty("balance", balance);
+        logger.info("balance lesser: " + balanceObj);
         return String.valueOf(balanceObj);
     }
 
+
     public boolean addMotoToLesser(int id) {
         Lesser lesser = lesserRepository.findLesserById(id);
-        lesser.setSum_moto(lesser.getSum_moto()+1);
+        lesser.setSum_moto(lesser.getSum_moto() + 1);
         lesserRepository.save(lesser);
         return true;
     }
 
+    @Override
+    public String topUp(String data){
+        return "";
+    }
 
-    //Setting password hash
-//    @Override
-//    public void setPasswordHash() {
-//        Lesser lesser = lesserRepository.findLesserByEmail("kate@gmail.com");
-//        logger.info("info about lesser"+lesser);
-//        try{
-//            logger.info("old password:   "+lesser.getPassword());
-//            lesser.setPassword(HashUtil.getSaltedHash(lesser.getPassword()));
-//            logger.info("hash pasword:  "+lesser.getPassword());
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        }
-//    }
 }

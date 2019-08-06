@@ -8,6 +8,8 @@ import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 import NavbarComp from "./NavbarComp";
 
 
+import {AndreyLocalIpOW} from "./ipConfigs";
+
 class Info extends Component {
     constructor(props) {
         super(props);
@@ -39,7 +41,8 @@ class Info extends Component {
     }
 
     getListOfId() {
-        fetch('http://10.101.177.21:9091/infolistid')
+        fetch(AndreyLocalIpOW + '/infolistid')
+        //fetch('http://10.101.177.21:9091/infolistid')
             .then((resp) => {
                 return resp.json()
             })
@@ -55,7 +58,7 @@ class Info extends Component {
     }
 
     getForms() {
-        fetch('http://10.101.177.21:9091/info')
+        fetch(AndreyLocalIpOW +  '/info')
             .then(resp => {
                 return resp.json()
             })

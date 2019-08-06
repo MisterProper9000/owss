@@ -19,6 +19,7 @@ public interface LesserService {
 
     boolean addMotoToLesser(int id);
 
-    //void setPasswordHash();
+    String topUp(String data);
+
 
 }

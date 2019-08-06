@@ -94,8 +94,16 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public String CheckBalance(String data){
-        logger.info("called check balance: " + data);
-        int clientId = clientRepository.findClientByEmail(data).getId();
+        logger.info("called check balance" + data);
+        int clientId = 0;
+        try{
+            clientId = clientRepository.findClientByEmail(data).getId();
+        } catch (Exception e)
+        {
+            logger.info("database error: " + e.toString());
+        }
+        logger.info("database request client by ID " + clientId + "succesfully finded");
+
 
         UFXService ufxService = new UFXServiceImpl();
         String balance = ufxService.BalanceRequestInWay4(clientId);
@@ -134,7 +142,6 @@ public class ClientServiceImpl implements ClientService {
         Client client = clientRepository.findClientByEmail(email);
         int clientId = client.getId();
 
-        //String testN = "CLE"
         String resTopUp = ufxService.ClientTopUp(name, sName, cardNum, cvc2,
                 exDate, amount, clientId);
 

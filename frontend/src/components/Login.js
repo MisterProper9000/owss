@@ -3,6 +3,10 @@ import '../css/Login.css';
 import NavbarComp from "./NavbarComp";
 import Cookies from "js-cookie";
 
+
+import {AndreyLocalIpOW} from "./ipConfigs";
+
+
 class Login extends Component {
 
     constructor(props) {
@@ -38,7 +42,8 @@ class Login extends Component {
             return;
         }
 
-        fetch('http://10.101.177.21:9091/login', {
+        fetch(AndreyLocalIpOW + '/login', {
+        //fetch('http://10.101.177.21:9091/login', {
             method: 'POST',
             body: JSON.stringify({
                     email,

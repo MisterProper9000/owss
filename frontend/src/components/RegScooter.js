@@ -3,6 +3,8 @@ import '../css/RegScooter.css';
 import NavbarComp from "./NavbarComp";
 import Cookies from "js-cookie";
 
+import {AndreyLocalIpOW} from "./ipConfigs";
+
 class RegScooter extends Component {
 
     constructor(props) {
@@ -37,7 +39,7 @@ class RegScooter extends Component {
             return;
         }
 
-        fetch('http://10.101.177.21:9091/addmoto', {
+        fetch(AndreyLocalIpOW + '/addmoto', {
             method: 'POST',
             body: JSON.stringify({
                 auto_number,

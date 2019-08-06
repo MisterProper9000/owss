@@ -30,6 +30,8 @@ public interface UFXService {
     String ClientTopUp(String name, String sName, String cardNum,
                               String cvc2, String exDate,String amount, int clientId);
 
+    String LesserTopUp(String name, String sName, String cardNum,
+                       String cvc2, String exDate,String amount, int clientId);
 
 }
 

@@ -1,6 +1,7 @@
 package openway.controller;
 
 import openway.service.ClientService;
+import openway.service.MotoService;
 import openway.service.OrderService;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,32 +38,37 @@ public class MobileController {
 
     @PostMapping("/balanceInquery")
     String clientBalanceRequest(@RequestBody String data) {
-        logger.info("balance request: " + data);
+        logger.info("balance request from mobApp: " + data);
         return clientService.CheckBalance(data);
     }
 
     @PostMapping("/payRent")
     String payRent(@RequestBody String data) {
-        logger.info("pay rent request " + data);
+        logger.info("pay rent request from mobApp " + data);
         return clientService.payRent(data);
     }
 
     @PostMapping("/motoRes")
     String reserveStart(@RequestBody String resData) {
-        logger.info("moto reserve request: " + resData);
-        String reserveResult = orderService.motoReserve(moto_id, resData);
-        logger.info("moto reservation status(new): " + reserveResult);
-        logger.info("moto reserved:" + reserveResult);
-        return (reserveResult.equals("false")?"OK|":"") + reserveResult;
-
+        logger.info("moto reserve request from mobApp: " + resData);
+        String reserveResult = orderService.motoReserve(resData);
+        logger.info("moto reservation result: " + reserveResult);
+        return reserveResult;
     }
 
     @PostMapping("/motoResCanc")
     String reserveCanceled(@RequestBody String resCancData) {
-        logger.info("moto reserve cancel request: + " + resCancData);
-        String reserveCancelResult = orderService.motoReserveCanceled(moto_id, resCancData);
-        logger.info("moto reservation status(new): " + reserveCancelResult);
+        logger.info("moto reserve cancel request: from mobApp: " + resCancData);
+        String reserveCancelResult = orderService.motoReserveCanceled(resCancData);
+        logger.info("moto reservation cancelled result: " + reserveCancelResult);
         return reserveCancelResult;
+    }
+
+    @PostMapping("/checkresstat")
+    String checkResMoto(@RequestBody String checkResData)
+    {
+        logger.info("checkResStatus: order_id = " + checkResData);
+        return orderService.checkResState(checkResData);
     }
 
     /**
@@ -71,12 +77,11 @@ public class MobileController {
      *
      * @return
      */
-
     @PostMapping("topUpCl")
     String clientTopUp(@RequestBody String topUpData){
-        logger.info("client top up request: + " + topUpData);
+        logger.info("client top up request from mobApp: " + topUpData);
         String clientTopUpRes = clientService.TopUp(topUpData);
-        logger.info(clientTopUpRes);
+        logger.info("client top up result: " + clientTopUpRes);
         return "OK|";
     }
 

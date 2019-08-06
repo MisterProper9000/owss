@@ -37,8 +37,8 @@ public class MotoController {
         boolean res = motoService.getStatusRes(moto_id);
 
         String resTmCheck = orderService.reserveTM(moto_id);
-        logger.info("check timeout: " + resTmCheck);
-
+        logger.info("check timeout in motoController");
+        logger.info("" + resTmCheck);
 
         if(!rent && ! res){
 
@@ -54,8 +54,6 @@ public class MotoController {
             return "true";
         }
         return "dermo";
-        //logger.info();
-        //return motoService.getStatusRent(moto_id) + "res1" ;//" + motoService.getStatusRes(moto_id);
     }
 
     @PostMapping("/ardstart")
@@ -74,7 +72,7 @@ public class MotoController {
     String resTT(@RequestBody String id_motoStr) throws ParseException {
         logger.info("reserve timeout data: " + id_motoStr);
         //int id_moto = Integer.valueOf(id_motoStr);
-        return  orderService.reserveTM(moto_id);
+        return orderService.reserveTM(moto_id);
         //return orderService.reserveTm(id_moto);
     }
 
@@ -124,7 +122,7 @@ public class MotoController {
 
     @PostMapping("/listrentonmobile")
     List<Order> getlistrent(@RequestBody String email) {
-        logger.info("get list of scooters id");
+        logger.info("getlistrent: " + email);
         return orderService.listrentmobile(email);
     }
 

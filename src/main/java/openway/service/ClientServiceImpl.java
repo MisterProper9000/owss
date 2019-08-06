@@ -94,7 +94,7 @@ public class ClientServiceImpl implements ClientService {
 
     @Override
     public String CheckBalance(String data){
-        logger.info("called check balance" + data);
+        logger.info("balance request(service): " + data);
         int clientId = 0;
         try{
             clientId = clientRepository.findClientByEmail(data).getId();
@@ -102,7 +102,7 @@ public class ClientServiceImpl implements ClientService {
         {
             logger.info("database error: " + e.toString());
         }
-        logger.info("database request client by ID " + clientId + "succesfully finded");
+        logger.info("database request client by ID " + clientId + " succesfully finded");
 
 
         UFXService ufxService = new UFXServiceImpl();
@@ -128,6 +128,8 @@ public class ClientServiceImpl implements ClientService {
         return String.valueOf(Status.OK);
     }
 
+
+    // TODO : return not ok im bad case
     @Override
     public String TopUp(String topUpData){
         String args[] = topUpData.split("\\|");

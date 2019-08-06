@@ -18,6 +18,7 @@ public class Motoroller {
     private boolean insurance;
     private boolean status_rent = false;
     private boolean status_reserv = false;
+    private String timeresst;
 
     public Motoroller() {
     }
@@ -52,5 +53,13 @@ public class Motoroller {
 
     public int getId() {
         return id;
+    }
+
+    public String gettimeresst() {
+        return timeresst;
+    }
+
+    public void settimeresst(String timeresst) {
+        this.timeresst = timeresst;
     }
 }

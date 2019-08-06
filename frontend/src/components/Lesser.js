@@ -138,7 +138,7 @@ class Lesser extends Component {
         })
 
 
-        fetch('http://10.101.177.21:9091/infomoto', {
+        fetch(AndreyLocalIpOW + '/infomoto', {
             method: 'POST',
             body: this.state.id_client
         })

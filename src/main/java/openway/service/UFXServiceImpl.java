@@ -29,6 +29,8 @@ public class UFXServiceImpl implements UFXService {
     private String depositSize = "200";
     private String depositCurrency = "USD";
 
+    private enum cTypes {LesserT, ClientT};
+
     private String RRN;
     private String VPosId = "SOA0001";
 
@@ -110,10 +112,13 @@ public class UFXServiceImpl implements UFXService {
     public String BalanceRequestInWay4(int clientId){
         String clientNumber = GenerateId( clientId + "CL");
         String request = RequestCreateBalanceInquery(clientNumber);
-        logger.info("balance request client: " + request);
+        //logger.info("balance request client: " + request);
         String response = SendRequest(urlUfxAdapter, request);
-        logger.info("balance response client: " + response);
-        return BalanceResponseParse(response);
+        //logger.info("balance response client: " + response);
+        logger.info("way4 data for balance request: " + clientNumber);
+        String balance = BalanceResponseParse(response);
+        logger.info("balance response parsed result: " + balance);
+        return balance;
     }
 
 
@@ -177,29 +182,55 @@ public class UFXServiceImpl implements UFXService {
         return String.valueOf(Status.OK);
     }
 
+    private String checkTopUp(String response){
+        String sp = "Success";
+
+        String res = XMLParse.findValueInString(response, sp);
+        if(!res.equals(sp)){
+            return Status.ERROR + "|";
+        }
+        return Status.OK + "|";
+    }
+
     public String ClientTopUp(String name, String sName, String cardNum,
                               String cvc2, String exDate,String amount, int clientId){
         //String clientNumber = "CLIENT_TEST_100";
-        String clientNumber = GenerateId(clientId + "CL");
-        cardNum = cardNum.replaceAll("-", "");
-        exDate = exDate.replaceAll("\\/", "");
-
-        String topUpRequest = RequestCreateTopUpCl(name, sName, cardNum,
-                cvc2, exDate, amount, clientNumber);
-        String resTopUp = SendRequest(urlUfxAdapter, topUpRequest);
-        return resTopUp;
+        return TopUp(name, sName, cardNum,
+                cvc2, exDate, amount,clientId, cTypes.ClientT);
     }
 
     public String LesserTopUp(String name, String sName, String cardNum,
-                              String cvc2, String exDate,String amount, int clientId){
-        String clientNumber = GenerateId(clientId + "LES");
+                              String cvc2, String exDate,String amount, int lesserId){
+        //String clientNumber = GenerateId(lesserId + "LES");
+        return TopUp(name, sName, cardNum,
+                cvc2, exDate, amount, lesserId, cTypes.LesserT);
+    }
+
+    private String TopUp(String name, String sName, String cardNum,
+                         String cvc2, String exDate,String amount,
+                         int Id, cTypes type){
+
+        String clientNumber = "";
+        switch (type){
+            case LesserT:
+            {
+                clientNumber = GenerateId(Id + "LES");
+                break;
+            }
+            default:
+            {
+                clientNumber = GenerateId(Id + "CL");
+                break;
+            }
+        }
         cardNum = cardNum.replaceAll("-", "");
         exDate = exDate.replaceAll("\\/", "");
-
         String topUpRequest = RequestCreateTopUpCl(name, sName, cardNum,
                 cvc2, exDate, amount, clientNumber);
         String resTopUp = SendRequest(urlUfxAdapter, topUpRequest);
-        return resTopUp;
+        String redResTopUp = checkTopUp(resTopUp);
+        return redResTopUp;
+
     }
 
     /**
@@ -670,13 +701,6 @@ public class UFXServiceImpl implements UFXService {
                 "            <LocalDt>" +
                             dateStr +
                             "</LocalDt>\n" +
-                "      <SourceDtls>\n" +
-                "        <SIC>6012</SIC>\n" +
-                "        <Country>RU</Country>\n" +
-                "        <City>Merchant City</City>\n" +
-                "        <MerchantName>Merchant Name</MerchantName>\n" +
-                "      </SourceDtls>" +
-
                             adrStringTrans +
 
                 "            <Requestor>\n" +

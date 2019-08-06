@@ -38,7 +38,7 @@ public class Order {
         this.RRN = RRN;
     }
 
-    public Order(String begin_time, int id_moto, int id_client, double tariff, int tariff_time, String RRN) {
+    public Order(String begin_time, int id_moto, int idclient, double tariff, int tariff_time, String RRN) {
         this.begin_time = begin_time;
         this.id_moto = id_moto;
         this.idclient = idclient;

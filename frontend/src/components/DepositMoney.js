@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import '../css/DepositMoney.css';
 import NavbarComp from "./NavbarComp";
 
+import {AndreyLocalIpOW} from "./ipConfigs";
+
 class DepositMoney extends Component {
 
     constructor(props) {
@@ -24,7 +26,9 @@ class DepositMoney extends Component {
         event.preventDefault();
         const {card_number, security_code, name_on_card, expiration} = this.state;
 
-        fetch('http://10.101.177.21:9091/depositmoney', {
+        fetch(AndreyLocalIpOW + '/depositmoney', {
+            //fetch('http://10.101.177.21:9091/depositmoney', {
+
             method: 'POST',
             body: JSON.stringify({
                     card_number,

@@ -2,6 +2,8 @@ import React, {Component, useState} from 'react';
 import '../css/Login.css';
 import NavbarComp from "./NavbarComp";
 
+import {AndreyLocalIpOW} from "./ipConfigs";
+
 class Registration extends Component {
 
     constructor(props) {
@@ -46,7 +48,7 @@ class Registration extends Component {
             return;
         }
 
-        fetch('http://10.101.177.21:9091/reg', {
+        fetch(AndreyLocalIpOW + '/reg', {
             method: 'POST',
             body: JSON.stringify({
                 first_name,

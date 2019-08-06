@@ -8,6 +8,8 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
 
+import {AndreyLocalIpOW} from "./ipConfigs";
+
 class Lesser extends Component {
 
     constructor(props) {
@@ -72,11 +74,11 @@ class Lesser extends Component {
     componentDidMount() {
 
 
-
-        fetch('http://10.101.177.21:9091/balanceInqueryLessor', {
+        fetch(AndreyLocalIpOW + '/balanceInqueryLessor', {
+        //fetch('http://10.101.177.21:9091/balanceInqueryLessor', {
             method: 'POST',
             body: JSON.stringify({
-                    email: 'test2@gmail.com',
+                    email: 'a@mail.com',
                 }
             )
         }).then((resp) => {

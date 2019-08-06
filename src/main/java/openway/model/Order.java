@@ -32,8 +32,8 @@ public class Order {
         this.tariff = tariff;
     }
 
-    public Order(int id_moto, int idclient, String RRN){
-        this.idmoto = id_moto;
+    public Order(int idmoto, int idclient, String RRN){
+        this.idmoto = idmoto;
         this.idclient = idclient;
         this.RRN = RRN;
     }
@@ -48,10 +48,10 @@ public class Order {
         this.RRN = RRN;
     }
 
-    public Order(String begin_time, String end_time, int id_moto, int idclient, double tariff, float cost, String RRN) {
+    public Order(String begin_time, String end_time, int idmoto, int idclient, double tariff, float cost, String RRN) {
         this.begin_time = begin_time;
         this.end_time = end_time;
-        this.idmoto = id_moto;
+        this.idmoto = idmoto;
         this.idclient = idclient;
         this.tariff = tariff;
         this.cost = cost;

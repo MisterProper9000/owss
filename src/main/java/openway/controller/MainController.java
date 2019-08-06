@@ -78,14 +78,16 @@ public class MainController {
     String lessorBalanceRequest(@RequestBody String id) {
         logger.info("balance lesser request " + id);
         String res = lesserService.checkBalanceLessor(id);
-        logger.info("res balance: "+res);
+        logger.info("res balance: " + res);
+        String tp = lesserService.topUp(id);
+
         return res;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/topUpLessor")
     String lessorTopUpt(@RequestBody String data) {
-        logger.info("balance lesser request " + data);
+        logger.info("lesser top up " + data);
         return lesserService.topUp(data);
     }
 

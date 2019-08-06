@@ -3,6 +3,7 @@ package openway.service;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import openway.model.Client;
 import openway.model.Lesser;
 import openway.model.Login;
 import openway.model.Order;
@@ -115,7 +116,9 @@ public class LesserServiceImpl implements LesserService {
         String restmp = tmpStr[1].replaceAll("\"","");
         String res = restmp.replaceAll("}","");
         logger.info("*****************balance lesser: " + res);
-        return res;
+        Gson gson = new Gson();
+        String json = gson.toJson(res);
+        return json.toString();
     }
 
 
@@ -128,9 +131,54 @@ public class LesserServiceImpl implements LesserService {
 
     @Override
     public String topUp(String data){
-        return "";
+//        card_number,
+//                security_code,
+//                expiration,
+//                depositMoney,
+//                id
+
+
+//        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+//        String card_number = jsonObject.get("card_number").getAsString();
+//        String security_code = jsonObject.get("security_code").getAsString();
+//        String expiration = jsonObject.get("expiration").getAsString();
+//        String depositMoney = jsonObject.get("depositMoney").getAsString();
+//        int lesserId = jsonObject.get("id").getAsInt();
+        String card_number = "1000040182277768";
+        String expiration = "2008";
+        String security_code = "364";
+        int lesserId = 1;
+        String depositMoney = "56";
+
+
+//        String args[] = data.split("\\|");
+//        String name = "";
+//        String sName = "";
+//        String cardNum = args[0];
+//        String cvc2 = args[1];
+//        String exDate = args[2];
+//        String amount = args[3];
+//        String email = args[4];
+        UFXService ufxService = new UFXServiceImpl();
+
+        Lesser ls = lesserRepository.findLesserById(lesserId);
+        //int lesserId = ls.getId();
+
+        String resTopUp = ufxService.LesserTopUp("", "", card_number, security_code,
+                expiration, depositMoney, lesserId);
+
+        return resTopUp;
     }
 
+private class balanceData{
 
+    public float balance;
+    public String cur;
+    balanceData(float balance, String cur){
+        this.balance = balance;
+        this.cur = cur;
+    }
+
+    }
 
 }

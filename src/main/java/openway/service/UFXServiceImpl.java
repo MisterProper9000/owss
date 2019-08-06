@@ -228,6 +228,7 @@ public class UFXServiceImpl implements UFXService {
         String topUpRequest = RequestCreateTopUpCl(name, sName, cardNum,
                 cvc2, exDate, amount, clientNumber);
         String resTopUp = SendRequest(urlUfxAdapter, topUpRequest);
+        logger.info(resTopUp);
         String redResTopUp = checkTopUp(resTopUp);
         return redResTopUp;
 
@@ -791,7 +792,7 @@ public class UFXServiceImpl implements UFXService {
      * @return
      */
     private String GenerateId(String data){
-        return  "XML_FF_" + data;
+        return  "XML_XX_" + data;
     }
 
     /**

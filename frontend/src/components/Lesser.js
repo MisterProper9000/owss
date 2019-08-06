@@ -141,7 +141,8 @@ class Lesser extends Component {
         }).then((resp) => {
             return resp.json()
         }).then(resp => {
-            //this.setState({balance: resp});
+            //console.log("kek")
+            this.setState({balance: " " + resp.toString()});
         });
 
 

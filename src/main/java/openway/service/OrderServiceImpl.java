@@ -403,7 +403,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.findOrderById(orderId);
         if(order == null){
             logger.info("checkResState returned data (not find order): "
-                    + Status.OK + "|");
+                    + Status.OK + "|" + false);
             return Status.OK + "|" + false;
         }
         Motoroller moto = motoRepository.findMotorollerById(order.getId_moto());

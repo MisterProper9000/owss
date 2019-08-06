@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import '../css/DepositMoney.css';
 import NavbarComp from "./NavbarComp";
-
+import Cookies from "js-cookie";
 import {AndreyLocalIpOW, JuliaLocalIpOW} from "./ipConfigs";
 
 class DepositMoney extends Component {
@@ -15,6 +15,7 @@ class DepositMoney extends Component {
             expiration: '',
             depositMoney: '',
             errorMsg: '',
+            id: Cookies.get('token'),
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -26,7 +27,7 @@ class DepositMoney extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        const {card_number, security_code, name_on_card, expiration, depositMoney} = this.state;
+        const {card_number, security_code, id, expiration, depositMoney} = this.state;
 
         fetch(JuliaLocalIpOW + '/depositmoney', {
             //fetch('http://10.101.177.21:9091/depositmoney', {
@@ -36,15 +37,15 @@ class DepositMoney extends Component {
                     card_number,
                     security_code,
                     expiration,
-                    depositMoney
+                    depositMoney,
+                    id
                 }
             )
         })
-            .then(resp =>{
-                if(resp){
-                    alert("You have successfully replenished your wallet in the amount of "+depositMoney)
-                }
-                else {
+            .then(resp => {
+                if (resp) {
+                    alert("You have successfully replenished your wallet in the amount of " + depositMoney)
+                } else {
                     this.setState({errorMsg: 'Replenishment error'});
                 }
             });

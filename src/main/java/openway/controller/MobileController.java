@@ -55,7 +55,7 @@ public class MobileController {
         String reserveResult = orderService.motoReserve(moto_id, resData);
         logger.info("moto reserved:" + reserveResult);
 
-        return reserveResult;
+        return (reserveResult.equals("false")?"OK|":"")+reserveResult;
 
     }
 

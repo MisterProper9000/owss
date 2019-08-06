@@ -1,6 +1,7 @@
 package openway.controller;
 
 import openway.model.Motoroller;
+import openway.model.Order;
 import openway.service.LesserService;
 import openway.service.MotoService;
 import openway.service.OrderService;
@@ -13,6 +14,7 @@ import java.util.logging.Logger;
 @RestController
 public class MotoController {
 
+    //?????????????????????????????????
     private int moto_id = 1;
 
     private final static Logger logger = Logger.getLogger(MotoController.class.getName());
@@ -89,7 +91,14 @@ public class MotoController {
     @PostMapping("/infomoto")
     List<Motoroller> getInfoMoto(@RequestBody String id) {
         logger.info("get all info about applications (called findAll())");
-        return motoService.findLesserMoto(id);
+        return motoService.findLesserMotos(id);
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/infoAboutOnemoto")
+    Motoroller getMotoById(@RequestBody String id) {
+        logger.info("info about moto");
+        return motoService.findMotoById(id);
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
@@ -106,11 +115,24 @@ public class MotoController {
         return motoService.listofidscooters(id);
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping("/rentmoto")
-    List<Integer> getrent(@RequestBody String id) {
-        logger.info("get list of scooters id");
-        return motoService.listofidscooters(id);
+
+    @PostMapping("/listmotomobile")
+    List<Motoroller> getListMoto() {
+        logger.info("get list of moto");
+        return motoService.findAll();
     }
 
+    @PostMapping("/listrentonmobile")
+    List<Order> getlistrent(@RequestBody String email) {
+        logger.info("get list of scooters id");
+        return orderService.listrentmobile(email);
+    }
+
+
+    @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/goToScooterInfo")
+    boolean isIdScooterExist(@RequestBody String id) {
+        logger.info("isIdScooterExist: "+motoService.isScooterIdExist(id));
+        return motoService.isScooterIdExist(id);
+    }
 }

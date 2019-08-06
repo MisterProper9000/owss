@@ -3,17 +3,18 @@ package openway.service;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import openway.model.Client;
+import openway.model.Lesser;
 import openway.model.Motoroller;
 import openway.model.Order;
 import openway.repository.ClientRepository;
 import openway.repository.LesserRepository;
 import openway.repository.MotoRepository;
 import openway.repository.OrderRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
@@ -29,15 +30,17 @@ public class OrderServiceImpl implements OrderService {
     final private OrderRepository orderRepository;
     final private ClientRepository clientRepository;
     final private MotoRepository motoRepository;
+    final private LesserRepository lesserRepository;
 
     private float reserveCancelPenalty = 1;
 
     public OrderServiceImpl(OrderRepository orderRepository,
                             ClientRepository clientRepository,
-                            MotoRepository motoRepository){
+                            MotoRepository motoRepository, LesserRepository lesserRepository){
         this.orderRepository = orderRepository;
         this.clientRepository = clientRepository;
         this.motoRepository = motoRepository;
+        this.lesserRepository = lesserRepository;
     }
 
     @Override
@@ -58,12 +61,6 @@ public class OrderServiceImpl implements OrderService {
         Client client = clientRepository.findClientByEmail(email);
         int id_client = client.getId();
 
-        String balanceStr = ufxService.BalanceRequestInWay4(id_client).split(" ")[0];
-        double balance = Double.valueOf(balanceStr);
-        if(balance < ufxService.getDepositSize()){
-            return String.valueOf(Status.NOTENOUGH);
-        }
-
 
         if ((motoRepository.findMotorollerById(id_moto) != null) && (client.getEmail() != null)) {
             logger.info("called checkQr(): correct qr");
@@ -76,7 +73,7 @@ public class OrderServiceImpl implements OrderService {
                 List<Order> orders = orderRepository.findOrdersByCost(-1.0f);
                 int i;
                 for(i = 0; i < orders.size(); i++){
-                    if(orders.get(i).getId_client() == id_client){
+                    if(orders.get(i).getIdclient() == id_client){
                         tmp = orders.get(i);
                         tmpOrderId = tmp.getId();
                         break;
@@ -92,6 +89,8 @@ public class OrderServiceImpl implements OrderService {
 
 
                 moto.setStatusReserve(false);
+                motoRepository.save(moto);
+
                 String resReverseDeposit = ufxService.ReverseDeposit(id_client, moto.getIdowner(), tmp.getRRN());
 
                 logger.info("reverse deposit by starting rent: " + resReverseDeposit);
@@ -104,6 +103,14 @@ public class OrderServiceImpl implements OrderService {
             motoRepository.save(moto);
 
             int id_lesser = moto.getIdowner();
+
+            String balanceStr = ufxService.BalanceRequestInWay4(id_client).split(" ")[0];
+            double balance = Double.valueOf(balanceStr);
+            if(balance < ufxService.getDepositSize()){
+                return String.valueOf(Status.NOTENOUGH);
+            }
+
+
 
             String resDeposit = ufxService.GetDepositFromClient(id_client, id_lesser);
 
@@ -213,7 +220,7 @@ public class OrderServiceImpl implements OrderService {
 
         // TODO check here
         UFXService ufxService = new UFXServiceImpl();
-        int clientId = order.getId_client();
+        int clientId = order.getIdclient();
         int lesserId = moto.getIdowner();
         String RRN = order.getRRN();
 
@@ -238,9 +245,23 @@ public class OrderServiceImpl implements OrderService {
                 break;
             }
         }
-        ufxService.ReverseDeposit(tmp.getId_client(), moto.getIdowner(), tmp.getRRN());
-        ufxService.GetPayment(tmp.getId_client(), moto.getIdowner(), 1);
+        ufxService.ReverseDeposit(tmp.getIdclient(), moto.getIdowner(), tmp.getRRN());
+        ufxService.GetPayment(tmp.getIdclient(), moto.getIdowner(), 1);
         return "OK|";
+    }
+
+    @Override
+    public List<Order> listrentmobile(String email) {
+        Client client = clientRepository.findClientByEmail(email);
+        logger.info("orders:"+orderRepository.findOrdersByIdclient(client.getId()));
+        List<Order> listorder = orderRepository.findOrdersByIdclient(client.getId());
+        List<Order> list = new ArrayList<>();
+        for (Order order :listorder) {
+            if(order.getCost()>0){
+                list.add(order);
+            }
+        }
+        return list;
     }
 
 
@@ -255,4 +276,6 @@ public class OrderServiceImpl implements OrderService {
         return formatter.parse(dateStr);
 
     }
+    
+    
 }

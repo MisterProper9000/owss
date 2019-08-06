@@ -16,7 +16,7 @@ public class Order {
     private String begin_time;
     private String end_time;
     private int id_moto;
-    private int id_client;
+    private int idclient;
     private double tariff = 1;
     private int tariff_time;
     private float cost;
@@ -25,43 +25,43 @@ public class Order {
     public Order() {
     }
 
-    public Order(String begin_time, int id_moto, int id_client, double tariff) {
+    public Order(String begin_time, int id_moto, int idclient, double tariff) {
         this.begin_time = begin_time;
         this.id_moto = id_moto;
-        this.id_client = id_client;
+        this.idclient = idclient;
         this.tariff = tariff;
     }
 
-    public Order(int id_moto, int id_client, String RRN){
+    public Order(int id_moto, int idclient, String RRN){
         this.id_moto = id_moto;
-        this.id_client = id_client;
+        this.idclient = idclient;
         this.RRN = RRN;
     }
 
     public Order(String begin_time, int id_moto, int id_client, double tariff, int tariff_time, String RRN) {
         this.begin_time = begin_time;
         this.id_moto = id_moto;
-        this.id_client = id_client;
+        this.idclient = idclient;
         this.tariff = tariff;
         this.tariff_time = tariff_time;
         this.RRN = RRN;
     }
 
-    public Order(String begin_time, String end_time, int id_moto, int id_client, double tariff, float cost, String RRN) {
+    public Order(String begin_time, String end_time, int id_moto, int idclient, double tariff, float cost, String RRN) {
         this.begin_time = begin_time;
         this.end_time = end_time;
         this.id_moto = id_moto;
-        this.id_client = id_client;
+        this.idclient = idclient;
         this.tariff = tariff;
         this.cost = cost;
         this.RRN = RRN;
     }
 
-    public Order(String begin_time, String end_time, int id_moto, int id_client, double tariff, int tariff_time, float cost, String RRN) {
+    public Order(String begin_time, String end_time, int id_moto, int idclient, double tariff, int tariff_time, float cost, String RRN) {
         this.begin_time = begin_time;
         this.end_time = end_time;
         this.id_moto = id_moto;
-        this.id_client = id_client;
+        this.idclient = idclient;
         this.tariff = tariff;
         this.tariff_time = tariff_time;
         this.cost = cost;
@@ -92,8 +92,8 @@ public class Order {
         return id_moto;
     }
 
-    public int getId_client() {
-        return id_client;
+    public int getIdclient() {
+        return idclient;
     }
 
     public float getCost() {

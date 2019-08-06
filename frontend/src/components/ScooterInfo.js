@@ -8,35 +8,73 @@ import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
-
 class ScooterInfo extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
 
-            idowner: Cookies.get('token'),
-            id_moto: '1',
+
+            id: '',
             auto_number: '',
             model: '',
             insurance: '',
-
-            id: '',
-            begin_time: '',
-            end_time: '',
-            cost: '',
-            tariff: '',
+            status_reserv: '',
+            status_rent: '',
 
 
-            columnRent: [
+            balance: '',
+
+            columnDefs: [
                 {headerName: "ID", field: "id", width: 100},
-                {headerName: "Begin time", field: "begin_time"},
-                {headerName: "End time", field: "end_time"},
-                {headerName: "Cost", field: "cost"},
-                {headerName: "Tariff", field: "tariff"},
+                {headerName: "Scooter number", field: "auto_number"},
+                {headerName: "Model", field: "model"},
+                {headerName: "Insuranse", field: "insurance"},
+                {headerName: "Reserved", field: "status_reserv"},
+                {headerName: "In rent", field: "status_rent"}
 
             ],
-            rowRent: [],
+            rowData: [],
+
+            // //idowner: Cookies.get('token'),
+            // id: '',
+            // auto_number: '',
+            // model: '',
+            // insurance: '',
+            // status_reserv: '',
+            // status_rent: '',
+            // idowner:'',
+            // rent:'',
+            // res:'',
+            //
+            // // id: '1',
+            // // begin_time: '',
+            // // end_time: '',
+            // // cost: '',
+            // // tariff: '',
+            // //
+            // // data: [],
+            //
+            // // columnRent: [
+            // //     {headerName: "ID", field: "id", width: 100},
+            // //     {headerName: "Begin time", field: "begin_time"},
+            // //     {headerName: "End time", field: "end_time"},
+            // //     {headerName: "Cost", field: "cost"},
+            // //     {headerName: "Tariff", field: "tariff"},
+            // //
+            // // ],
+            // // rowRent: [],
+            //
+            // columnData: [
+            //     {headerName: "ID", field: "id", width: 100},
+            //     {headerName: "auto_number", field: "auto_number"},
+            //     {headerName: " model", field: "model"},
+            //     {headerName: "insurance", field: "insurance"},
+            //     {headerName: "status_reserv", field: "status_reserv"},
+            //     {headerName: "status_rent", field: "status_rent"},
+            //
+            // ],
+            // rowData: [],
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -52,78 +90,17 @@ class ScooterInfo extends Component {
 
 
     componentDidMount() {
-        // fetch('http://10.101.177.21:9091/listScooterId')
-        //     .then((resp) => {
-        //         return resp.json()
-        //     })
-        //     .then(data => {
-        //         let idFromDB = data.map(id => {
-        //             return {value: id, display: id}
-        //         });
-        //         this.setState({listId: [{value: 'all', display: 'Select id'}].concat(idFromDB)});
-        //     }).catch(error => {
-        //     console.log(error);
-        // });
-
-
-        // fetch('http://10.101.177.21:9091//rentmoto', {
-        //     method: 'POST',
-        //     body: this.state.id
-        // })
-        //     .then(result => result.json())
-        //     .then(rowRent => this.setState({rowRent}))
     }
 
     render() {
-        const {id} = this.state;
         return (
-            <div className="tableInfoScooter">
+            <div>
                 <NavbarComp/>
                 <button className="buttonBack" onClick={this.goBack}> Back</button>
-                <h1 className="titleDop">Scooter Information</h1>
-                {/*<text className="selectId">Select id</text>*/}
-
-                {/*<select name="id" className="form-control dark" value={id} onChange={this.handleChange}*/}
-                {/*        onClick={this.addDataToTheTable}>*/}
-                {/*    {this.state.listId.map((id) => <option key={id.value}*/}
-                {/*                                           value={id.value}>{id.display}</option>)}*/}
-                {/*</select>*/}
-
-                <div>
-                    <table className="tableLesser">
-                        <tr>
-                            <th>Id scooter:</th>
-                            <td>{this.state.id_moto}</td>
-                        </tr>
-                        <tr>
-                            <th>Scooter number:</th>
-                            <td>{this.state.auto_number}</td>
-                        </tr>
-                        <tr>
-                            <th>Model</th>
-                            <td>{this.state.model}</td>
-                        </tr>
-                        <tr>
-                            <th>Insurance</th>
-                            <td>{this.state.insurance}</td>
-                        </tr>
-                    </table>
+                <div className="mainMargin">
+                    <h1 className="titleDop">Scooter Information</h1>
                 </div>
 
-                <div>
-                    <div
-                        className="ag-theme-balham"
-                        style={{height: '200px', width: '1000px'}}
-                    >
-                        <AgGridReact
-                            //pagination={true}
-                            enableFilter={true}
-                            enableSorting={true}
-                            columnDefs={this.state.columnRent}
-                            rowData={this.state.rowRent}>
-                        </AgGridReact>
-                    </div>
-                </div>
             </div>
 
         );

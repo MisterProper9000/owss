@@ -68,6 +68,7 @@ if (Cookies.get('token')) {
                     <Route path="/reg"
                            render={() => <Reg/>}
                     />
+
                     <Route component={NotFound}/>
                 </Switch>
             </BrowserRouter>

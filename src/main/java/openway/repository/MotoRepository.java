@@ -10,4 +10,7 @@ public interface MotoRepository extends JpaRepository<Motoroller, Integer> {
     List<Motoroller> findMotorollersByIdowner(int id);
 
     List<Motoroller> findMotorollersById(int parseInt);
+
+    boolean existsMotorollerById(int id);
+
 }

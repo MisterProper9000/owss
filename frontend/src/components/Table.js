@@ -10,14 +10,23 @@ class Table extends Component {
         return (
             <div>
                 <BootstrapTable data={this.props.data}>
-                    <TableHeaderColumn isKey dataField='id'>
+                    <TableHeaderColumn isKey dataField='id' width="80px">
                         ID
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField='name'>
-                        Name
+                    <TableHeaderColumn dataField='auto_number'>
+                        Scooter Number
                     </TableHeaderColumn>
-                    <TableHeaderColumn dataField='value'>
-                        Value
+                    <TableHeaderColumn dataField='model'>
+                        Model
+                    </TableHeaderColumn>
+                    <TableHeaderColumn dataField='insurance'>
+                        Insurance
+                    </TableHeaderColumn>
+                    <TableHeaderColumn dataField='status_reserv' width="120px">
+                        Reserved
+                    </TableHeaderColumn>
+                    <TableHeaderColumn dataField='status_rent' width="120px">
+                        In rent
                     </TableHeaderColumn>
                 </BootstrapTable>
             </div>
@@ -26,3 +35,6 @@ class Table extends Component {
 }
 
 export default Table;
+
+
+

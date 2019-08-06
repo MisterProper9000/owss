@@ -14,4 +14,7 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 
     List<Order> findOrdersByCost(float cost);
     List<Order> findOrdersByIdclient(int id);
+
+    List<Order> findOrdersByIdmoto(int id);
+
 }

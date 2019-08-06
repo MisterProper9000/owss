@@ -8,7 +8,7 @@ import '../../node_modules/react-bootstrap-table/css/react-bootstrap-table.css'
 import NavbarComp from "./NavbarComp";
 
 
-import {AndreyLocalIpOW} from "./ipConfigs";
+import {AndreyLocalIpOW, JuliaLocalIpOW} from "./ipConfigs";
 
 class Info extends Component {
     constructor(props) {
@@ -41,7 +41,7 @@ class Info extends Component {
     }
 
     getListOfId() {
-        fetch(AndreyLocalIpOW + '/infolistid')
+        fetch(JuliaLocalIpOW + '/infolistid')
         //fetch('http://10.101.177.21:9091/infolistid')
             .then((resp) => {
                 return resp.json()
@@ -58,7 +58,7 @@ class Info extends Component {
     }
 
     getForms() {
-        fetch(AndreyLocalIpOW +  '/info')
+        fetch(JuliaLocalIpOW +  '/info')
             .then(resp => {
                 return resp.json()
             })

@@ -5,11 +5,13 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import openway.model.Lesser;
 import openway.model.Login;
+import openway.model.Order;
 import openway.repository.LesserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -26,7 +28,7 @@ public class LesserServiceImpl implements LesserService {
     }
 
     @Override
-    public void addNewLesser(String newLesser) {
+    public String addNewLesser(String newLesser) {
         logger.info("called addNewLesser()");
         Gson g = new Gson();
         UFXService ufxService = new UFXServiceImpl();
@@ -42,6 +44,7 @@ public class LesserServiceImpl implements LesserService {
         String checkResWay4 = ufxService.CheckRes(resWay4);
         logger.info("saved way4: " + checkResWay4);
 
+        return String.valueOf(lesser.getId());
     }
 
     @Override
@@ -97,19 +100,22 @@ public class LesserServiceImpl implements LesserService {
     }
 
     @Override
-    public String checkBalanceLessor(String data){
-        logger.info("check balance lesser: " + data);
-        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
-        String email = jsonObject.get("email").getAsString();
-        int lesserId = lesserRepository.findLesserByEmail(email).getId();
+    public String checkBalanceLessor(String id_client){
+        JsonObject jsonObject = new JsonParser().parse(id_client).getAsJsonObject();
+        int lesserId = jsonObject.get("id").getAsInt();
+        logger.info("check balance lesser: " + id_client);
+
         logger.info("lesserId: " + lesserId);
 
         UFXService ufxService = new UFXServiceImpl();
         String balance = ufxService.BalanceLesserRequestInWay4(lesserId);
         JsonObject balanceObj = new JsonObject();
         balanceObj.addProperty("balance", balance);
-        logger.info("balance lesser: " + balanceObj);
-        return String.valueOf(balanceObj);
+        String[] tmpStr = String.valueOf(balanceObj).split(":");
+        String restmp = tmpStr[1].replaceAll("\"","");
+        String res = restmp.replaceAll("}","");
+        logger.info("*****************balance lesser: " + res);
+        return res;
     }
 
 
@@ -124,5 +130,7 @@ public class LesserServiceImpl implements LesserService {
     public String topUp(String data){
         return "";
     }
+
+
 
 }

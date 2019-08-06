@@ -10,6 +10,7 @@ class NavbarComp extends Component {
                 <Navbar style={navbarColor} collapseOnSelect expand="lg"  variant="dark">
                     <Navbar.Brand href="/">ScooShar</Navbar.Brand>
                     <Navbar.Brand href="/lesser">Account</Navbar.Brand>
+                    <Navbar.Brand href="/stat">Statistics</Navbar.Brand>
                     <Navbar.Brand href="/logout">Log out</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                     <Navbar.Collapse id="responsive-navbar-nav">

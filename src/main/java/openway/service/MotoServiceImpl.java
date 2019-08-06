@@ -35,7 +35,7 @@ public class MotoServiceImpl implements MotoService {
     }
 
     @Override
-    public boolean getStatusRes(int id){
+    public boolean getStatusRes(int id) {
         return motoRepository.findMotorollerById(id).isRes();
     }
 
@@ -64,7 +64,7 @@ public class MotoServiceImpl implements MotoService {
     public int addMoto(String moto) {
         logger.info("called addNewLesser()");
         Gson g = new Gson();
-        Motoroller motoroller = g.fromJson(moto,Motoroller.class);
+        Motoroller motoroller = g.fromJson(moto, Motoroller.class);
         motoRepository.save(motoroller);
         logger.info("save moto to database:" + moto);
         return motoroller.getIdowner();
@@ -111,7 +111,9 @@ public class MotoServiceImpl implements MotoService {
     }
 
     @Override
-    public boolean isScooterIdExist(String id) {
-        return motoRepository.existsMotorollerById(Integer.parseInt(id));
+    public String isScooterIdExist(String id) {
+        if (motoRepository.existsMotorollerById(Integer.parseInt(id)))
+            return "true";
+        else return "false";
     }
 }

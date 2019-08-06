@@ -8,7 +8,7 @@ import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 
 
-import {AndreyLocalIpOW} from "./ipConfigs";
+import {AndreyLocalIpOW, JuliaLocalIpOW} from "./ipConfigs";
 
 class Lesser extends Component {
     goScooterInfo;
@@ -27,8 +27,9 @@ class Lesser extends Component {
             sum_moto: '',
             bank_account: '',
 
+            errorMsg: '',
 
-            selected_id: 0,
+            selected_id: '',
 
 
             lesserData: [],
@@ -37,10 +38,10 @@ class Lesser extends Component {
             auto_number: '',
             model: '',
             insurance: '',
-            status_reserv:'',
-            status_rent:'',
+            status_reserv: '',
+            status_rent: '',
 
-            listid:[],
+            listid: [],
 
 
             balance: '',
@@ -74,20 +75,29 @@ class Lesser extends Component {
 
     getScooterInfo(selected_id) {
         Cookies.remove('id_scooter');
-        this.setState({selected_id:selected_id});
-        Cookies.set('id_scooter',this.state.selected_id);
+        this.setState({selected_id: selected_id});
+        Cookies.set('id_scooter', this.state.selected_id);
         console.log(selected_id);
 
-        fetch(AndreyLocalIpOW + '/goToScooterInfo', {
+        fetch(JuliaLocalIpOW + '/goToScooterInfo', {
             method: 'POST',
             body: Cookies.get('id_scooter')
         })
             .then(resp => {
-            //return resp.json()
-                console.log(resp.json());
-        })
-        //window.location = "/scooter_info";
+                return resp.json()
+            })
+            .then(resp => {
+                //console.log(resp);
+                if (resp != true) {
+                    this.setState({errorMsg: 'Enter an existing scooter'});
+                } else {
+                    window.location = "/scooter_info";
+                }
+
+            })
+
     }
+
 
     goToPaymentInfo() {
         window.location = "/payment_info"
@@ -96,13 +106,13 @@ class Lesser extends Component {
 
     componentDidMount() {
 
-        fetch(AndreyLocalIpOW + '/goToScooterInfo', {
+        fetch(JuliaLocalIpOW + '/goToScooterInfo', {
             method: 'POST',
             body: this.state.id_client
         })
 
 
-        fetch(AndreyLocalIpOW + '/lesserinfo', {
+        fetch(JuliaLocalIpOW + '/lesserinfo', {
             method: 'POST',
             body: this.state.id_client
         }).then(resp => {
@@ -121,21 +131,19 @@ class Lesser extends Component {
                     bank_account: resp.bank_account,
                 }));
 
-        fetch(AndreyLocalIpOW + '/balanceInqueryLessor', {
-        //fetch('http://10.101.177.21:9091/balanceInqueryLessor', {
+        fetch(JuliaLocalIpOW + '/balanceInqueryLessor', {
+            //fetch('http://10.101.177.21:9091/balanceInqueryLessor', {
             method: 'POST',
             body: JSON.stringify({
-                    email: 'a@mail.com',
+                    id: Cookies.get('token')
                 }
             )
         }).then((resp) => {
             return resp.json()
-        }).then(function (jsonData) {
-            return JSON.stringify(jsonData);
         }).then(resp => {
-            var bal = resp.split('"balance":');
-            this.setState({balance: bal});
-        })
+            //this.setState({balance: resp});
+        });
+
 
 
         fetch(AndreyLocalIpOW + '/infomoto', {
@@ -144,7 +152,7 @@ class Lesser extends Component {
         })
             .then(result => result.json())
             .then(rowData => {
-               this.setState({rowData});
+                this.setState({rowData});
             })
     }
 
@@ -222,13 +230,18 @@ class Lesser extends Component {
                             </button>
                             <br/>
 
-                            <div className="selectScooter">
+
+                            <div>
                                 <tr>
-                                    <th>Scooter information</th>
-                                    <text className="selectId">Enter id scooter</text>
+                                    <th width="100%">Rental history</th>
+                                    <text>Enter id scooter</text>
+                                    <div className="errorMsg">{this.state.errorMsg}</div>
                                     <input id="id_selected_input" type="text" placeholder="" name="selected_id"/><br/>
                                 </tr>
-                                <button className="buttonDeposit" onClick={()=>this.getScooterInfo(document.getElementById("id_selected_input").value)}>Find</button>
+                                <button className="buttonDeposit"
+                                        onClick={() => this.getScooterInfo(document.getElementById("id_selected_input").value)}>Show
+                                    info
+                                </button>
                             </div>
                         </div>
                     </div>

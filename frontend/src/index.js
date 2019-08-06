@@ -16,6 +16,7 @@ import PaymentInfo from "./components/PaymentInfo";
 import ScooterInfo from "./components/ScooterInfo";
 
 import Cookies from "js-cookie";
+import Statistic from "./components/Statistic";
 
 
 if (Cookies.get('token')) {
@@ -46,6 +47,9 @@ if (Cookies.get('token')) {
                     />
                     <Route path="/scooter_info"
                            render={() => <ScooterInfo/>}
+                    />
+                    <Route path="/stat"
+                           render={() => <Statistic/>}
                     />
                     <Route component={NotFound}/>
                 </Switch>

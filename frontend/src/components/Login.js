@@ -4,7 +4,7 @@ import NavbarComp from "./NavbarComp";
 import Cookies from "js-cookie";
 
 
-import {AndreyLocalIpOW} from "./ipConfigs";
+import {AndreyLocalIpOW, JuliaLocalIpOW} from "./ipConfigs";
 
 
 class Login extends Component {
@@ -40,7 +40,7 @@ class Login extends Component {
             return;
         }
 
-        fetch(AndreyLocalIpOW + '/login', {
+        fetch(JuliaLocalIpOW + '/login', {
         //fetch('http://10.101.177.21:9091/login', {
             method: 'POST',
             body: JSON.stringify({

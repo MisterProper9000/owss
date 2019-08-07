@@ -82,7 +82,7 @@ public class MobileController {
         logger.info("client top up request from mobApp: " + topUpData);
         String clientTopUpRes = clientService.TopUp(topUpData);
         logger.info("client top up result: " + clientTopUpRes);
-        return "OK|";
+        return clientTopUpRes;
     }
 
 }

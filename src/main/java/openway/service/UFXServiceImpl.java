@@ -684,7 +684,7 @@ public class UFXServiceImpl implements UFXService {
     }
 
     private String RequestCreateTopUpCl(String name, String sName, String cardNum,
-                                        String cvc2, String exDate,String amount,
+                                        String cvc2, String exDate, String amount,
                                         String clientNumber){
         String dateStr = DateUfx.getTime();
         return "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
@@ -757,6 +757,103 @@ public class UFXServiceImpl implements UFXService {
                 "            </Transaction>\n" +
                 "        </Doc>\n" +
                 "    </MsgData>\n" +
+                "</UFXMsg>";
+    }
+
+
+    public String ClientDownMoney(String cardNum, String cvc2,
+                           String exDate,String amount, int clientId){
+
+        String clientNumber = GenerateId(clientId + "CL");
+        String cardNumReg = cardNum.replaceAll("-", "");
+        String exDateReg = exDate.replaceAll("\\/", "");
+        String request = RequestCreateDownMoneyClient(cardNumReg, cvc2, exDateReg,
+                amount, clientNumber);
+        logger.info("request for client down money: " + request);
+        String resDownMoney = SendRequest(urlUfxAdapter, request);
+        logger.info("response down money: " + resDownMoney);
+        String redResDownMoney = checkTopUp(resDownMoney);
+        return redResDownMoney;
+    }
+
+
+    private String RequestCreateDownMoneyClient(String cardNum, String cvc2,
+                                         String exDate, String amount,
+                                         String clientNumber){
+        String dateStr = DateUfx.getTime();
+        return "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
+                "  <MsgId>1211372852124</MsgId>\n" +
+                "  <Source app=\"mobileApp\"/>\n" +
+                "  <MsgData>\n" +
+                "    <Doc>\n" +
+                "      <TransType>\n" +
+                "        <TransCode>\n" +
+                "          <MsgCode>OrdReq</MsgCode>\n" +
+                "          <ServiceCode>P2P</ServiceCode>\n" +
+                "        </TransCode>\n" +
+                "        <TransCondition>MBSMS</TransCondition>\n" +
+                "        <TransRules>\n" +
+                "          <TransRule>\n" +
+                "            <ParmCode>CreditTransCondition</ParmCode>\n" +
+                "            <Value>,TBAPPL,MNET,ENET,NO_CARD,NO_TERM,</Value>\n" +
+                "          </TransRule>\n" +
+                "          <TransRule>\n" +
+                "            <ParmCode>BusinessApplicationIdentifier</ParmCode>\n" +
+                "            <Value>MP</Value>\n" +
+                "          </TransRule>\n" +
+                "        </TransRules>\n" +
+                "      </TransType>\n" +
+                "      <LocalDt>" +
+                        dateStr +
+                        "</LocalDt>\n" +
+                "      <SourceDtls>\n" +
+                "        <SIC>6012</SIC>\n" +
+                "        <Country>RU</Country>\n" +
+                "        <City>Merchant City</City>\n" +
+                "        <MerchantName>Merchant Name</MerchantName>\n" +
+                "      </SourceDtls>\n" +
+                "      <Requestor>\n" +
+                "      \t<ContractNumber>" +
+                        clientNumber +
+                        "</ContractNumber> \n" +
+                "      </Requestor>\n" +
+                "      <Source>\n" +
+                "        <ContractNumber>" +
+                        VPosId +
+                        "</ContractNumber> <!-- Put your virtual POS terminal ID here -->\n" +
+                "      </Source>\n" +
+                "      <Destination>\n" +
+                "      \t<ContractNumber>" +
+                        cardNum +
+                        "</ContractNumber> <!-- Put your test card number (sender) here -->\n" +
+                "        <CardInfo>\n" +
+                "          <CardExpiry>" +
+                            exDate +
+                            "</CardExpiry> <!-- Put your test card (sender) expiration date in format YYMM here -->\n" +
+                "        </CardInfo>\n" +
+                "       <SecurityData>\n" +
+                "         <SecParm>\n" +
+                "           <Code>CVV2</Code>\n" +
+                "           <Value>" +
+                            cvc2 +
+                            "</Value> <!-- Put your test card (sender) CVV2 here -->\n" +
+                "         </SecParm>\n" +
+                "       </SecurityData><!-- Put your test card number (receive) here -->\n" +
+                "      </Destination>\n" +
+                "      <Transaction>\n" +
+                "        <Currency>" +
+                        depositCurrency +
+                        "</Currency>\n" +
+                "        <Amount>" +
+                        amount +
+                        "</Amount>\n" +
+                "        <Extra>\n" +
+                "          <Type>CustomData</Type>\n" +
+                "          <Details>E82DC229U0100000000007360500100000000007360501111</Details>\n" +
+                "        </Extra>\n" +
+                "      </Transaction>\n" +
+                "    </Doc>\n" +
+                "  </MsgData>\n" +
                 "</UFXMsg>";
     }
 

@@ -17,4 +17,6 @@ public interface ClientService {
     String payRent(String data);
 
     String TopUp(String topUpData);
+
+    String DownMoney(String downMoneyData);
 }

@@ -35,5 +35,8 @@ public interface UFXService {
 
     String LesserUpdMotoInfo(int lesserId, int newSumMoto, String cardNum);
 
+    String ClientDownMoney(String cardNum, String cvc2,
+                           String exDate,String amount, int clientId);
+
 }
 

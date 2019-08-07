@@ -12,8 +12,9 @@ public class ufxTest {
     public static void main(String argv[]){
 
         UFXService ufxSer = new UFXServiceImpl();
-        System.out.println(ufxSer.LesserUpdMotoInfo(1, 2, "1000040182277768"));
-
+        //System.out.println(ufxSer.LesserUpdMotoInfo(1, 2, "1000040182277768"));
+        System.out.println(ufxSer.ClientDownMoney(
+                "1000040176379547", "970", "2008", "25", 1));
 
         //Client client = new Client("Vasya", "Lalkov", "vl@gmail.com",
         //"5553535", "123");

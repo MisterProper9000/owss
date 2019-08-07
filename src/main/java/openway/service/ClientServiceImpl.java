@@ -150,4 +150,21 @@ public class ClientServiceImpl implements ClientService {
         return resTopUp;
     }
 
+    public String DownMoney(String downMoneyData){
+        String args[] = downMoneyData.split("\\|");
+        String name = "";
+        String sName = "";
+        String cardNum = args[0];
+        String cvc2 = args[1];
+        String exDate = args[2];
+        String amount = args[3];
+        String email = args[4];
+        UFXService ufxService = new UFXServiceImpl();
+        Client client = clientRepository.findClientByEmail(email);
+        int clientId = client.getId();
+        String redResDownMoney = ufxService.ClientDownMoney(cardNum, cvc2,
+                exDate, amount, clientId);
+        return redResDownMoney;
+    }
+
 }

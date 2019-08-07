@@ -77,12 +77,20 @@ public class MobileController {
      *
      * @return
      */
-    @PostMapping("topUpCl")
+    @PostMapping("/topUpCl")
     String clientTopUp(@RequestBody String topUpData){
         logger.info("client top up request from mobApp: " + topUpData);
         String clientTopUpRes = clientService.TopUp(topUpData);
         logger.info("client top up result: " + clientTopUpRes);
         return clientTopUpRes;
+    }
+
+    @PostMapping("/topDownCl")
+    String clientDown(@RequestBody String downData){
+        logger.info("client down money request from mobApp: " + downData);
+        String clientDownRes = clientService.DownMoney(downData);
+        logger.info("client down money result: " + clientDownRes);
+        return clientDownRes;
     }
 
 }

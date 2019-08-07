@@ -1,5 +1,6 @@
 package openway.controller;
 
+import com.google.gson.Gson;
 import openway.model.Lesser;
 import openway.service.LesserService;
 
@@ -97,7 +98,16 @@ public class MainController {
         logger.info("deposit " + data);
         String resLsTopUp = lesserService.topUp(data);
         logger.info("res ls topUp (returned data the same): " + resLsTopUp);
-        return resLsTopUp;
+//        String jsonString;
+//        try {
+//            jsonString = new JSONObject()
+//                    .put("res", resLsTopUp).toString();
+//            return jsonString;
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//            return "badError" ;
+//        }
+        return "ojshukl";
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

@@ -29,7 +29,7 @@ class Lesser extends Component {
 
             errorMsg: '',
 
-            selected_id: '',
+            selected_idd: 0,
 
 
             lesserData: [],
@@ -74,9 +74,8 @@ class Lesser extends Component {
     }
 
     getScooterInfo(selected_id) {
-        Cookies.remove('id_scooter');
-        this.setState({selected_id: selected_id});
-        Cookies.set('id_scooter', this.state.selected_id);
+        //this.setState({selected_idd: selected_id});
+        Cookies.set('id_scooter',selected_id);
         console.log(selected_id);
 
         fetch(JuliaLocalIpOW + '/goToScooterInfo', {
@@ -105,12 +104,10 @@ class Lesser extends Component {
 
 
     componentDidMount() {
-
         fetch(JuliaLocalIpOW + '/goToScooterInfo', {
             method: 'POST',
             body: this.state.id_client
         })
-
 
         fetch(JuliaLocalIpOW + '/lesserinfo', {
             method: 'POST',
@@ -232,7 +229,7 @@ class Lesser extends Component {
                             <br/>
 
 
-                            <div>
+                            <div className="rental">
                                 <tr>
                                     <th width="100%">Rental history</th>
                                     <text>Enter id scooter</text>

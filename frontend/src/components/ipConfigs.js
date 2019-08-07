@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
-export var AndreyLocalIpOW = 'http://10.101.177.12:9091';
-export var JuliaLocalIpOW = 'http://10.101.177.12:9091';
+export var AndreyLocalIpOW = 'http://10.101.177.21:9091';
+export var JuliaLocalIpOW = 'http://10.101.177.21:9091';
 
 class ipConfigs extends Component{
     constructor(props) {

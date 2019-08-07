@@ -106,7 +106,7 @@ public class ClientServiceImpl implements ClientService {
 
 
         UFXService ufxService = new UFXServiceImpl();
-        String balance = ufxService.BalanceRequestInWay4(clientId);
+        String balance = ufxService.BalanceClientRequestInWay4(clientId);
 
         return balance;
     }

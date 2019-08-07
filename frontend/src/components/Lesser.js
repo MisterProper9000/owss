@@ -204,7 +204,7 @@ class Lesser extends Component {
                             <br/>
                             <div className="balance">
                                 <tr>
-                                    <th>Your balance</th>
+                                    <th>Your balance  </th>
                                     <td>{this.state.balance}</td>
                                 </tr>
                                 <button className="buttonDeposit" onClick={this.depositMoney}>Deposit money</button>

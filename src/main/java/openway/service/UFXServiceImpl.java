@@ -109,35 +109,29 @@ public class UFXServiceImpl implements UFXService {
         return res;
     }
 
-    public String BalanceRequestInWay4(int clientId){
+    public String BalanceClientRequestInWay4(int clientId){
         String clientNumber = GenerateId( clientId + "CL");
-        String request = RequestCreateBalanceInquery(clientNumber);
-        //logger.info("balance request client: " + request);
+        String request = RequestCreateBalanceInquery(clientNumber, cTypes.ClientT);
+        logger.info("way4 data for client balance request: " + clientNumber);
         String response = SendRequest(urlUfxAdapter, request);
-        //logger.info("balance response client: " + response);
-        logger.info("way4 data for balance request: " + clientNumber);
-        String balance = BalanceResponseParse(response);
-        logger.info("balance response parsed result: " + balance);
+        String balance = BalanceResponseParse(response, cTypes.ClientT);
+        logger.info("balance client response parsed result: " + balance);
         return balance;
     }
 
-
     public String BalanceLesserRequestInWay4(int lesserId){
         String lesserNumber = GenerateId(lesserId + "LES");
-
-        String request = RequestCreateBalanceInquery(lesserNumber);
-        logger.info("balance request lesser: " + request);
+        String request = RequestCreateBalanceInquery(lesserNumber, cTypes.LesserT);
+        logger.info("way4 data for lesser balance request: " + lesserNumber);
         String response = SendRequest(urlUfxAdapter, request);
-        logger.info("balance response lesser: " + response);
-        return BalanceResponseParse(response);
-
+        String balance = BalanceResponseParse(response, cTypes.LesserT);
+        logger.info("balance lesser response parsed result: " + balance);
+        return balance;
     }
 
     public String GetDepositFromClient(int clientId, int lesserId){
-
         String clientNumber = GenerateId(clientId + "CL");
         String lesserNumber = GenerateId(lesserId + "LES");
-
         String requestGetDeposit = RequestCreateGetDeposit(clientNumber, lesserNumber,
                 depositSize, depositCurrency);
         String resDeposit = SendRequest(urlUfxAdapter, requestGetDeposit);
@@ -145,13 +139,10 @@ public class UFXServiceImpl implements UFXService {
     }
 
     public String ReverseDeposit(int clientId, int lesserId, String RRN){
-
         String clientNumber = GenerateId(clientId + "CL");
         String lesserNumber = GenerateId(lesserId + "LES");
-
         String requestReverseDeposit = RequestCreateReverseDeposit(clientNumber, lesserNumber,
                 RRN, depositSize, depositCurrency);
-
         String resReverseDeposit = SendRequest(urlUfxAdapter, requestReverseDeposit);
         return resReverseDeposit;
     }
@@ -160,10 +151,8 @@ public class UFXServiceImpl implements UFXService {
         String clientNumber = GenerateId(clientId + "CL");
         String lesserNumber = GenerateId(lesserId + "LES");
         String sum = Float.toString(cost);
-
         String requestPayment = RequestCreatePayment(clientNumber, lesserNumber,
                 sum, depositCurrency);
-
         String resRequestPayment = SendRequest(urlUfxAdapter, requestPayment);
         return resRequestPayment;
     }
@@ -194,16 +183,16 @@ public class UFXServiceImpl implements UFXService {
 
     public String ClientTopUp(String name, String sName, String cardNum,
                               String cvc2, String exDate,String amount, int clientId){
-        //String clientNumber = "CLIENT_TEST_100";
         return TopUp(name, sName, cardNum,
-                cvc2, exDate, amount,clientId, cTypes.ClientT);
+                cvc2, exDate, amount,
+                clientId, cTypes.ClientT);
     }
 
     public String LesserTopUp(String name, String sName, String cardNum,
                               String cvc2, String exDate,String amount, int lesserId){
-        //String clientNumber = GenerateId(lesserId + "LES");
         return TopUp(name, sName, cardNum,
-                cvc2, exDate, amount, lesserId, cTypes.LesserT);
+                cvc2, exDate, amount,
+                lesserId, cTypes.LesserT);
     }
 
     private String TopUp(String name, String sName, String cardNum,
@@ -460,8 +449,17 @@ public class UFXServiceImpl implements UFXService {
     }
 
 
-    private String RequestCreateBalanceInquery(String clientNumber){
+    private String RequestCreateBalanceInquery(String clientNumber, cTypes type){
         String regNumberApp = clientNumber + "_B";
+        String balanceType = "";
+        switch (type){
+            case LesserT:
+                balanceType = "ACQ_AVAILABLE";
+                break;
+            default:
+                balanceType = "AVAILABLE";
+                break;
+        }
         return  "<UFXMsg direction=\"Rq\" msg_type=\"Information\" scheme=\"WAY4Appl\" version=\"2.0\">\n" +
                 "    <MsgId>AAA-555-333-EEE-23124141</MsgId>\n" +
                 "    <Source app=\"MobileApp\"/>\n" +
@@ -479,7 +477,9 @@ public class UFXServiceImpl implements UFXService {
                 "                </Parm>\n" +
                 "                <Parm>\n" +
                 "                    <ParmCode>Balance</ParmCode>\n" +
-                "                    <Value>AVAILABLE</Value>\n" +
+                "                    <Value>" +
+                balanceType +
+                "</Value>\n" +
                 "                </Parm>\n" +
                 "            </ResultDtls>\n" +
                 "            <ObjectFor>\n" +
@@ -495,11 +495,21 @@ public class UFXServiceImpl implements UFXService {
                 "</UFXMsg>";
     }
 
-    private String BalanceResponseParse(String response){
+    private String BalanceResponseParse(String response, cTypes type){
+        String balanceType = "";
+        switch (type){
+            case LesserT:
+                balanceType = "<Name>Acquiring Balance</Name>" +
+                        "<Type>ACQ_AVAILABLE</Type>";
+                break;
+            default:
+                balanceType = "<Name>Available</Name><Type>AVAILABLE</Type>";
+                break;
+        }
+
+
         String balanceTemplate = "<Balances>" +
-                                "<Balance>" +
-                                "<Name>Available</Name>" +
-                                "<Type>AVAILABLE</Type>.*?" +
+                                "<Balance>" + balanceType + ".*?" +
                                 "<Currency>USD</Currency>" +
                                 "</Balance>";
         String balanceString = XMLParse.findValueInString(response, balanceTemplate);

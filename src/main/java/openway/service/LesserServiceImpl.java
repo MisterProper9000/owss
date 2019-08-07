@@ -164,10 +164,10 @@ public class LesserServiceImpl implements LesserService {
         Lesser ls = lesserRepository.findLesserById(lesserId);
         //int lesserId = ls.getId();
 
-        String resTopUp = ufxService.LesserTopUp("", "", card_number, security_code,
-                expiration, depositMoney, lesserId);
+        //String resTopUp = ufxService.LesserTopUp("", "", card_number, security_code,
+        //        expiration, depositMoney, lesserId);
 
-        return resTopUp;
+        return "";
     }
 
 private class balanceData{

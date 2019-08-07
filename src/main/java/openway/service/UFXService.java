@@ -9,7 +9,9 @@ public interface UFXService {
 
     String AddNewLesserInWay4(Lesser lesser);
 
-    String BalanceRequestInWay4(int clientId);
+    String BalanceClientRequestInWay4(int clientId);
+
+    String BalanceLesserRequestInWay4(int clientId);
 
     String GetDepositFromClient(int clientId, int lesserId);
 
@@ -21,17 +23,15 @@ public interface UFXService {
 
     double getDepositSize();
 
-    String BalanceLesserRequestInWay4(int clientId);
-
     String GenerateRRN(String type);
 
     String CheckRes(String res);
 
     String ClientTopUp(String name, String sName, String cardNum,
-                              String cvc2, String exDate,String amount, int clientId);
+                       String cvc2, String exDate,String amount, int clientId);
 
     String LesserTopUp(String name, String sName, String cardNum,
-                       String cvc2, String exDate,String amount, int clientId);
+                       String cvc2, String exDate,String amount, int lesserId);
 
 }
 

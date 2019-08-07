@@ -126,7 +126,7 @@ public class OrderServiceImpl implements OrderService {
             String balanceStr;
             double balance;
             try {
-                balanceStr = ufxService.BalanceRequestInWay4(id_client).split(" ")[0];
+                balanceStr = ufxService.BalanceClientRequestInWay4(id_client).split(" ")[0];
                 balance = Double.valueOf(balanceStr);
             }catch (Exception e){
                 logger.info("start rent error: " + e.toString());
@@ -199,7 +199,7 @@ public class OrderServiceImpl implements OrderService {
             return "OK|" + false;
         }
 
-        String checkBalanceStr = ufxService.BalanceRequestInWay4(client.getId());
+        String checkBalanceStr = ufxService.BalanceClientRequestInWay4(client.getId());
         String checkBalance[] = checkBalanceStr.split(" ");
         double balance = Double.valueOf(checkBalance[0]);
         if(balance < ufxService.getDepositSize()){

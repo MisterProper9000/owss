@@ -825,4 +825,68 @@ public class UFXServiceImpl implements UFXService {
     public double getDepositSize() {
         return Double.valueOf(depositSize);
     }
+
+    public String LesserUpdMotoInfo(int lesserId, int newSumMoto ,String cardNum){
+        String lesserNumber = GenerateId(lesserId + "LES");
+        String newSumMotoStr = String.valueOf(newSumMoto);
+        String request = RequestCreateUpdMoto(lesserNumber, newSumMotoStr, cardNum);
+        String resUpd = SendRequest(urlUfxAdapter, request);
+        return resUpd;
+    }
+
+    private String RequestCreateUpdMoto(String lesserNumber,
+                                        String newSum, String cardNum ){
+        String regNumberApp = lesserNumber + "_U";
+        String spcSumMoto = "ACQ_MOTO" + newSum + ";";
+        String spcContrNum = "CONTRNUM=" + cardNum + ";";
+
+
+        return  "<UFXMsg direction=\"Rq\" msg_type=\"Doc\" scheme=\"WAY4Doc\" version=\"2.0\">\n" +
+                "    <MsgId>1211372852124</MsgId>\n" +
+                "    <Source app=\"mobApp\"/>\n" +
+                "    <MsgData>\n" +
+                "        <Application>\n" +
+                "            <RegNumber>" +
+                            "XML_" + GenerateRRN("time") +
+                            "</RegNumber>\n" +
+                "            <Institution>0001</Institution>\n" +
+                "            <OrderDprt>0101</OrderDprt>\n" +
+                "            <ObjectType>Contract</ObjectType>\n" +
+                "            <ActionType>Update</ActionType>\n" +
+                "            <ObjectFor>\n" +
+                "                <ContractIDT>\n" +
+                "                    <ContractNumber>" +
+                                    lesserNumber +
+                                    "</ContractNumber>\n" +
+                "                    <Client>\n" +
+                "                        <ClientInfo>\n" +
+                "                            <RegNumber>" +
+                                            lesserNumber +
+                                            "</RegNumber>\n" +
+                "                        </ClientInfo>\n" +
+                "                    </Client>\n" +
+                "                </ContractIDT>\n" +
+                "            </ObjectFor>\n" +
+                "            <Data>\n" +
+                "                <Contract>\n" +
+                "                    <ContractIDT>\n" +
+                "                        <ContractNumber>" +
+                                        lesserNumber +
+                                        "</ContractNumber>\n" +
+                "                    </ContractIDT>\n" +
+                "                    <ContractName>" +
+                                    lesserNumber + "_N" +
+                                    "</ContractName>\n" +
+                "                    <AddContractInfo>\n" +
+                "                        <AddInfo01>" +
+                                        spcSumMoto +
+                                        spcContrNum +
+                                        "</AddInfo01>\n" +
+                "                    </AddContractInfo>\n" +
+                "                </Contract>\n" +
+                "            </Data>\n" +
+                "        </Application>\n" +
+                "    </MsgData>\n" +
+                "</UFXMsg>";
+    }
 }

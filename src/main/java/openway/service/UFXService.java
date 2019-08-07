@@ -33,5 +33,7 @@ public interface UFXService {
     String LesserTopUp(String name, String sName, String cardNum,
                        String cvc2, String exDate,String amount, int lesserId);
 
+    String LesserUpdMotoInfo(int lesserId, int newSumMoto, String cardNum);
+
 }
 

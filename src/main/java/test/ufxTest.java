@@ -12,6 +12,8 @@ public class ufxTest {
     public static void main(String argv[]){
 
         UFXService ufxSer = new UFXServiceImpl();
+        System.out.println(ufxSer.LesserUpdMotoInfo(1, 2, "1000040182277768"));
+
 
         //Client client = new Client("Vasya", "Lalkov", "vl@gmail.com",
         //"5553535", "123");
@@ -25,9 +27,9 @@ public class ufxTest {
         //String newLesserRes = ufxSer.AddNewLesserInWay4(lesser);
 
 
-        String req = ufxSer.LesserTopUp("Daniil", "Plaksin",
-                "1000040176379547", "970", "2008", "25",
-                0);
+//        String req = ufxSer.LesserTopUp("Daniil", "Plaksin",
+//                "1000040176379547", "970", "2008", "25",
+//                0);
 
         //System.out.println(req);
 //        System.out.println(req);

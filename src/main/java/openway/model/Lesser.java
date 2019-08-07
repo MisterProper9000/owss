@@ -80,4 +80,8 @@ public class Lesser {
     public int getSum_moto() {
         return sum_moto;
     }
+
+    public String getBank_account() {
+        return bank_account;
+    }
 }

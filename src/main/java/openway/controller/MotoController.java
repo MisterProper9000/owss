@@ -81,7 +81,7 @@ public class MotoController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/addmoto")
     boolean addMotoToDB(@RequestBody String moto) {
-        logger.info("check auth");
+        logger.info("check auth ");
         logger.info("auth: " + moto);
         int id_lessor = motoService.addMoto(moto);
         return lesserService.addMotoToLesser(id_lessor);

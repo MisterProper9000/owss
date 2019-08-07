@@ -117,9 +117,23 @@ public class LesserServiceImpl implements LesserService {
 
 
     public boolean addMotoToLesser(int id) {
-        Lesser lesser = lesserRepository.findLesserById(id);
-        lesser.setSum_moto(lesser.getSum_moto() + 1);
+        Lesser lesser;
+        try {
+            lesser = lesserRepository.findLesserById(id);
+        }catch (Exception e)
+        {
+            logger.info("addMoto error: " + e.toString());
+            return false;
+        }
+        int motoSum = lesser.getSum_moto();
+        motoSum++;
+        lesser.setSum_moto(motoSum);
         lesserRepository.save(lesser);
+        UFXService ufxService = new UFXServiceImpl();
+        String cardNum = lesser.getBank_account();
+        String resUpd = ufxService.LesserUpdMotoInfo(id, motoSum * 100, cardNum);
+
+        logger.info("upd lesser moto sum result: " + resUpd);
         return true;
     }
 

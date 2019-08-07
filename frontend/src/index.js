@@ -17,6 +17,7 @@ import ScooterInfo from "./components/ScooterInfo";
 
 import Cookies from "js-cookie";
 import Statistic from "./components/Statistic";
+import About from "./components/About";
 
 
 if (Cookies.get('token')) {
@@ -51,6 +52,9 @@ if (Cookies.get('token')) {
                     <Route path="/stat"
                            render={() => <Statistic/>}
                     />
+                    <Route path="/about"
+                           render={() => <About/>}
+                    />
                     <Route component={NotFound}/>
                 </Switch>
             </BrowserRouter>
@@ -71,6 +75,9 @@ if (Cookies.get('token')) {
                     />
                     <Route path="/reg"
                            render={() => <Reg/>}
+                    />
+                    <Route path="/about"
+                           render={() => <About/>}
                     />
 
                     <Route component={NotFound}/>

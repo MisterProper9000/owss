@@ -60,6 +60,16 @@ public class MotoServiceImpl implements MotoService {
         }
     }
 
+//    @Override
+//    public int addMoto(String moto) {
+//        logger.info("called addNewLesser()");
+//        Gson g = new Gson();
+//        Motoroller motoroller = g.fromJson(moto, Motoroller.class);
+//        motoRepository.save(motoroller);
+//        logger.info("save moto to database:" + moto);
+//        return motoroller.getIdowner();
+//    }
+
     @Override
     public int addMoto(String moto) {
         logger.info("called addNewLesser()");

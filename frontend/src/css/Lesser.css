@@ -1,4 +1,4 @@
-.pagePersonalAccount{
+.pagePersonalAccount {
     margin-left: 5%;
 }
 
@@ -6,20 +6,26 @@
     margin-top: 3%;
 }
 
-.tableLesser{
+.tableLesser {
     width: 400px;
     margin-top: 3%;
     border: 4px double #bac0cc; /* Параметры границы */
     padding: 10%; /* Поля вокруг текста */
 }
 
-.balance{
+.balance {
     border: 4px double #bac0cc; /* Параметры границы */
     padding: 10px; /* Поля вокруг текста */
     width: 400px;
 }
 
-.selectScooter{
+.rental {
+    border: 4px double #bac0cc; /* Параметры границы */
+    padding: 10px; /* Поля вокруг текста */
+    width: 600px;
+}
+
+.selectScooter {
     margin-top: 2.5%;
     border: 4px double #bac0cc; /* Параметры границы */
     padding: 10px; /* Поля вокруг текста */
@@ -41,7 +47,8 @@
     width: 35%;
     padding: 15px;
 }
-.titleDop{
+
+.titleDop {
     margin-left: 20%;
     color: #660033;
     opacity: 0.8;
@@ -54,19 +61,24 @@
     clear: both;
 }
 
-.buttonDeposit{
+.buttonDeposit {
     width: 300px;
 }
 
-.buttonPaymentInfo{
+.buttonshowinfo {
+    width: 570px;
+}
+
+.buttonPaymentInfo {
     width: 400px;
 }
 
-.buttonInfoScooter{
+.buttonInfoScooter {
     width: 600px;
 }
 
 
-.buttonNewScooter{
+.buttonNewScooter {
     width: 600px;
 }
+

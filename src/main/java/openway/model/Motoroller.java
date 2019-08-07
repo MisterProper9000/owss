@@ -62,4 +62,28 @@ public class Motoroller {
     public void settimeresst(String timeresst) {
         this.timeresst = timeresst;
     }
+
+    public boolean isInsurance() {
+        return insurance;
+    }
+
+    public boolean isStatus_rent() {
+        return status_rent;
+    }
+
+    public boolean isStatus_reserv() {
+        return status_reserv;
+    }
+
+    public void setInsurance(boolean insurance) {
+        this.insurance = insurance;
+    }
+
+    public void setStatus_rent(boolean status_rent) {
+        this.status_rent = status_rent;
+    }
+
+    public void setStatus_reserv(boolean status_reserv) {
+        this.status_reserv = status_reserv;
+    }
 }

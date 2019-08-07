@@ -56,6 +56,8 @@ class DepositMoney extends Component {
                 } else {
                     this.setState({errorMsg: 'Replenishment error'});
                 }
+                return resp.json();
+
             })
     }
 
@@ -72,8 +74,7 @@ class DepositMoney extends Component {
         return (
             <div>
                 <NavbarComp/>
-
-
+                <button className="buttonBack" onClick={this.goBack}> Back</button>
                 <form className="formDeposit" onSubmit={this.handleSubmit}>
                     <h1 className="title">Deposit Money</h1>
                     <input className="input" type="text" placeholder="card number" name="card_number"

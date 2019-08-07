@@ -79,8 +79,6 @@ public class MainController {
         logger.info("balance lesser request " + id);
         String res = lesserService.checkBalanceLessor(id);
         logger.info("res balance: " + res);
-        //String tp = lesserService.topUp(id);
-
         return res;
     }
 
@@ -116,6 +114,5 @@ public class MainController {
             return "" ;
         }
     }
-
 
 }

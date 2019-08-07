@@ -134,27 +134,14 @@ public class LesserServiceImpl implements LesserService {
 
     @Override
     public String topUp(String data){
-//        card_number,
-//                security_code,
-//                expiration,
-//                depositMoney,
-//                id
-        logger.info(data);
+        logger.info("data for ls top up: " + data);
         JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
         String card_number = jsonObject.get("card_number").getAsString();
         String security_code = jsonObject.get("security_code").getAsString();
         String expiration = jsonObject.get("expiration").getAsString();
         String depositMoney = jsonObject.get("depositMoney").getAsString();
         int lesserId = jsonObject.get("id").getAsInt();
-//        String card_number = "1000040182277768";
-//        String expiration = "2008";
-//        String security_code = "364";
-//        int lesserId = 1;
-//        String depositMoney = "56";
         UFXService ufxService = new UFXServiceImpl();
-        //Lesser ls = lesserRepository.findLesserById(lesserId);
-        //int lesserId = ls.getId();
-
         String resTopUp = ufxService.LesserTopUp("", "", card_number, security_code,
                 expiration, depositMoney, lesserId);
 

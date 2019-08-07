@@ -35,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
     final private LesserRepository lesserRepository;
 
     private float reserveCancelPenalty = 1;
-    private int TIME_OUT_RES = 15;
+    private int TIME_OUT_RES = 30;
 
 
     public OrderServiceImpl(OrderRepository orderRepository,
@@ -279,9 +279,9 @@ public class OrderServiceImpl implements OrderService {
         }
         String begin_time = order.getBegin_time();
 
-        float timeOfRent = (float) (setStringDateToDate(end_time).getTime() - setStringDateToDate(begin_time).getTime()) / 1000;
-        logger.info("time of Rent: " + timeOfRent);
-        float cost = (float) ceil((float) order.getTariff() / order.getTariff_time()) * timeOfRent;
+        float timeOfRent = (float) (setStringDateToDate(end_time).getTime() - setStringDateToDate(begin_time).getTime()) / (1000 * 60);
+        logger.info("time of Rent(minutes): " + timeOfRent);
+        float cost = (float) ceil(timeOfRent / order.getTariff_time()) * (float)order.getTariff();
         order.setCost(cost);
         orderRepository.save(order);
 

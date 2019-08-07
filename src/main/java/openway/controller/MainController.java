@@ -92,6 +92,13 @@ public class MainController {
     }
 
     @CrossOrigin(origins = "http://localhost:3000")
+    @PostMapping("/depositmoney")
+    String deposit(@RequestBody String data) {
+        logger.info("deposit " + data);
+        return "hi";
+    }
+
+    @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/findStat")
     String getdataforstat(@RequestBody String data) throws ParseException {
         logger.info("statistics " + data);

@@ -1,0 +1,85 @@
+
+.all{
+    margin-left: 5%;
+    margin-right: 10%;
+}
+.title{
+    /*margin: 4% 20% 0% 20%;*/
+    /*border: 10% 20% 2% 20%;*/
+}
+
+.what{
+    color: #660033;
+    opacity: 1;
+    font-weight: bold;
+    font-size: 320%;
+    /*text-align: center;*/
+    /*padding: 10px 50px 10px 50px;*/
+}
+
+.about{
+    color: #660033;
+    margin-bottom: 2%;
+    opacity: 0.9;
+    /*text-align: center*/
+}
+
+.blockbusiness{
+    /*margin: 4% 20% 0% 20%;*/
+    /*border: 10% 20% 2% 20%;*/
+}
+
+
+.blocktravel{
+    /*margin: 4% 20% 0% 20%;*/
+    /*border: 10% 20% 2% 20%;*/
+}
+
+
+.forbusiness{
+    /*text-align: center;*/
+    color: #660033;
+    font-weight: bold;
+    /*opacity: 0.8;*/
+    font-size: 150%;
+
+    /*padding: 10px 50px 10px 50px;*/
+}
+
+
+.fortravel{
+    /*text-align: center;*/
+    color: #660033;
+    font-weight: bold;
+    /*opacity: 0.8;*/
+    font-size: 150%;
+    margin-top: 2%;
+    /*font-weight: bold;*/
+    /*opacity: 0.8;*/
+
+    /*padding: 10px 50px 10px 50px;*/
+}
+
+.business{
+    color: #666666;
+    /*text-align: center;*/
+}
+
+.money{
+    color: #666666;
+    /*text-align: center;*/
+}
+
+
+.travel{
+    color: #666666;
+    /*text-align: center;*/
+}
+
+.mobile{
+    margin-top: 4%;
+    color: #660033;
+    font-weight: bold;
+    opacity: 0.9;
+    /*text-align: center;*/
+}

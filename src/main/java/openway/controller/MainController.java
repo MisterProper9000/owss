@@ -79,7 +79,7 @@ public class MainController {
         logger.info("balance lesser request " + id);
         String res = lesserService.checkBalanceLessor(id);
         logger.info("res balance: " + res);
-        String tp = lesserService.topUp(id);
+        //String tp = lesserService.topUp(id);
 
         return res;
     }
@@ -95,7 +95,9 @@ public class MainController {
     @PostMapping("/depositmoney")
     String deposit(@RequestBody String data) {
         logger.info("deposit " + data);
-        return "hi";
+        String resLsTopUp = lesserService.topUp(data);
+        logger.info("res ls topUp (returned data the same): " + resLsTopUp);
+        return resLsTopUp;
     }
 
     @CrossOrigin(origins = "http://localhost:3000")

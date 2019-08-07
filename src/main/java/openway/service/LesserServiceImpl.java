@@ -105,7 +105,6 @@ public class LesserServiceImpl implements LesserService {
         JsonObject jsonObject = new JsonParser().parse(id_client).getAsJsonObject();
         int lesserId = jsonObject.get("id").getAsInt();
         logger.info("check balance lesser: " + id_client);
-
         logger.info("lesserId: " + lesserId);
 
         UFXService ufxService = new UFXServiceImpl();
@@ -129,6 +128,10 @@ public class LesserServiceImpl implements LesserService {
         return true;
     }
 
+    // 1000040182277768
+    // 2008
+    // 364
+
     @Override
     public String topUp(String data){
 //        card_number,
@@ -136,38 +139,26 @@ public class LesserServiceImpl implements LesserService {
 //                expiration,
 //                depositMoney,
 //                id
-
-
-//        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
-//        String card_number = jsonObject.get("card_number").getAsString();
-//        String security_code = jsonObject.get("security_code").getAsString();
-//        String expiration = jsonObject.get("expiration").getAsString();
-//        String depositMoney = jsonObject.get("depositMoney").getAsString();
-//        int lesserId = jsonObject.get("id").getAsInt();
-        String card_number = "1000040182277768";
-        String expiration = "2008";
-        String security_code = "364";
-        int lesserId = 1;
-        String depositMoney = "56";
-
-
-//        String args[] = data.split("\\|");
-//        String name = "";
-//        String sName = "";
-//        String cardNum = args[0];
-//        String cvc2 = args[1];
-//        String exDate = args[2];
-//        String amount = args[3];
-//        String email = args[4];
+        logger.info(data);
+        JsonObject jsonObject = new JsonParser().parse(data).getAsJsonObject();
+        String card_number = jsonObject.get("card_number").getAsString();
+        String security_code = jsonObject.get("security_code").getAsString();
+        String expiration = jsonObject.get("expiration").getAsString();
+        String depositMoney = jsonObject.get("depositMoney").getAsString();
+        int lesserId = jsonObject.get("id").getAsInt();
+//        String card_number = "1000040182277768";
+//        String expiration = "2008";
+//        String security_code = "364";
+//        int lesserId = 1;
+//        String depositMoney = "56";
         UFXService ufxService = new UFXServiceImpl();
-
-        Lesser ls = lesserRepository.findLesserById(lesserId);
+        //Lesser ls = lesserRepository.findLesserById(lesserId);
         //int lesserId = ls.getId();
 
-        //String resTopUp = ufxService.LesserTopUp("", "", card_number, security_code,
-        //        expiration, depositMoney, lesserId);
+        String resTopUp = ufxService.LesserTopUp("", "", card_number, security_code,
+                expiration, depositMoney, lesserId);
 
-        return "";
+        return resTopUp;
     }
 
 private class balanceData{

@@ -34,10 +34,10 @@ class ScooterInfo extends Component {
 
             columnRent: [
                 {headerName: "ID rent", field: "id", width: 100},
-                {headerName: "begin_time", field: "begin_time"},
-                {headerName: "end_time", field: "end_time"},
-                {headerName: "cost", field: "cost"},
-                {headerName: "tariff_time", field: "tariff_time"}
+                {headerName: "Begin Rent", field: "begin_time"},
+                {headerName: "End Rent", field: "end_time"},
+                {headerName: "Trans Amount", field: "cost"},
+                {headerName: "Tariff", field: "tariff_time"}
 
             ],
             rowRent: [],
@@ -94,7 +94,7 @@ class ScooterInfo extends Component {
         //         });
         //     });
 
-        fetch(JuliaLocalIpOW+'/gotorentforscooter', {
+        fetch(JuliaLocalIpOW + '/gotorentforscooter', {
             method: 'POST',
             body: Cookies.get('id_scooter')
         })
@@ -127,17 +127,19 @@ class ScooterInfo extends Component {
                     {/*</div>*/}
                     {/*<br/>*/}
                     {/*<br/>*/}
-                    <div
-                        className="ag-theme-balham"
-                        style={{height: '400px', width: '100%'}}
-                    >
-                        <AgGridReact
-                            //pagination={true}
-                            enableFilter={true}
-                            enableSorting={true}
-                            columnDefs={this.state.columnRent}
-                            rowData={this.state.rowRent}>
-                        </AgGridReact>
+                    <div className="tablerenthistory">
+                        <div
+                            className="ag-theme-balham"
+                            style={{height: '300px', width: '100%'}}
+                        >
+                            <AgGridReact
+                                //pagination={true}
+                                enableFilter={true}
+                                enableSorting={true}
+                                columnDefs={this.state.columnRent}
+                                rowData={this.state.rowRent}>
+                            </AgGridReact>
+                        </div>
                     </div>
                 </div>
 

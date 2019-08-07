@@ -47,12 +47,12 @@ class Lesser extends Component {
             balance: '',
 
             columnDefs: [
-                {headerName: "ID", field: "id", width: 100},
-                {headerName: "Scooter number", field: "auto_number"},
-                {headerName: "Model", field: "model"},
-                {headerName: "Insuranse", field: "insurance"},
-                {headerName: "Reserved", field: "status_reserv"},
-                {headerName: "In rent", field: "status_rent"}
+                {headerName: "ID", field: "id", width: 70},
+                {headerName: "Scooter", field: "auto_number",width: 100},
+                {headerName: "Model", field: "model",width: 130},
+                {headerName: "Insuranse", field: "insurance",width: 100},
+                {headerName: "Reserved", field: "status_reserv",width: 100},
+                {headerName: "In rent", field: "status_rent",width: 80}
 
             ],
             rowData: [],
@@ -150,6 +150,14 @@ class Lesser extends Component {
         })
             .then(result => result.json())
             .then(rowData => {
+                // var stringified = JSON.stringify(rowData);
+                // stringified = stringified.replace('"insurance": "true"', '"insurance": "yes"');
+                // stringified = stringified.replace('"insurance": "false"', '"insurance": "no"');
+                // stringified = stringified.replace('"status_reserv": "true"', '"status_reserv": "yes"');
+                // stringified = stringified.replace('"status_reserv": "false"', '"status_reserv": "no"');
+                // stringified = stringified.replace('"status_rent": "false"', '"status_rent": "no"');
+                // stringified = stringified.replace('"status_rent": "true"', '"status_rent": "yes"');
+                // var jsonObject = JSON.parse(stringified);
                 this.setState({rowData});
             })
     }
@@ -197,8 +205,7 @@ class Lesser extends Component {
                                     <td>{this.state.sum_moto}</td>
                                 </tr>
                             </table>
-                            <br/>
-                            <br/>
+
                             <div className="balance">
                                 <tr>
                                     <th>Your balance  </th>
@@ -227,16 +234,19 @@ class Lesser extends Component {
                             <button className="buttonNewScooter" onClick={this.addNewScooter}>Add new scooter
                             </button>
                             <br/>
+                            <br/>
 
 
                             <div className="rental">
                                 <tr>
                                     <th width="100%">Rental history</th>
-                                    <text>Enter id scooter</text>
-                                    <div className="errorMsg">{this.state.errorMsg}</div>
-                                    <input id="id_selected_input" type="text" placeholder="" name="selected_id"/><br/>
+                                    <td><text>Enter id scooter</text>
+                                        <div className="errorMsg">{this.state.errorMsg}</div>
+                                        <input id="id_selected_input" type="text" placeholder="" name="selected_id"/><br/>
+                                    </td>
+
                                 </tr>
-                                <button className="buttonDeposit"
+                                <button className="buttonshowinfo"
                                         onClick={() => this.getScooterInfo(document.getElementById("id_selected_input").value)}>Show
                                     info
                                 </button>

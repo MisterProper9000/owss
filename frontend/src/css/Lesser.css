@@ -22,7 +22,7 @@
 .rental {
     border: 4px double #bac0cc; /* Параметры границы */
     padding: 10px; /* Поля вокруг текста */
-    width: 400px;
+    width: 600px;
 }
 
 .selectScooter {
@@ -65,6 +65,10 @@
     width: 300px;
 }
 
+.buttonshowinfo {
+    width: 570px;
+}
+
 .buttonPaymentInfo {
     width: 400px;
 }
@@ -77,3 +81,4 @@
 .buttonNewScooter {
     width: 600px;
 }
+

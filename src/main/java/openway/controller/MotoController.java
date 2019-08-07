@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.text.ParseException;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @RestController
 public class MotoController {
@@ -91,6 +92,18 @@ public class MotoController {
         logger.info("get all info about applications (called findAll())");
         return motoService.findLesserMotos(id);
     }
+
+//    @CrossOrigin(origins = "http://localhost:3000")
+//    @PostMapping("/infomoto")
+//    List<Motoroller> getInfoMoto(@RequestBody String id) {
+//        logger.info("get all info about applications (called findAll())");
+//        List<Motoroller> list = motoService.findLesserMotos(id);
+//
+////        String listStr = list.toString().replaceAll("false","no");
+////        String res = list.toString().replaceAll("true","yes");
+////        logger.info("(((((((((( "+res);
+//        return null;
+//    }
 
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/infoaboutonemoto")

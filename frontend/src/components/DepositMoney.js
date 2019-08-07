@@ -49,7 +49,6 @@ class DepositMoney extends Component {
                 }
             )
         })
-
             .then(resp => {
                 if (resp) {
                     alert("You have successfully replenished your wallet in the amount of " + depositMoney)
@@ -90,7 +89,8 @@ class DepositMoney extends Component {
                     <input className="input" type="text" placeholder="Cost" name="depositMoney"
                            value={depositMoney}
                            onChange={this.handleChange}/><br/>
-                    <input type="submit" name="buttonDeposit" className="buttonSubmitDeposit"
+                    <br/>
+                    <input type="submit" name="buttonSubmitDeposit" className="buttonSubmitDeposit"
                            value="Submit"/>
                 </form>
             </div>

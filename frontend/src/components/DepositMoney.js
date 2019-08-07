@@ -51,7 +51,7 @@ class DepositMoney extends Component {
             )
         })
             .then(resp => {
-                if (resp) {
+                if (resp.toString() == "OK|") {
                     alert("You have successfully replenished your wallet in the amount of " + depositMoney)
                 } else {
                     this.setState({errorMsg: 'Replenishment error'});

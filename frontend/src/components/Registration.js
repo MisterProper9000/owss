@@ -48,7 +48,18 @@ class Registration extends Component {
             this.setState({errorMsg: 'Wrong email'});
             return;
         }
-
+        console.log(this.state.bank_account);
+        console.log(this.state.bank_account.match("^[\\d]{16,19}$"));
+        if(!this.state.bank_account.match("^[\\d]{16,19}$"))
+        {
+            this.setState({errorMsg: 'Wrong bank account'});
+            return;
+        }
+        if(!this.state.phone.match("^\\+?[\\d]{11,14}$"))
+        {
+            this.setState({errorMsg: 'Wrong phone number'});
+            return;
+        }
         fetch(JuliaLocalIpOW + '/reg', {
             method: 'POST',
             body: JSON.stringify({

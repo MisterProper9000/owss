@@ -28,7 +28,7 @@ public class MainController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/reg")
     String addNewLesser(@RequestBody String newItem) {
-        logger.info("called addNewLesser()");
+        logger.info("add new lesser (main controller)");
 
         try {
             String id = lesserService.addNewLesser(newItem);
@@ -69,7 +69,7 @@ public class MainController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/lesserinfo")
     Lesser getLesInfo(@RequestBody String id) {
-        logger.info("get lesser /lesserinfo :"+id);
+        logger.info("get lesser  /lesserinfo: " + id);
         return lesserService.getNameSerName(id);
     }
 

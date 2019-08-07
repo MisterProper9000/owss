@@ -3,16 +3,13 @@ package openway.service;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import openway.model.Client;
 import openway.model.Lesser;
 import openway.model.Login;
-import openway.model.Order;
 import openway.repository.LesserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -94,9 +91,7 @@ public class LesserServiceImpl implements LesserService {
 
     @Override
     public Lesser getNameSerName(String id) {
-
         Lesser lesser = lesserRepository.findLesserById(Integer.parseInt(id));
-
         return lesser;
     }
 
@@ -148,14 +143,14 @@ public class LesserServiceImpl implements LesserService {
         return resTopUp;
     }
 
-private class balanceData{
+    private class balanceData{
 
-    public float balance;
-    public String cur;
-    balanceData(float balance, String cur){
-        this.balance = balance;
-        this.cur = cur;
-    }
+        public float balance;
+        public String cur;
+        balanceData(float balance, String cur){
+            this.balance = balance;
+            this.cur = cur;
+        }
 
     }
 

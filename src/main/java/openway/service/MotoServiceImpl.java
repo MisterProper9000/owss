@@ -77,7 +77,14 @@ public class MotoServiceImpl implements MotoService {
 
     @Override
     public List<Motoroller> findLesserMotos(String id) {
-        int id_lesser = Integer.parseInt(id);
+        int id_lesser;
+        try{
+            id_lesser = Integer.parseInt(id);
+        }
+        catch (Exception e){
+            logger.info("findLesserMotos: " + e.toString());
+            return null;
+        }
         return motoRepository.findMotorollersByIdowner(id_lesser);
     }
 

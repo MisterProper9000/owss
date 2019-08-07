@@ -40,7 +40,7 @@ public class MotoController {
         logger.info("check timeout in motoController");
         logger.info("" + resTmCheck);
 
-        if(!rent && ! res){
+        if(!rent && !res){
 
             logger.info("false");
             return "false";
@@ -49,10 +49,11 @@ public class MotoController {
             logger.info("falseres1");
             return "falseres1";
         }
-        if(rent && res){
+        if(rent && !res){
             logger.info("true");
             return "true";
         }
+
         return "dermo";
     }
 
@@ -88,7 +89,7 @@ public class MotoController {
     @CrossOrigin(origins = "http://localhost:3000")
     @PostMapping("/infomoto")
     List<Motoroller> getInfoMoto(@RequestBody String id) {
-        logger.info("get all info about applications (called findAll())");
+        logger.info("getInfoMoto from motoContr: (les id)" + id);
         return motoService.findLesserMotos(id);
     }
 

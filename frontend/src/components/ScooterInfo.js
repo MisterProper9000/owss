@@ -2,12 +2,15 @@ import React, {Component} from 'react';
 import NavbarComp from "./NavbarComp";
 import Cookies from "js-cookie";
 import './../css/ScooterInfo.css'
+import QRCode from 'qrcode.react';
 
 
 import {AgGridReact} from 'ag-grid-react';
 import 'ag-grid-community/dist/styles/ag-grid.css';
 import 'ag-grid-community/dist/styles/ag-theme-balham.css';
 import {JuliaLocalIpOW} from "./ipConfigs";
+
+
 
 class ScooterInfo extends Component {
 
@@ -106,13 +109,25 @@ class ScooterInfo extends Component {
     }
 
     render() {
+        var qr = "sfb_moto:"+Cookies.get('id_scooter');
         return (
             <div>
                 <NavbarComp/>
                 <button className="buttonBack" onClick={this.goBack}> Back</button>
                 <div className="mainMargin">
                     <h1 className="titleDop">Rental History</h1>
-                    <h1 className="titleDop2">Id scooter: {this.state.idmoto}</h1>
+                    <h3 className="titleDop2">Id scooter: {this.state.idmoto}</h3>
+
+                    {/*<table className="tableLesser">*/}
+                    {/*    <tr>*/}
+                    {/*        <th><h3 className="titleDop2">Id scooter: {this.state.idmoto}</h3></th>*/}
+                    {/*        <td><QRCode value={qr} /></td>*/}
+                    {/*    </tr>*/}
+                    {/*</table>*/}
+                    <div className="qr">
+                        <QRCode value={qr} />
+                    </div>
+
                     {/*<div*/}
                     {/*    className="ag-theme-balham"*/}
                     {/*    style={{height: '100px', width: '100%'}}*/}
@@ -130,7 +145,7 @@ class ScooterInfo extends Component {
                     <div className="tablerenthistory">
                         <div
                             className="ag-theme-balham"
-                            style={{height: '300px', width: '100%'}}
+                            style={{height: '200px', width: '100%'}}
                         >
                             <AgGridReact
                                 //pagination={true}
@@ -142,6 +157,8 @@ class ScooterInfo extends Component {
                         </div>
                     </div>
                 </div>
+
+
 
             </div>
 

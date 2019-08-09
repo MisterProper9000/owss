@@ -155,6 +155,9 @@ public class LesserServiceImpl implements LesserService {
         String resTopUp = ufxService.LesserTopUp("", "", card_number, security_code,
                 expiration, depositMoney, lesserId);
 
+        //Gson gson = new Gson();
+        //String json = gson.toJson(resTopUp);
+        //return json.toString();
         return resTopUp;
     }
 

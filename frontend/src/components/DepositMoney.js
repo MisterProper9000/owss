@@ -51,13 +51,23 @@ class DepositMoney extends Component {
             )
         })
             .then(resp => {
-                if (resp.toString() == "OK|") {
+                //console.log(resp.prototype.toString())
+                if (resp.toString().match("^OK|.*")) {
+                    //this.setState({errorMsg: 'Replenishment error'})
                     alert("You have successfully replenished your wallet in the amount of " + depositMoney)
                 } else {
+                    //alert("You have successfully replenished your wallet in the amount of " + depositMoney)
                     this.setState({errorMsg: 'Replenishment error'});
                 }
                 return resp.json();
-
+            // .then(resp => {
+            //     if (resp.toString().match("^OK|.*") != null) {
+            //         //if (resp.toString() == "OK|") {
+            //         alert("You have successfully replenished your wallet in the amount of " + depositMoney)
+            //     } else {
+            //         this.setState({errorMsg: 'Replenishment error'});
+            //     }
+            //     return resp.json();
             })
     }
 

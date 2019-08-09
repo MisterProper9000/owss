@@ -117,6 +117,9 @@ class About extends Component {
                                     platform. Currently application supports 5 languages: English, Russian, Spanish,
                                     German and Vietnamese!
                                 </div>
+                                <a href={"https://drive.google.com/drive/folders/1EEG___zOTwgJxC4lGrqFBPjcr027ep58"} >
+                                Download mobile app </a>
+
                             </div>
 
                         </div>

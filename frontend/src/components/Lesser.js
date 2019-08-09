@@ -171,6 +171,7 @@ class Lesser extends Component {
                     <h1 className="titleDop">Personal account: {this.state.first_name} {this.state.last_name}</h1>
                     <div className="rowLesser">
                         <div className="columnLesser">
+                            <br/>
                             <table className="tableLesser">
                                 <tr>
                                     <th>Type:</th>
@@ -218,7 +219,7 @@ class Lesser extends Component {
                         </div>
 
                         <div className="columnLesser">
-                            <div>Scooters</div>
+                            <div className="scooter">Scooters</div>
                             <div
                                 className="ag-theme-balham"
                                 style={{height: '200px', width: '600px'}}
@@ -242,7 +243,7 @@ class Lesser extends Component {
                                     <th width="100%">Rental history</th>
                                     <td><text>Enter id scooter</text>
                                         <div className="errorMsg">{this.state.errorMsg}</div>
-                                        <input id="id_selected_input" type="text" placeholder="" name="selected_id"/><br/>
+                                        <input id="id_selected_input" type="text" placeholder="" name="selected_id" className="select"/><br/>
                                     </td>
 
                                 </tr>

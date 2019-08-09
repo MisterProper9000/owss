@@ -50,7 +50,8 @@ public class MotoServiceImpl implements MotoService {
 
         try {
             String currentWorkingDir = System.getProperty("user.dir");
-            OutputStream out = new FileOutputStream(currentWorkingDir + "\\src\\main\\resources\\qr_codes\\qr-code" + id + ".png");
+//            OutputStream out = new FileOutputStream(currentWorkingDir + "\\src\\main\\resources\\qr_codes\\qr-code" + id + ".png");
+            OutputStream out = new FileOutputStream("C:/Users/User/IdeaProjects/owss/src/main/resources/qr_codes");
             bout.writeTo(out);
             out.flush();
             out.close();

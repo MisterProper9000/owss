@@ -247,24 +247,26 @@ namespace ScooterSharing
             List<ScootersFromServer> scootersFromServers = JsonConvert.DeserializeObject<List<ScootersFromServer>>(result);
             for (int i = 0; i < scootersFromServers.Count; i++)
             {
-               /* if (App.Current.Properties["res"].ToString() == "no" && (!scootersFromServers[i].status_rent ||!scootersFromServers[i].status_reserv))
-                {
-                    Scooters.Add(new Scooter
-                    {
-                        scoo = scootersFromServers[i],
-                        Price = App.Current.Properties["showtariff"].ToString(),
-                        Lat = 59.954833,
-                        Lng = 30.337149,
-                        btnResText = AppRes.Reserve,
-                        id = "sfb_moto:" + scootersFromServers[i].id,
-                        color = Color.WhiteSmoke,
-                        ImageSource = "http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42560-motor-scooter-icon.png",
-                        CompanyName = "CoolRentCompany9000",
-                        reservable = false,
-                    });
-                    ((Image)grid.FindByName("customPin1")).Scale = 0.02;
-                    continue;
-                }*/
+                res = false;
+                clear = false;
+                /* if (App.Current.Properties["res"].ToString() == "no" && (!scootersFromServers[i].status_rent ||!scootersFromServers[i].status_reserv))
+                 {
+                     Scooters.Add(new Scooter
+                     {
+                         scoo = scootersFromServers[i],
+                         Price = App.Current.Properties["showtariff"].ToString(),
+                         Lat = 59.954833,
+                         Lng = 30.337149,
+                         btnResText = AppRes.Reserve,
+                         id = "sfb_moto:" + scootersFromServers[i].id,
+                         color = Color.WhiteSmoke,
+                         ImageSource = "http://icons.iconarchive.com/icons/google/noto-emoji-travel-places/1024/42560-motor-scooter-icon.png",
+                         CompanyName = "CoolRentCompany9000",
+                         reservable = false,
+                     });
+                     ((Image)grid.FindByName("customPin1")).Scale = 0.02;
+                     continue;
+                 }*/
                 Console.WriteLine("blyat " + App.Current.Properties["res"].ToString() + " " + scootersFromServers[i].id.ToString());
                 if (App.Current.Properties["res"].ToString() != scootersFromServers[i].id.ToString())
                 {
@@ -339,7 +341,15 @@ namespace ScooterSharing
                     });
             }
             Console.WriteLine("countcount " + scootersFromServers.Count + " " + Scooters.Count);
-            res = false;
+            
+
+            foreach(Scooter it in scooterList.ItemsSource)
+            {
+                if(it.color == Color.Gold)
+                {
+                    scooterList.ScrollTo(it, ScrollToPosition.Start, true);
+                }
+            }
         }
     
         public void OnScooterTapped(object sender, ItemTappedEventArgs e)

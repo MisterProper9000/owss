@@ -125,17 +125,19 @@ namespace ScooterSharing
                 qr = App.Current.Properties["qr"].ToString(),
                 email = App.Current.Properties["email"].ToString()
             };
-
-            string result = await RequestStuff.doRequest("checkresstat", App.Current.Properties["resId"].ToString());
-            if (result.Split('|')[0] != RequestResult.OK.ToString())
-                return;
-            if (result.Split('|')[1] == "false" && App.Current.Properties["res"].ToString() != "no")
+            string result;
+            if (App.Current.Properties["resId"].ToString() != "")
             {
-                App.Current.Properties["res"] = "no";
-                await App.Current.SavePropertiesAsync();
-                await DisplayAlert("Attention", "You reservation was expired", "OK");
+                result = await RequestStuff.doRequest("checkresstat", App.Current.Properties["resId"].ToString());
+                if (result.Split('|')[0] != RequestResult.OK.ToString())
+                    return;
+                if (result.Split('|')[1] == "false" && App.Current.Properties["res"].ToString() != "no")
+                {
+                    App.Current.Properties["res"] = "no";
+                    await App.Current.SavePropertiesAsync();
+                    await DisplayAlert("Attention", "You reservation was expired", "OK");
+                }
             }
-
             result = await RequestStuff.doRequest("ardstart", JsonConvert.SerializeObject(Qr));
             string[] parseResult = result.Split('|');
             Console.WriteLine("GOVNO "+result);
@@ -171,7 +173,7 @@ namespace ScooterSharing
                     }
 
                     DateTime now = DateTime.Now;
-                    start.Text = (int)now.Subtract(startRent).TotalHours + ":" + (int)now.Subtract(startRent).TotalMinutes + ":" + (int)now.Subtract(startRent).TotalSeconds;
+                    start.Text = (int)now.Subtract(startRent).TotalHours + ":" + (int)now.Subtract(startRent).TotalMinutes%60 + ":" + (int)now.Subtract(startRent).TotalSeconds%60;
 
                     return true; // True = Repeat again, False = Stop the timer
                 });

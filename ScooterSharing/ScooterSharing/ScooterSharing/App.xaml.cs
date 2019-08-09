@@ -33,10 +33,10 @@ namespace ScooterSharing
             // Handle when your app sleeps
         }
 
-        async protected override void OnResume()
+        /*async*/ protected override void OnResume()
         {
             // Handle when your app resumes
-            if(App.Current.Properties["res"].ToString() != "no")
+           /* if(App.Current.Properties["res"].ToString() != "no")
             {
                 string result = await RequestStuff.doRequest("checkresstat", App.Current.Properties["resId"].ToString());
                 if (result.Split('|')[0] != RequestResult.OK.ToString())
@@ -46,7 +46,7 @@ namespace ScooterSharing
                     App.Current.Properties["res"] = "no";
                     await App.Current.SavePropertiesAsync();
                 }
-            }
+            }*/
             
         }
     }

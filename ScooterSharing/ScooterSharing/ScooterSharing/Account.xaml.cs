@@ -165,6 +165,18 @@ namespace ScooterSharing
                 notifications.IsVisible = false;
                 notifications.IsEnabled = false;
             }
+
+            if (App.Current.Properties["rent"].ToString() == "no")
+            {
+                QR.IsEnabled = true;
+                toRentDetails.IsEnabled = false;
+            }
+            else
+            {
+                QR.IsEnabled = false;
+                toRentDetails.IsEnabled = true;
+            }
+
             SetBalance();
             base.OnAppearing();
         }

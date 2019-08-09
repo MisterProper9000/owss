@@ -52,9 +52,22 @@ namespace ScooterSharing
             }
             //NavigationPage.SetHasNavigationBar(this, false);
         }
+        private bool needAlert = true;
         async private void TariffTapped(object sender, SelectedItemChangedEventArgs e)
         {
             Tariff selectedItem = e.SelectedItem as Tariff;
+            if (App.Current.Properties["rent"].ToString() == "yes" && needAlert)
+            {
+                needAlert = false;
+                await DisplayAlert(AppRes.Attention, "You cannot change the tariff during rental", AppRes.OK);
+                if(selectedItem.m_money == 1)
+                {
+                    TariffList.SelectedItem = tariffs[1];
+                }
+                else
+                    TariffList.SelectedItem = tariffs[0];
+                return;
+            }
             App.Current.Properties["tariff"] = selectedItem.m_money.ToString()+"|"+selectedItem.m_time.ToString();
             App.Current.Properties["showtariff"] = selectedItem.m_text;
             await App.Current.SavePropertiesAsync();
@@ -85,5 +98,10 @@ namespace ScooterSharing
             }
         }
 
+        protected override void OnAppearing()
+        {
+            needAlert = true;
+            base.OnAppearing();
+        }
     }
 }

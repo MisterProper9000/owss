@@ -87,23 +87,23 @@ namespace ScooterSharing
             switch (entry.ClassId)
             {
                 case "cvc2":
-                    if (cvc2.Text.Length < cvc2CharLimit)
+                    if (cvc2.Text != "" && cvc2.Text.Length < cvc2CharLimit)
                     {
                         cvc2.Text = "";
                         DisplayAlert(AppRes.Attention, AppRes.Too_short_code, AppRes.OK);
                     }
                     break;
                 case "cardNum":
-                    if (cardNum.Text.Length < cardNumCharLimit)
+                    if (cardNum.Text != "" && cardNum.Text.Length < cardNumCharLimit)
                     {
                         cardNum.Text = "";
                         DisplayAlert(AppRes.Attention, AppRes.Too_short_card_number, AppRes.OK);
                     }
                     break;
                 case "exdate":
-                    if (cardNum.Text.Length < 5)
+                    if (exdate.Text != "" && exdate.Text.Length < 5)
                     {
-                        cardNum.Text = "";
+                        exdate.Text = "";
                         DisplayAlert(AppRes.Attention, AppRes.Too_short_code, AppRes.OK);
                     }
                     break;
@@ -129,15 +129,19 @@ namespace ScooterSharing
             payAnim.IsEnabled = true;
             payAnim.IsVisible = true;
             payAnim.Play();
-            string result = await RequestStuff.doRequest("topUpCl", pr.cardNum + "|" + pr.cvc2 + "|" + pr.exDate + "|" + pr.sum + "|" + App.Current.Properties["email"]);
+            await Task.Delay(2000);
+            string result = await RequestStuff.doRequest("topDownCl", pr.cardNum + "|" + pr.cvc2 + "|" + pr.exDate + "|" + pr.sum + "|" + App.Current.Properties["email"]);
             payAnim.Pause();
             payAnim.IsEnabled = false;
             payAnim.IsVisible = false;
-            if(result.Split('|')[0] == RequestResult.OK.ToString())
-                await DisplayAlert("Withdrawal was successful", "Money withdrawn: " + payAmount.Text+"$", AppRes.OK);
+            if (result.Split('|')[0] == RequestResult.OK.ToString())
+            {
+                cardNum.Text = "";
+                await DisplayAlert("Withdrawal was successful", "Money withdrawn: " + payAmount.Text + "$", AppRes.OK);
+            }
             else if (result.Split('|')[0] == RequestResult.ERROR.ToString())
                 await DisplayAlert("Fail", "Wrong card data", AppRes.OK);
-            cardNum.Text = "";
+            
             cvc2.Text = "";
             payAmount.Text = "";
             exdate.Text = "";

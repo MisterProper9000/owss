@@ -105,9 +105,9 @@ namespace ScooterSharing
                     }
                     break;
                 case "exdate":
-                    if (cardNum.Text != "" && cardNum.Text.Length < 5)
+                    if (exdate.Text != "" && exdate.Text.Length < 5)
                     {
-                        cardNum.Text = "";
+                        exdate.Text = "";
                         DisplayAlert(AppRes.Attention, AppRes.Too_short_code, AppRes.OK);
                     }
                     break;
@@ -139,11 +139,15 @@ namespace ScooterSharing
             payAnim.Pause();
             payAnim.IsEnabled = false;
             payAnim.IsVisible = false;
-            if(result.Split('|')[0] == RequestResult.OK.ToString())
+            Console.WriteLine(result);
+            if (result.Split('|')[0] == RequestResult.OK.ToString())
+            {
+                cardNum.Text = "";
                 await DisplayAlert("Wallet refill was successful", "Money transferred: " + payAmount.Text + "$", AppRes.OK);
-            else if(result.Split('|')[0] == RequestResult.ERROR.ToString())
+            }
+            else// if(result.Split('|')[0] == RequestResult.ERROR.ToString())
                 await DisplayAlert("Fail", "Wrong card data", AppRes.OK);
-            cardNum.Text = "";
+            
             cvc2.Text = "";
             payAmount.Text = "";
             exdate.Text = "";
